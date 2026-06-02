@@ -328,7 +328,7 @@ function App() {
         .then((response) => response.json())
         .then((response) => {
           setSyncStatus(
-            response.ok ? 'Đã lưu Google Sheets' : 'Không lưu được Google Sheets',
+            response.ok ? '' : 'Không lưu được Google Sheets',
           );
         })
         .catch(() => {
