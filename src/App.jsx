@@ -553,30 +553,30 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50 p-3 font-sans text-slate-800 md:p-5">
-      <header className="mx-auto mb-4 max-w-7xl text-center">
-        <div className="mb-2 inline-flex items-center justify-center rounded-xl bg-indigo-100 p-2 text-indigo-600 shadow-sm">
-          <CalendarDays size={24} />
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-cyan-50 p-4 font-sans text-slate-800 md:p-8">
+      <header className="mx-auto mb-10 max-w-7xl text-center">
+        <div className="mb-4 inline-flex items-center justify-center rounded-2xl bg-indigo-100 p-3 text-indigo-600 shadow-sm">
+          <CalendarDays size={32} />
         </div>
-        <h1 className="mb-1 overflow-visible bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text py-1 text-2xl font-extrabold leading-[1.18] tracking-tight text-transparent md:text-3xl">
+        <h1 className="mb-3 overflow-visible bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text py-3 text-3xl font-extrabold leading-[1.18] tracking-tight text-transparent md:text-4xl lg:text-5xl">
           Weekly Study Planner
         </h1>
         {syncStatus && (
-          <p className="text-xs font-semibold text-slate-500">{syncStatus}</p>
+          <p className="text-sm font-semibold text-slate-500">{syncStatus}</p>
         )}
 
-        <div className="mt-3 flex items-center justify-center gap-2">
+        <div className="mt-5 flex items-center justify-center gap-4">
           <button
             onClick={() => setCurrentWeek((week) => Math.max(1, week - 1))}
             disabled={currentWeek === 1}
-            className="rounded-full bg-white p-2 shadow-sm transition-all hover:bg-slate-50 hover:shadow-md disabled:opacity-30 disabled:hover:shadow-sm"
+            className="rounded-full bg-white p-2.5 shadow-sm transition-all hover:bg-slate-50 hover:shadow-md disabled:opacity-30 disabled:hover:shadow-sm"
             aria-label="Tuần trước"
           >
-            <ChevronLeft size={20} className="text-slate-600" />
+            <ChevronLeft size={24} className="text-slate-600" />
           </button>
 
-          <div className="group relative flex min-w-[220px] flex-col items-center rounded-xl border border-slate-100 bg-white px-4 py-1.5 shadow-sm">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+          <div className="group relative flex min-w-[240px] flex-col items-center rounded-2xl border border-slate-100 bg-white px-6 py-2.5 shadow-sm">
+            <span className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400">
               Tiến độ hiện tại
             </span>
             <input
@@ -585,9 +585,9 @@ function App() {
               onChange={(event) => updateWeekLabel(event.target.value)}
               placeholder="VD: 25/05 - 31/05"
               title="Bấm vào để sửa ngày tháng"
-              className="w-full rounded border-b-2 border-transparent bg-transparent text-center text-xl font-black text-indigo-900 transition-all hover:bg-slate-50 focus:border-indigo-400 focus:outline-none"
+              className="w-full rounded border-b-2 border-transparent bg-transparent pb-0.5 text-center text-2xl font-black text-indigo-900 transition-all hover:bg-slate-50 focus:border-indigo-400 focus:outline-none"
             />
-            <label className="mt-1 flex cursor-pointer items-center gap-1.5 text-[11px] font-bold text-slate-500">
+            <label className="mt-2 flex cursor-pointer items-center gap-2 text-xs font-bold text-slate-500">
               <input
                 type="checkbox"
                 checked={selectedWeek === String(currentWeek)}
@@ -604,15 +604,15 @@ function App() {
 
           <button
             onClick={() => setCurrentWeek((week) => week + 1)}
-            className="rounded-full bg-white p-2 shadow-sm transition-all hover:bg-slate-50 hover:shadow-md"
+            className="rounded-full bg-white p-2.5 shadow-sm transition-all hover:bg-slate-50 hover:shadow-md"
             aria-label="Tuần sau"
           >
-            <ChevronRight size={20} className="text-slate-600" />
+            <ChevronRight size={24} className="text-slate-600" />
           </button>
         </div>
       </header>
 
-      <nav className="mx-auto mb-4 flex max-w-7xl justify-center">
+      <nav className="mx-auto mb-8 flex max-w-7xl justify-center">
         <div className="inline-flex rounded-2xl border border-slate-200 bg-white p-1 shadow-sm">
           {[
             { id: 'planner', label: 'Lịch học', icon: CalendarDays },
@@ -624,7 +624,7 @@ function App() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 rounded-xl px-3 py-1.5 text-sm font-bold transition-all ${
+                className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold transition-all ${
                   activeTab === tab.id
                     ? 'bg-indigo-600 text-white shadow-sm'
                     : 'text-slate-600 hover:bg-slate-50'
