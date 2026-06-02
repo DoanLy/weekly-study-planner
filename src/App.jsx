@@ -560,99 +560,78 @@ function App() {
     { id: 'report', label: 'Report tuần', icon: BarChart3 },
     { id: 'notes', label: 'Bảng Note', icon: Pencil },
   ];
-
-  return (
-    <div
-      className={`min-h-screen font-sans text-slate-800 ${
-        activeTab === 'notes'
-          ? 'bg-slate-50'
-          : 'bg-gradient-to-br from-indigo-50 via-white to-cyan-50 p-4 md:p-8'
-      }`}
-    >
-      {activeTab !== 'notes' && (
-        <>
-          <header className="mx-auto mb-10 max-w-7xl text-center">
-        <div className="mb-4 inline-flex items-center justify-center rounded-2xl bg-indigo-100 p-3 text-indigo-600 shadow-sm">
-          <CalendarDays size={32} />
+  const workspaceHeader = (
+    <header className="border-b border-slate-200 bg-white">
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between md:px-8">
+        <div className="flex items-center gap-3">
+          <div className="rounded-2xl bg-indigo-100 p-3 text-indigo-600">
+            <CalendarDays size={28} />
+          </div>
+          <h1 className="text-2xl font-black tracking-tight text-slate-950 md:text-3xl">
+            Weekly Study Planner
+          </h1>
         </div>
-        <h1 className="mb-3 overflow-visible bg-gradient-to-r from-indigo-600 to-cyan-600 bg-clip-text py-3 text-3xl font-extrabold leading-[1.18] tracking-tight text-transparent md:text-4xl lg:text-5xl">
-          Weekly Study Planner
-        </h1>
-        {syncStatus && (
-          <p className="text-sm font-semibold text-slate-500">{syncStatus}</p>
-        )}
 
-        <div className="mt-5 flex items-center justify-center gap-4">
+        <div className="flex min-w-[260px] items-center justify-between rounded-full border border-slate-200 bg-slate-50 px-4 py-2">
           <button
             onClick={() => setCurrentWeek((week) => Math.max(1, week - 1))}
             disabled={currentWeek === 1}
-            className="rounded-full bg-white p-2.5 shadow-sm transition-all hover:bg-slate-50 hover:shadow-md disabled:opacity-30 disabled:hover:shadow-sm"
+            className="rounded-full p-1 text-slate-600 transition-colors hover:bg-white disabled:opacity-30"
             aria-label="Tuần trước"
           >
-            <ChevronLeft size={24} className="text-slate-600" />
+            <ChevronLeft size={20} />
           </button>
-
-          <div className="group relative flex min-w-[240px] flex-col items-center rounded-2xl border border-slate-100 bg-white px-6 py-2.5 shadow-sm">
-            <span className="mb-1 text-xs font-bold uppercase tracking-widest text-slate-400">
-              Tiến độ hiện tại
-            </span>
-            <input
-              type="text"
-              value={weekLabel}
-              onChange={(event) => updateWeekLabel(event.target.value)}
-              placeholder="VD: 25/05 - 31/05"
-              title="Bấm vào để sửa ngày tháng"
-              className="w-full rounded border-b-2 border-transparent bg-transparent pb-0.5 text-center text-2xl font-black text-indigo-900 transition-all hover:bg-slate-50 focus:border-indigo-400 focus:outline-none"
-            />
-            <label className="mt-2 flex cursor-pointer items-center gap-2 text-xs font-bold text-slate-500">
+          <div className="px-3 text-center">
+            <p className="text-sm font-black text-indigo-600">
+              {compactWeekTitle}
+            </p>
+            <label className="flex cursor-pointer items-center justify-center gap-1.5 text-xs font-medium text-slate-500">
               <input
                 type="checkbox"
                 checked={selectedWeek === String(currentWeek)}
                 onChange={rememberCurrentWeek}
-                className="cursor-pointer accent-emerald-500"
+                className="h-3 w-3 cursor-pointer accent-indigo-600"
+                title="Mở tuần này khi tải lại"
               />
-              Mở tuần này khi tải lại
+              {compactWeekDates || 'Mở tuần này khi tải lại'}
             </label>
-            <Pencil
-              size={12}
-              className="pointer-events-none absolute right-4 top-1/2 text-slate-500 opacity-0 transition-opacity group-hover:opacity-40"
-            />
           </div>
-
           <button
             onClick={() => setCurrentWeek((week) => week + 1)}
-            className="rounded-full bg-white p-2.5 shadow-sm transition-all hover:bg-slate-50 hover:shadow-md"
+            className="rounded-full p-1 text-slate-600 transition-colors hover:bg-white"
             aria-label="Tuần sau"
           >
-            <ChevronRight size={24} className="text-slate-600" />
+            <ChevronRight size={20} />
           </button>
         </div>
-          </header>
+      </div>
 
-          <nav className="mx-auto mb-8 flex max-w-7xl justify-center">
-            <div className="inline-flex rounded-2xl border border-slate-200 bg-white p-1 shadow-sm">
-              {navigationTabs.map((tab) => {
-                const Icon = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold transition-all ${
-                      activeTab === tab.id
-                        ? 'bg-indigo-600 text-white shadow-sm'
-                        : 'text-slate-600 hover:bg-slate-50'
-                    }`}
-                  >
-                    <Icon size={16} />
-                    {tab.label}
-                  </button>
-                );
-              })}
-            </div>
-          </nav>
-        </>
-      )}
+      <nav className="mx-auto flex max-w-[1600px] overflow-x-auto px-4 md:px-8">
+        {navigationTabs.map((tab) => {
+          const Icon = tab.icon;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex shrink-0 items-center gap-2 border-b-2 px-4 py-4 text-sm font-bold transition-colors ${
+                activeTab === tab.id
+                  ? 'border-indigo-600 bg-indigo-50 text-indigo-600'
+                  : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+              }`}
+            >
+              <Icon size={18} />
+              {tab.label}
+            </button>
+          );
+        })}
+      </nav>
+    </header>
+  );
 
+  return (
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+      {workspaceHeader}
+      <div className={activeTab === 'notes' ? '' : 'p-4 md:p-8'}>
       {activeTab === 'planner' && (
         <>
           <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2">
@@ -1012,69 +991,6 @@ function App() {
 
       {activeTab === 'notes' && (
         <>
-          <header className="border-b border-slate-200 bg-white">
-            <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between md:px-8">
-              <div className="flex items-center gap-3">
-                <div className="rounded-2xl bg-indigo-100 p-3 text-indigo-600">
-                  <CalendarDays size={28} />
-                </div>
-                <h1 className="text-2xl font-black tracking-tight text-slate-950 md:text-3xl">
-                  Weekly Study Planner
-                </h1>
-              </div>
-
-              <div className="flex min-w-[260px] items-center justify-between rounded-full border border-slate-200 bg-slate-50 px-4 py-2">
-                <button
-                  onClick={() =>
-                    setCurrentWeek((week) => Math.max(1, week - 1))
-                  }
-                  disabled={currentWeek === 1}
-                  className="rounded-full p-1 text-slate-600 transition-colors hover:bg-white disabled:opacity-30"
-                  aria-label="Tuần trước"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-                <div className="px-3 text-center">
-                  <p className="text-sm font-black text-indigo-600">
-                    {compactWeekTitle}
-                  </p>
-                  {compactWeekDates && (
-                    <p className="text-xs font-medium text-slate-500">
-                      {compactWeekDates}
-                    </p>
-                  )}
-                </div>
-                <button
-                  onClick={() => setCurrentWeek((week) => week + 1)}
-                  className="rounded-full p-1 text-slate-600 transition-colors hover:bg-white"
-                  aria-label="Tuần sau"
-                >
-                  <ChevronRight size={20} />
-                </button>
-              </div>
-            </div>
-
-            <nav className="mx-auto flex max-w-[1600px] overflow-x-auto px-4 md:px-8">
-              {navigationTabs.map((tab) => {
-                const Icon = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`flex shrink-0 items-center gap-2 border-b-2 px-4 py-4 text-sm font-bold transition-colors ${
-                      activeTab === tab.id
-                        ? 'border-indigo-600 bg-indigo-50 text-indigo-600'
-                        : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-800'
-                    }`}
-                  >
-                    <Icon size={18} />
-                    {tab.label}
-                  </button>
-                );
-              })}
-            </nav>
-          </header>
-
           <main className="p-4 md:p-8">
             <section className="mx-auto max-w-[1600px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
               <div className="border-b border-slate-200 px-5 pt-5 md:px-8">
@@ -1274,6 +1190,7 @@ function App() {
           </main>
         </>
       )}
+      </div>
     </div>
   );
 }
