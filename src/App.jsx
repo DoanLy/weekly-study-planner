@@ -145,6 +145,64 @@ function stripHtml(value) {
     .trim();
 }
 
+function cloneData(data) {
+  return JSON.parse(JSON.stringify(data || {}));
+}
+
+function setNestedValue(target, path, value) {
+  let current = target;
+  path.slice(0, -1).forEach((key) => {
+    current[key] = current[key] || {};
+    current = current[key];
+  });
+  current[path.at(-1)] = value;
+}
+
+function applyPatches(data, patches) {
+  const nextData = cloneData(data);
+
+  patches.forEach((patch) => {
+    if (patch.type === 'set') {
+      setNestedValue(nextData, patch.path, patch.value);
+      return;
+    }
+
+    const weekData = nextData[patch.week] || {};
+    const studyNotes = weekData.studyNotes || [];
+
+    if (patch.type === 'prepend-study-note') {
+      nextData[patch.week] = {
+        ...weekData,
+        studyNotes: studyNotes.some((note) => note.id === patch.note.id)
+          ? studyNotes
+          : [patch.note, ...studyNotes],
+      };
+      return;
+    }
+
+    if (patch.type === 'update-study-note') {
+      nextData[patch.week] = {
+        ...weekData,
+        studyNotes: studyNotes.map((note) =>
+          note.id === patch.noteId
+            ? { ...note, [patch.field]: patch.value }
+            : note,
+        ),
+      };
+      return;
+    }
+
+    if (patch.type === 'delete-study-note') {
+      nextData[patch.week] = {
+        ...weekData,
+        studyNotes: studyNotes.filter((note) => note.id !== patch.noteId),
+      };
+    }
+  });
+
+  return nextData;
+}
+
 function applyTextFormat(command, value) {
   document.execCommand(command, false, value);
 }
@@ -178,6 +236,9 @@ function App() {
   const [activeTab, setActiveTab] = useState('planner');
   const [expandedDays, setExpandedDays] = useState({});
   const hasLoadedRemoteData = useRef(false);
+  const isSaving = useRef(false);
+  const pendingPatches = useRef([]);
+  const [syncRevision, setSyncRevision] = useState(0);
   const [selectedWeek, setSelectedWeek] = useState(() =>
     window.localStorage.getItem(SELECTED_WEEK_STORAGE_KEY),
   );
@@ -292,13 +353,17 @@ function App() {
       .then((response) => response.json())
       .then((response) => {
         if (response.data && Object.keys(response.data).length > 0) {
-          setData(response.data);
+          const latestData = applyPatches(
+            response.data,
+            pendingPatches.current,
+          );
+          setData(latestData);
           window.localStorage.setItem(
             DATA_STORAGE_KEY,
-            JSON.stringify(response.data),
+            JSON.stringify(latestData),
           );
         }
-        setSyncStatus('Đã đồng bộ Google Sheets');
+        setSyncStatus('');
       })
       .catch(() => {
         setSyncStatus(
@@ -309,6 +374,9 @@ function App() {
       })
       .finally(() => {
         hasLoadedRemoteData.current = true;
+        if (pendingPatches.current.length > 0) {
+          setSyncRevision((revision) => revision + 1);
+        }
       });
 
     return () => controller.abort();
@@ -316,28 +384,76 @@ function App() {
 
   useEffect(() => {
     window.localStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(data));
-    if (!hasLoadedRemoteData.current) return undefined;
+  }, [data]);
 
+  useEffect(() => {
+    if (
+      !hasLoadedRemoteData.current ||
+      pendingPatches.current.length === 0
+    ) {
+      return undefined;
+    }
+
+    const timeout = window.setTimeout(flushPendingPatches, 700);
+    return () => window.clearTimeout(timeout);
+  }, [syncRevision]);
+
+  function queuePatches(...patches) {
+    pendingPatches.current.push(...patches);
+    setData((currentData) => applyPatches(currentData, patches));
+    setSyncRevision((revision) => revision + 1);
+  }
+
+  async function flushPendingPatches() {
+    if (
+      isSaving.current ||
+      !hasLoadedRemoteData.current ||
+      pendingPatches.current.length === 0
+    ) {
+      return;
+    }
+
+    isSaving.current = true;
     setSyncStatus('Đang lưu Google Sheets...');
-    const timeout = window.setTimeout(() => {
-      fetch(SHEETS_ENDPOINT, {
+    const patchesToSave = pendingPatches.current.slice();
+
+    try {
+      const latestResponse = await fetch(`${SHEETS_ENDPOINT}?action=load`, {
+        cache: 'no-store',
+      });
+      const latestPayload = await latestResponse.json();
+      if (!latestResponse.ok || !latestPayload.ok) {
+        throw new Error('Could not load the latest Google Sheets data.');
+      }
+
+      const mergedData = applyPatches(latestPayload.data, patchesToSave);
+      const saveResponse = await fetch(SHEETS_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify({ data }),
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          setSyncStatus(
-            response.ok ? '' : 'Không lưu được Google Sheets',
-          );
-        })
-        .catch(() => {
-          setSyncStatus('Mất kết nối, đã lưu tạm trên máy');
-        });
-    }, 700);
+        body: JSON.stringify({ data: mergedData }),
+      });
+      const savePayload = await saveResponse.json();
+      if (!saveResponse.ok || !savePayload.ok) {
+        throw new Error('Could not save Google Sheets data.');
+      }
 
-    return () => window.clearTimeout(timeout);
-  }, [data]);
+      pendingPatches.current.splice(0, patchesToSave.length);
+      const latestLocalData = applyPatches(
+        mergedData,
+        pendingPatches.current,
+      );
+      setData(latestLocalData);
+      setSyncStatus('');
+
+      if (pendingPatches.current.length > 0) {
+        setSyncRevision((revision) => revision + 1);
+      }
+    } catch {
+      setSyncStatus('Mất kết nối, đã lưu tạm trên máy');
+    } finally {
+      isSaving.current = false;
+    }
+  }
 
   function rememberCurrentWeek() {
     const nextSelectedWeek =
@@ -361,62 +477,43 @@ function App() {
   }
 
   function updateWeekLabel(value) {
-    setData((currentData) => {
-      const currentWeekData = currentData[currentWeek] || {};
-      return {
-        ...currentData,
-        [currentWeek]: { ...currentWeekData, weekLabel: value },
-      };
+    queuePatches({
+      type: 'set',
+      path: [String(currentWeek), 'weekLabel'],
+      value,
     });
   }
 
   function updateTask(taskId, field, value) {
-    setData((currentData) => {
-      const currentWeekData = currentData[currentWeek] || {};
-      const currentTasks = currentWeekData.tasks || {};
-      return {
-        ...currentData,
-        [currentWeek]: {
-          ...currentWeekData,
-          tasks: {
-            ...currentTasks,
-            [taskId]: { ...(currentTasks[taskId] || {}), [field]: value },
-          },
-        },
-      };
+    queuePatches({
+      type: 'set',
+      path: [String(currentWeek), 'tasks', taskId, field],
+      value,
     });
   }
 
   function toggleCompleted(taskId) {
-    setData((currentData) => {
-      const currentWeekData = currentData[currentWeek] || {};
-      const currentTasks = currentWeekData.tasks || {};
-      const currentTask = currentTasks[taskId] || {};
-      const completed = !currentTask.completed;
-      return {
-        ...currentData,
-        [currentWeek]: {
-          ...currentWeekData,
-          tasks: {
-            ...currentTasks,
-            [taskId]: {
-              ...currentTask,
-              completed,
-              progress: completed ? 100 : currentTask.progress || 0,
-            },
-          },
-        },
-      };
-    });
+    const currentTask = taskData[taskId] || {};
+    const completed = !currentTask.completed;
+    queuePatches(
+      {
+        type: 'set',
+        path: [String(currentWeek), 'tasks', taskId, 'completed'],
+        value: completed,
+      },
+      {
+        type: 'set',
+        path: [String(currentWeek), 'tasks', taskId, 'progress'],
+        value: completed ? 100 : currentTask.progress || 0,
+      },
+    );
   }
 
   function updateGlobalNotes(value) {
-    setData((currentData) => {
-      const currentWeekData = currentData[currentWeek] || {};
-      return {
-        ...currentData,
-        [currentWeek]: { ...currentWeekData, globalNotes: value },
-      };
+    queuePatches({
+      type: 'set',
+      path: [String(currentWeek), 'globalNotes'],
+      value,
     });
   }
 
@@ -430,45 +527,28 @@ function App() {
       remembered: false,
       createdAt: new Date().toISOString(),
     };
-    setData((currentData) => {
-      const currentWeekData = currentData[currentWeek] || {};
-      return {
-        ...currentData,
-        [currentWeek]: {
-          ...currentWeekData,
-          studyNotes: [note, ...(currentWeekData.studyNotes || [])],
-        },
-      };
+    queuePatches({
+      type: 'prepend-study-note',
+      week: String(currentWeek),
+      note,
     });
   }
 
   function updateStudyNote(noteId, field, value) {
-    setData((currentData) => {
-      const currentWeekData = currentData[currentWeek] || {};
-      return {
-        ...currentData,
-        [currentWeek]: {
-          ...currentWeekData,
-          studyNotes: (currentWeekData.studyNotes || []).map((note) =>
-            note.id === noteId ? { ...note, [field]: value } : note,
-          ),
-        },
-      };
+    queuePatches({
+      type: 'update-study-note',
+      week: String(currentWeek),
+      noteId,
+      field,
+      value,
     });
   }
 
   function deleteStudyNote(noteId) {
-    setData((currentData) => {
-      const currentWeekData = currentData[currentWeek] || {};
-      return {
-        ...currentData,
-        [currentWeek]: {
-          ...currentWeekData,
-          studyNotes: (currentWeekData.studyNotes || []).filter(
-            (note) => note.id !== noteId,
-          ),
-        },
-      };
+    queuePatches({
+      type: 'delete-study-note',
+      week: String(currentWeek),
+      noteId,
     });
   }
 
