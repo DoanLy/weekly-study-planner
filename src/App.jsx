@@ -148,6 +148,10 @@ function stripHtml(value) {
 function formatWeekDate(value) {
   if (!value) return '';
 
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    return value;
+  }
+
   const [year, month, day] = value.split('-');
   return year && month && day ? `${day}/${month}/${year}` : value;
 }
@@ -573,8 +577,6 @@ function App() {
 
   const compactWeekLabelMatch = weekTitle.match(/^(.+?)\s*\((.+)\)$/);
   const compactWeekTitle = compactWeekLabelMatch?.[1] || weekTitle;
-  const compactWeekDates =
-    formattedWeekDate || compactWeekLabelMatch?.[2] || '';
   const navigationTabs = [
     { id: 'planner', label: 'Lịch học', icon: CalendarDays },
     { id: 'report', label: 'Report tuần', icon: BarChart3 },
@@ -623,18 +625,14 @@ function App() {
             <label className="mt-2 flex items-center justify-center gap-1.5 rounded-full border border-indigo-100 bg-white px-2 py-1 text-xs font-bold text-indigo-700">
               <CalendarDays size={14} className="shrink-0" />
               <input
-                type="date"
+                type="text"
                 value={weekData.weekDate || ''}
                 onChange={(event) => updateWeekDate(event.target.value)}
-                className="min-w-0 flex-1 bg-transparent text-center font-bold text-indigo-700 outline-none [color-scheme:light]"
-                aria-label="Nhập ngày cho tuần"
+                placeholder="22/03/2026 -> 23/03/2026"
+                className="min-w-0 flex-1 bg-transparent text-center font-bold text-indigo-700 outline-none placeholder:text-indigo-300"
+                aria-label="Nhập khoảng thời gian cho tuần"
               />
             </label>
-            {compactWeekDates && (
-              <p className="mt-1 text-[11px] font-semibold text-slate-500">
-                {compactWeekDates}
-              </p>
-            )}
           </div>
           <button
             onClick={() => setCurrentWeek((week) => week + 1)}
