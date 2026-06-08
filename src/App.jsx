@@ -246,6 +246,7 @@ function App() {
   const [syncStatus, setSyncStatus] = useState('Đang tải dữ liệu...');
   const [activeTab, setActiveTab] = useState('planner');
   const [expandedDays, setExpandedDays] = useState({});
+  const [textToolbarPosition, setTextToolbarPosition] = useState(null);
   const hasLoadedRemoteData = useRef(false);
   const isSaving = useRef(false);
   const pendingPatches = useRef([]);
@@ -400,6 +401,63 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(data));
   }, [data]);
+
+  useEffect(() => {
+    function updateTextToolbarPosition() {
+      if (activeTab !== 'notes') {
+        setTextToolbarPosition(null);
+        return;
+      }
+
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+        setTextToolbarPosition(null);
+        return;
+      }
+
+      const range = selection.getRangeAt(0);
+      const selectedNode =
+        range.commonAncestorContainer.nodeType === Node.ELEMENT_NODE
+          ? range.commonAncestorContainer
+          : range.commonAncestorContainer.parentElement;
+      const noteCell = selectedNode?.closest?.('.rich-note-cell');
+
+      if (!noteCell) {
+        setTextToolbarPosition(null);
+        return;
+      }
+
+      const rect = range.getBoundingClientRect();
+      if (!rect.width && !rect.height) {
+        setTextToolbarPosition(null);
+        return;
+      }
+
+      const estimatedToolbarWidth = 350;
+      const left = Math.min(
+        window.innerWidth - estimatedToolbarWidth / 2 - 12,
+        Math.max(estimatedToolbarWidth / 2 + 12, rect.left + rect.width / 2),
+      );
+      const top = rect.top > 74 ? rect.top - 58 : rect.bottom + 10;
+
+      setTextToolbarPosition({ left, top });
+    }
+
+    document.addEventListener('selectionchange', updateTextToolbarPosition);
+    window.addEventListener('resize', updateTextToolbarPosition);
+    window.addEventListener('scroll', updateTextToolbarPosition, true);
+
+    updateTextToolbarPosition();
+
+    return () => {
+      document.removeEventListener(
+        'selectionchange',
+        updateTextToolbarPosition,
+      );
+      window.removeEventListener('resize', updateTextToolbarPosition);
+      window.removeEventListener('scroll', updateTextToolbarPosition, true);
+    };
+  }, [activeTab]);
 
   useEffect(() => {
     if (
@@ -669,6 +727,50 @@ function App() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
       {workspaceHeader}
+      {textToolbarPosition && (
+        <div
+          className="fixed z-50 inline-flex items-center rounded-xl border border-slate-200 bg-white px-2 py-1 shadow-xl shadow-slate-900/10"
+          style={{
+            left: textToolbarPosition.left,
+            top: textToolbarPosition.top,
+            transform: 'translateX(-50%)',
+          }}
+        >
+          <button
+            onMouseDown={(event) => {
+              event.preventDefault();
+              applyTextFormat('foreColor', '#dc2626');
+            }}
+            className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50"
+            title="Tô chữ đỏ cho phần đang chọn"
+          >
+            <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
+            Đỏ
+          </button>
+          <button
+            onMouseDown={(event) => {
+              event.preventDefault();
+              applyTextFormat('hiliteColor', '#fef08a');
+            }}
+            className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-slate-50"
+            title="Highlight phần đang chọn"
+          >
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+            Highlight
+          </button>
+          <div className="mx-1 h-4 w-px bg-slate-200" />
+          <button
+            onMouseDown={(event) => {
+              event.preventDefault();
+              applyTextFormat('removeFormat');
+            }}
+            className="rounded-lg px-2.5 py-2 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-50"
+            title="Bỏ định dạng phần đang chọn"
+          >
+            Bỏ màu
+          </button>
+        </div>
+      )}
       <div className={activeTab === 'notes' ? '' : 'p-4 md:p-8'}>
       {activeTab === 'planner' && (
         <>
@@ -1075,43 +1177,7 @@ function App() {
                   />
                 </div>
 
-                <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="inline-flex w-fit items-center rounded-xl border border-slate-200 bg-slate-50 px-2 py-1">
-                    <button
-                      onMouseDown={(event) => {
-                        event.preventDefault();
-                        applyTextFormat('foreColor', '#dc2626');
-                      }}
-                      className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-white"
-                      title="Tô chữ đỏ cho phần đang chọn"
-                    >
-                      <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
-                      Đỏ
-                    </button>
-                    <button
-                      onMouseDown={(event) => {
-                        event.preventDefault();
-                        applyTextFormat('hiliteColor', '#fef08a');
-                      }}
-                      className="flex items-center gap-2 rounded-lg px-2.5 py-2 text-xs font-bold text-slate-700 transition-colors hover:bg-white"
-                      title="Highlight phần đang chọn"
-                    >
-                      <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-                      Highlight
-                    </button>
-                    <div className="mx-1 h-4 w-px bg-slate-200" />
-                    <button
-                      onMouseDown={(event) => {
-                        event.preventDefault();
-                        applyTextFormat('removeFormat');
-                      }}
-                      className="rounded-lg px-2.5 py-2 text-xs font-bold text-slate-600 transition-colors hover:bg-white"
-                      title="Bỏ định dạng phần đang chọn"
-                    >
-                      Bỏ màu
-                    </button>
-                  </div>
-
+                <div className="mt-5 flex items-center justify-end gap-4">
                   <div className="flex items-center justify-between gap-4 sm:justify-end">
                     <span className="text-sm font-black text-slate-800">
                       {visibleNotes.length}/{topicNotes.length} dòng
