@@ -145,6 +145,13 @@ function stripHtml(value) {
     .trim();
 }
 
+function formatWeekDate(value) {
+  if (!value) return '';
+
+  const [year, month, day] = value.split('-');
+  return year && month && day ? `${day}/${month}/${year}` : value;
+}
+
 function cloneData(data) {
   return JSON.parse(JSON.stringify(data || {}));
 }
@@ -248,7 +255,11 @@ function App() {
 
   const weekData = data[currentWeek] || {};
   const taskData = weekData.tasks || {};
-  const weekLabel = weekData.weekLabel ?? `Tuần ${currentWeek}`;
+  const weekTitle = weekData.weekLabel?.trim() || `Tuần ${currentWeek}`;
+  const formattedWeekDate = formatWeekDate(weekData.weekDate);
+  const weekLabel = formattedWeekDate
+    ? `${weekTitle} - ${formattedWeekDate}`
+    : weekTitle;
   const globalNotes = weekData.globalNotes || '';
   const studyNotes = weekData.studyNotes || [];
 
@@ -484,6 +495,14 @@ function App() {
     });
   }
 
+  function updateWeekDate(value) {
+    queuePatches({
+      type: 'set',
+      path: [String(currentWeek), 'weekDate'],
+      value,
+    });
+  }
+
   function updateTask(taskId, field, value) {
     queuePatches({
       type: 'set',
@@ -552,9 +571,10 @@ function App() {
     });
   }
 
-  const compactWeekLabelMatch = weekLabel.match(/^(.+?)\s*\((.+)\)$/);
-  const compactWeekTitle = compactWeekLabelMatch?.[1] || weekLabel;
-  const compactWeekDates = compactWeekLabelMatch?.[2] || '';
+  const compactWeekLabelMatch = weekTitle.match(/^(.+?)\s*\((.+)\)$/);
+  const compactWeekTitle = compactWeekLabelMatch?.[1] || weekTitle;
+  const compactWeekDates =
+    formattedWeekDate || compactWeekLabelMatch?.[2] || '';
   const navigationTabs = [
     { id: 'planner', label: 'Lịch học', icon: CalendarDays },
     { id: 'report', label: 'Report tuần', icon: BarChart3 },
@@ -572,7 +592,7 @@ function App() {
           </h1>
         </div>
 
-        <div className="flex min-w-[260px] items-center justify-between rounded-full border border-slate-200 bg-slate-50 px-4 py-2">
+        <div className="flex min-w-[320px] items-center justify-between gap-2 rounded-[28px] border border-slate-200 bg-slate-50 px-4 py-2">
           <button
             onClick={() => setCurrentWeek((week) => Math.max(1, week - 1))}
             disabled={currentWeek === 1}
@@ -581,10 +601,15 @@ function App() {
           >
             <ChevronLeft size={20} />
           </button>
-          <div className="px-3 text-center">
-            <p className="text-sm font-black text-indigo-600">
-              {compactWeekTitle}
-            </p>
+          <div className="min-w-0 flex-1 px-2 text-center">
+            <input
+              type="text"
+              value={compactWeekTitle}
+              onChange={(event) => updateWeekLabel(event.target.value)}
+              placeholder={`Tuần ${currentWeek}`}
+              className="w-full bg-transparent text-center text-sm font-black text-indigo-600 outline-none"
+              aria-label="Tên tuần"
+            />
             <label className="flex cursor-pointer items-center justify-center gap-1.5 text-xs font-medium text-slate-500">
               <input
                 type="checkbox"
@@ -593,8 +618,23 @@ function App() {
                 className="h-3 w-3 cursor-pointer accent-indigo-600"
                 title="Mở tuần này khi tải lại"
               />
-              {compactWeekDates || 'Mở tuần này khi tải lại'}
+              <span>Mở tuần này khi tải lại</span>
             </label>
+            <label className="mt-2 flex items-center justify-center gap-1.5 rounded-full border border-indigo-100 bg-white px-2 py-1 text-xs font-bold text-indigo-700">
+              <CalendarDays size={14} className="shrink-0" />
+              <input
+                type="date"
+                value={weekData.weekDate || ''}
+                onChange={(event) => updateWeekDate(event.target.value)}
+                className="min-w-0 flex-1 bg-transparent text-center font-bold text-indigo-700 outline-none [color-scheme:light]"
+                aria-label="Nhập ngày cho tuần"
+              />
+            </label>
+            {compactWeekDates && (
+              <p className="mt-1 text-[11px] font-semibold text-slate-500">
+                {compactWeekDates}
+              </p>
+            )}
           </div>
           <button
             onClick={() => setCurrentWeek((week) => week + 1)}
