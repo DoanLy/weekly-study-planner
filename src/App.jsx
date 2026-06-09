@@ -642,7 +642,7 @@ function App() {
   ];
   const workspaceHeader = (
     <header className="border-b border-slate-200 bg-white">
-      <div className="mx-auto flex max-w-[1600px] flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between md:px-8">
+      <div className="mx-auto grid max-w-[1600px] gap-4 px-4 py-4 md:px-8 lg:grid-cols-[auto_1fr_auto] lg:items-center">
         <div className="flex items-center gap-3">
           <div className="rounded-2xl bg-indigo-100 p-3 text-indigo-600">
             <CalendarDays size={28} />
@@ -652,7 +652,27 @@ function App() {
           </h1>
         </div>
 
-        <div className="flex min-w-[320px] items-center justify-between gap-2 rounded-[28px] border border-slate-200 bg-slate-50 px-4 py-2">
+        <nav className="flex min-w-0 items-center gap-2 overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50 p-1 lg:mx-auto">
+          {navigationTabs.map((tab) => {
+            const Icon = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`inline-flex shrink-0 items-center gap-2 rounded-xl px-3.5 py-2.5 text-sm font-bold transition-colors ${
+                  activeTab === tab.id
+                    ? 'bg-white text-indigo-600 shadow-sm shadow-slate-900/5'
+                    : 'text-slate-500 hover:bg-white/70 hover:text-slate-800'
+                }`}
+              >
+                <Icon size={17} />
+                {tab.label}
+              </button>
+            );
+          })}
+        </nav>
+
+        <div className="flex min-w-0 items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 sm:min-w-[320px]">
           <button
             onClick={() => setCurrentWeek((week) => Math.max(1, week - 1))}
             disabled={currentWeek === 1}
@@ -702,25 +722,6 @@ function App() {
         </div>
       </div>
 
-      <nav className="mx-auto flex max-w-[1600px] overflow-x-auto px-4 md:px-8">
-        {navigationTabs.map((tab) => {
-          const Icon = tab.icon;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex shrink-0 items-center gap-2 border-b-2 px-4 py-4 text-sm font-bold transition-colors ${
-                activeTab === tab.id
-                  ? 'border-indigo-600 bg-indigo-50 text-indigo-600'
-                  : 'border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-800'
-              }`}
-            >
-              <Icon size={18} />
-              {tab.label}
-            </button>
-          );
-        })}
-      </nav>
     </header>
   );
 
@@ -1133,38 +1134,27 @@ function App() {
         <>
           <main className="p-4 md:p-8">
             <section className="mx-auto max-w-[1600px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-              <div className="border-b border-slate-200 px-5 pt-5 md:px-8">
-                <div className="flex flex-wrap gap-6">
-                  {TOPICS.map((topic) => (
-                    <button
-                      key={topic.id}
-                      onClick={() => setActiveTopic(topic.id)}
-                      className={`relative flex items-center gap-2 pb-4 text-sm font-bold transition-colors ${
-                        activeTopic === topic.id
-                          ? 'text-indigo-600'
-                          : 'text-slate-500 hover:text-slate-800'
-                      }`}
+              <div className="border-b border-slate-200 px-5 py-4 md:px-7">
+                <div className="grid gap-3 lg:grid-cols-[220px_1fr_auto] lg:items-center">
+                  <label className="relative block">
+                    <select
+                      value={activeTopic}
+                      onChange={(event) => setActiveTopic(event.target.value)}
+                      className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 pr-10 text-sm font-black text-slate-800 outline-none transition-all focus:border-indigo-300 focus:bg-white focus:ring-2 focus:ring-indigo-100"
+                      aria-label="Chá»n nhÃ³m note"
                     >
-                      {topic.label}
-                      <span
-                        className={`rounded-full px-2 py-1 text-xs ${
-                          activeTopic === topic.id
-                            ? 'bg-indigo-100 text-indigo-600'
-                            : 'bg-slate-100 text-slate-500'
-                        }`}
-                      >
-                        {topicCounts[topic.id]}
-                      </span>
-                      {activeTopic === topic.id && (
-                        <span className="absolute inset-x-0 bottom-0 h-0.5 bg-indigo-600" />
-                      )}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="border-b border-slate-200 px-5 py-6 md:px-7">
-                <div className="relative">
+                      {TOPICS.map((topic) => (
+                        <option key={topic.id} value={topic.id}>
+                          {topic.label} ({topicCounts[topic.id]})
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown
+                      size={18}
+                      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-500"
+                    />
+                  </label>
+                  <div className="relative">
                   <Search
                     size={19}
                     className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
@@ -1177,7 +1167,7 @@ function App() {
                   />
                 </div>
 
-                <div className="mt-5 flex items-center justify-end gap-4">
+                  <div className="flex items-center justify-end gap-4">
                   <div className="flex items-center justify-between gap-4 sm:justify-end">
                     <span className="text-sm font-black text-slate-800">
                       {visibleNotes.length}/{topicNotes.length} dòng
@@ -1189,6 +1179,7 @@ function App() {
                       <Plus size={18} />
                       Thêm note
                     </button>
+                  </div>
                   </div>
                 </div>
               </div>
