@@ -11,6 +11,7 @@ import {
   ChevronUp,
   Circle,
   Coffee,
+  Download,
   Flag,
   Headphones,
   Languages,
@@ -143,6 +144,28 @@ function stripHtml(value) {
     .replace(/&nbsp;/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+function escapeCsvCell(value) {
+  const text = String(value ?? '');
+  return `"${text.replace(/"/g, '""')}"`;
+}
+
+function downloadCsv(filename, rows) {
+  const csv = rows
+    .map((row) => row.map((cell) => escapeCsvCell(cell)).join(','))
+    .join('\r\n');
+  const blob = new Blob([`\uFEFF${csv}`], {
+    type: 'text/csv;charset=utf-8;',
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
 function formatWeekDate(value) {
@@ -631,6 +654,40 @@ function App() {
       week: String(currentWeek),
       noteId,
     });
+  }
+
+  function downloadStudyNotes() {
+    const topicLabelById = TOPICS.reduce(
+      (labels, topic) => ({ ...labels, [topic.id]: topic.label }),
+      {},
+    );
+    const rows = [
+      [
+        'Tuan',
+        'Khoang thoi gian',
+        'Nhom',
+        'Noi dung chinh',
+        'Ghi chu / Giai thich',
+        'Bo sung',
+        'Trang thai',
+        'Ngay tao',
+      ],
+      ...studyNotes.map((note) => [
+        compactWeekTitle,
+        weekData.weekDate || '',
+        topicLabelById[note.topic || 'english'] || note.topic || 'Tiếng Anh',
+        stripHtml(note.main || ''),
+        stripHtml(note.note || ''),
+        stripHtml(note.related || ''),
+        note.remembered ? 'Da nho' : 'Can on',
+        note.createdAt ? new Date(note.createdAt).toLocaleString('vi-VN') : '',
+      ]),
+    ];
+    const safeWeekName = compactWeekTitle
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '');
+    downloadCsv(`bang-note-${safeWeekName || `tuan-${currentWeek}`}.csv`, rows);
   }
 
   const compactWeekLabelMatch = weekTitle.match(/^(.+?)\s*\((.+)\)$/);
@@ -1172,6 +1229,14 @@ function App() {
                     <span className="text-sm font-black text-slate-800">
                       {visibleNotes.length}/{topicNotes.length} dòng
                     </span>
+                    <button
+                      onClick={downloadStudyNotes}
+                      disabled={studyNotes.length === 0}
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 shadow-sm transition-all hover:border-indigo-200 hover:text-indigo-600 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      <Download size={18} />
+                      Tải xuống
+                    </button>
                     <button
                       onClick={addStudyNote}
                       className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-indigo-700"
