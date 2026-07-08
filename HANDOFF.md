@@ -7,45 +7,30 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 - Local source: `C:\Users\lenovo\Documents\Codex\2026-06-02\b-n-c-n-nh-app\work\weekly-study-planner`
 - GitHub: https://github.com/DoanLy/weekly-study-planner.git (branch `main`)
 - Vercel project: `files-mentioned-by-the-user-weeklyplanner` (org `doanlys-projects`), production tại https://files-mentioned-by-the-user-weeklyp.vercel.app/
-- Toàn bộ UI nằm trong 1 file: `src/App.jsx` (~2100 dòng, React + Vite + Tailwind + lucide-react)
-- Data lưu trong `localStorage` (key `weekly-study-planner-data`) và đồng bộ 2 chiều với Google Apps Script endpoint (`SHEETS_ENDPOINT` trong `App.jsx`)
+- Toàn bộ UI nằm trong 1 file: `src/App.jsx` (~2400 dòng, React + Vite + Tailwind + lucide-react)
+- **Data lưu trong Postgres (Neon, qua Vercel Marketplace integration)**, không còn dùng Google Sheets. Local state vẫn cache trong `localStorage` (key `weekly-study-planner-data`) để mở app offline được, đồng bộ 2 chiều với API `/api/data` (`api/data.js`, serverless function dùng `@neondatabase/serverless`).
+  - Bảng Postgres: `app_data(id text primary key, data jsonb, updated_at timestamptz)` — chỉ 1 row cố định `id = 'planner'` chứa toàn bộ state (giống hệt cách Google Sheets lưu trước đây, chỉ đổi backend).
+  - Env var cần thiết: `DATABASE_URL` (đã được Vercel tự inject vào Production/Preview/Development khi cài integration Neon; local dev cần chạy `npx vercel env pull .env.local` để có file này).
+  - Chạy dev đầy đủ (kèm API) bằng `npx vercel dev` chứ không phải `npm run dev` thuần (Vite thuần không chạy được `/api/*`). `.claude/launch.json` đã cấu hình sẵn preview tool dùng `vercel dev`.
 
 ## Trạng thái git tại thời điểm handoff
 
-- Commit gần nhất **đã push**: `91977e6` — "Remove AI Refine, add schedule rule list management in Settings"
-- **Đang có thay đổi CHƯA COMMIT** trong `src/App.jsx`: chuyển lịch mặc định (Mon/Wed/Fri, Tue/Thu/Sat, Chủ Nhật) từ hard-code sang rule động (xem chi tiết bên dưới). Cần review rồi commit + push khi người dùng xác nhận.
+- Tất cả thay đổi trong phiên này (xem mục dưới) đã **commit + push** lên `main`.
 
-## Các việc đã hoàn thành trong phiên này (theo thứ tự)
+## Các việc đã hoàn thành trong phiên này
 
-### 1. Bỏ tính năng "AI Refine" (đã commit ở `91977e6`)
-Tính năng cũ (`refineNote`, nút "AI Refine" với icon `WandSparkles` trong `TaskCard`) chỉ định dạng lại ghi chú thành gạch đầu dòng, không gọi API AI ngoài nào — nên xóa gọn, không có tác dụng phụ.
+### Chuyển từ Google Sheets sang Postgres (Neon) làm nguồn lưu trữ chính
+- Cài Neon Postgres qua Vercel Marketplace (`npx vercel integration add neon`), tự động connect vào project và inject env vars.
+- Thêm `api/data.js`: serverless function GET (đọc row `planner`) / POST (upsert row `planner`), tự tạo bảng `app_data` nếu chưa có (`CREATE TABLE IF NOT EXISTS`).
+- `src/App.jsx`: thay `SHEETS_ENDPOINT` (Google Apps Script) bằng `DATA_API_ENDPOINT = '/api/data'`; cùng logic load-on-mount + debounce-save-700ms như cũ, chỉ đổi endpoint và bỏ `?action=load` (giờ phân biệt bằng HTTP method GET/POST).
+- Viết script migration một lần `scripts/migrate-from-sheets.mjs`: fetch data thật từ Google Sheets endpoint cũ, insert vào Postgres. **Đã chạy và verify dữ liệu khớp** (documents, dailyTasks, scheduleRules, speakingTopics — bao gồm cả chủ đề Speaking người dùng đã tự tạo).
+- Đã test round-trip (toggle 1 câu hỏi Speaking → xác nhận ghi vào DB → toggle lại như cũ) qua `vercel dev` local, không có lỗi console.
+- Google Apps Script endpoint cũ **không bị xoá/động tới** — vẫn còn nguyên như một bản sao dữ liệu cũ, nhưng app không còn đọc/ghi vào đó nữa kể từ commit này.
 
-### 2. Rule list trong Settings (đã commit ở `91977e6`)
-`SettingsView` giờ hiển thị toàn bộ `data.scheduleRules` dưới dạng `RuleCard` (khoảng ngày, thứ áp dụng, giờ, badge "Đã apply N buổi", nút Sửa/Xóa). Trước đó tính năng này đã có sẵn code (uncommitted từ phiên trước đó nữa) — phiên này chỉ dọn dead code (xóa hàm `LegacySettingsView` không còn được render).
-
-### 3. Biến lịch mặc định thành rule động (CHƯA COMMIT)
-Trước đây `getDefaultTasks(date)` hard-code 3 khung lịch cố định (không hiện trong Settings, không sửa/xóa được). Đã refactor thành:
-
-- **7 rule seed** (`DEFAULT_RULE_SEEDS`) tương ứng đúng lịch cũ:
-  - T2/T4/T6: "Làm bài tập & Ôn bài cũ + mới" (10:00–12:00), "Học clip thầy Tùng" (13:00–16:00), "Dịch Anh-Việt & Việt-Anh" (21:00–23:00)
-  - T3/T5/T7: "Học auto" (10:00–12:00), "Học auto" (13:00–17:00), "Listen & Speak" (20:00–22:00)
-  - CN: "Nghỉ ngơi" (không có giờ cụ thể)
-  - Khoảng ngày mỗi rule: `2020-01-01` → `2035-12-31` (coi như áp dụng vĩnh viễn, sửa được trong Settings nếu muốn thu hẹp)
-- **Seed 1 lần duy nhất**: `ensureDefaultRules(data)` chèn 7 rule trên vào `scheduleRules` nếu `data.defaultRulesSeeded` chưa `true`, rồi đánh dấu `true`. Chạy tại: khởi tạo state từ `localStorage`, và sau khi load remote từ Google Sheets. `clearAllData()` set `defaultRulesSeeded: true` ngay sau khi xóa để **không tự sinh lại** 7 rule mặc định sau khi người dùng chủ động xóa sạch dữ liệu.
-- **Tính lịch động thay vì bake sẵn**: `getTasksForDate(data, date)` giờ ưu tiên `data.dailyTasks[dateStr]` nếu đã có (nghĩa là ngày đó người dùng từng sửa/tick/note), nếu chưa thì gọi `getRuleGeneratedTasks(data.scheduleRules, date)` để tính trực tiếp từ mọi rule khớp ngày đó (kể cả rule người dùng tự tạo thêm). **Không còn bake hàng nghìn ngày vào storage** — tránh phình dữ liệu khi sync Google Sheets.
-- `applyRuleToDailyTasks` (dùng khi tạo/sửa rule qua form) giờ chỉ tính `appliedCount` (số buổi rule sẽ khớp trong khoảng ngày) + dọn các task đã bake theo `ruleId` cũ (từ hệ thống cũ trước refactor), **không còn ghi task vào từng ngày** nữa.
-
-**Đã verify bằng cách nào**: không dùng được browser preview trong phiên (tool preview bị khoá vào project khác trên máy). Đã verify bằng:
-- `npm run build` chạy sạch không lỗi.
-- Script Node độc lập trích xuất các hàm thuần (`getRuleGeneratedTasks`, `countRuleOccurrences`, `buildDefaultRule`) để mô phỏng lịch cho vài ngày mẫu (T2, T3, T4, CN) — kết quả khớp đúng lịch cũ.
-
-**Đánh đổi/hạn chế đã biết (chưa xử lý, cần lưu ý nếu làm tiếp)**:
-- Nếu người dùng **sửa** 1 trong 7 rule mặc định qua form Settings, icon gốc (`book`, `headphones`, `language`, `bot`, `graduation`) sẽ bị ghi đè thành `mic`/`code` chung chung — vì `buildRuleFromForm` tính icon qua `getRuleIcon(theme)` (map thô theo theme), không giữ icon gốc. Đây là hạn chế có sẵn của form tạo rule (áp dụng cho mọi rule, không riêng gì 7 rule mặc định).
-- Rule "Nghỉ ngơi" (Chủ Nhật) không có `start`/`end` (để trống) nên task hiển thị không có badge giờ — khác với bản cũ ghi cứng "Cả ngày". Chưa xử lý vì input giờ dạng `type="time"` không nhận text tự do.
-- Nếu Google Sheets đang lưu data từ **trước** bản refactor này (không có field `defaultRulesSeeded`/7 rule mặc định) và local đã chạy bản mới, có thể có tình huống 2 nguồn lệch nhau tạm thời cho tới khi sync xong theo 1 chiều — chưa test kỹ tình huống multi-device/multi-tab.
+**Lưu ý quan trọng cho phiên sau**: `DATABASE_URL` trong `.env.local` (khi chạy `vercel env pull`) trỏ **cùng một database** cho cả Production/Preview/Development — Neon integration này không tự tách branch riêng theo environment. Nghĩa là chạy `vercel dev` / test script ở local sẽ đọc/ghi thẳng vào dữ liệu thật của production (bảng chỉ có 1 row nên rủi ro thấp hơn so với append-log, nhưng vẫn cần cẩn thận khi test — ghi đè xong nhớ chạy lại `node --env-file=.env.local scripts/migrate-from-sheets.mjs` để khôi phục nếu lỡ ghi đè dữ liệu test).
 
 ## Việc cần làm tiếp (nếu người dùng đồng ý)
 
-1. Review + **commit + push** thay đổi "rule động thay lịch mặc định" (`src/App.jsx`, hiện chưa commit).
+1. Cân nhắc xoá hẳn Google Apps Script project (hiện vẫn còn tồn tại như dữ liệu cũ, không ảnh hưởng gì nhưng cũng không còn dùng).
 2. Cân nhắc cập nhật `README.md` (dòng 18-20 nhắc tới tính năng "pin tuần" cũ, có vẻ không còn khớp với UI "StudyFlow" hiện tại — chưa kiểm tra kỹ).
-3. Nếu muốn xử lý hạn chế icon khi sửa rule mặc định, cần thêm field `icon` riêng vào form Settings hoặc giữ icon gốc khi `existingRule` có sẵn icon hợp lệ.
+3. Nếu muốn tách biệt dữ liệu dev/production thật sự an toàn, có thể tạo riêng 1 Neon branch cho Development/Preview qua Neon dashboard rồi gán `DATABASE_URL` riêng cho từng environment trong Vercel.

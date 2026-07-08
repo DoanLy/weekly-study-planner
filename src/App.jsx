@@ -35,8 +35,7 @@ import {
 } from 'lucide-react';
 
 const DATA_STORAGE_KEY = 'weekly-study-planner-data';
-const SHEETS_ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbzVKJPjWGsQpMdF_LKW4Ix_md92kYfLJXafupLl3d8laqdxZo2vbaF4afmSkSuetZ5P/exec';
+const DATA_API_ENDPOINT = '/api/data';
 
 const INITIAL_DATE = new Date(2026, 6, 8);
 const VIETNAMESE_DAYS = [
@@ -628,9 +627,9 @@ function App() {
 
   useEffect(() => {
     const controller = new AbortController();
-    setSyncStatus('Đang đồng bộ Google Sheets...');
+    setSyncStatus('Đang đồng bộ dữ liệu...');
 
-    fetch(`${SHEETS_ENDPOINT}?action=load`, { signal: controller.signal })
+    fetch(DATA_API_ENDPOINT, { signal: controller.signal })
       .then((response) => response.json())
       .then((payload) => {
         if (payload.data && Object.keys(payload.data).length > 0) {
@@ -656,10 +655,10 @@ function App() {
     if (!hasLoadedRemote.current) return undefined;
     window.clearTimeout(pendingSave.current);
     pendingSave.current = window.setTimeout(() => {
-      setSyncStatus('Đang lưu Google Sheets...');
-      fetch(SHEETS_ENDPOINT, {
+      setSyncStatus('Đang lưu dữ liệu...');
+      fetch(DATA_API_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data }),
       })
         .then((response) => {
@@ -671,7 +670,7 @@ function App() {
           setSyncStatus('');
         })
         .catch(() => {
-          setSyncStatus('Đã lưu tạm trên máy, chưa đồng bộ được Google Sheets');
+          setSyncStatus('Đã lưu tạm trên máy, chưa đồng bộ được với server');
         });
     }, 700);
 
@@ -2409,7 +2408,7 @@ function SettingsView({
       <div className="rounded-2xl border border-rose-100 bg-white p-6 shadow-sm">
         <h3 className="font-bold text-slate-700">Quản lý dữ liệu</h3>
         <p className="mt-1 text-xs text-slate-400">
-          Dữ liệu được lưu trên máy và đồng bộ Google Sheets khi có mạng.
+          Dữ liệu được lưu trên máy và đồng bộ với server khi có mạng.
         </p>
         <button
           type="button"
