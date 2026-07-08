@@ -23,7 +23,10 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Sửa tiếp bug search Speaking: chủ đề đang chọn không khớp query vẫn hiển thị (mới nhất)
+### Dọn dữ liệu rác trong Calendar/dailyTasks (mới nhất — chỉ sửa data, không đổi code)
+Người dùng báo vẫn thấy "dữ liệu rác" trong Lịch. Kiểm tra `dailyTasks` trong Postgres thấy 4 ngày (`2026-07-10`, `2026-09-02`, `2026-09-04`, `2026-09-07`) có task list bị "đóng băng" (baked) từ trước khi refactor sang dynamic rules: vẫn còn task của các rule đã bị xoá từ lâu ("Học clip thầy Tùng", "Dịch Anh-Việt & Việt-Anh"), và cả 1 task lạ tên "MÚA" với timestamp tạo giống hệt nhau trên cả 3 ngày (rõ ràng là data test/rác, không phải người dùng tự gõ). Cả 4 ngày này đều `completed:false`, `note:""` — không có customization thật nào bị mất. Đã xoá 4 override này khỏi `dailyTasks` (giữ nguyên `2026-07-08` vì có dữ liệu thật: task đã hoàn thành + note + task tự thêm). Sau khi xoá, các ngày này tự tính lại đúng theo `scheduleRules` hiện tại (đã verify qua preview: hiển thị khớp với các ngày Mon/Wed/Fri hoặc Tue/Thu/Sat lân cận, không còn task rác).
+
+### Sửa tiếp bug search Speaking: chủ đề đang chọn không khớp query vẫn hiển thị
 Sau khi sửa `filterSpeakingTopicByQuery` (session trước), vẫn còn 1 kẽ hở: nếu chủ đề ĐANG ĐƯỢC CHỌN (selectedTopicId) không khớp cả tên lẫn câu hỏi với search query mới, `selectedTopic` vẫn tra theo ID cũ và hiển thị chủ đề đó với "Chưa có câu hỏi nào" (gây hiểu lầm là lỗi). Đã thêm `useEffect` trong `SpeakingView`: khi query thay đổi và chủ đề đang chọn không còn nằm trong `activeTopicsList` (danh sách đã lọc), tự động chuyển sang chủ đề đầu tiên khớp kết quả.
 
 ### Cải thiện UI ô "Câu trả lời" trong Speaking
