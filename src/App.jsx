@@ -234,7 +234,6 @@ function createSpeakingTopic(partial) {
   return {
     id: `topic-${Date.now()}-${Math.random().toString(36).slice(2)}`,
     name: '',
-    vietnameseName: '',
     questions: [],
     ...partial,
   };
@@ -1719,11 +1718,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
   const [savingStates, setSavingStates] = useState({});
   const [topicModalOpen, setTopicModalOpen] = useState(false);
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
-  const [newTopic, setNewTopic] = useState({
-    name: '',
-    vietnameseName: '',
-    firstQuestion: '',
-  });
+  const [newTopic, setNewTopic] = useState({ name: '', firstQuestion: '' });
   const [newQuestionText, setNewQuestionText] = useState('');
   const savingTimeouts = useRef({});
 
@@ -1747,9 +1742,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
       }))
       .filter(
         (topic) =>
-          topic.name.toLowerCase().includes(query) ||
-          topic.vietnameseName.toLowerCase().includes(query) ||
-          topic.questions.length > 0,
+          topic.name.toLowerCase().includes(query) || topic.questions.length > 0,
       );
   }, [currentPartTopics, query]);
 
@@ -1818,7 +1811,6 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
 
     const topic = createSpeakingTopic({
       name: newTopic.name.trim(),
-      vietnameseName: newTopic.vietnameseName.trim() || 'Chủ đề tự thêm',
       questions: [createSpeakingQuestion({ text: newTopic.firstQuestion.trim() })],
     });
 
@@ -1827,7 +1819,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
       [activePart]: [...current[activePart], topic],
     }));
     setSelectedTopicId(topic.id);
-    setNewTopic({ name: '', vietnameseName: '', firstQuestion: '' });
+    setNewTopic({ name: '', firstQuestion: '' });
     setTopicModalOpen(false);
   }
 
@@ -1853,10 +1845,6 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h2 className="text-2xl font-bold text-slate-800">Speaking</h2>
-          <p className="text-xs text-slate-400">
-            Luyện tập IELTS Speaking Part 1, 2, 3 theo chủ đề — tick khi đã học
-            xong, ghi câu trả lời để ôn lại.
-          </p>
         </div>
         <div className="relative w-full sm:w-64">
           <input
@@ -1937,9 +1925,6 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                         </span>
                       )}
                     </div>
-                    <span className="mt-0.5 block truncate text-xs font-normal text-slate-400">
-                      {topic.vietnameseName}
-                    </span>
                   </button>
                 );
               })
@@ -1967,9 +1952,6 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                   <h3 className="text-xl font-extrabold text-slate-800">
                     {selectedTopic.name}
                   </h3>
-                  <p className="mt-0.5 text-xs font-semibold text-slate-400">
-                    {selectedTopic.vietnameseName}
-                  </p>
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
                   <button
@@ -2097,20 +2079,6 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                 placeholder="Ví dụ: Daily Routine"
                 className="field-input"
                 required
-              />
-            </Field>
-            <Field label="Tên chủ đề (Tiếng Việt, tùy chọn)">
-              <input
-                type="text"
-                value={newTopic.vietnameseName}
-                onChange={(event) =>
-                  setNewTopic((current) => ({
-                    ...current,
-                    vietnameseName: event.target.value,
-                  }))
-                }
-                placeholder="Ví dụ: Thói quen hàng ngày"
-                className="field-input"
               />
             </Field>
             <Field label="Câu hỏi đầu tiên">
