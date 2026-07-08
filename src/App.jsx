@@ -1411,7 +1411,7 @@ function TaskCard({
           </div>
           <h3
             className={`text-lg font-extrabold ${
-              task.completed ? 'text-slate-400 line-through' : styles.text
+              task.completed ? 'text-slate-400' : styles.text
             }`}
           >
             {task.title}
