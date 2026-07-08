@@ -11,7 +11,9 @@ import {
   ChevronRight,
   Circle,
   Code2,
+  Compass,
   Expand,
+  FolderOpen,
   GraduationCap,
   Headphones,
   Languages,
@@ -23,6 +25,7 @@ import {
   NotebookPen,
   Plus,
   RefreshCw,
+  Search,
   Settings,
   SlidersHorizontal,
   Sparkles,
@@ -70,10 +73,13 @@ const MONTH_NAMES = [
   'December',
 ];
 
+const EMPTY_SPEAKING_TOPICS = { part1: [], part2: [], part3: [] };
+
 const EMPTY_DATA = {
   dailyTasks: {},
   scheduleRules: [],
   documents: [],
+  speakingTopics: EMPTY_SPEAKING_TOPICS,
   legacyWeeks: null,
   defaultRulesSeeded: false,
 };
@@ -143,6 +149,15 @@ function parseStoredData(value) {
   }
 }
 
+function normalizeSpeakingTopics(value) {
+  if (!value || typeof value !== 'object') return EMPTY_SPEAKING_TOPICS;
+  return {
+    part1: Array.isArray(value.part1) ? value.part1 : [],
+    part2: Array.isArray(value.part2) ? value.part2 : [],
+    part3: Array.isArray(value.part3) ? value.part3 : [],
+  };
+}
+
 function normalizeData(value) {
   if (!value || typeof value !== 'object') return EMPTY_DATA;
 
@@ -155,6 +170,7 @@ function normalizeData(value) {
         ? value.scheduleRules
         : [],
       documents: Array.isArray(value.documents) ? value.documents : [],
+      speakingTopics: normalizeSpeakingTopics(value.speakingTopics),
     };
   }
 
@@ -162,6 +178,7 @@ function normalizeData(value) {
     dailyTasks: {},
     scheduleRules: [],
     documents: [],
+    speakingTopics: EMPTY_SPEAKING_TOPICS,
     legacyWeeks: value,
     defaultRulesSeeded: false,
   };
@@ -209,6 +226,26 @@ function createDocument(partial) {
     content: '',
     createdAt: now,
     updatedAt: now,
+    ...partial,
+  };
+}
+
+function createSpeakingTopic(partial) {
+  return {
+    id: `topic-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    name: '',
+    vietnameseName: '',
+    questions: [],
+    ...partial,
+  };
+}
+
+function createSpeakingQuestion(partial) {
+  return {
+    id: `sq-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    text: '',
+    completed: false,
+    userNote: '',
     ...partial,
   };
 }
@@ -865,12 +902,23 @@ function App() {
     showToast('Đã xóa tài liệu.');
   }
 
+  function updateSpeakingTopics(updater) {
+    setData((current) => ({
+      ...current,
+      speakingTopics:
+        typeof updater === 'function'
+          ? updater(current.speakingTopics)
+          : updater,
+    }));
+  }
+
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'calendar', label: 'Calendar', icon: CalendarDays },
     { id: 'tasks', label: 'Tasks', icon: ListChecks, badge: incompleteSelected },
     { id: 'notes', label: 'Notes', icon: StickyNote },
     { id: 'documents', label: 'Documents', icon: Library },
+    { id: 'speaking', label: 'Speaking', icon: Mic },
     { id: 'settings', label: 'Settings', icon: SlidersHorizontal },
   ];
 
@@ -1003,6 +1051,13 @@ function App() {
             deleteDocument={deleteDocument}
             openEditDocument={openEditDocument}
             openNewDocument={openNewDocument}
+          />
+        )}
+
+        {activeView === 'speaking' && (
+          <SpeakingView
+            speakingTopics={data.speakingTopics}
+            setSpeakingTopics={updateSpeakingTopics}
           />
         )}
 
@@ -1643,6 +1698,499 @@ function DocumentsView({ documents, deleteDocument, openEditDocument, openNewDoc
               </div>
             </div>
           ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+const SPEAKING_PARTS = [
+  { id: 'part1', label: 'Part 1' },
+  { id: 'part2', label: 'Part 2' },
+  { id: 'part3', label: 'Part 3' },
+];
+
+function SpeakingView({ speakingTopics, setSpeakingTopics }) {
+  const [activePart, setActivePart] = useState('part1');
+  const [selectedTopicId, setSelectedTopicId] = useState(
+    () => speakingTopics.part1[0]?.id || '',
+  );
+  const [searchQuery, setSearchQuery] = useState('');
+  const [savingStates, setSavingStates] = useState({});
+  const [topicModalOpen, setTopicModalOpen] = useState(false);
+  const [questionModalOpen, setQuestionModalOpen] = useState(false);
+  const [newTopic, setNewTopic] = useState({
+    name: '',
+    vietnameseName: '',
+    firstQuestion: '',
+  });
+  const [newQuestionText, setNewQuestionText] = useState('');
+  const savingTimeouts = useRef({});
+
+  function changePart(partId) {
+    setActivePart(partId);
+    setSelectedTopicId(speakingTopics[partId]?.[0]?.id || '');
+    setSearchQuery('');
+  }
+
+  const query = searchQuery.trim().toLowerCase();
+  const currentPartTopics = speakingTopics[activePart] || [];
+
+  const activeTopicsList = useMemo(() => {
+    if (!query) return currentPartTopics;
+    return currentPartTopics
+      .map((topic) => ({
+        ...topic,
+        questions: topic.questions.filter((q) =>
+          q.text.toLowerCase().includes(query),
+        ),
+      }))
+      .filter(
+        (topic) =>
+          topic.name.toLowerCase().includes(query) ||
+          topic.vietnameseName.toLowerCase().includes(query) ||
+          topic.questions.length > 0,
+      );
+  }, [currentPartTopics, query]);
+
+  const selectedTopic = useMemo(() => {
+    const found = currentPartTopics.find((topic) => topic.id === selectedTopicId);
+    if (!found) return null;
+    if (!query) return found;
+    return {
+      ...found,
+      questions: found.questions.filter((q) => q.text.toLowerCase().includes(query)),
+    };
+  }, [currentPartTopics, selectedTopicId, query]);
+
+  function toggleQuestionComplete(questionId) {
+    setSpeakingTopics((current) => ({
+      ...current,
+      [activePart]: current[activePart].map((topic) => ({
+        ...topic,
+        questions: topic.questions.map((q) =>
+          q.id === questionId ? { ...q, completed: !q.completed } : q,
+        ),
+      })),
+    }));
+  }
+
+  function updateQuestionNote(questionId, note) {
+    setSavingStates((prev) => ({ ...prev, [questionId]: 'saving' }));
+    setSpeakingTopics((current) => ({
+      ...current,
+      [activePart]: current[activePart].map((topic) => ({
+        ...topic,
+        questions: topic.questions.map((q) =>
+          q.id === questionId ? { ...q, userNote: note } : q,
+        ),
+      })),
+    }));
+
+    window.clearTimeout(savingTimeouts.current[questionId]);
+    savingTimeouts.current[questionId] = window.setTimeout(() => {
+      setSavingStates((prev) => ({ ...prev, [questionId]: 'saved' }));
+    }, 500);
+  }
+
+  function deleteQuestion(questionId) {
+    setSpeakingTopics((current) => ({
+      ...current,
+      [activePart]: current[activePart].map((topic) => ({
+        ...topic,
+        questions: topic.questions.filter((q) => q.id !== questionId),
+      })),
+    }));
+  }
+
+  function deleteTopic(topicId) {
+    if (!window.confirm('Bạn có chắc chắn muốn xóa chủ đề này?')) return;
+    setSpeakingTopics((current) => ({
+      ...current,
+      [activePart]: current[activePart].filter((topic) => topic.id !== topicId),
+    }));
+    if (selectedTopicId === topicId) setSelectedTopicId('');
+  }
+
+  function submitAddTopic(event) {
+    event.preventDefault();
+    if (!newTopic.name.trim() || !newTopic.firstQuestion.trim()) return;
+
+    const topic = createSpeakingTopic({
+      name: newTopic.name.trim(),
+      vietnameseName: newTopic.vietnameseName.trim() || 'Chủ đề tự thêm',
+      questions: [createSpeakingQuestion({ text: newTopic.firstQuestion.trim() })],
+    });
+
+    setSpeakingTopics((current) => ({
+      ...current,
+      [activePart]: [...current[activePart], topic],
+    }));
+    setSelectedTopicId(topic.id);
+    setNewTopic({ name: '', vietnameseName: '', firstQuestion: '' });
+    setTopicModalOpen(false);
+  }
+
+  function submitAddQuestion(event) {
+    event.preventDefault();
+    if (!newQuestionText.trim() || !selectedTopic) return;
+
+    const question = createSpeakingQuestion({ text: newQuestionText.trim() });
+    setSpeakingTopics((current) => ({
+      ...current,
+      [activePart]: current[activePart].map((topic) =>
+        topic.id === selectedTopic.id
+          ? { ...topic, questions: [...topic.questions, question] }
+          : topic,
+      ),
+    }));
+    setNewQuestionText('');
+    setQuestionModalOpen(false);
+  }
+
+  return (
+    <section className="flex flex-col gap-6">
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-800">Speaking</h2>
+          <p className="text-xs text-slate-400">
+            Luyện tập IELTS Speaking Part 1, 2, 3 theo chủ đề — tick khi đã học
+            xong, ghi câu trả lời để ôn lại.
+          </p>
+        </div>
+        <div className="relative w-full sm:w-64">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Tìm câu hỏi..."
+            className="field-input pr-10"
+          />
+          <Search
+            size={16}
+            className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <aside className="flex flex-col gap-4 lg:col-span-4">
+          <div className="grid grid-cols-3 gap-1 rounded-xl bg-slate-100 p-1">
+            {SPEAKING_PARTS.map((part) => (
+              <button
+                key={part.id}
+                type="button"
+                onClick={() => changePart(part.id)}
+                className={`rounded-lg py-1.5 text-center text-xs font-bold transition-all ${
+                  activePart === part.id
+                    ? 'bg-white text-blue-700 shadow-sm'
+                    : 'text-slate-500 hover:text-slate-800'
+                }`}
+              >
+                {part.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-between">
+            <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+              <Compass size={16} /> Chủ đề
+            </h3>
+            <button
+              type="button"
+              onClick={() => setTopicModalOpen(true)}
+              className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-colors hover:bg-slate-200"
+              title="Thêm chủ đề mới"
+            >
+              <Plus size={14} />
+            </button>
+          </div>
+
+          <div className="flex max-h-[60vh] flex-col gap-2 overflow-y-auto pr-1">
+            {activeTopicsList.length === 0 ? (
+              <p className="rounded-xl border border-slate-100 bg-white p-4 text-center text-xs italic text-slate-400">
+                Chưa có chủ đề nào ở mục này
+              </p>
+            ) : (
+              activeTopicsList.map((topic) => {
+                const isSelected = selectedTopicId === topic.id;
+                const completedCount = topic.questions.filter(
+                  (q) => q.completed,
+                ).length;
+                const totalCount = topic.questions.length;
+                return (
+                  <button
+                    key={topic.id}
+                    type="button"
+                    onClick={() => setSelectedTopicId(topic.id)}
+                    className={`w-full rounded-xl border-2 px-4 py-3 text-left text-sm font-semibold transition-all ${
+                      isSelected
+                        ? 'border-blue-400 bg-blue-50 text-blue-700 shadow-sm'
+                        : 'border-slate-100 bg-white text-slate-600 hover:border-slate-200 hover:bg-slate-50'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="truncate">{topic.name}</span>
+                      {totalCount > 0 && (
+                        <span className="shrink-0 rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700">
+                          {completedCount}/{totalCount}
+                        </span>
+                      )}
+                    </div>
+                    <span className="mt-0.5 block truncate text-xs font-normal text-slate-400">
+                      {topic.vietnameseName}
+                    </span>
+                  </button>
+                );
+              })
+            )}
+          </div>
+        </aside>
+
+        <div className="lg:col-span-8">
+          {!selectedTopic ? (
+            <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-slate-100 bg-white p-12 text-center shadow-sm">
+              <FolderOpen size={40} className="text-slate-300" />
+              <div>
+                <h4 className="font-bold text-slate-700">
+                  Chưa chọn chủ đề nào
+                </h4>
+                <p className="mt-1 text-xs text-slate-400">
+                  Hãy chọn một chủ đề bên trái hoặc tạo chủ đề mới để bắt đầu.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+              <div className="mb-5 flex items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                <div>
+                  <h3 className="text-xl font-extrabold text-slate-800">
+                    {selectedTopic.name}
+                  </h3>
+                  <p className="mt-0.5 text-xs font-semibold text-slate-400">
+                    {selectedTopic.vietnameseName}
+                  </p>
+                </div>
+                <div className="flex shrink-0 items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setQuestionModalOpen(true)}
+                    className="flex items-center gap-1.5 rounded-xl border border-blue-200 px-3 py-1.5 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-50"
+                  >
+                    <Plus size={14} /> Thêm câu hỏi
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => deleteTopic(selectedTopic.id)}
+                    className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-300 transition-colors hover:bg-rose-50 hover:text-rose-500"
+                    title="Xóa chủ đề"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              </div>
+
+              {selectedTopic.questions.length === 0 ? (
+                <p className="py-12 text-center text-sm italic text-slate-400">
+                  Chưa có câu hỏi nào trong chủ đề này. Nhấn &quot;Thêm câu hỏi&quot;
+                  để bắt đầu.
+                </p>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  {selectedTopic.questions.map((q) => (
+                    <div
+                      key={q.id}
+                      className={`grid grid-cols-1 gap-4 rounded-2xl border p-4 transition-all md:grid-cols-12 ${
+                        q.completed
+                          ? 'border-emerald-200 bg-emerald-50/40'
+                          : 'border-slate-200 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-start gap-3 md:col-span-7">
+                        <button
+                          type="button"
+                          onClick={() => toggleQuestionComplete(q.id)}
+                          className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all ${
+                            q.completed
+                              ? 'border-emerald-600 bg-emerald-500 text-white'
+                              : 'border-slate-300 text-transparent hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-500'
+                          }`}
+                          title={
+                            q.completed
+                              ? 'Đã học xong (nhấn để bỏ)'
+                              : 'Đánh dấu là đã học xong'
+                          }
+                        >
+                          <Check size={12} strokeWidth={3} />
+                        </button>
+                        <p
+                          className={`flex-1 text-[15px] font-semibold leading-relaxed ${
+                            q.completed ? 'text-slate-600' : 'text-slate-800'
+                          }`}
+                        >
+                          {q.text}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => deleteQuestion(q.id)}
+                          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-slate-300 transition-colors hover:bg-rose-50 hover:text-rose-500"
+                          title="Xóa câu hỏi"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+
+                      <div className="flex flex-col gap-1.5 border-t border-slate-200 pt-3 md:col-span-5 md:border-l md:border-t-0 md:pl-4 md:pt-0">
+                        <div className="flex items-center justify-between text-[11px] font-bold">
+                          <span className="text-slate-400">Câu trả lời</span>
+                          {savingStates[q.id] === 'saving' && (
+                            <span className="text-amber-500">Đang lưu...</span>
+                          )}
+                          {savingStates[q.id] === 'saved' && (
+                            <span className="text-emerald-500">Đã tự lưu</span>
+                          )}
+                        </div>
+                        <textarea
+                          value={q.userNote || ''}
+                          onChange={(event) =>
+                            updateQuestionNote(q.id, event.target.value)
+                          }
+                          placeholder="Nhập câu trả lời của bạn vào đây..."
+                          rows={2}
+                          className="field-input resize-none text-xs"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {topicModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
+          <form
+            onSubmit={submitAddTopic}
+            className="flex w-full max-w-md flex-col gap-4 rounded-2xl bg-white p-6 shadow-2xl"
+          >
+            <div className="flex items-center justify-between">
+              <h4 className="text-lg font-bold text-slate-800">
+                Thêm chủ đề nói mới
+              </h4>
+              <button
+                type="button"
+                onClick={() => setTopicModalOpen(false)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <Field label="Tên chủ đề (Tiếng Anh)">
+              <input
+                type="text"
+                value={newTopic.name}
+                onChange={(event) =>
+                  setNewTopic((current) => ({ ...current, name: event.target.value }))
+                }
+                placeholder="Ví dụ: Daily Routine"
+                className="field-input"
+                required
+              />
+            </Field>
+            <Field label="Tên chủ đề (Tiếng Việt, tùy chọn)">
+              <input
+                type="text"
+                value={newTopic.vietnameseName}
+                onChange={(event) =>
+                  setNewTopic((current) => ({
+                    ...current,
+                    vietnameseName: event.target.value,
+                  }))
+                }
+                placeholder="Ví dụ: Thói quen hàng ngày"
+                className="field-input"
+              />
+            </Field>
+            <Field label="Câu hỏi đầu tiên">
+              <textarea
+                value={newTopic.firstQuestion}
+                onChange={(event) =>
+                  setNewTopic((current) => ({
+                    ...current,
+                    firstQuestion: event.target.value,
+                  }))
+                }
+                rows={3}
+                placeholder="Ví dụ: What is your favorite time of the day?"
+                className="field-input resize-none"
+                required
+              />
+            </Field>
+            <div className="flex justify-end gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => setTopicModalOpen(false)}
+                className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
+              >
+                Hủy
+              </button>
+              <button
+                type="submit"
+                className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+              >
+                Lưu chủ đề
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {questionModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
+          <form
+            onSubmit={submitAddQuestion}
+            className="flex w-full max-w-md flex-col gap-4 rounded-2xl bg-white p-6 shadow-2xl"
+          >
+            <div className="flex items-center justify-between">
+              <h4 className="text-lg font-bold text-slate-800">
+                Thêm câu hỏi luyện nói
+              </h4>
+              <button
+                type="button"
+                onClick={() => setQuestionModalOpen(false)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <Field label="Nội dung câu hỏi (Tiếng Anh)">
+              <textarea
+                value={newQuestionText}
+                onChange={(event) => setNewQuestionText(event.target.value)}
+                rows={3}
+                placeholder="Ví dụ: What is your favorite time of the day?"
+                className="field-input resize-none"
+                required
+              />
+            </Field>
+            <div className="flex justify-end gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => setQuestionModalOpen(false)}
+                className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
+              >
+                Hủy
+              </button>
+              <button
+                type="submit"
+                className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+              >
+                Lưu câu hỏi
+              </button>
+            </div>
+          </form>
         </div>
       )}
     </section>
