@@ -638,11 +638,11 @@ function App() {
           window.localStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(remoteData));
         }
         setSyncStatus('');
+        hasLoadedRemote.current = true;
       })
-      .catch(() => {
+      .catch((error) => {
+        if (error?.name === 'AbortError') return;
         setSyncStatus('Mất kết nối, đang dùng dữ liệu trên máy');
-      })
-      .finally(() => {
         hasLoadedRemote.current = true;
       });
 
@@ -1945,6 +1945,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                     key={topic.id}
                     type="button"
                     onClick={() => setSelectedTopicId(topic.id)}
+                    title={topic.name}
                     className={`w-full rounded-xl border-2 px-4 py-3 text-left text-sm font-semibold transition-all ${
                       isSelected
                         ? 'border-blue-400 bg-blue-50 text-blue-700 shadow-sm'
