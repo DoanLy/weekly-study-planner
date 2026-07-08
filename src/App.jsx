@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowLeft,
   BarChart3,
+  Bold,
   BookOpen,
   Bot,
   CalendarCheck,
@@ -16,6 +17,7 @@ import {
   FolderOpen,
   GraduationCap,
   Headphones,
+  Highlighter,
   Languages,
   LayoutDashboard,
   Library,
@@ -464,6 +466,7 @@ function escapeHtml(value) {
 function parseInlineMarkdown(text) {
   return escapeHtml(text)
     .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/==(.*?)==/g, '<mark>$1</mark>')
     .replace(/`([^`]+)`/g, '<code>$1</code>');
 }
 
@@ -1789,7 +1792,9 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
   const [questionModalOpen, setQuestionModalOpen] = useState(false);
   const [newTopic, setNewTopic] = useState({ name: '', firstQuestion: '' });
   const [newQuestionText, setNewQuestionText] = useState('');
+  const [editingAnswers, setEditingAnswers] = useState({});
   const savingTimeouts = useRef({});
+  const answerRefs = useRef({});
 
   function changePart(partId) {
     setActivePart(partId);
@@ -1822,6 +1827,21 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
     return filterSpeakingTopicByQuery(found, query);
   }, [currentPartTopics, selectedTopicId, query]);
 
+  useEffect(() => {
+    if (!selectedTopic) return;
+    setEditingAnswers((current) => {
+      let changed = false;
+      const next = { ...current };
+      selectedTopic.questions.forEach((q) => {
+        if (!(q.id in next)) {
+          next[q.id] = !q.userNote;
+          changed = true;
+        }
+      });
+      return changed ? next : current;
+    });
+  }, [selectedTopic]);
+
   function toggleQuestionComplete(questionId) {
     setSpeakingTopics((current) => ({
       ...current,
@@ -1850,6 +1870,24 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
     savingTimeouts.current[questionId] = window.setTimeout(() => {
       setSavingStates((prev) => ({ ...prev, [questionId]: 'saved' }));
     }, 500);
+  }
+
+  function applyAnswerFormatting(questionId, marker) {
+    const el = answerRefs.current[questionId];
+    if (!el) return;
+
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const value = el.value;
+    const selected = value.slice(start, end) || 'văn bản';
+    const nextValue = `${value.slice(0, start)}${marker}${selected}${marker}${value.slice(end)}`;
+
+    updateQuestionNote(questionId, nextValue);
+
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(start + marker.length, start + marker.length + selected.length);
+    });
   }
 
   function deleteQuestion(questionId) {
@@ -2090,33 +2128,79 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                       </div>
 
                       <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50/70 p-3">
-                        <div className="mb-2 flex items-center justify-between text-[11px] font-bold">
+                        <div className="mb-2 flex items-center justify-between gap-2 text-[11px] font-bold">
                           <span className="text-slate-400">Câu trả lời</span>
-                          {savingStates[q.id] === 'saving' && (
-                            <span className="text-amber-500">Đang lưu...</span>
-                          )}
-                          {savingStates[q.id] === 'saved' && (
-                            <span className="text-emerald-500">Đã tự lưu</span>
-                          )}
+                          <div className="flex items-center gap-2">
+                            {savingStates[q.id] === 'saving' && (
+                              <span className="text-amber-500">Đang lưu...</span>
+                            )}
+                            {savingStates[q.id] === 'saved' && (
+                              <span className="text-emerald-500">Đã tự lưu</span>
+                            )}
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setEditingAnswers((current) => ({
+                                  ...current,
+                                  [q.id]: !(current[q.id] ?? !q.userNote),
+                                }))
+                              }
+                              className="text-slate-400 transition-colors hover:text-blue-600"
+                            >
+                              {(editingAnswers[q.id] ?? !q.userNote) ? 'Xem' : 'Sửa'}
+                            </button>
+                          </div>
                         </div>
-                        <textarea
-                          ref={(el) => {
-                            if (!el) return;
-                            el.style.height = 'auto';
-                            el.style.height = `${el.scrollHeight}px`;
-                          }}
-                          value={q.userNote || ''}
-                          onChange={(event) =>
-                            updateQuestionNote(q.id, event.target.value)
-                          }
-                          onInput={(event) => {
-                            event.target.style.height = 'auto';
-                            event.target.style.height = `${event.target.scrollHeight}px`;
-                          }}
-                          placeholder="Nhập câu trả lời của bạn vào đây..."
-                          rows={2}
-                          className="field-input min-h-[3rem] resize-none overflow-hidden bg-white text-sm leading-relaxed"
-                        />
+
+                        {(editingAnswers[q.id] ?? !q.userNote) ? (
+                          <>
+                            <div className="mb-1.5 flex items-center gap-1">
+                              <button
+                                type="button"
+                                onClick={() => applyAnswerFormatting(q.id, '**')}
+                                title="In đậm"
+                                className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-800"
+                              >
+                                <Bold size={14} />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => applyAnswerFormatting(q.id, '==')}
+                                title="Tô màu (bôi vàng)"
+                                className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-800"
+                              >
+                                <Highlighter size={14} />
+                              </button>
+                            </div>
+                            <textarea
+                              ref={(el) => {
+                                answerRefs.current[q.id] = el;
+                                if (!el) return;
+                                el.style.height = 'auto';
+                                el.style.height = `${el.scrollHeight}px`;
+                              }}
+                              value={q.userNote || ''}
+                              onChange={(event) =>
+                                updateQuestionNote(q.id, event.target.value)
+                              }
+                              onInput={(event) => {
+                                event.target.style.height = 'auto';
+                                event.target.style.height = `${event.target.scrollHeight}px`;
+                              }}
+                              placeholder="Nhập câu trả lời của bạn vào đây... Dùng **từ khóa** để in đậm, ==từ khóa== để tô màu."
+                              rows={2}
+                              className="field-input min-h-[3rem] resize-none overflow-hidden bg-white text-sm leading-relaxed"
+                            />
+                          </>
+                        ) : (
+                          <div
+                            className="study-note-preview cursor-text rounded-xl border border-transparent bg-white p-3 text-sm text-slate-700 transition-colors hover:border-slate-200"
+                            onClick={() =>
+                              setEditingAnswers((current) => ({ ...current, [q.id]: true }))
+                            }
+                            dangerouslySetInnerHTML={{ __html: formatNoteHtml(q.userNote) }}
+                          />
+                        )}
                       </div>
                     </div>
                   ))}

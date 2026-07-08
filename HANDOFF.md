@@ -23,7 +23,14 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Sửa mất dữ liệu khi đóng tab ngay sau khi sửa/xoá (mới nhất) + xoá "chủ đề 1" hẳn
+### Thêm định dạng văn bản (in đậm, tô màu) cho khung "Câu trả lời" Speaking (mới nhất)
+Người dùng muốn format câu trả lời cho đẹp (in đậm, tô màu) thay vì chỉ gõ text thường. Đã thêm:
+- Cú pháp `==text==` → tô vàng (`<mark>`), bổ sung cạnh `**text**` (in đậm, đã có sẵn) trong `parseInlineMarkdown`/`formatNoteHtml`. CSS `mark` thêm trong `index.css`.
+- 2 nút toolbar (icon `Bold`, `Highlighter` từ lucide-react) phía trên textarea: bấm khi đã bôi đen 1 đoạn text sẽ tự bọc `**...**` hoặc `==...==` quanh đoạn đó (không cần tự gõ cú pháp); nếu chưa chọn gì thì chèn placeholder "văn bản" để người dùng gõ đè.
+- Thêm chế độ Xem/Sửa cho từng câu trả lời (giống pattern "Ghi chú bài học" ở Tasks): câu đã có nội dung mặc định hiện dạng đã định dạng đẹp (không editable, bấm "Sửa" để chỉnh); câu chưa có nội dung mặc định vào thẳng chế độ soạn (không mất công bấm mới gõ được).
+- **Lưu ý code**: trạng thái Xem/Sửa mặc định ban đầu tính dựa theo `!q.userNote` nhưng phải "chốt" 1 lần qua `useEffect` khi chọn topic (seed vào state `editingAnswers`), KHÔNG được tính lại mỗi lần render — nếu tính lại trực tiếp theo nội dung hiện tại thì textarea sẽ tự đóng lại thành view-mode ngay khi người dùng gõ ký tự đầu tiên (đã gặp bug này khi test, đã sửa).
+
+### Sửa mất dữ liệu khi đóng tab ngay sau khi sửa/xoá + xoá "chủ đề 1" hẳn
 Người dùng xoá "chủ đề 1" (topic test cũ) nhiều lần nhưng nó "cứ hiện lại". Nguyên nhân thật: app chỉ lưu lên server sau debounce 700ms; nếu đóng/tải lại tab trong lúc đó, thay đổi (bao gồm xoá) không kịp lưu, mở lại app fetch lại data cũ trên server → trông như "xoá không được". **Đính chính lại phần "Sự cố" bên dưới**: 2 lần đầu "chủ đề 1" biến mất đúng là do process `vercel dev` mồ côi (đã xác minh qua `Get-Process`), nhưng rất có thể người dùng cũng đang tự xoá topic này qua UI thật song song lúc đó — nghĩa là ít nhất 1 trong 2 lần "khôi phục" của tôi thực ra là khôi phục lại thứ người dùng đã chủ động xoá. Lần này đã xoá hẳn "chủ đề 1" qua script trực tiếp theo đúng ý người dùng.
 
 Đã sửa tận gốc race điều kiện đóng tab: thêm listener `visibilitychange` (khi ẩn tab) + `pagehide`, dùng `navigator.sendBeacon` để flush lưu ngay lập tức thay vì chờ debounce — hoạt động kể cả khi trang đang unload (fetch thường có thể bị huỷ giữa chừng lúc unload, sendBeacon thì không).

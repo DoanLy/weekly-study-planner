@@ -51,3 +51,10 @@ body {
   color: #be123c;
   font-size: 0.85em;
 }
+
+.study-note-preview mark {
+  border-radius: 0.25rem;
+  background: #fef08a;
+  padding: 0.05rem 0.25rem;
+  color: inherit;
+}
