@@ -23,7 +23,15 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Dọn dữ liệu rác trong Calendar/dailyTasks (mới nhất — chỉ sửa data, không đổi code)
+### Sửa mất dữ liệu khi đóng tab ngay sau khi sửa/xoá (mới nhất) + xoá "chủ đề 1" hẳn
+Người dùng xoá "chủ đề 1" (topic test cũ) nhiều lần nhưng nó "cứ hiện lại". Nguyên nhân thật: app chỉ lưu lên server sau debounce 700ms; nếu đóng/tải lại tab trong lúc đó, thay đổi (bao gồm xoá) không kịp lưu, mở lại app fetch lại data cũ trên server → trông như "xoá không được". **Đính chính lại phần "Sự cố" bên dưới**: 2 lần đầu "chủ đề 1" biến mất đúng là do process `vercel dev` mồ côi (đã xác minh qua `Get-Process`), nhưng rất có thể người dùng cũng đang tự xoá topic này qua UI thật song song lúc đó — nghĩa là ít nhất 1 trong 2 lần "khôi phục" của tôi thực ra là khôi phục lại thứ người dùng đã chủ động xoá. Lần này đã xoá hẳn "chủ đề 1" qua script trực tiếp theo đúng ý người dùng.
+
+Đã sửa tận gốc race điều kiện đóng tab: thêm listener `visibilitychange` (khi ẩn tab) + `pagehide`, dùng `navigator.sendBeacon` để flush lưu ngay lập tức thay vì chờ debounce — hoạt động kể cả khi trang đang unload (fetch thường có thể bị huỷ giữa chừng lúc unload, sendBeacon thì không).
+
+### Cải thiện UI khung "Câu trả lời" trong Speaking
+Textarea giờ tự giãn chiều cao theo nội dung (không cần scroll để xem hết câu trả lời) — dùng `ref` + `onInput` set `style.height = scrollHeight`. Khung câu trả lời cũng được bọc riêng trong 1 khối có nền xám nhạt + border rõ ràng (`bg-slate-50/70 border border-slate-200 rounded-xl`) để tách biệt trực quan với câu hỏi và với câu hỏi/trả lời kế tiếp; thêm `shadow-sm` cho card câu hỏi để phân định rõ hơn giữa các câu hỏi.
+
+### Dọn dữ liệu rác trong Calendar/dailyTasks (chỉ sửa data, không đổi code)
 Người dùng báo vẫn thấy "dữ liệu rác" trong Lịch. Kiểm tra `dailyTasks` trong Postgres thấy 4 ngày (`2026-07-10`, `2026-09-02`, `2026-09-04`, `2026-09-07`) có task list bị "đóng băng" (baked) từ trước khi refactor sang dynamic rules: vẫn còn task của các rule đã bị xoá từ lâu ("Học clip thầy Tùng", "Dịch Anh-Việt & Việt-Anh"), và cả 1 task lạ tên "MÚA" với timestamp tạo giống hệt nhau trên cả 3 ngày (rõ ràng là data test/rác, không phải người dùng tự gõ). Cả 4 ngày này đều `completed:false`, `note:""` — không có customization thật nào bị mất. Đã xoá 4 override này khỏi `dailyTasks` (giữ nguyên `2026-07-08` vì có dữ liệu thật: task đã hoàn thành + note + task tự thêm). Sau khi xoá, các ngày này tự tính lại đúng theo `scheduleRules` hiện tại (đã verify qua preview: hiển thị khớp với các ngày Mon/Wed/Fri hoặc Tue/Thu/Sat lân cận, không còn task rác).
 
 ### Sửa tiếp bug search Speaking: chủ đề đang chọn không khớp query vẫn hiển thị

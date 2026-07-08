@@ -649,6 +649,9 @@ function App() {
     return () => controller.abort();
   }, []);
 
+  const latestData = useRef(data);
+  latestData.current = data;
+
   useEffect(() => {
     window.localStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(data));
 
@@ -676,6 +679,29 @@ function App() {
 
     return () => window.clearTimeout(pendingSave.current);
   }, [data]);
+
+  useEffect(() => {
+    function flushPendingSave() {
+      if (!hasLoadedRemote.current) return;
+      window.clearTimeout(pendingSave.current);
+      const blob = new Blob([JSON.stringify({ data: latestData.current })], {
+        type: 'application/json',
+      });
+      navigator.sendBeacon(DATA_API_ENDPOINT, blob);
+    }
+
+    function handleVisibilityChange() {
+      if (document.visibilityState === 'hidden') flushPendingSave();
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('pagehide', flushPendingSave);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('pagehide', flushPendingSave);
+    };
+  }, []);
 
   function showToast(message) {
     setToast(message);
@@ -2023,7 +2049,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                   {selectedTopic.questions.map((q) => (
                     <div
                       key={q.id}
-                      className={`rounded-2xl border p-4 transition-all ${
+                      className={`rounded-2xl border p-4 shadow-sm transition-all ${
                         q.completed
                           ? 'border-emerald-200 bg-emerald-50/40'
                           : 'border-slate-200 bg-white'
@@ -2063,8 +2089,8 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                         </button>
                       </div>
 
-                      <div className="mt-3 flex flex-col gap-1.5 border-t border-slate-100 pt-3">
-                        <div className="flex items-center justify-between text-[11px] font-bold">
+                      <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50/70 p-3">
+                        <div className="mb-2 flex items-center justify-between text-[11px] font-bold">
                           <span className="text-slate-400">Câu trả lời</span>
                           {savingStates[q.id] === 'saving' && (
                             <span className="text-amber-500">Đang lưu...</span>
@@ -2074,13 +2100,22 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                           )}
                         </div>
                         <textarea
+                          ref={(el) => {
+                            if (!el) return;
+                            el.style.height = 'auto';
+                            el.style.height = `${el.scrollHeight}px`;
+                          }}
                           value={q.userNote || ''}
                           onChange={(event) =>
                             updateQuestionNote(q.id, event.target.value)
                           }
+                          onInput={(event) => {
+                            event.target.style.height = 'auto';
+                            event.target.style.height = `${event.target.scrollHeight}px`;
+                          }}
                           placeholder="Nhập câu trả lời của bạn vào đây..."
-                          rows={4}
-                          className="field-input min-h-[7rem] resize-y text-sm leading-relaxed"
+                          rows={2}
+                          className="field-input min-h-[3rem] resize-none overflow-hidden bg-white text-sm leading-relaxed"
                         />
                       </div>
                     </div>
