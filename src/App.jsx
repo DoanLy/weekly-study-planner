@@ -2017,13 +2017,13 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                   {selectedTopic.questions.map((q) => (
                     <div
                       key={q.id}
-                      className={`grid grid-cols-1 gap-4 rounded-2xl border p-4 transition-all md:grid-cols-12 ${
+                      className={`rounded-2xl border p-4 transition-all ${
                         q.completed
                           ? 'border-emerald-200 bg-emerald-50/40'
                           : 'border-slate-200 bg-white'
                       }`}
                     >
-                      <div className="flex items-start gap-3 md:col-span-7">
+                      <div className="flex items-start gap-3">
                         <button
                           type="button"
                           onClick={() => toggleQuestionComplete(q.id)}
@@ -2057,7 +2057,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                         </button>
                       </div>
 
-                      <div className="flex flex-col gap-1.5 border-t border-slate-200 pt-3 md:col-span-5 md:border-l md:border-t-0 md:pl-4 md:pt-0">
+                      <div className="mt-3 flex flex-col gap-1.5 border-t border-slate-100 pt-3">
                         <div className="flex items-center justify-between text-[11px] font-bold">
                           <span className="text-slate-400">Câu trả lời</span>
                           {savingStates[q.id] === 'saving' && (
@@ -2073,8 +2073,8 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                             updateQuestionNote(q.id, event.target.value)
                           }
                           placeholder="Nhập câu trả lời của bạn vào đây..."
-                          rows={2}
-                          className="field-input resize-none text-xs"
+                          rows={4}
+                          className="field-input min-h-[7rem] resize-y text-sm leading-relaxed"
                         />
                       </div>
                     </div>
