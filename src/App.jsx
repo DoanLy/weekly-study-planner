@@ -949,32 +949,9 @@ function App() {
                             <div className="mt-1 border-t border-slate-200/50 pt-2">
                               <div className="flex items-center gap-1.5 py-1 text-[13px] font-semibold text-slate-600">
                                 <Pencil size={14} />
-                                Tiến độ & Ghi chú
+                                Ghi chú
                               </div>
-                              <div className="mt-3 space-y-3 rounded-xl border border-white bg-white/70 p-3 shadow-sm">
-                                <div className="flex items-center gap-3">
-                                  <label className="w-16 text-xs font-bold text-slate-700">
-                                    Tiến độ:
-                                  </label>
-                                  <input
-                                    type="range"
-                                    min="0"
-                                    max="100"
-                                    step="5"
-                                    value={status.progress || 0}
-                                    onChange={(event) =>
-                                      updateTask(
-                                        taskId,
-                                        'progress',
-                                        Number.parseInt(event.target.value, 10),
-                                      )
-                                    }
-                                    className="h-1.5 flex-1 cursor-pointer appearance-none rounded-lg bg-slate-200 accent-emerald-500"
-                                  />
-                                  <span className="w-10 rounded-md bg-emerald-50 px-1.5 py-0.5 text-right text-xs font-bold text-emerald-600">
-                                    {status.progress || 0}%
-                                  </span>
-                                </div>
+                              <div className="mt-3 rounded-xl border border-white bg-white/70 p-3 shadow-sm">
                                 <textarea
                                   placeholder="Bạn đã hoàn thành đến đâu? Có từ vựng nào cần nhớ không..."
                                   value={status.notes || ''}
