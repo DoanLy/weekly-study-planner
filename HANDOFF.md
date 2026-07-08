@@ -23,7 +23,10 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Thêm định dạng văn bản (in đậm, tô màu) cho khung "Câu trả lời" Speaking (mới nhất)
+### Sự cố khi verify + khôi phục dữ liệu thật bị hỏng do test (mới nhất — chỉ sửa data, không đổi code)
+Sau khi deploy tính năng in đậm/tô màu, lúc verify production đã phát hiện câu trả lời thật của người dùng cho "Do you wear a watch?" (topic Watch, Part 1) bị hỏng dòng đầu tiên: `"1. ==Do ==you **wear **a ==watch==?"` thay vì `"1. Do you wear a watch?"`. Nguyên nhân: lúc test tính năng format trước khi push, đã dùng `document.querySelector('button[title="In đậm"]')` KHÔNG giới hạn phạm vi (scope) đúng textarea/question đang test, nên có lúc bấm nhầm vào nút của câu hỏi khác (kể cả câu hỏi thật chứa data người dùng) — chèn `**`/`==` sai vị trí. Đã phát hiện qua kiểm tra production sau deploy và khôi phục lại đúng nguyên văn dòng đầu (phần còn lại của câu trả lời không bị ảnh hưởng). **Bài học**: khi test bằng script trên nhiều câu hỏi giống nhau (nhiều nút cùng title), LUÔN giới hạn `querySelector` trong đúng card/phần tử cha của câu hỏi đang test (`.closest(...)` rồi mới `querySelector` bên trong), không dùng query toàn trang.
+
+### Thêm định dạng văn bản (in đậm, tô màu) cho khung "Câu trả lời" Speaking
 Người dùng muốn format câu trả lời cho đẹp (in đậm, tô màu) thay vì chỉ gõ text thường. Đã thêm:
 - Cú pháp `==text==` → tô vàng (`<mark>`), bổ sung cạnh `**text**` (in đậm, đã có sẵn) trong `parseInlineMarkdown`/`formatNoteHtml`. CSS `mark` thêm trong `index.css`.
 - 2 nút toolbar (icon `Bold`, `Highlighter` từ lucide-react) phía trên textarea: bấm khi đã bôi đen 1 đoạn text sẽ tự bọc `**...**` hoặc `==...==` quanh đoạn đó (không cần tự gõ cú pháp); nếu chưa chọn gì thì chèn placeholder "văn bản" để người dùng gõ đè.
