@@ -239,6 +239,15 @@ function createSpeakingTopic(partial) {
   };
 }
 
+function filterSpeakingTopicByQuery(topic, query) {
+  if (!query) return topic;
+  if (topic.name.toLowerCase().includes(query)) return topic;
+  return {
+    ...topic,
+    questions: topic.questions.filter((q) => q.text.toLowerCase().includes(query)),
+  };
+}
+
 function createSpeakingQuestion(partial) {
   return {
     id: `sq-${Date.now()}-${Math.random().toString(36).slice(2)}`,
@@ -555,6 +564,7 @@ function App() {
   const [currentDate, setCurrentDate] = useState(INITIAL_DATE);
   const [selectedDate, setSelectedDate] = useState(INITIAL_DATE);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [fullNoteTaskId, setFullNoteTaskId] = useState(null);
   const [noteDraft, setNoteDraft] = useState('');
@@ -923,25 +933,48 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 md:flex">
-      <aside className="sticky top-0 z-30 flex w-full shrink-0 flex-col border-b border-slate-200 bg-white md:h-screen md:w-64 md:border-b-0 md:border-r">
-        <div className="flex items-center justify-between border-b border-slate-100 p-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white shadow-md shadow-blue-500/20">
+      <aside
+        className={`sticky top-0 z-30 flex w-full shrink-0 flex-col border-b border-slate-200 bg-white transition-[width] duration-200 md:h-screen md:border-b-0 md:border-r ${
+          sidebarCollapsed ? 'md:w-20' : 'md:w-64'
+        }`}
+      >
+        <div
+          className={`flex items-center justify-between gap-2 border-b border-slate-100 p-6 ${
+            sidebarCollapsed ? 'md:flex-col md:justify-center md:p-4' : ''
+          }`}
+        >
+          <div
+            className={`flex items-center gap-3 ${sidebarCollapsed ? 'md:justify-center' : ''}`}
+          >
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white shadow-md shadow-blue-500/20">
               S
             </div>
-            <div>
-              <h1 className="text-base font-bold leading-tight text-slate-800">
-                StudyFlow
-              </h1>
-              <p className="text-xs font-medium text-slate-400">
-                Planned Progress
-              </p>
-            </div>
+            {!sidebarCollapsed && (
+              <div>
+                <h1 className="text-base font-bold leading-tight text-slate-800">
+                  StudyFlow
+                </h1>
+                <p className="text-xs font-medium text-slate-400">
+                  Planned Progress
+                </p>
+              </div>
+            )}
           </div>
           <button
             type="button"
+            onClick={() => setSidebarCollapsed((collapsed) => !collapsed)}
+            className={`hidden rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 md:block ${
+              sidebarCollapsed ? 'md:ml-0' : 'md:ml-auto'
+            }`}
+            aria-label={sidebarCollapsed ? 'Mở rộng menu' : 'Thu hẹp menu'}
+            title={sidebarCollapsed ? 'Mở rộng menu' : 'Thu hẹp menu'}
+          >
+            {sidebarCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+          </button>
+          <button
+            type="button"
             onClick={() => setMobileMenuOpen((open) => !open)}
-            className="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 md:hidden"
+            className="ml-auto rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 md:hidden"
             aria-label="Mở menu"
           >
             {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -962,7 +995,10 @@ function App() {
                   setActiveView(item.id);
                   setMobileMenuOpen(false);
                 }}
+                title={sidebarCollapsed ? item.label : undefined}
                 className={`relative flex items-center gap-3.5 rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
+                  sidebarCollapsed ? 'md:justify-center md:px-0' : ''
+                } ${
                   active
                     ? 'bg-blue-50 text-blue-700'
                     : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
@@ -973,10 +1009,16 @@ function App() {
                     active ? 'opacity-100' : 'opacity-0'
                   }`}
                 />
-                <Icon size={18} className="w-5" />
-                {item.label}
+                <Icon size={18} className="w-5 shrink-0" />
+                <span className={sidebarCollapsed ? 'md:hidden' : ''}>
+                  {item.label}
+                </span>
                 {item.badge > 0 && (
-                  <span className="ml-auto rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800">
+                  <span
+                    className={`ml-auto rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800 ${
+                      sidebarCollapsed ? 'md:hidden' : ''
+                    }`}
+                  >
                     {item.badge}
                   </span>
                 )}
@@ -985,17 +1027,19 @@ function App() {
           })}
         </nav>
 
-        <div className="hidden border-t border-slate-100 p-4 md:block">
-          <div className="rounded-xl border border-slate-100 bg-slate-50 p-3 text-center">
-            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              Hôm nay là
-            </p>
-            <p className="mt-1 text-xs font-bold text-slate-700">{todayLabel}</p>
-            <p className="mt-1 text-[10px] font-bold text-blue-600">
-              {globalCompleted} mục đã hoàn thành
-            </p>
+        {!sidebarCollapsed && (
+          <div className="hidden border-t border-slate-100 p-4 md:block">
+            <div className="rounded-xl border border-slate-100 bg-slate-50 p-3 text-center">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                Hôm nay là
+              </p>
+              <p className="mt-1 text-xs font-bold text-slate-700">{todayLabel}</p>
+              <p className="mt-1 text-[10px] font-bold text-blue-600">
+                {globalCompleted} mục đã hoàn thành
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </aside>
 
       <main className="h-screen flex-grow overflow-y-auto p-4 md:p-8">
@@ -1734,12 +1778,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
   const activeTopicsList = useMemo(() => {
     if (!query) return currentPartTopics;
     return currentPartTopics
-      .map((topic) => ({
-        ...topic,
-        questions: topic.questions.filter((q) =>
-          q.text.toLowerCase().includes(query),
-        ),
-      }))
+      .map((topic) => filterSpeakingTopicByQuery(topic, query))
       .filter(
         (topic) =>
           topic.name.toLowerCase().includes(query) || topic.questions.length > 0,
@@ -1749,11 +1788,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
   const selectedTopic = useMemo(() => {
     const found = currentPartTopics.find((topic) => topic.id === selectedTopicId);
     if (!found) return null;
-    if (!query) return found;
-    return {
-      ...found,
-      questions: found.questions.filter((q) => q.text.toLowerCase().includes(query)),
-    };
+    return filterSpeakingTopicByQuery(found, query);
   }, [currentPartTopics, selectedTopicId, query]);
 
   function toggleQuestionComplete(questionId) {
