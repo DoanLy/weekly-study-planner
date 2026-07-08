@@ -27,7 +27,6 @@ import {
   Sparkles,
   StickyNote,
   Trash2,
-  WandSparkles,
   X,
 } from 'lucide-react';
 
@@ -72,6 +71,7 @@ const MONTH_NAMES = [
 
 const EMPTY_DATA = {
   dailyTasks: {},
+  scheduleRules: [],
   legacyWeeks: null,
 };
 
@@ -113,6 +113,14 @@ const THEME_STYLES = {
   },
 };
 
+const THEME_LABELS = {
+  orange: 'IELTS Grammar',
+  purple: 'Listening/Speaking',
+  blue: 'Translation',
+  teal: 'Automation',
+  slate: 'General',
+};
+
 const ICONS = {
   book: BookOpen,
   headphones: Headphones,
@@ -140,11 +148,15 @@ function normalizeData(value) {
       ...EMPTY_DATA,
       ...value,
       dailyTasks: value.dailyTasks,
+      scheduleRules: Array.isArray(value.scheduleRules)
+        ? value.scheduleRules
+        : [],
     };
   }
 
   return {
     dailyTasks: {},
+    scheduleRules: [],
     legacyWeeks: value,
   };
 }
@@ -180,6 +192,89 @@ function createTask(partial) {
     theme: 'blue',
     icon: 'graduation',
     ...partial,
+  };
+}
+
+function createDefaultBulkTask() {
+  const today = formatDateString(new Date());
+  const later = new Date();
+  later.setMonth(later.getMonth() + 1);
+  return {
+    startDate: today,
+    endDate: formatDateString(later),
+    weekdays: [1, 3, 5],
+    title: '',
+    start: '',
+    end: '',
+    theme: 'blue',
+  };
+}
+
+function getRuleIcon(theme) {
+  return ['orange', 'purple'].includes(theme) ? 'mic' : 'code';
+}
+
+function buildRuleFromForm(form, existingRule) {
+  return {
+    id:
+      existingRule?.id ||
+      `rule-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    startDate: form.startDate,
+    endDate: form.endDate,
+    weekdays: [...form.weekdays].sort((left, right) => left - right),
+    title: form.title.trim(),
+    start: form.start,
+    end: form.end,
+    theme: form.theme,
+    icon: getRuleIcon(form.theme),
+    appliedCount: 0,
+    createdAt: existingRule?.createdAt || new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+}
+
+function removeTasksForRule(dailyTasks, ruleId) {
+  return Object.fromEntries(
+    Object.entries(dailyTasks).map(([dateKey, tasks]) => [
+      dateKey,
+      tasks.filter((task) => task.ruleId !== ruleId),
+    ]),
+  );
+}
+
+function applyRuleToDailyTasks(dailyTasks, rule) {
+  const nextDailyTasks = removeTasksForRule(dailyTasks, rule.id);
+  const start = parseDateString(rule.startDate);
+  const end = parseDateString(rule.endDate);
+  const cursor = new Date(start);
+  let appliedCount = 0;
+
+  while (cursor <= end) {
+    if (rule.weekdays.includes(cursor.getDay())) {
+      const dateKey = formatDateString(cursor);
+      const tasks = nextDailyTasks[dateKey] || getDefaultTasks(cursor);
+      nextDailyTasks[dateKey] = [
+        ...tasks,
+        createTask({
+          id: `${rule.id}-${dateKey}`,
+          ruleId: rule.id,
+          title: rule.title,
+          time: buildTimeString(rule.start, rule.end),
+          theme: rule.theme,
+          icon: rule.icon,
+        }),
+      ];
+      appliedCount += 1;
+    }
+    cursor.setDate(cursor.getDate() + 1);
+  }
+
+  return {
+    dailyTasks: nextDailyTasks,
+    rule: {
+      ...rule,
+      appliedCount,
+    },
   };
 }
 
@@ -378,20 +473,8 @@ function App() {
     icon: 'book',
     note: '',
   });
-  const [bulkTask, setBulkTask] = useState(() => {
-    const today = formatDateString(new Date());
-    const later = new Date();
-    later.setMonth(later.getMonth() + 1);
-    return {
-      startDate: today,
-      endDate: formatDateString(later),
-      weekdays: [1, 3, 5],
-      title: '',
-      start: '',
-      end: '',
-      theme: 'blue',
-    };
-  });
+  const [bulkTask, setBulkTask] = useState(createDefaultBulkTask);
+  const [editingRuleId, setEditingRuleId] = useState(null);
   const pendingSave = useRef(null);
   const hasLoadedRemote = useRef(false);
 
@@ -532,6 +615,8 @@ function App() {
       return;
     }
     setData(EMPTY_DATA);
+    setEditingRuleId(null);
+    setBulkTask(createDefaultBulkTask());
     setEditingNotes({});
     showToast('Đã xóa sạch dữ liệu lưu trữ.');
   }
@@ -572,30 +657,61 @@ function App() {
       return;
     }
 
-    let applied = 0;
-    const dailyTasks = { ...data.dailyTasks };
-    const cursor = new Date(start);
-    while (cursor <= end) {
-      if (bulkTask.weekdays.includes(cursor.getDay())) {
-        const dateKey = formatDateString(cursor);
-        const tasks = dailyTasks[dateKey] || getDefaultTasks(cursor);
-        dailyTasks[dateKey] = [
-          ...tasks,
-          createTask({
-            title: bulkTask.title,
-            time: buildTimeString(bulkTask.start, bulkTask.end),
-            theme: bulkTask.theme,
-            icon: ['orange', 'purple'].includes(bulkTask.theme) ? 'mic' : 'code',
-          }),
-        ];
-        applied += 1;
-      }
-      cursor.setDate(cursor.getDate() + 1);
-    }
+    const existingRule = data.scheduleRules.find(
+      (rule) => rule.id === editingRuleId,
+    );
+    const draftRule = buildRuleFromForm(bulkTask, existingRule);
+    const applied = applyRuleToDailyTasks(data.dailyTasks, draftRule);
 
-    setData((current) => ({ ...current, dailyTasks }));
-    setBulkTask((current) => ({ ...current, title: '', start: '', end: '' }));
-    showToast(`Đã thêm tự động ${applied} nhiệm vụ học tập.`);
+    setData((current) => ({
+      ...current,
+      dailyTasks: applied.dailyTasks,
+      scheduleRules: editingRuleId
+        ? current.scheduleRules.map((rule) =>
+            rule.id === editingRuleId ? applied.rule : rule,
+          )
+        : [applied.rule, ...current.scheduleRules],
+    }));
+    setEditingRuleId(null);
+    setBulkTask(createDefaultBulkTask());
+    showToast(
+      editingRuleId
+        ? `Đã cập nhật rule và áp dụng ${applied.rule.appliedCount} buổi vào lịch.`
+        : `Đã lưu rule và áp dụng ${applied.rule.appliedCount} buổi vào lịch.`,
+    );
+  }
+
+  function editScheduleRule(rule) {
+    setEditingRuleId(rule.id);
+    setBulkTask({
+      startDate: rule.startDate,
+      endDate: rule.endDate,
+      weekdays: rule.weekdays,
+      title: rule.title,
+      start: rule.start,
+      end: rule.end,
+      theme: rule.theme,
+    });
+    setActiveView('settings');
+    showToast('Đã đưa rule vào form để sửa.');
+  }
+
+  function cancelRuleEdit() {
+    setEditingRuleId(null);
+    setBulkTask(createDefaultBulkTask());
+  }
+
+  function deleteScheduleRule(ruleId) {
+    setData((current) => ({
+      ...current,
+      dailyTasks: removeTasksForRule(current.dailyTasks, ruleId),
+      scheduleRules: current.scheduleRules.filter((rule) => rule.id !== ruleId),
+    }));
+
+    if (editingRuleId === ruleId) {
+      cancelRuleEdit();
+    }
+    showToast('Đã xóa rule và các mục lịch do rule này tạo.');
   }
 
   function selectDate(date, view = 'tasks') {
@@ -620,23 +736,6 @@ function App() {
     setFullNoteTaskId(null);
     setNoteDraft('');
     showToast('Đã lưu ghi chú.');
-  }
-
-  function refineNote(taskId) {
-    const task = selectedTasks.find((item) => item.id === taskId);
-    if (!task?.note?.trim()) {
-      showToast('Hãy viết ghi chú trước khi tối ưu.');
-      return;
-    }
-
-    const refined = task.note
-      .split('\n')
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .map((line) => (line.startsWith('- ') ? line : `- ${line}`))
-      .join('\n');
-    updateTask(taskId, { note: refined });
-    showToast('Đã định dạng ghi chú thành dạng gạch đầu dòng.');
   }
 
   const navItems = [
@@ -759,7 +858,6 @@ function App() {
             deleteTask={deleteTask}
             openAddTask={() => setAddModalOpen(true)}
             openFullNote={openFullNote}
-            refineNote={refineNote}
             resetToDefaults={resetToDefaults}
             setActiveView={setActiveView}
             setEditingNotes={setEditingNotes}
@@ -775,6 +873,11 @@ function App() {
           <SettingsView
             bulkTask={bulkTask}
             clearAllData={clearAllData}
+            editingRuleId={editingRuleId}
+            rules={data.scheduleRules}
+            cancelRuleEdit={cancelRuleEdit}
+            deleteRule={deleteScheduleRule}
+            editRule={editScheduleRule}
             setBulkTask={setBulkTask}
             submit={applyBulkSchedule}
           />
@@ -1018,7 +1121,6 @@ function TasksView({
   deleteTask,
   openAddTask,
   openFullNote,
-  refineNote,
   resetToDefaults,
   setActiveView,
   setEditingNotes,
@@ -1118,7 +1220,6 @@ function TasksView({
               editing={Boolean(editingNotes[task.id])}
               deleteTask={deleteTask}
               openFullNote={openFullNote}
-              refineNote={refineNote}
               setEditing={(editing) =>
                 setEditingNotes((current) => ({
                   ...current,
@@ -1139,7 +1240,6 @@ function TaskCard({
   editing,
   deleteTask,
   openFullNote,
-  refineNote,
   setEditing,
   updateTask,
 }) {
@@ -1216,14 +1316,6 @@ function TaskCard({
               className="flex items-center gap-1 transition-colors hover:text-blue-600"
             >
               <Expand size={13} /> Mở rộng
-            </button>
-            <span className="text-slate-300">|</span>
-            <button
-              type="button"
-              onClick={() => refineNote(task.id)}
-              className="flex items-center gap-1 font-bold text-indigo-600 transition-colors hover:text-indigo-800"
-            >
-              <WandSparkles size={13} /> AI Refine
             </button>
           </div>
         </div>
@@ -1337,7 +1429,17 @@ function NotesView({ notes, selectDate }) {
   );
 }
 
-function SettingsView({ bulkTask, clearAllData, setBulkTask, submit }) {
+function SettingsView({
+  bulkTask,
+  cancelRuleEdit,
+  clearAllData,
+  deleteRule,
+  editRule,
+  editingRuleId,
+  rules,
+  setBulkTask,
+  submit,
+}) {
   function toggleWeekday(value) {
     setBulkTask((current) => ({
       ...current,
@@ -1352,7 +1454,7 @@ function SettingsView({ bulkTask, clearAllData, setBulkTask, submit }) {
       <div>
         <h2 className="text-2xl font-bold text-slate-800">Settings</h2>
         <p className="text-xs text-slate-400">
-          Lập lịch hàng loạt theo quy tắc và quản lý dữ liệu lưu trữ.
+          Lập lịch hàng loạt theo rule, xem lại rule đã tạo và quản lý dữ liệu.
         </p>
       </div>
 
@@ -1360,9 +1462,22 @@ function SettingsView({ bulkTask, clearAllData, setBulkTask, submit }) {
         onSubmit={submit}
         className="flex flex-col gap-5 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm"
       >
-        <div className="flex items-center gap-2">
-          <Settings size={18} className="text-blue-600" />
-          <h3 className="font-bold text-slate-700">Tạo lịch tự động</h3>
+        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+          <div className="flex items-center gap-2">
+            <Settings size={18} className="text-blue-600" />
+            <h3 className="font-bold text-slate-700">
+              {editingRuleId ? 'Sửa rule lịch học' : 'Tạo lịch tự động'}
+            </h3>
+          </div>
+          {editingRuleId && (
+            <button
+              type="button"
+              onClick={cancelRuleEdit}
+              className="w-max rounded-xl bg-slate-100 px-3 py-2 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-200"
+            >
+              Hủy sửa
+            </button>
+          )}
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -1478,9 +1593,47 @@ function SettingsView({ bulkTask, clearAllData, setBulkTask, submit }) {
           type="submit"
           className="flex w-max items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/15 transition-all hover:bg-blue-700"
         >
-          <Plus size={16} /> Áp dụng lịch
+          <Plus size={16} /> {editingRuleId ? 'Cập nhật rule' : 'Áp dụng lịch'}
         </button>
       </form>
+
+      <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+          <div>
+            <h3 className="font-bold text-slate-700">Rule hiện tại</h3>
+            <p className="mt-1 text-xs text-slate-400">
+              Tất cả rule đã lưu, kèm trạng thái đã apply vào lịch học.
+            </p>
+          </div>
+          <span className="w-max rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600">
+            {rules.length} rule
+          </span>
+        </div>
+
+        {rules.length === 0 ? (
+          <div className="mt-5 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center">
+            <CalendarDays size={32} className="mx-auto mb-2 text-slate-300" />
+            <p className="text-sm font-bold text-slate-600">
+              Chưa có rule nào được tạo
+            </p>
+            <p className="mt-1 text-xs text-slate-400">
+              Sau khi bấm Áp dụng lịch, rule sẽ xuất hiện ở đây để bạn xem, sửa hoặc xóa.
+            </p>
+          </div>
+        ) : (
+          <div className="mt-5 grid grid-cols-1 gap-3 lg:grid-cols-2">
+            {rules.map((rule) => (
+              <RuleCard
+                key={rule.id}
+                rule={rule}
+                isEditing={editingRuleId === rule.id}
+                deleteRule={deleteRule}
+                editRule={editRule}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
       <div className="rounded-2xl border border-rose-100 bg-white p-6 shadow-sm">
         <h3 className="font-bold text-slate-700">Quản lý dữ liệu</h3>
@@ -1496,6 +1649,79 @@ function SettingsView({ bulkTask, clearAllData, setBulkTask, submit }) {
         </button>
       </div>
     </section>
+  );
+}
+
+function RuleCard({ rule, isEditing, deleteRule, editRule }) {
+  const styles = THEME_STYLES[rule.theme] || THEME_STYLES.blue;
+  const weekdayText = rule.weekdays
+    .map((day) => VIETNAMESE_DAYS[day])
+    .join(', ');
+  const timeText = buildTimeString(rule.start, rule.end) || 'Không đặt giờ';
+
+  return (
+    <article
+      className={`rounded-2xl border p-4 ${
+        isEditing ? 'border-blue-300 bg-blue-50' : 'border-slate-100 bg-slate-50/60'
+      }`}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <span
+              className={`rounded-full border px-2.5 py-1 text-[10px] font-bold ${styles.badge}`}
+            >
+              {THEME_LABELS[rule.theme] || rule.theme}
+            </span>
+            <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700">
+              Đã apply {rule.appliedCount || 0} buổi
+            </span>
+          </div>
+          <h4 className="truncate text-sm font-extrabold text-slate-800">
+            {rule.title}
+          </h4>
+        </div>
+        {isEditing && (
+          <span className="rounded-full bg-blue-600 px-2.5 py-1 text-[10px] font-bold text-white">
+            Đang sửa
+          </span>
+        )}
+      </div>
+
+      <dl className="mt-3 grid grid-cols-1 gap-2 text-xs text-slate-500 sm:grid-cols-2">
+        <div>
+          <dt className="font-bold text-slate-400">Khoảng ngày</dt>
+          <dd className="mt-0.5 text-slate-700">
+            {rule.startDate} - {rule.endDate}
+          </dd>
+        </div>
+        <div>
+          <dt className="font-bold text-slate-400">Thời gian</dt>
+          <dd className="mt-0.5 text-slate-700">{timeText}</dd>
+        </div>
+        <div className="sm:col-span-2">
+          <dt className="font-bold text-slate-400">Thứ áp dụng</dt>
+          <dd className="mt-0.5 text-slate-700">{weekdayText}</dd>
+        </div>
+      </dl>
+
+      <div className="mt-4 flex justify-end gap-2 border-t border-slate-200/70 pt-3">
+        <button
+          type="button"
+          onClick={() => editRule(rule)}
+          className="rounded-xl bg-white px-3 py-2 text-xs font-bold text-blue-600 shadow-sm ring-1 ring-slate-200 transition-colors hover:bg-blue-50"
+        >
+          Sửa
+        </button>
+        <button
+          type="button"
+          onClick={() => deleteRule(rule.id)}
+          className="rounded-xl bg-rose-50 px-3 py-2 text-xs font-bold text-rose-600 transition-colors hover:bg-rose-100"
+        >
+          Xóa
+        </button>
+      </div>
+    </article>
   );
 }
 
