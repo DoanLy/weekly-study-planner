@@ -73,6 +73,7 @@ const EMPTY_DATA = {
   dailyTasks: {},
   scheduleRules: [],
   legacyWeeks: null,
+  defaultRulesSeeded: false,
 };
 
 const THEME_STYLES = {
@@ -158,6 +159,7 @@ function normalizeData(value) {
     dailyTasks: {},
     scheduleRules: [],
     legacyWeeks: value,
+    defaultRulesSeeded: false,
   };
 }
 
@@ -242,112 +244,152 @@ function removeTasksForRule(dailyTasks, ruleId) {
   );
 }
 
-function applyRuleToDailyTasks(dailyTasks, rule) {
-  const nextDailyTasks = removeTasksForRule(dailyTasks, rule.id);
+function countRuleOccurrences(rule) {
   const start = parseDateString(rule.startDate);
   const end = parseDateString(rule.endDate);
   const cursor = new Date(start);
-  let appliedCount = 0;
+  let count = 0;
 
   while (cursor <= end) {
-    if (rule.weekdays.includes(cursor.getDay())) {
-      const dateKey = formatDateString(cursor);
-      const tasks = nextDailyTasks[dateKey] || getDefaultTasks(cursor);
-      nextDailyTasks[dateKey] = [
-        ...tasks,
-        createTask({
-          id: `${rule.id}-${dateKey}`,
-          ruleId: rule.id,
-          title: rule.title,
-          time: buildTimeString(rule.start, rule.end),
-          theme: rule.theme,
-          icon: rule.icon,
-        }),
-      ];
-      appliedCount += 1;
-    }
+    if (rule.weekdays.includes(cursor.getDay())) count += 1;
     cursor.setDate(cursor.getDate() + 1);
   }
 
+  return count;
+}
+
+function applyRuleToDailyTasks(dailyTasks, rule) {
   return {
-    dailyTasks: nextDailyTasks,
-    rule: {
-      ...rule,
-      appliedCount,
-    },
+    dailyTasks: removeTasksForRule(dailyTasks, rule.id),
+    rule: { ...rule, appliedCount: countRuleOccurrences(rule) },
   };
 }
 
-function getDefaultTasks(date) {
-  const dateStr = formatDateString(date);
-  const day = date.getDay();
+function getRuleGeneratedTasks(rules, date) {
+  const dateKey = formatDateString(date);
+  const weekday = date.getDay();
 
-  if ([1, 3, 5].includes(day)) {
-    return [
+  return rules
+    .filter((rule) => {
+      if (!rule.weekdays.includes(weekday)) return false;
+      const start = parseDateString(rule.startDate);
+      const end = parseDateString(rule.endDate);
+      return date >= start && date <= end;
+    })
+    .map((rule) =>
       createTask({
-        id: `default-exercise-${dateStr}-1`,
-        title: 'Làm bài tập & Ôn bài cũ + mới',
-        time: '10:00 - 12:00',
-        theme: 'orange',
-        icon: 'book',
+        id: `${rule.id}-${dateKey}`,
+        ruleId: rule.id,
+        title: rule.title,
+        time: buildTimeString(rule.start, rule.end),
+        theme: rule.theme,
+        icon: rule.icon,
       }),
-      createTask({
-        id: `default-exercise-${dateStr}-2`,
-        title: 'Học clip thầy Tùng',
-        time: '13:00 - 16:00',
-        theme: 'purple',
-        icon: 'headphones',
-      }),
-      createTask({
-        id: `default-translation-${dateStr}`,
-        title: 'Dịch Anh-Việt & Việt-Anh',
-        time: '21:00 - 23:00',
-        theme: 'blue',
-        icon: 'language',
-      }),
-    ];
-  }
+    );
+}
 
-  if ([2, 4, 6].includes(day)) {
-    return [
-      createTask({
-        id: `default-auto-${dateStr}-1`,
-        title: 'Học auto',
-        time: '10:00 - 12:00',
-        theme: 'teal',
-        icon: 'bot',
-      }),
-      createTask({
-        id: `default-auto-${dateStr}-2`,
-        title: 'Học auto',
-        time: '13:00 - 17:00',
-        theme: 'teal',
-        icon: 'bot',
-      }),
-      createTask({
-        id: `default-listen-${dateStr}`,
-        title: 'Listen & Speak',
-        time: '20:00 - 22:00',
-        theme: 'purple',
-        icon: 'headphones',
-      }),
-    ];
-  }
+const DEFAULT_RULE_RANGE_START = '2020-01-01';
+const DEFAULT_RULE_RANGE_END = '2035-12-31';
 
-  return [
-    createTask({
-      id: `default-rest-${dateStr}`,
-      title: 'Nghỉ ngơi',
-      time: 'Cả ngày',
-      theme: 'slate',
-      icon: 'graduation',
-    }),
-  ];
+const DEFAULT_RULE_SEEDS = [
+  {
+    id: 'default-rule-mwf-exercise',
+    weekdays: [1, 3, 5],
+    title: 'Làm bài tập & Ôn bài cũ + mới',
+    start: '10:00',
+    end: '12:00',
+    theme: 'orange',
+    icon: 'book',
+  },
+  {
+    id: 'default-rule-mwf-video',
+    weekdays: [1, 3, 5],
+    title: 'Học clip thầy Tùng',
+    start: '13:00',
+    end: '16:00',
+    theme: 'purple',
+    icon: 'headphones',
+  },
+  {
+    id: 'default-rule-mwf-translation',
+    weekdays: [1, 3, 5],
+    title: 'Dịch Anh-Việt & Việt-Anh',
+    start: '21:00',
+    end: '23:00',
+    theme: 'blue',
+    icon: 'language',
+  },
+  {
+    id: 'default-rule-tth-auto-morning',
+    weekdays: [2, 4, 6],
+    title: 'Học auto',
+    start: '10:00',
+    end: '12:00',
+    theme: 'teal',
+    icon: 'bot',
+  },
+  {
+    id: 'default-rule-tth-auto-afternoon',
+    weekdays: [2, 4, 6],
+    title: 'Học auto',
+    start: '13:00',
+    end: '17:00',
+    theme: 'teal',
+    icon: 'bot',
+  },
+  {
+    id: 'default-rule-tth-listen',
+    weekdays: [2, 4, 6],
+    title: 'Listen & Speak',
+    start: '20:00',
+    end: '22:00',
+    theme: 'purple',
+    icon: 'headphones',
+  },
+  {
+    id: 'default-rule-sunday-rest',
+    weekdays: [0],
+    title: 'Nghỉ ngơi',
+    start: '',
+    end: '',
+    theme: 'slate',
+    icon: 'graduation',
+  },
+];
+
+function buildDefaultRule(seed) {
+  const rule = {
+    id: seed.id,
+    startDate: DEFAULT_RULE_RANGE_START,
+    endDate: DEFAULT_RULE_RANGE_END,
+    weekdays: seed.weekdays,
+    title: seed.title,
+    start: seed.start,
+    end: seed.end,
+    theme: seed.theme,
+    icon: seed.icon,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  return { ...rule, appliedCount: countRuleOccurrences(rule) };
+}
+
+function ensureDefaultRules(data) {
+  if (data.defaultRulesSeeded) return data;
+  return {
+    ...data,
+    scheduleRules: [
+      ...data.scheduleRules,
+      ...DEFAULT_RULE_SEEDS.map(buildDefaultRule),
+    ],
+    defaultRulesSeeded: true,
+  };
 }
 
 function getTasksForDate(data, date) {
   const dateStr = formatDateString(date);
-  return data.dailyTasks[dateStr] || getDefaultTasks(date);
+  if (data.dailyTasks[dateStr]) return data.dailyTasks[dateStr];
+  return getRuleGeneratedTasks(data.scheduleRules, date);
 }
 
 function escapeHtml(value) {
@@ -453,7 +495,9 @@ function getTaskStats(tasks) {
 
 function App() {
   const [data, setData] = useState(() =>
-    normalizeData(parseStoredData(window.localStorage.getItem(DATA_STORAGE_KEY))),
+    ensureDefaultRules(
+      normalizeData(parseStoredData(window.localStorage.getItem(DATA_STORAGE_KEY))),
+    ),
   );
   const [activeView, setActiveView] = useState('dashboard');
   const [currentDate, setCurrentDate] = useState(INITIAL_DATE);
@@ -525,7 +569,7 @@ function App() {
       .then((response) => response.json())
       .then((payload) => {
         if (payload.data && Object.keys(payload.data).length > 0) {
-          const remoteData = normalizeData(payload.data);
+          const remoteData = ensureDefaultRules(normalizeData(payload.data));
           setData(remoteData);
           window.localStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(remoteData));
         }
@@ -614,7 +658,7 @@ function App() {
     if (!window.confirm('Bạn có chắc chắn muốn xóa tất cả dữ liệu đã lưu?')) {
       return;
     }
-    setData(EMPTY_DATA);
+    setData({ ...EMPTY_DATA, defaultRulesSeeded: true });
     setEditingRuleId(null);
     setBulkTask(createDefaultBulkTask());
     setEditingNotes({});
