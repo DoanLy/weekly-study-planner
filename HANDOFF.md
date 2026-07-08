@@ -23,7 +23,18 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Sự cố khi verify + khôi phục dữ liệu thật bị hỏng do test (mới nhất — chỉ sửa data, không đổi code)
+### Đổi khung "Câu trả lời" Speaking thành editor bôi-đen-để-format trực tiếp (mới nhất)
+Người dùng không muốn kiểu "gõ markdown rồi bấm Xem để thấy định dạng" — muốn kiểu bôi đen chữ là format ngay lập tức (giống Google Docs/Notion), bỏ hẳn nút Xem/Sửa vừa thêm trước đó.
+
+Đã đổi từ `<textarea>` (lưu markdown text) sang `<div contentEditable>` (lưu HTML trực tiếp trong `userNote`):
+- 2 nút toolbar (Bold, Highlighter) gọi `document.execCommand('bold')` / `document.execCommand('hiliteColor', false, '#fef08a')` trên phần đang bôi đen — thao tác tức thời, thấy kết quả ngay, không cần chế độ xem riêng.
+- Nút toolbar dùng `onMouseDown={(e) => e.preventDefault()}` để không bị mất vùng bôi đen (selection) khi click chuyển focus ra khỏi ô đang soạn — nếu thiếu dòng này thì bấm nút sẽ không có tác dụng.
+- Paste vào ô luôn ép thành plain text (`handleAnswerPaste`, chặn định dạng lạ từ nguồn dán vào).
+- Ref callback set `innerHTML` đúng 1 lần khi phần tử DOM mới mount (đánh dấu qua `el.dataset.seeded`), không set lại mỗi lần render — nếu thiếu bước này sẽ bị mất vị trí con trỏ / nội dung gõ dở mỗi lần gõ phím.
+- Đã kiểm tra dữ liệu `userNote` hiện có không chứa ký tự `<`, `>`, `&` nên chuyển sang lưu HTML an toàn, không cần escape thêm.
+- Bỏ hẳn state `editingAnswers` và effect seed mặc định Xem/Sửa (không cần nữa).
+
+### Sự cố khi verify + khôi phục dữ liệu thật bị hỏng do test (chỉ sửa data, không đổi code)
 Sau khi deploy tính năng in đậm/tô màu, lúc verify production đã phát hiện câu trả lời thật của người dùng cho "Do you wear a watch?" (topic Watch, Part 1) bị hỏng dòng đầu tiên: `"1. ==Do ==you **wear **a ==watch==?"` thay vì `"1. Do you wear a watch?"`. Nguyên nhân: lúc test tính năng format trước khi push, đã dùng `document.querySelector('button[title="In đậm"]')` KHÔNG giới hạn phạm vi (scope) đúng textarea/question đang test, nên có lúc bấm nhầm vào nút của câu hỏi khác (kể cả câu hỏi thật chứa data người dùng) — chèn `**`/`==` sai vị trí. Đã phát hiện qua kiểm tra production sau deploy và khôi phục lại đúng nguyên văn dòng đầu (phần còn lại của câu trả lời không bị ảnh hưởng). **Bài học**: khi test bằng script trên nhiều câu hỏi giống nhau (nhiều nút cùng title), LUÔN giới hạn `querySelector` trong đúng card/phần tử cha của câu hỏi đang test (`.closest(...)` rồi mới `querySelector` bên trong), không dùng query toàn trang.
 
 ### Thêm định dạng văn bản (in đậm, tô màu) cho khung "Câu trả lời" Speaking
