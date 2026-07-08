@@ -23,7 +23,10 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Cải thiện UI ô "Câu trả lời" trong Speaking (mới nhất)
+### Sửa tiếp bug search Speaking: chủ đề đang chọn không khớp query vẫn hiển thị (mới nhất)
+Sau khi sửa `filterSpeakingTopicByQuery` (session trước), vẫn còn 1 kẽ hở: nếu chủ đề ĐANG ĐƯỢC CHỌN (selectedTopicId) không khớp cả tên lẫn câu hỏi với search query mới, `selectedTopic` vẫn tra theo ID cũ và hiển thị chủ đề đó với "Chưa có câu hỏi nào" (gây hiểu lầm là lỗi). Đã thêm `useEffect` trong `SpeakingView`: khi query thay đổi và chủ đề đang chọn không còn nằm trong `activeTopicsList` (danh sách đã lọc), tự động chuyển sang chủ đề đầu tiên khớp kết quả.
+
+### Cải thiện UI ô "Câu trả lời" trong Speaking
 Layout câu hỏi/câu trả lời cũ dùng grid 12 cột (câu hỏi 7 cột, câu trả lời 5 cột) với textarea chỉ 2 dòng, chữ `text-xs` — khó đọc lại câu trả lời khi ôn tập. Đã đổi sang layout xếp dọc: câu hỏi trên cùng, câu trả lời full-width bên dưới, textarea 4 dòng (`min-h-[7rem]`, `resize-y`, `text-sm leading-relaxed`) để dễ đọc và có thể kéo giãn thêm nếu cần.
 
 ### Seed nội dung Speaking Part 1/2/3

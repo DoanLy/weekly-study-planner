@@ -1784,6 +1784,12 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
       );
   }, [currentPartTopics, query]);
 
+  useEffect(() => {
+    if (!query) return;
+    if (activeTopicsList.some((topic) => topic.id === selectedTopicId)) return;
+    setSelectedTopicId(activeTopicsList[0]?.id || '');
+  }, [query, activeTopicsList, selectedTopicId]);
+
   const selectedTopic = useMemo(() => {
     const found = currentPartTopics.find((topic) => topic.id === selectedTopicId);
     if (!found) return null;
