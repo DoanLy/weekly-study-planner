@@ -16,6 +16,7 @@ import {
   Headphones,
   Languages,
   LayoutDashboard,
+  Library,
   ListChecks,
   Menu,
   Mic,
@@ -72,6 +73,7 @@ const MONTH_NAMES = [
 const EMPTY_DATA = {
   dailyTasks: {},
   scheduleRules: [],
+  documents: [],
   legacyWeeks: null,
   defaultRulesSeeded: false,
 };
@@ -152,12 +154,14 @@ function normalizeData(value) {
       scheduleRules: Array.isArray(value.scheduleRules)
         ? value.scheduleRules
         : [],
+      documents: Array.isArray(value.documents) ? value.documents : [],
     };
   }
 
   return {
     dailyTasks: {},
     scheduleRules: [],
+    documents: [],
     legacyWeeks: value,
     defaultRulesSeeded: false,
   };
@@ -193,6 +197,18 @@ function createTask(partial) {
     completed: false,
     theme: 'blue',
     icon: 'graduation',
+    ...partial,
+  };
+}
+
+function createDocument(partial) {
+  const now = new Date().toISOString();
+  return {
+    id: `doc-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    title: '',
+    content: '',
+    createdAt: now,
+    updatedAt: now,
     ...partial,
   };
 }
@@ -519,6 +535,9 @@ function App() {
   });
   const [bulkTask, setBulkTask] = useState(createDefaultBulkTask);
   const [editingRuleId, setEditingRuleId] = useState(null);
+  const [documentModalOpen, setDocumentModalOpen] = useState(false);
+  const [editingDocumentId, setEditingDocumentId] = useState(null);
+  const [documentDraft, setDocumentDraft] = useState({ title: '', content: '' });
   const pendingSave = useRef(null);
   const hasLoadedRemote = useRef(false);
 
@@ -782,11 +801,76 @@ function App() {
     showToast('Đã lưu ghi chú.');
   }
 
+  function openNewDocument() {
+    setEditingDocumentId(null);
+    setDocumentDraft({ title: '', content: '' });
+    setDocumentModalOpen(true);
+  }
+
+  function openEditDocument(doc) {
+    setEditingDocumentId(doc.id);
+    setDocumentDraft({ title: doc.title, content: doc.content });
+    setDocumentModalOpen(true);
+  }
+
+  function closeDocumentModal() {
+    setDocumentModalOpen(false);
+    setEditingDocumentId(null);
+    setDocumentDraft({ title: '', content: '' });
+  }
+
+  function saveDocument() {
+    if (!documentDraft.title.trim()) {
+      showToast('Vui lòng nhập tiêu đề tài liệu.');
+      return;
+    }
+
+    setData((current) => {
+      if (editingDocumentId) {
+        return {
+          ...current,
+          documents: current.documents.map((doc) =>
+            doc.id === editingDocumentId
+              ? {
+                  ...doc,
+                  title: documentDraft.title.trim(),
+                  content: documentDraft.content,
+                  updatedAt: new Date().toISOString(),
+                }
+              : doc,
+          ),
+        };
+      }
+
+      const doc = createDocument({
+        title: documentDraft.title.trim(),
+        content: documentDraft.content,
+      });
+      return { ...current, documents: [doc, ...current.documents] };
+    });
+
+    showToast(editingDocumentId ? 'Đã cập nhật tài liệu.' : 'Đã lưu tài liệu mới.');
+    closeDocumentModal();
+  }
+
+  function deleteDocument(docId) {
+    if (!window.confirm('Bạn có chắc chắn muốn xóa tài liệu này?')) return;
+    setData((current) => ({
+      ...current,
+      documents: current.documents.filter((doc) => doc.id !== docId),
+    }));
+    if (editingDocumentId === docId) {
+      closeDocumentModal();
+    }
+    showToast('Đã xóa tài liệu.');
+  }
+
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'calendar', label: 'Calendar', icon: CalendarDays },
     { id: 'tasks', label: 'Tasks', icon: ListChecks, badge: incompleteSelected },
     { id: 'notes', label: 'Notes', icon: StickyNote },
+    { id: 'documents', label: 'Documents', icon: Library },
     { id: 'settings', label: 'Settings', icon: SlidersHorizontal },
   ];
 
@@ -913,6 +997,15 @@ function App() {
           <NotesView notes={allNotes} selectDate={selectDate} />
         )}
 
+        {activeView === 'documents' && (
+          <DocumentsView
+            documents={data.documents}
+            deleteDocument={deleteDocument}
+            openEditDocument={openEditDocument}
+            openNewDocument={openNewDocument}
+          />
+        )}
+
         {activeView === 'settings' && (
           <SettingsView
             bulkTask={bulkTask}
@@ -943,6 +1036,16 @@ function App() {
           setDraft={setNoteDraft}
           close={() => setFullNoteTaskId(null)}
           save={saveFullNote}
+        />
+      )}
+
+      {documentModalOpen && (
+        <DocumentModal
+          draft={documentDraft}
+          isEditing={Boolean(editingDocumentId)}
+          setDraft={setDocumentDraft}
+          close={closeDocumentModal}
+          save={saveDocument}
         />
       )}
 
@@ -1473,6 +1576,79 @@ function NotesView({ notes, selectDate }) {
   );
 }
 
+function DocumentsView({ documents, deleteDocument, openEditDocument, openNewDocument }) {
+  return (
+    <section className="flex flex-col gap-6">
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-800">Documents</h2>
+          <p className="text-xs text-slate-400">
+            Kho lưu trữ tài liệu văn bản của bạn — ví dụ câu hỏi Speaking IELTS,
+            danh sách từ vựng, hoặc bất kỳ ghi chú dài nào cần tra cứu lại.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={openNewDocument}
+          className="flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/15 transition-all hover:bg-blue-700"
+        >
+          <Plus size={16} /> Tạo tài liệu mới
+        </button>
+      </div>
+
+      {documents.length === 0 ? (
+        <div className="rounded-2xl border border-slate-100 bg-white p-12 text-center">
+          <Library size={44} className="mx-auto mb-3 text-slate-300" />
+          <h4 className="font-bold text-slate-700">Chưa có tài liệu nào</h4>
+          <p className="mt-1 text-xs text-slate-400">
+            Bấm &quot;Tạo tài liệu mới&quot; để bắt đầu lưu trữ nội dung học tập.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {documents.map((doc) => (
+            <div
+              key={doc.id}
+              className="flex flex-col justify-between rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+            >
+              <div>
+                <div className="mb-3 flex items-start justify-between gap-3">
+                  <h3 className="truncate text-sm font-extrabold text-slate-800">
+                    {doc.title}
+                  </h3>
+                  <span className="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                    {new Date(doc.updatedAt).toLocaleDateString('vi-VN')}
+                  </span>
+                </div>
+                <div
+                  className="study-note-preview max-h-48 overflow-y-auto border-t border-slate-50 pt-3 text-slate-600"
+                  dangerouslySetInnerHTML={{ __html: formatNoteHtml(doc.content) }}
+                />
+              </div>
+              <div className="mt-4 flex justify-end gap-2 border-t border-slate-50 pt-3">
+                <button
+                  type="button"
+                  onClick={() => deleteDocument(doc.id)}
+                  className="rounded-xl bg-rose-50 px-3 py-2 text-xs font-bold text-rose-600 transition-colors hover:bg-rose-100"
+                >
+                  Xóa
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openEditDocument(doc)}
+                  className="rounded-xl bg-blue-50 px-3 py-2 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-100"
+                >
+                  Xem / Sửa
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
 function SettingsView({
   bulkTask,
   cancelRuleEdit,
@@ -1930,6 +2106,77 @@ function FullNoteModal({ draft, setDraft, close, save }) {
               __html: draft
                 ? formatNoteHtml(draft)
                 : '<span class="text-slate-400 italic">Preview ghi chú sẽ hiện ở đây...</span>',
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocumentModal({ draft, isEditing, setDraft, close, save }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
+      <div className="grid h-[82vh] w-full max-w-5xl grid-cols-1 overflow-hidden rounded-2xl bg-white shadow-2xl md:grid-cols-2">
+        <div className="flex flex-col border-r border-slate-100">
+          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
+            <h3 className="font-bold text-slate-800">
+              {isEditing ? 'Sửa tài liệu' : 'Tạo tài liệu mới'}
+            </h3>
+            <button
+              type="button"
+              onClick={close}
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+            >
+              <X size={18} />
+            </button>
+          </div>
+          <div className="border-b border-slate-100 p-4">
+            <input
+              type="text"
+              value={draft.title}
+              onChange={(event) =>
+                setDraft((current) => ({ ...current, title: event.target.value }))
+              }
+              placeholder="Tiêu đề tài liệu, ví dụ: Câu hỏi Speaking Part 1"
+              className="field-input"
+            />
+          </div>
+          <textarea
+            value={draft.content}
+            onChange={(event) =>
+              setDraft((current) => ({ ...current, content: event.target.value }))
+            }
+            className="min-h-0 flex-1 resize-none p-5 text-sm outline-none"
+            placeholder="Dán hoặc soạn nội dung tài liệu ở đây... Dùng **từ khóa** để bôi đậm, `code` cho lệnh, '- ' cho danh sách."
+          />
+          <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
+            <button
+              type="button"
+              onClick={close}
+              className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
+            >
+              Đóng
+            </button>
+            <button
+              type="button"
+              onClick={save}
+              className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              Lưu tài liệu
+            </button>
+          </div>
+        </div>
+        <div className="overflow-y-auto bg-slate-50 p-5">
+          <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+            <Sparkles size={14} /> Preview
+          </div>
+          <div
+            className="study-note-preview rounded-2xl border border-slate-100 bg-white p-5 text-sm text-slate-700 shadow-sm"
+            dangerouslySetInnerHTML={{
+              __html: draft.content
+                ? formatNoteHtml(draft.content)
+                : '<span class="text-slate-400 italic">Preview nội dung sẽ hiện ở đây...</span>',
             }}
           />
         </div>
