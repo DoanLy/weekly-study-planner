@@ -586,6 +586,7 @@ function App() {
   const [documentModalOpen, setDocumentModalOpen] = useState(false);
   const [editingDocumentId, setEditingDocumentId] = useState(null);
   const [documentDraft, setDocumentDraft] = useState({ title: '', content: '' });
+  const [viewingDocumentId, setViewingDocumentId] = useState(null);
   const pendingSave = useRef(null);
   const hasLoadedRemote = useRef(false);
 
@@ -882,6 +883,7 @@ function App() {
   }
 
   function openEditDocument(doc) {
+    setViewingDocumentId(null);
     setEditingDocumentId(doc.id);
     setDocumentDraft({ title: doc.title, content: doc.content });
     setDocumentModalOpen(true);
@@ -891,6 +893,14 @@ function App() {
     setDocumentModalOpen(false);
     setEditingDocumentId(null);
     setDocumentDraft({ title: '', content: '' });
+  }
+
+  function openViewDocument(doc) {
+    setViewingDocumentId(doc.id);
+  }
+
+  function closeViewDocument() {
+    setViewingDocumentId(null);
   }
 
   function saveDocument() {
@@ -935,6 +945,9 @@ function App() {
     }));
     if (editingDocumentId === docId) {
       closeDocumentModal();
+    }
+    if (viewingDocumentId === docId) {
+      closeViewDocument();
     }
     showToast('Đã xóa tài liệu.');
   }
@@ -1121,6 +1134,7 @@ function App() {
             documents={data.documents}
             deleteDocument={deleteDocument}
             openEditDocument={openEditDocument}
+            openViewDocument={openViewDocument}
             openNewDocument={openNewDocument}
           />
         )}
@@ -1172,6 +1186,14 @@ function App() {
           setDraft={setDocumentDraft}
           close={closeDocumentModal}
           save={saveDocument}
+        />
+      )}
+
+      {viewingDocumentId && (
+        <DocumentViewModal
+          doc={data.documents.find((doc) => doc.id === viewingDocumentId)}
+          close={closeViewDocument}
+          edit={(doc) => openEditDocument(doc)}
         />
       )}
 
@@ -1702,7 +1724,13 @@ function NotesView({ notes, selectDate }) {
   );
 }
 
-function DocumentsView({ documents, deleteDocument, openEditDocument, openNewDocument }) {
+function DocumentsView({
+  documents,
+  deleteDocument,
+  openEditDocument,
+  openViewDocument,
+  openNewDocument,
+}) {
   return (
     <section className="flex flex-col gap-6">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -1761,10 +1789,17 @@ function DocumentsView({ documents, deleteDocument, openEditDocument, openNewDoc
                 </button>
                 <button
                   type="button"
+                  onClick={() => openViewDocument(doc)}
+                  className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-200"
+                >
+                  Xem
+                </button>
+                <button
+                  type="button"
                   onClick={() => openEditDocument(doc)}
                   className="rounded-xl bg-blue-50 px-3 py-2 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-100"
                 >
-                  Xem / Sửa
+                  Sửa
                 </button>
               </div>
             </div>
@@ -2750,68 +2785,100 @@ function FullNoteModal({ draft, setDraft, close, save }) {
 function DocumentModal({ draft, isEditing, setDraft, close, save }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
-      <div className="grid h-[82vh] w-full max-w-5xl grid-cols-1 overflow-hidden rounded-2xl bg-white shadow-2xl md:grid-cols-2">
-        <div className="flex flex-col border-r border-slate-100">
-          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
-            <h3 className="font-bold text-slate-800">
-              {isEditing ? 'Sửa tài liệu' : 'Tạo tài liệu mới'}
-            </h3>
-            <button
-              type="button"
-              onClick={close}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
-            >
-              <X size={18} />
-            </button>
-          </div>
-          <div className="border-b border-slate-100 p-4">
-            <input
-              type="text"
-              value={draft.title}
-              onChange={(event) =>
-                setDraft((current) => ({ ...current, title: event.target.value }))
-              }
-              placeholder="Tiêu đề tài liệu, ví dụ: Câu hỏi Speaking Part 1"
-              className="field-input"
-            />
-          </div>
-          <textarea
-            value={draft.content}
-            onChange={(event) =>
-              setDraft((current) => ({ ...current, content: event.target.value }))
-            }
-            className="min-h-0 flex-1 resize-none p-5 text-sm outline-none"
-            placeholder="Dán hoặc soạn nội dung tài liệu ở đây... Dùng **từ khóa** để bôi đậm, `code` cho lệnh, '- ' cho danh sách."
-          />
-          <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
-            <button
-              type="button"
-              onClick={close}
-              className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
-            >
-              Đóng
-            </button>
-            <button
-              type="button"
-              onClick={save}
-              className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-            >
-              Lưu tài liệu
-            </button>
-          </div>
+      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
+          <h3 className="font-bold text-slate-800">
+            {isEditing ? 'Sửa tài liệu' : 'Tạo tài liệu mới'}
+          </h3>
+          <button
+            type="button"
+            onClick={close}
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+          >
+            <X size={18} />
+          </button>
         </div>
-        <div className="overflow-y-auto bg-slate-50 p-5">
-          <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
-            <Sparkles size={14} /> Preview
-          </div>
+        <div className="border-b border-slate-100 p-4">
+          <input
+            type="text"
+            value={draft.title}
+            onChange={(event) =>
+              setDraft((current) => ({ ...current, title: event.target.value }))
+            }
+            placeholder="Tiêu đề tài liệu, ví dụ: Câu hỏi Speaking Part 1"
+            className="field-input"
+          />
+        </div>
+        <textarea
+          value={draft.content}
+          onChange={(event) =>
+            setDraft((current) => ({ ...current, content: event.target.value }))
+          }
+          className="min-h-0 flex-1 resize-none p-5 text-sm outline-none"
+          placeholder="Dán hoặc soạn nội dung tài liệu ở đây... Dùng **từ khóa** để bôi đậm, `code` cho lệnh, '- ' cho danh sách."
+        />
+        <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
+          <button
+            type="button"
+            onClick={close}
+            className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
+          >
+            Đóng
+          </button>
+          <button
+            type="button"
+            onClick={save}
+            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Lưu tài liệu
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DocumentViewModal({ doc, close, edit }) {
+  if (!doc) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
+      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
+          <h3 className="truncate font-bold text-slate-800">{doc.title}</h3>
+          <button
+            type="button"
+            onClick={close}
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+          >
+            <X size={18} />
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto p-6">
           <div
-            className="study-note-preview rounded-2xl border border-slate-100 bg-white p-5 text-sm text-slate-700 shadow-sm"
+            className="study-note-preview text-sm leading-relaxed text-slate-700"
             dangerouslySetInnerHTML={{
-              __html: draft.content
-                ? formatNoteHtml(draft.content)
-                : '<span class="text-slate-400 italic">Preview nội dung sẽ hiện ở đây...</span>',
+              __html: doc.content
+                ? formatNoteHtml(doc.content)
+                : '<span class="text-slate-400 italic">Tài liệu chưa có nội dung.</span>',
             }}
           />
+        </div>
+        <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
+          <button
+            type="button"
+            onClick={close}
+            className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
+          >
+            Đóng
+          </button>
+          <button
+            type="button"
+            onClick={() => edit(doc)}
+            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Sửa
+          </button>
         </div>
       </div>
     </div>
