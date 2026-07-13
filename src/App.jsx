@@ -39,7 +39,7 @@ import {
 const DATA_STORAGE_KEY = 'weekly-study-planner-data';
 const DATA_API_ENDPOINT = '/api/data';
 
-const INITIAL_DATE = new Date(2026, 6, 8);
+const INITIAL_DATE = new Date();
 const VIETNAMESE_DAYS = [
   'Chủ Nhật',
   'Thứ Hai',

@@ -23,7 +23,10 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Đổi khung "Câu trả lời" Speaking thành editor bôi-đen-để-format trực tiếp (mới nhất)
+### Sửa lỗi Dashboard tự động focus sai ngày (mới nhất)
+Người dùng báo hôm nay là 13/7 nhưng lịch trên Dashboard lại bôi xanh (focus) ngày 8. Nguyên nhân: hằng số `INITIAL_DATE` (dùng làm `currentDate`/`selectedDate` mặc định khi mở app) bị hardcode cứng `new Date(2026, 6, 8)` — chắc là sót lại từ lúc test tính năng trước đó — thay vì lấy ngày thực tế. Đã sửa thành `new Date()` ở [src/App.jsx:42](src/App.jsx:42). Đã verify qua preview (`vercel dev`): reload lại thấy ngày 13 được bôi xanh đúng, và xác nhận process `vercel dev` chết hẳn sau `preview_stop` (`Get-NetTCPConnection -LocalPort 5173` không còn ai ở trạng thái Listen).
+
+### Đổi khung "Câu trả lời" Speaking thành editor bôi-đen-để-format trực tiếp
 Người dùng không muốn kiểu "gõ markdown rồi bấm Xem để thấy định dạng" — muốn kiểu bôi đen chữ là format ngay lập tức (giống Google Docs/Notion), bỏ hẳn nút Xem/Sửa vừa thêm trước đó.
 
 Đã đổi từ `<textarea>` (lưu markdown text) sang `<div contentEditable>` (lưu HTML trực tiếp trong `userNote`):
