@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import TESTING_DATA from './testing-data.json';
+import { TESTING_GLOSSARY } from './testing-glossary.js';
 import {
   ArrowLeft,
   BarChart3,
@@ -14,6 +16,7 @@ import {
   Code2,
   Compass,
   Expand,
+  FlaskConical,
   FolderOpen,
   GraduationCap,
   Headphones,
@@ -35,6 +38,12 @@ import {
   Trash2,
   X,
 } from 'lucide-react';
+
+const GLOSSARY_REGEX = (() => {
+  const terms = Object.keys(TESTING_GLOSSARY).sort((a, b) => b.length - a.length);
+  const escaped = terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  return new RegExp(`\\b(${escaped.join('|')})\\b`, 'i');
+})();
 
 const DATA_STORAGE_KEY = 'weekly-study-planner-data';
 const DATA_API_ENDPOINT = '/api/data';
@@ -969,6 +978,7 @@ function App() {
     { id: 'notes', label: 'Notes', icon: StickyNote },
     { id: 'documents', label: 'Documents', icon: Library },
     { id: 'speaking', label: 'Speaking', icon: Mic },
+    { id: 'testing', label: 'Testing', icon: FlaskConical },
     { id: 'settings', label: 'Settings', icon: SlidersHorizontal },
   ];
 
@@ -1145,6 +1155,8 @@ function App() {
             setSpeakingTopics={updateSpeakingTopics}
           />
         )}
+
+        {activeView === 'testing' && <TestingView />}
 
         {activeView === 'settings' && (
           <SettingsView
@@ -2311,6 +2323,251 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
               </button>
             </div>
           </form>
+        </div>
+      )}
+    </section>
+  );
+}
+
+function TestingAnswerRenderer({ text, onTermClick }) {
+  const paragraphs = text.split('\n').filter((p) => p.trim());
+  return (
+    <div>
+      {paragraphs.map((para, pi) => {
+        const parts = para.split(GLOSSARY_REGEX);
+        return (
+          <p key={pi} className="mb-3 text-sm leading-relaxed text-slate-700 last:mb-0">
+            {parts.map((part, i) => {
+              if (!part) return null;
+              if (i % 2 === 1) {
+                return (
+                  <span
+                    key={i}
+                    className="cursor-pointer font-medium text-blue-600 underline decoration-dotted underline-offset-2 hover:text-blue-800"
+                    onClick={(e) => onTermClick(part, e)}
+                  >
+                    {part}
+                  </span>
+                );
+              }
+              return <span key={i}>{part}</span>;
+            })}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+function TestingView() {
+  const [expandedSections, setExpandedSections] = useState(() => {
+    const init = {};
+    if (TESTING_DATA[0]) init[TESTING_DATA[0].id] = true;
+    return init;
+  });
+  const [selectedQ, setSelectedQ] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [tooltip, setTooltip] = useState(null);
+
+  const query = searchQuery.trim().toLowerCase();
+
+  const filteredSections = useMemo(() => {
+    if (!query) return TESTING_DATA;
+    return TESTING_DATA.map((section) => ({
+      ...section,
+      questions: section.questions.filter(
+        (q) =>
+          q.question.toLowerCase().includes(query) ||
+          q.answer.toLowerCase().includes(query),
+      ),
+    })).filter((s) => s.questions.length > 0);
+  }, [query]);
+
+  useEffect(() => {
+    if (!query) return;
+    const expanded = {};
+    filteredSections.forEach((s) => {
+      expanded[s.id] = true;
+    });
+    setExpandedSections(expanded);
+  }, [query]);
+
+  useEffect(() => {
+    if (!selectedQ || !query) return;
+    const section = filteredSections.find((s) => s.id === selectedQ.sectionId);
+    if (!section || !section.questions.find((q) => q.id === selectedQ.qId)) {
+      setSelectedQ(null);
+    }
+  }, [filteredSections, selectedQ, query]);
+
+  const fullSelectedQ = useMemo(() => {
+    if (!selectedQ) return null;
+    const section = TESTING_DATA.find((s) => s.id === selectedQ.sectionId);
+    if (!section) return null;
+    const q = section.questions.find((q) => q.id === selectedQ.qId);
+    if (!q) return null;
+    return { ...q, sectionTitle: section.title };
+  }, [selectedQ]);
+
+  function toggleSection(sectionId) {
+    setExpandedSections((prev) => ({ ...prev, [sectionId]: !prev[sectionId] }));
+  }
+
+  function selectQuestion(sectionId, qId) {
+    setSelectedQ({ sectionId, qId });
+    setTooltip(null);
+  }
+
+  function handleTermClick(term, event) {
+    event.stopPropagation();
+    const canonical = Object.keys(TESTING_GLOSSARY).find(
+      (k) => k.toLowerCase() === term.toLowerCase(),
+    );
+    if (!canonical) return;
+    const rect = event.target.getBoundingClientRect();
+    const x = Math.min(rect.left, window.innerWidth - 320);
+    setTooltip({ term: canonical, definition: TESTING_GLOSSARY[canonical], x, y: rect.bottom + 8 });
+  }
+
+  useEffect(() => {
+    if (!tooltip) return;
+    function close() {
+      setTooltip(null);
+    }
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [tooltip]);
+
+  const totalQuestions = TESTING_DATA.reduce((s, sec) => s + sec.questions.length, 0);
+
+  return (
+    <section className="flex flex-col gap-6">
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-800">Testing Q&amp;A</h2>
+          <p className="mt-0.5 text-xs text-slate-400">
+            {totalQuestions} câu hỏi · {TESTING_DATA.length} sections
+          </p>
+        </div>
+        <div className="relative w-full sm:w-64">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Tìm câu hỏi..."
+            className="field-input pr-10"
+          />
+          <Search
+            size={16}
+            className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <aside className="lg:col-span-4">
+          <div className="flex max-h-[72vh] flex-col gap-1.5 overflow-y-auto pr-1">
+            {filteredSections.length === 0 ? (
+              <p className="rounded-xl border border-slate-100 bg-white p-4 text-center text-xs italic text-slate-400">
+                Không tìm thấy câu hỏi nào
+              </p>
+            ) : (
+              filteredSections.map((section) => {
+                const isExpanded = !!expandedSections[section.id];
+                const origIdx = TESTING_DATA.findIndex((s) => s.id === section.id);
+                return (
+                  <div key={section.id}>
+                    <button
+                      type="button"
+                      onClick={() => toggleSection(section.id)}
+                      className="flex w-full items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white px-3 py-2.5 text-left transition-colors hover:bg-slate-50"
+                    >
+                      <div className="flex min-w-0 items-center gap-2">
+                        <span className="shrink-0 rounded bg-blue-50 px-1.5 py-0.5 text-[10px] font-bold text-blue-600">
+                          {origIdx + 1}
+                        </span>
+                        <span className="truncate text-xs font-semibold text-slate-700">
+                          {section.title}
+                        </span>
+                      </div>
+                      <div className="flex shrink-0 items-center gap-1.5">
+                        <span className="rounded-full bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-500">
+                          {section.questions.length}
+                        </span>
+                        <ChevronRight
+                          size={13}
+                          className={`text-slate-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                        />
+                      </div>
+                    </button>
+                    {isExpanded && (
+                      <div className="mt-1 flex flex-col gap-1 pl-3">
+                        {section.questions.map((q) => {
+                          const isSelected = selectedQ?.qId === q.id;
+                          return (
+                            <button
+                              key={q.id}
+                              type="button"
+                              onClick={() => selectQuestion(section.id, q.id)}
+                              className={`w-full rounded-lg border-l-2 px-3 py-2 text-left text-xs transition-all ${
+                                isSelected
+                                  ? 'border-blue-500 bg-blue-50 font-semibold text-blue-700'
+                                  : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
+                              }`}
+                            >
+                              <span className="line-clamp-2">{q.question}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })
+            )}
+          </div>
+        </aside>
+
+        <div className="lg:col-span-8">
+          {!fullSelectedQ ? (
+            <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-slate-100 bg-white p-12 text-center shadow-sm">
+              <FolderOpen size={40} className="text-slate-300" />
+              <div>
+                <h4 className="font-bold text-slate-700">Chưa chọn câu hỏi nào</h4>
+                <p className="mt-1 text-xs text-slate-400">
+                  Chọn một câu hỏi từ danh sách bên trái để xem nội dung.
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-slate-100 bg-white shadow-sm">
+              <div className="border-b border-slate-100 px-6 py-4">
+                <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                  {fullSelectedQ.sectionTitle}
+                </p>
+                <h3 className="text-base font-bold leading-snug text-slate-800">
+                  {fullSelectedQ.question}
+                </h3>
+              </div>
+              <div className="px-6 py-5">
+                <p className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                  Bấm vào từ được gạch chân để xem nghĩa
+                </p>
+                <TestingAnswerRenderer text={fullSelectedQ.answer} onTermClick={handleTermClick} />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {tooltip && (
+        <div
+          className="fixed z-50 max-w-xs rounded-xl border border-blue-100 bg-white p-3 shadow-xl ring-1 ring-blue-50"
+          style={{ top: tooltip.y, left: tooltip.x }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <p className="mb-1 text-xs font-bold text-blue-700">{tooltip.term}</p>
+          <p className="text-xs leading-relaxed text-slate-600">{tooltip.definition}</p>
         </div>
       )}
     </section>

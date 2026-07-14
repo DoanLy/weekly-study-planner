@@ -23,7 +23,23 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Tách "Xem" và "Sửa" tài liệu thành 2 luồng riêng (mới nhất)
+### Thêm menu Testing Q&A (mới nhất)
+Thêm section Testing vào sidebar nav với 268 câu hỏi phỏng vấn Senior Tester từ file `D:\ENGLISH\VOCAB TESTING\Senior_Tester_Interview_QA.docx`.
+
+**Files mới/thay đổi:**
+- `src/testing-data.json` — toàn bộ 268 Q&A (20 sections) được parse từ docx, lưu dạng JSON tĩnh (không cần DB)
+- `src/testing-glossary.js` — từ điển ~130 thuật ngữ testing/software với giải thích tiếng Việt theo ngữ cảnh
+- `src/App.jsx` — thêm import, navItem `testing` (icon `FlaskConical`), component `TestingView` + `TestingAnswerRenderer`
+
+**UI (view-only, không edit):**
+- Panel trái: accordion 20 sections; bấm section để mở/đóng danh sách câu hỏi; có badge đếm số câu mỗi section
+- Panel phải: hiển thị Q&A đầy đủ khi chọn câu hỏi; breadcrumb section ở trên cùng
+- Search: filter real-time theo nội dung câu hỏi + câu trả lời, tự expand các section có kết quả
+- Tooltip: các từ kỹ thuật trong phần trả lời được gạch chân (màu xanh); bấm vào → popup nổi hiện nghĩa tiếng Việt trong ngữ cảnh phần mềm/testing; bấm ra ngoài để đóng
+
+**Module-level constant `GLOSSARY_REGEX`**: dùng `\b(term1|term2|...)\b` (case-insensitive), các terms sort theo độ dài giảm dần để ưu tiên match dài nhất trước (vd: "Boundary Value Analysis" trước "BVA").
+
+### Tách "Xem" và "Sửa" tài liệu thành 2 luồng riêng
 Người dùng không muốn UI chung kiểu chia đôi màn hình (bên trái nhập raw, bên phải Preview) cho tài liệu trong mục Documents. Đã tách:
 - Card tài liệu giờ có 3 nút riêng: **Xóa** / **Xem** / **Sửa** (trước là 1 nút "Xem / Sửa" gộp).
 - **Xem** mở `DocumentViewModal` (component mới) — chỉ hiển thị nội dung đã format đẹp (read-only), không có ô nhập; có nút "Sửa" ở footer để chuyển thẳng sang chế độ chỉnh sửa.
