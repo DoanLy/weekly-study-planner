@@ -39,11 +39,7 @@ import {
   X,
 } from 'lucide-react';
 
-const GLOSSARY_REGEX = (() => {
-  const terms = Object.keys(TESTING_GLOSSARY).sort((a, b) => b.length - a.length);
-  const escaped = terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-  return new RegExp(`\\b(${escaped.join('|')})\\b`, 'i');
-})();
+const translationCache = new Map();
 
 const DATA_STORAGE_KEY = 'weekly-study-planner-data';
 const DATA_API_ENDPOINT = '/api/data';
@@ -2329,28 +2325,27 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
   );
 }
 
-function TestingAnswerRenderer({ text, onTermClick }) {
+function TestingAnswerRenderer({ text, onWordClick }) {
   const paragraphs = text.split('\n').filter((p) => p.trim());
   return (
     <div>
       {paragraphs.map((para, pi) => {
-        const parts = para.split(GLOSSARY_REGEX);
+        const tokens = para.split(/(\w+)/);
         return (
           <p key={pi} className="mb-3 text-sm leading-relaxed text-slate-700 last:mb-0">
-            {parts.map((part, i) => {
-              if (!part) return null;
+            {tokens.map((token, i) => {
               if (i % 2 === 1) {
                 return (
                   <span
                     key={i}
-                    className="cursor-pointer font-medium text-blue-600 underline decoration-dotted underline-offset-2 hover:text-blue-800"
-                    onClick={(e) => onTermClick(part, e)}
+                    className="cursor-pointer rounded px-px hover:bg-blue-50 hover:text-blue-700"
+                    onClick={(e) => onWordClick(token, e)}
                   >
-                    {part}
+                    {token}
                   </span>
                 );
               }
-              return <span key={i}>{part}</span>;
+              return token || null;
             })}
           </p>
         );
@@ -2418,15 +2413,48 @@ function TestingView() {
     setTooltip(null);
   }
 
-  function handleTermClick(term, event) {
+  async function handleWordClick(word, event) {
     event.stopPropagation();
-    const canonical = Object.keys(TESTING_GLOSSARY).find(
-      (k) => k.toLowerCase() === term.toLowerCase(),
-    );
-    if (!canonical) return;
+    if (word.length < 2 || /^\d+$/.test(word)) return;
     const rect = event.target.getBoundingClientRect();
     const x = Math.min(rect.left, window.innerWidth - 320);
-    setTooltip({ term: canonical, definition: TESTING_GLOSSARY[canonical], x, y: rect.bottom + 8 });
+    const y = rect.bottom + 8;
+
+    // Glossary takes priority (instant, no API needed)
+    const canonical = Object.keys(TESTING_GLOSSARY).find(
+      (k) => k.toLowerCase() === word.toLowerCase(),
+    );
+    if (canonical) {
+      setTooltip({ word: canonical, translation: TESTING_GLOSSARY[canonical], loading: false, x, y });
+      return;
+    }
+
+    // Check cache
+    const cacheKey = word.toLowerCase();
+    if (translationCache.has(cacheKey)) {
+      setTooltip({ word, translation: translationCache.get(cacheKey), loading: false, x, y });
+      return;
+    }
+
+    // Show loading → call Google Translate (unofficial, no key needed)
+    setTooltip({ word, translation: null, loading: true, x, y });
+    try {
+      const res = await fetch(
+        `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=vi&dt=t&q=${encodeURIComponent(word)}`,
+      );
+      const data = await res.json();
+      const translation = data?.[0]?.[0]?.[0];
+      const result =
+        translation && translation.toLowerCase() !== word.toLowerCase()
+          ? translation
+          : '(không tìm thấy)';
+      translationCache.set(cacheKey, result);
+      setTooltip((prev) => (prev?.word === word ? { ...prev, translation: result, loading: false } : prev));
+    } catch {
+      setTooltip((prev) =>
+        prev?.word === word ? { ...prev, translation: 'Lỗi kết nối', loading: false } : prev,
+      );
+    }
   }
 
   useEffect(() => {
@@ -2551,9 +2579,9 @@ function TestingView() {
               </div>
               <div className="px-6 py-5">
                 <p className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
-                  Bấm vào từ được gạch chân để xem nghĩa
+                  Bấm vào bất kỳ từ nào để xem nghĩa tiếng Việt
                 </p>
-                <TestingAnswerRenderer text={fullSelectedQ.answer} onTermClick={handleTermClick} />
+                <TestingAnswerRenderer text={fullSelectedQ.answer} onWordClick={handleWordClick} />
               </div>
             </div>
           )}
@@ -2566,8 +2594,12 @@ function TestingView() {
           style={{ top: tooltip.y, left: tooltip.x }}
           onClick={(e) => e.stopPropagation()}
         >
-          <p className="mb-1 text-xs font-bold text-blue-700">{tooltip.term}</p>
-          <p className="text-xs leading-relaxed text-slate-600">{tooltip.definition}</p>
+          <p className="mb-1 text-xs font-bold text-blue-700">{tooltip.word}</p>
+          {tooltip.loading ? (
+            <p className="text-xs italic text-slate-400">Đang dịch...</p>
+          ) : (
+            <p className="text-xs leading-relaxed text-slate-600">{tooltip.translation}</p>
+          )}
         </div>
       )}
     </section>
