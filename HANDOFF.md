@@ -23,7 +23,12 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Thêm menu Testing Q&A (mới nhất)
+### Cải thiện câu trả lời Testing Q&A — Section 9 Q1 (mới nhất)
+Viết lại câu trả lời cho câu hỏi "Deadline is urgent, only 50% tested" (id: s10q2) trong `src/testing-data.json`.
+Câu trả lời mới có cấu trúc rõ hơn: opening ngắn gọn, 4 bước hành động, go/no-go condition, communication script, post-release note.
+Từ vựng dùng IT quen thuộc (backlog, smoke test, hotfix, sign-off, go/no-go, defect tracker, regression) thay vì jargon phức tạp.
+
+### Thêm menu Testing Q&A
 Thêm section Testing vào sidebar nav với 268 câu hỏi phỏng vấn Senior Tester từ file `D:\ENGLISH\VOCAB TESTING\Senior_Tester_Interview_QA.docx`.
 
 **Files mới/thay đổi:**
