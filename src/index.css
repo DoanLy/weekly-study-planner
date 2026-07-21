@@ -12,6 +12,11 @@ body {
   pointer-events: none;
 }
 
+.rich-note-cell,
+.study-note-preview {
+  white-space: pre-wrap;
+}
+
 .field-input {
   width: 100%;
   border-radius: 0.75rem;

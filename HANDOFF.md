@@ -23,7 +23,20 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Cải thiện câu trả lời Testing Q&A — Section 9 Q1 (mới nhất)
+### Notes: xem/sửa ghi chú trực tiếp từ Master Notes + đổi editor ghi chú task sang WYSIWYG (mới nhất)
+Người dùng yêu cầu 2 việc:
+1. Ở trang Master Notes (`NotesView`), bấm vào note phải xem được chi tiết + sửa được ngay, không cần bấm "Xem chi tiết ngày này" để nhảy sang trang Tasks của ngày đó.
+2. Modal "Soạn ghi chú" (`FullNoteModal`, mở qua nút "Mở rộng" ở Tasks) nên dùng editor giống bên Speaking (bôi đen để format ngay, không phải gõ markdown rồi xem preview).
+
+**Thay đổi:**
+- Thêm 2 nút "Xem" / "Sửa" trực tiếp trên mỗi card ở `NotesView` (giữ lại link nhỏ "Đi tới ngày này" để vẫn nhảy sang Tasks nếu cần). "Xem" mở modal mới `NoteViewModal` (đọc-only, cùng pattern với `DocumentViewModal`), có nút "Sửa" ở footer để chuyển thẳng sang edit.
+- `FullNoteModal` đổi từ `<textarea>` + panel Preview markdown sang `<div contentEditable>` + 2 nút toolbar (Bold, Highlighter) dùng `execCommand`, giống hệt pattern đã làm cho Speaking — bỏ hẳn panel Preview chia đôi, seed nội dung 1 lần qua `dataset.seeded` để không mất con trỏ khi gõ.
+- **Lưu ý quan trọng đã sửa 1 bug tiềm ẩn**: `updateTask()` (dùng bởi hầu hết nơi khác) chỉ thao tác trên `getTasksForDate(data, selectedDate)` — tức là ngầm định note đang sửa thuộc `selectedDate` hiện tại. Điều này đúng ở Tasks (task luôn thuộc ngày đang chọn) nhưng SAI khi mở sửa note từ Master Notes (note có thể thuộc ngày bất kỳ, khác `selectedDate`). Đã thêm state `fullNoteTaskDate` (chốt ngày của note lúc `openFullNote(task, dateKey)` được gọi) và `saveFullNote()` giờ tự lấy đúng `dailyTasks[fullNoteTaskDate]` để lưu, không phụ thuộc `selectedDate` nữa. Đã verify qua `vercel dev` + đọc thẳng DB: sửa note ngày 2026-07-16 trong khi `selectedDate` đang là hôm nay (2026-07-21) lưu đúng vào đúng ngày 07-16, không đụng tới dữ liệu ngày 07-21.
+- **Tương thích ngược dữ liệu cũ**: `task.note` trước đây lưu dạng markdown thô (`**bold**`, `==mark==`, `` `code` ``, `- list`) hiển thị qua `formatNoteHtml()`; giờ editor mới lưu thẳng HTML thật (giống Speaking). Thêm helper `renderNoteHtml(text)`: nếu nội dung đã chứa thẻ HTML thật thì render thẳng, nếu không (note cũ dạng markdown/plain text) thì vẫn chạy qua `formatNoteHtml()` như cũ — không có note cũ nào bị vỡ định dạng. Đã kiểm tra trực tiếp DB thật: chỉ có 3 task có note, 1 cái dùng markdown (`**Listen**`) — đã verify vẫn hiển thị đậm đúng sau khi đổi code.
+- Thêm CSS `white-space: pre-wrap` cho `.rich-note-cell` và `.study-note-preview` để giữ đúng xuống dòng (`\n`) của note cũ khi hiển thị dạng raw HTML.
+- **Lưu ý**: chỉ đổi modal "Soạn ghi chú" (mở rộng) sang editor mới; ô textarea sửa nhanh ngay trong `TaskCard` (nút "Sửa" inline, không phải "Mở rộng") VẪN giữ nguyên dạng markdown thô — người dùng chỉ yêu cầu đổi modal, chưa đổi ô inline này.
+
+### Cải thiện câu trả lời Testing Q&A — Section 9 Q1
 Viết lại câu trả lời cho câu hỏi "Deadline is urgent, only 50% tested" (id: s10q2) trong `src/testing-data.json`.
 Câu trả lời mới có cấu trúc rõ hơn: opening ngắn gọn, 4 bước hành động, go/no-go condition, communication script, post-release note.
 Từ vựng dùng IT quen thuộc (backlog, smoke test, hotfix, sign-off, go/no-go, defect tracker, regression) thay vì jargon phức tạp.

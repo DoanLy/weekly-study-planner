@@ -33,7 +33,6 @@ import {
   Search,
   Settings,
   SlidersHorizontal,
-  Sparkles,
   StickyNote,
   Trash2,
   X,
@@ -512,6 +511,14 @@ function formatNoteHtml(text) {
   return html;
 }
 
+const HTML_TAG_PATTERN = /<[a-z][\s\S]*>/i;
+
+function renderNoteHtml(text) {
+  if (!text) return '';
+  if (HTML_TAG_PATTERN.test(text)) return text;
+  return formatNoteHtml(text);
+}
+
 function getCalendarCells(monthDate) {
   const year = monthDate.getFullYear();
   const month = monthDate.getMonth();
@@ -574,7 +581,9 @@ function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [fullNoteTaskId, setFullNoteTaskId] = useState(null);
+  const [fullNoteTaskDate, setFullNoteTaskDate] = useState('');
   const [noteDraft, setNoteDraft] = useState('');
+  const [viewingNoteTask, setViewingNoteTask] = useState(null);
   const [syncStatus, setSyncStatus] = useState('');
   const [toast, setToast] = useState('');
   const [editingNotes, setEditingNotes] = useState({});
@@ -868,17 +877,31 @@ function App() {
     setCurrentDate((date) => new Date(date.getFullYear(), date.getMonth() + direction, 1));
   }
 
-  function openFullNote(task) {
+  function openFullNote(task, dateKey) {
     setFullNoteTaskId(task.id);
+    setFullNoteTaskDate(dateKey || selectedDateKey);
     setNoteDraft(task.note || '');
   }
 
   function saveFullNote() {
     if (!fullNoteTaskId) return;
-    updateTask(fullNoteTaskId, { note: noteDraft });
+    const dateKey = fullNoteTaskDate || selectedDateKey;
+    const tasks = getTasksForDate(data, parseDateString(dateKey)).map((task) =>
+      task.id === fullNoteTaskId ? { ...task, note: noteDraft } : task,
+    );
+    saveTasksForDate(dateKey, tasks);
     setFullNoteTaskId(null);
+    setFullNoteTaskDate('');
     setNoteDraft('');
     showToast('Đã lưu ghi chú.');
+  }
+
+  function openViewNote(task) {
+    setViewingNoteTask(task);
+  }
+
+  function closeViewNote() {
+    setViewingNoteTask(null);
   }
 
   function openNewDocument() {
@@ -1132,7 +1155,12 @@ function App() {
         )}
 
         {activeView === 'notes' && (
-          <NotesView notes={allNotes} selectDate={selectDate} />
+          <NotesView
+            notes={allNotes}
+            selectDate={selectDate}
+            openFullNote={openFullNote}
+            openViewNote={openViewNote}
+          />
         )}
 
         {activeView === 'documents' && (
@@ -1182,8 +1210,22 @@ function App() {
         <FullNoteModal
           draft={noteDraft}
           setDraft={setNoteDraft}
-          close={() => setFullNoteTaskId(null)}
+          close={() => {
+            setFullNoteTaskId(null);
+            setFullNoteTaskDate('');
+          }}
           save={saveFullNote}
+        />
+      )}
+
+      {viewingNoteTask && (
+        <NoteViewModal
+          task={viewingNoteTask}
+          close={closeViewNote}
+          edit={(task) => {
+            closeViewNote();
+            openFullNote(task, task.date);
+          }}
         />
       )}
 
@@ -1639,7 +1681,7 @@ function TaskCard({
             {task.note ? (
               <div
                 className="study-note-preview"
-                dangerouslySetInnerHTML={{ __html: formatNoteHtml(task.note) }}
+                dangerouslySetInnerHTML={{ __html: renderNoteHtml(task.note) }}
               />
             ) : (
               <span className="flex items-center gap-1.5 text-xs italic text-slate-400">
@@ -1670,7 +1712,7 @@ function TaskCard({
   );
 }
 
-function NotesView({ notes, selectDate }) {
+function NotesView({ notes, selectDate, openFullNote, openViewNote }) {
   return (
     <section className="flex flex-col gap-6">
       <div>
@@ -1711,17 +1753,33 @@ function NotesView({ notes, selectDate }) {
                   </div>
                   <div
                     className="study-note-preview max-h-48 overflow-y-auto border-t border-slate-50 pt-3 text-slate-600"
-                    dangerouslySetInnerHTML={{ __html: formatNoteHtml(task.note) }}
+                    dangerouslySetInnerHTML={{ __html: renderNoteHtml(task.note) }}
                   />
                 </div>
-                <div className="mt-4 flex justify-end border-t border-slate-50 pt-3">
+                <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-50 pt-3">
                   <button
                     type="button"
                     onClick={() => selectDate(date)}
-                    className="text-xs font-bold text-blue-600 hover:underline"
+                    className="text-xs font-bold text-slate-400 hover:underline"
                   >
-                    Xem chi tiết ngày này
+                    Đi tới ngày này
                   </button>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => openViewNote(task)}
+                      className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-200"
+                    >
+                      Xem
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openFullNote(task, task.date)}
+                      className="rounded-xl bg-blue-50 px-3 py-2 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-100"
+                    >
+                      Sửa
+                    </button>
+                  </div>
                 </div>
               </div>
             );
@@ -1729,6 +1787,55 @@ function NotesView({ notes, selectDate }) {
         </div>
       )}
     </section>
+  );
+}
+
+function NoteViewModal({ task, close, edit }) {
+  if (!task) return null;
+  const date = parseDateString(task.date);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
+      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
+          <div className="min-w-0">
+            <h3 className="truncate font-bold text-slate-800">{task.title}</h3>
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+              {task.date} ({VIETNAMESE_DAYS[date.getDay()]})
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={close}
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+          >
+            <X size={18} />
+          </button>
+        </div>
+        <div className="flex-1 overflow-y-auto p-6">
+          <div
+            className="study-note-preview text-sm leading-relaxed text-slate-700"
+            dangerouslySetInnerHTML={{ __html: renderNoteHtml(task.note) }}
+          />
+        </div>
+        <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
+          <button
+            type="button"
+            onClick={close}
+            className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
+          >
+            Đóng
+          </button>
+          <button
+            type="button"
+            onClick={() => edit(task)}
+            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Sửa
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -3016,55 +3123,89 @@ function AddTaskModal({ newTask, setNewTask, close, submit }) {
 }
 
 function FullNoteModal({ draft, setDraft, close, save }) {
+  const editorRef = useRef(null);
+
+  function applyFormatting(command, value) {
+    const el = editorRef.current;
+    if (!el) return;
+    el.focus();
+    document.execCommand(command, false, value);
+    setDraft(el.innerHTML);
+  }
+
+  function handlePaste(event) {
+    event.preventDefault();
+    const text = event.clipboardData.getData('text/plain');
+    document.execCommand('insertText', false, text);
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
-      <div className="grid h-[82vh] w-full max-w-5xl grid-cols-1 overflow-hidden rounded-2xl bg-white shadow-2xl md:grid-cols-2">
-        <div className="flex flex-col border-r border-slate-100">
-          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
-            <h3 className="font-bold text-slate-800">Soạn ghi chú</h3>
-            <button
-              type="button"
-              onClick={close}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
-            >
-              <X size={18} />
-            </button>
-          </div>
-          <textarea
-            value={draft}
-            onChange={(event) => setDraft(event.target.value)}
-            className="min-h-0 flex-1 resize-none p-5 text-sm outline-none"
-            placeholder="Viết ghi chú ở đây..."
-          />
-          <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
-            <button
-              type="button"
-              onClick={close}
-              className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
-            >
-              Đóng
-            </button>
-            <button
-              type="button"
-              onClick={save}
-              className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-            >
-              Lưu ghi chú
-            </button>
-          </div>
+      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
+          <h3 className="font-bold text-slate-800">Soạn ghi chú</h3>
+          <button
+            type="button"
+            onClick={close}
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+          >
+            <X size={18} />
+          </button>
         </div>
-        <div className="overflow-y-auto bg-slate-50 p-5">
-          <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
-            <Sparkles size={14} /> Preview
-          </div>
-          <div
-            className="study-note-preview rounded-2xl border border-slate-100 bg-white p-5 text-sm text-slate-700 shadow-sm"
-            dangerouslySetInnerHTML={{
-              __html: draft
-                ? formatNoteHtml(draft)
-                : '<span class="text-slate-400 italic">Preview ghi chú sẽ hiện ở đây...</span>',
-            }}
-          />
+
+        <div className="flex items-center gap-1 border-b border-slate-100 bg-white px-4 py-2">
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('bold')}
+            title="In đậm phần đã bôi đen"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+          >
+            <Bold size={16} />
+          </button>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('hiliteColor', '#fef08a')}
+            title="Tô màu phần đã bôi đen"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+          >
+            <Highlighter size={16} />
+          </button>
+        </div>
+
+        <div
+          ref={(el) => {
+            if (!el) return;
+            editorRef.current = el;
+            if (el.dataset.seeded !== '1') {
+              el.innerHTML = draft || '';
+              el.dataset.seeded = '1';
+            }
+          }}
+          contentEditable
+          suppressContentEditableWarning
+          onInput={(event) => setDraft(event.currentTarget.innerHTML)}
+          onPaste={handlePaste}
+          data-placeholder="Viết ghi chú ở đây... Bôi đen chữ rồi bấm nút để in đậm/tô màu."
+          className="rich-note-cell min-h-0 flex-1 overflow-y-auto p-5 text-sm leading-relaxed outline-none"
+        />
+
+        <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
+          <button
+            type="button"
+            onClick={close}
+            className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
+          >
+            Đóng
+          </button>
+          <button
+            type="button"
+            onClick={save}
+            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Lưu ghi chú
+          </button>
         </div>
       </div>
     </div>
