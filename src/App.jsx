@@ -1891,7 +1891,7 @@ function DocumentsView({
                 </div>
                 <div
                   className="study-note-preview max-h-48 overflow-y-auto border-t border-slate-50 pt-3 text-slate-600"
-                  dangerouslySetInnerHTML={{ __html: formatNoteHtml(doc.content) }}
+                  dangerouslySetInnerHTML={{ __html: renderNoteHtml(doc.content) }}
                 />
               </div>
               <div className="mt-4 flex justify-end gap-2 border-t border-slate-50 pt-3">
@@ -3213,6 +3213,22 @@ function FullNoteModal({ draft, setDraft, close, save }) {
 }
 
 function DocumentModal({ draft, isEditing, setDraft, close, save }) {
+  const editorRef = useRef(null);
+
+  function applyFormatting(command, value) {
+    const el = editorRef.current;
+    if (!el) return;
+    el.focus();
+    document.execCommand(command, false, value);
+    setDraft((current) => ({ ...current, content: el.innerHTML }));
+  }
+
+  function handlePaste(event) {
+    event.preventDefault();
+    const text = event.clipboardData.getData('text/plain');
+    document.execCommand('insertText', false, text);
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
       <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
@@ -3239,14 +3255,47 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             className="field-input"
           />
         </div>
-        <textarea
-          value={draft.content}
-          onChange={(event) =>
-            setDraft((current) => ({ ...current, content: event.target.value }))
+
+        <div className="flex items-center gap-1 border-b border-slate-100 bg-white px-4 py-2">
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('bold')}
+            title="In đậm phần đã bôi đen"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+          >
+            <Bold size={16} />
+          </button>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('hiliteColor', '#fef08a')}
+            title="Tô màu phần đã bôi đen"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+          >
+            <Highlighter size={16} />
+          </button>
+        </div>
+
+        <div
+          ref={(el) => {
+            if (!el) return;
+            editorRef.current = el;
+            if (el.dataset.seeded !== '1') {
+              el.innerHTML = renderNoteHtml(draft.content);
+              el.dataset.seeded = '1';
+            }
+          }}
+          contentEditable
+          suppressContentEditableWarning
+          onInput={(event) =>
+            setDraft((current) => ({ ...current, content: event.currentTarget.innerHTML }))
           }
-          className="min-h-0 flex-1 resize-none p-5 text-sm outline-none"
-          placeholder="Dán hoặc soạn nội dung tài liệu ở đây... Dùng **từ khóa** để bôi đậm, `code` cho lệnh, '- ' cho danh sách."
+          onPaste={handlePaste}
+          data-placeholder="Dán hoặc soạn nội dung tài liệu ở đây... Bôi đen chữ rồi bấm nút để in đậm/tô màu."
+          className="rich-note-cell min-h-0 flex-1 overflow-y-auto p-5 text-sm leading-relaxed outline-none"
         />
+
         <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
           <button
             type="button"
@@ -3289,7 +3338,7 @@ function DocumentViewModal({ doc, close, edit }) {
             className="study-note-preview text-sm leading-relaxed text-slate-700"
             dangerouslySetInnerHTML={{
               __html: doc.content
-                ? formatNoteHtml(doc.content)
+                ? renderNoteHtml(doc.content)
                 : '<span class="text-slate-400 italic">Tài liệu chưa có nội dung.</span>',
             }}
           />

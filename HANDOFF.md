@@ -23,7 +23,14 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Notes: xem/sửa ghi chú trực tiếp từ Master Notes + đổi editor ghi chú task sang WYSIWYG (mới nhất)
+### Đổi editor "Sửa tài liệu" trong Documents sang WYSIWYG bôi-đen-để-format (mới nhất)
+Người dùng muốn thêm editor cho phần Documents (trước đó vẫn là `<textarea>` markdown thô sau lần đơn giản hóa tách Xem/Sửa trước).
+
+- `DocumentModal` ([src/App.jsx:3215](src/App.jsx:3215)): đổi `<textarea>` sang `<div contentEditable>` + 2 nút toolbar In đậm/Tô màu (`execCommand`), copy đúng pattern đã dùng cho `FullNoteModal`/Speaking (seed nội dung 1 lần qua `dataset.seeded`, paste ép plain text, `onMouseDown preventDefault` trên nút toolbar để không mất vùng bôi đen).
+- Card danh sách tài liệu ([src/App.jsx:1894](src/App.jsx:1894)) và `DocumentViewModal` đổi từ `formatNoteHtml(doc.content)` sang `renderNoteHtml(doc.content)` để tương thích ngược: tài liệu cũ lưu markdown thô (`**bold**`, `- list`...) vẫn hiển thị đúng qua `formatNoteHtml`, tài liệu mới lưu HTML thật (từ editor mới) render thẳng.
+- Đã verify qua `vercel dev`: modal Sửa mở đúng, nội dung tài liệu cũ ("Tình huống giao tiếp") seed đúng vào editor, toolbar hiện diện, tài liệu cũ vẫn hiển thị đúng ở danh sách/view modal sau khi đổi sang `renderNoteHtml`. **Chưa verify được** thao tác bôi đen + bấm nút trên UI thật do `vercel dev` local crash liên tục sau ~30-40s (lỗi native Windows không liên quan code: `Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\win\async.c` — môi trường flaky đã biết, không phải do thay đổi lần này). Đã xác nhận dọn sạch process node sau mỗi lần crash, không ảnh hưởng dữ liệu production.
+
+### Notes: xem/sửa ghi chú trực tiếp từ Master Notes + đổi editor ghi chú task sang WYSIWYG
 Người dùng yêu cầu 2 việc:
 1. Ở trang Master Notes (`NotesView`), bấm vào note phải xem được chi tiết + sửa được ngay, không cần bấm "Xem chi tiết ngày này" để nhảy sang trang Tasks của ngày đó.
 2. Modal "Soạn ghi chú" (`FullNoteModal`, mở qua nút "Mở rộng" ở Tasks) nên dùng editor giống bên Speaking (bôi đen để format ngay, không phải gõ markdown rồi xem preview).
