@@ -23,6 +23,16 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
+### Sửa lỗi crash trắng trang khi xóa text trong editor "Sửa tài liệu" (mới nhất)
+Người dùng báo crash (trắng trang) khi bôi đen rồi xóa text trong modal Sửa tài liệu (Documents) vừa đổi sang WYSIWYG ở phiên trước.
+
+**Nguyên nhân gốc**: `onInput` của `DocumentModal` đọc `event.currentTarget.innerHTML` **bên trong** hàm updater dạng function của `setDraft` — `setDraft((current) => ({ ...current, content: event.currentTarget.innerHTML }))`. React chủ động null hóa `event.currentTarget` sau khi handler đồng bộ chạy xong; nếu React xử lý hàm updater này trễ hơn 1 nhịp (dễ xảy ra khi thao tác xóa phức tạp — vd bôi đen xuyên ranh giới 2 đoạn `<p>` rồi xóa khiến `execCommand('delete')` merge DOM — kích hoạt nhiều lượt re-render dồn dập), `event.currentTarget` đã là `null` lúc updater thực thi → `TypeError: Cannot read properties of null (reading 'innerHTML')` → React unmount toàn bộ app (trắng trang, `#root` rỗng). `FullNoteModal`/Speaking không dính lỗi này vì đọc `event.currentTarget.innerHTML` **ngay lập tức** ở dạng giá trị (`setDraft(event.currentTarget.innerHTML)`), không bọc trong hàm updater.
+
+**Sửa**: [src/App.jsx:3291](src/App.jsx:3291) — lấy `event.currentTarget.innerHTML` ra biến `html` ngay khi handler chạy, rồi mới truyền `html` (không phải `event`) vào hàm updater của `setDraft`.
+
+**Cách tái hiện + verify**: dùng `document.execCommand('delete')` qua `javascript_tool` để chọn vùng xuyên ranh giới 2 thẻ `<p>`/`<li>` rồi xóa liên tục nhiều lần (lặp 8 lần) — trước khi sửa: crash ngay ở lần thứ 2; sau khi sửa: chạy đủ 8 lần không lỗi (`window.__errors` rỗng). Test qua `vercel dev` (DB thật) nhưng **không bấm "Lưu tài liệu"** trong lúc test, chỉ thao tác trong DOM rồi đóng modal — đã xác nhận nội dung tài liệu thật không đổi sau khi test.
+**Lưu ý cho lần sau**: khi viết `onInput`/event handler nào đó dùng dạng `setX((current) => ...)` (functional updater), KHÔNG được đọc `event.currentTarget`/`event.target` bên trong thân hàm updater — luôn đọc ra biến local trước, ngoài hàm updater.
+
 ### Đổi editor "Sửa tài liệu" trong Documents sang WYSIWYG bôi-đen-để-format (mới nhất)
 Người dùng muốn thêm editor cho phần Documents (trước đó vẫn là `<textarea>` markdown thô sau lần đơn giản hóa tách Xem/Sửa trước).
 

@@ -3288,9 +3288,10 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
           }}
           contentEditable
           suppressContentEditableWarning
-          onInput={(event) =>
-            setDraft((current) => ({ ...current, content: event.currentTarget.innerHTML }))
-          }
+          onInput={(event) => {
+            const html = event.currentTarget.innerHTML;
+            setDraft((current) => ({ ...current, content: html }));
+          }}
           onPaste={handlePaste}
           data-placeholder="Dán hoặc soạn nội dung tài liệu ở đây... Bôi đen chữ rồi bấm nút để in đậm/tô màu."
           className="rich-note-cell min-h-0 flex-1 overflow-y-auto p-5 text-sm leading-relaxed outline-none"
