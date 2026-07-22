@@ -519,6 +519,24 @@ function renderNoteHtml(text) {
   return formatNoteHtml(text);
 }
 
+const PASTE_UNSAFE_SELECTOR = 'script,style,link,meta,object,embed,iframe';
+
+function sanitizePastedHtml(html) {
+  const container = document.createElement('div');
+  container.innerHTML = html;
+  container.querySelectorAll(PASTE_UNSAFE_SELECTOR).forEach((el) => el.remove());
+  container.querySelectorAll('*').forEach((el) => {
+    Array.from(el.attributes).forEach((attr) => {
+      const name = attr.name.toLowerCase();
+      const isJsUrl = (name === 'href' || name === 'src') && /^\s*javascript:/i.test(attr.value);
+      if (name.startsWith('on') || isJsUrl) {
+        el.removeAttribute(attr.name);
+      }
+    });
+  });
+  return container.innerHTML;
+}
+
 function getCalendarCells(monthDate) {
   const year = monthDate.getFullYear();
   const month = monthDate.getMonth();
@@ -3225,6 +3243,11 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
 
   function handlePaste(event) {
     event.preventDefault();
+    const html = event.clipboardData.getData('text/html');
+    if (html) {
+      document.execCommand('insertHTML', false, sanitizePastedHtml(html));
+      return;
+    }
     const text = event.clipboardData.getData('text/plain');
     document.execCommand('insertText', false, text);
   }

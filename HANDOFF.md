@@ -23,7 +23,15 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Sửa lỗi crash trắng trang khi xóa text trong editor "Sửa tài liệu" (mới nhất)
+### Giữ định dạng gốc khi dán (paste) vào editor Documents (mới nhất)
+Người dùng muốn khi dán nội dung có định dạng (từ Word, web, ...) vào ô soạn tài liệu thì giữ nguyên định dạng, thay vì bị ép về plain text như trước.
+
+- `handlePaste` trong `DocumentModal` ([src/App.jsx:3244](src/App.jsx:3244)): nếu clipboard có `text/html` thì chèn bằng `execCommand('insertHTML', false, sanitizePastedHtml(html))`; nếu không có thì vẫn fallback về `text/plain` như cũ.
+- Hàm mới `sanitizePastedHtml()` ([src/App.jsx:524](src/App.jsx:524)): dựng 1 `<div>` tạm, xóa hẳn các thẻ nguy hiểm (`script,style,link,meta,object,embed,iframe`) và strip mọi thuộc tính `on*` (onerror, onclick...) + `href`/`src` dạng `javascript:` — cần thiết vì nội dung dán được lưu thẳng vào `content` rồi hiển thị lại qua `dangerouslySetInnerHTML` ở danh sách/preview, nên phải chặn trước nguy cơ tự-XSS khi dán nội dung từ nguồn lạ.
+- **Chỉ áp dụng cho Documents** — `FullNoteModal` (Notes) và Speaking vẫn cố ý ép plain text khi dán như quyết định trước đó, không đổi.
+- Đã verify qua `vercel dev`: mô phỏng dán HTML có `<b>`, `<span style="color:red">` cùng `<script>` và `<img onerror>` độc hại — kết quả giữ đúng in đậm/màu chữ, `<script>` bị loại bỏ hoàn toàn, `onerror` bị strip khỏi `<img>`, không có mã nào chạy được (`window.__xssFired` vẫn `false`). Test trên tài liệu mới (chưa lưu) nên không ảnh hưởng dữ liệu thật.
+
+### Sửa lỗi crash trắng trang khi xóa text trong editor "Sửa tài liệu"
 Người dùng báo crash (trắng trang) khi bôi đen rồi xóa text trong modal Sửa tài liệu (Documents) vừa đổi sang WYSIWYG ở phiên trước.
 
 **Nguyên nhân gốc**: `onInput` của `DocumentModal` đọc `event.currentTarget.innerHTML` **bên trong** hàm updater dạng function của `setDraft` — `setDraft((current) => ({ ...current, content: event.currentTarget.innerHTML }))`. React chủ động null hóa `event.currentTarget` sau khi handler đồng bộ chạy xong; nếu React xử lý hàm updater này trễ hơn 1 nhịp (dễ xảy ra khi thao tác xóa phức tạp — vd bôi đen xuyên ranh giới 2 đoạn `<p>` rồi xóa khiến `execCommand('delete')` merge DOM — kích hoạt nhiều lượt re-render dồn dập), `event.currentTarget` đã là `null` lúc updater thực thi → `TypeError: Cannot read properties of null (reading 'innerHTML')` → React unmount toàn bộ app (trắng trang, `#root` rỗng). `FullNoteModal`/Speaking không dính lỗi này vì đọc `event.currentTarget.innerHTML` **ngay lập tức** ở dạng giá trị (`setDraft(event.currentTarget.innerHTML)`), không bọc trong hàm updater.
