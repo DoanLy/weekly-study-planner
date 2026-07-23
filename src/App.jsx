@@ -220,6 +220,7 @@ function createTask(partial) {
     theme: 'blue',
     icon: 'graduation',
     ...partial,
+    ...(partial?.note?.trim() ? { noteUpdatedAt: new Date().toISOString() } : {}),
   };
 }
 
@@ -640,7 +641,15 @@ function App() {
       .flatMap(([date, tasks]) => tasks.map((task) => ({ ...task, date })))
       .sort((left, right) => left.date.localeCompare(right.date));
   }, [data.dailyTasks]);
-  const allNotes = allStoredTasks.filter((task) => task.note?.trim());
+  const allNotes = useMemo(() => {
+    return allStoredTasks
+      .filter((task) => task.note?.trim())
+      .sort((left, right) => {
+        const leftKey = left.noteUpdatedAt || left.date;
+        const rightKey = right.noteUpdatedAt || right.date;
+        return rightKey.localeCompare(leftKey);
+      });
+  }, [allStoredTasks]);
   const globalCompleted = allStoredTasks.filter((task) => task.completed).length;
   const incompleteSelected = selectedTasks.filter((task) => !task.completed).length;
   const weekStats = useMemo(() => {
@@ -756,8 +765,10 @@ function App() {
   }
 
   function updateTask(taskId, patch) {
+    const finalPatch =
+      'note' in patch ? { ...patch, noteUpdatedAt: new Date().toISOString() } : patch;
     const tasks = getTasksForDate(data, selectedDate).map((task) =>
-      task.id === taskId ? { ...task, ...patch } : task,
+      task.id === taskId ? { ...task, ...finalPatch } : task,
     );
     saveTasksForDate(selectedDateKey, tasks);
   }
@@ -905,7 +916,9 @@ function App() {
     if (!fullNoteTaskId) return;
     const dateKey = fullNoteTaskDate || selectedDateKey;
     const tasks = getTasksForDate(data, parseDateString(dateKey)).map((task) =>
-      task.id === fullNoteTaskId ? { ...task, note: noteDraft } : task,
+      task.id === fullNoteTaskId
+        ? { ...task, note: noteDraft, noteUpdatedAt: new Date().toISOString() }
+        : task,
     );
     saveTasksForDate(dateKey, tasks);
     setFullNoteTaskId(null);

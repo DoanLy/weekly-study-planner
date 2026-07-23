@@ -23,7 +23,14 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Giữ định dạng gốc khi dán (paste) vào editor Documents (mới nhất)
+### Master Notes: sắp xếp ghi chú mới thêm/sửa lên đầu (mới nhất)
+Người dùng muốn ở trang Master Notes (`NotesView`), note nào mới được thêm/sửa gần nhất thì hiển thị đầu tiên — trước đó danh sách chỉ sort theo ngày của task tăng dần (`allStoredTasks`), nên note thêm sau nhưng gắn ngày cũ hơn vẫn bị chìm xuống dưới.
+
+- Thêm field mới `noteUpdatedAt` (ISO timestamp) trên task, set ở 3 chỗ ghi note: `createTask()` ([src/App.jsx:213](src/App.jsx:213), khi tạo task mới kèm note luôn), `updateTask()` ([src/App.jsx:758](src/App.jsx:758), khi patch có key `note` — dùng cho ô textarea sửa nhanh inline trong `TaskCard`), `saveFullNote()` ([src/App.jsx:904](src/App.jsx:904), khi lưu từ modal "Soạn ghi chú").
+- `allNotes` ([src/App.jsx:643](src/App.jsx:643)) đổi từ `.filter()` đơn giản sang `useMemo` có `.sort()` giảm dần theo `noteUpdatedAt`, fallback về `task.date` cho note cũ chưa có timestamp (không cần migrate dữ liệu cũ).
+- Đã verify qua `vercel dev`: 4 note thật hiện có (không có `noteUpdatedAt`, fallback theo date) hiển thị đúng thứ tự ngày giảm dần (07-23 → 07-16 → 07-14 → 07-14). Chỉ xem tab Notes, không sửa/lưu note nào nên dữ liệu thật không đổi.
+
+### Giữ định dạng gốc khi dán (paste) vào editor Documents
 Người dùng muốn khi dán nội dung có định dạng (từ Word, web, ...) vào ô soạn tài liệu thì giữ nguyên định dạng, thay vì bị ép về plain text như trước.
 
 - `handlePaste` trong `DocumentModal` ([src/App.jsx:3244](src/App.jsx:3244)): nếu clipboard có `text/html` thì chèn bằng `execCommand('insertHTML', false, sanitizePastedHtml(html))`; nếu không có thì vẫn fallback về `text/plain` như cũ.
