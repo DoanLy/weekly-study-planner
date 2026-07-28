@@ -91,39 +91,39 @@ const EMPTY_DATA = {
 
 const THEME_STYLES = {
   orange: {
-    bg: 'bg-orange-50',
-    border: 'border-orange-200',
-    text: 'text-orange-700',
-    accent: 'text-orange-500',
-    badge: 'bg-orange-100 text-orange-700 border-orange-200',
+    bg: 'bg-sun-50',
+    border: 'border-ink-800',
+    text: 'text-ink-900',
+    accent: 'text-sun-600',
+    badge: 'bg-sun-200 text-ink-900 border-ink-800',
   },
   purple: {
-    bg: 'bg-purple-50',
-    border: 'border-purple-200',
-    text: 'text-purple-700',
-    accent: 'text-purple-500',
-    badge: 'bg-purple-100 text-purple-700 border-purple-200',
+    bg: 'bg-coral-50',
+    border: 'border-ink-800',
+    text: 'text-ink-900',
+    accent: 'text-coral-500',
+    badge: 'bg-coral-200 text-ink-900 border-ink-800',
   },
   blue: {
-    bg: 'bg-blue-50',
-    border: 'border-blue-200',
-    text: 'text-blue-700',
-    accent: 'text-blue-500',
-    badge: 'bg-blue-100 text-blue-700 border-blue-200',
+    bg: 'bg-sky-50',
+    border: 'border-ink-800',
+    text: 'text-ink-900',
+    accent: 'text-sky-600',
+    badge: 'bg-sky-200 text-ink-900 border-ink-800',
   },
   teal: {
     bg: 'bg-teal-50',
-    border: 'border-teal-200',
-    text: 'text-teal-700',
-    accent: 'text-teal-500',
-    badge: 'bg-teal-100 text-teal-700 border-teal-200',
+    border: 'border-ink-800',
+    text: 'text-ink-900',
+    accent: 'text-teal-600',
+    badge: 'bg-teal-200 text-ink-900 border-ink-800',
   },
   slate: {
-    bg: 'bg-slate-50',
-    border: 'border-slate-200',
-    text: 'text-slate-700',
-    accent: 'text-slate-500',
-    badge: 'bg-slate-100 text-slate-700 border-slate-200',
+    bg: 'bg-ink-50',
+    border: 'border-ink-800',
+    text: 'text-ink-900',
+    accent: 'text-ink-500',
+    badge: 'bg-ink-100 text-ink-900 border-ink-800',
   },
 };
 
@@ -1033,29 +1033,29 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 md:flex">
+    <div className="min-h-screen bg-cream font-sans text-ink-800 md:flex">
       <aside
-        className={`sticky top-0 z-30 flex w-full shrink-0 flex-col border-b border-slate-200 bg-white transition-[width] duration-200 md:h-screen md:border-b-0 md:border-r ${
+        className={`sticky top-0 z-30 flex w-full shrink-0 flex-col border-b-[1.5px] border-ink-800/15 bg-paper transition-[width] duration-200 md:h-screen md:border-b-0 md:border-r-[1.5px] ${
           sidebarCollapsed ? 'md:w-20' : 'md:w-64'
         }`}
       >
         <div
-          className={`flex items-center justify-between gap-2 border-b border-slate-100 p-6 ${
+          className={`flex items-center justify-between gap-2 border-b-[1.5px] border-dashed border-ink-800/20 p-6 ${
             sidebarCollapsed ? 'md:flex-col md:justify-center md:p-4' : ''
           }`}
         >
           <div
             className={`flex items-center gap-3 ${sidebarCollapsed ? 'md:justify-center' : ''}`}
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xl font-bold text-white shadow-md shadow-blue-500/20">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-teal-500 font-display text-xl font-bold text-white shadow-chip">
               S
             </div>
             {!sidebarCollapsed && (
               <div>
-                <h1 className="text-base font-bold leading-tight text-slate-800">
-                  StudyFlow
+                <h1 className="font-display text-lg font-bold leading-tight text-ink-900">
+                  Study<span className="marker">Flow</span>
                 </h1>
-                <p className="text-xs font-medium text-slate-400">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-ink-400">
                   Planned Progress
                 </p>
               </div>
@@ -1064,26 +1064,26 @@ function App() {
           <button
             type="button"
             onClick={() => setSidebarCollapsed((collapsed) => !collapsed)}
-            className={`hidden rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 md:block ${
+            className={`icon-btn hidden h-8 w-8 md:flex ${
               sidebarCollapsed ? 'md:ml-0' : 'md:ml-auto'
             }`}
             aria-label={sidebarCollapsed ? 'Mở rộng menu' : 'Thu hẹp menu'}
             title={sidebarCollapsed ? 'Mở rộng menu' : 'Thu hẹp menu'}
           >
-            {sidebarCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+            {sidebarCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
           </button>
           <button
             type="button"
             onClick={() => setMobileMenuOpen((open) => !open)}
-            className="ml-auto rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800 md:hidden"
+            className="icon-btn icon-btn-coral ml-auto h-9 w-9 md:hidden"
             aria-label="Mở menu"
           >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
 
         <nav
-          className={`flex-grow flex-col gap-1 overflow-y-auto p-4 ${mobileMenuOpen ? 'flex' : 'hidden md:flex'}`}
+          className={`flex-grow flex-col gap-1.5 overflow-y-auto p-4 ${mobileMenuOpen ? 'flex' : 'hidden md:flex'}`}
         >
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -1097,26 +1097,27 @@ function App() {
                   setMobileMenuOpen(false);
                 }}
                 title={sidebarCollapsed ? item.label : undefined}
-                className={`relative flex items-center gap-3.5 rounded-xl px-4 py-3 text-sm font-semibold transition-all ${
+                className={`relative flex items-center gap-3 rounded-full border-[1.5px] px-3.5 py-2.5 text-sm font-extrabold transition-all ${
                   sidebarCollapsed ? 'md:justify-center md:px-0' : ''
                 } ${
                   active
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-700'
+                    ? 'border-ink-800 bg-teal-500 text-white shadow-chip'
+                    : 'border-transparent text-ink-500 hover:border-ink-800/20 hover:bg-ink-50 hover:text-ink-800'
                 }`}
               >
                 <span
-                  className={`absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r bg-blue-600 ${
-                    active ? 'opacity-100' : 'opacity-0'
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors ${
+                    active ? 'bg-sun-300 text-ink-900' : 'text-ink-400'
                   }`}
-                />
-                <Icon size={18} className="w-5 shrink-0" />
+                >
+                  <Icon size={16} />
+                </span>
                 <span className={sidebarCollapsed ? 'md:hidden' : ''}>
                   {item.label}
                 </span>
                 {item.badge > 0 && (
                   <span
-                    className={`ml-auto rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-800 ${
+                    className={`ml-auto rounded-full border-[1.5px] border-ink-800 bg-coral-200 px-2 py-0.5 text-[10px] font-extrabold text-ink-900 ${
                       sidebarCollapsed ? 'md:hidden' : ''
                     }`}
                   >
@@ -1129,13 +1130,13 @@ function App() {
         </nav>
 
         {!sidebarCollapsed && (
-          <div className="hidden border-t border-slate-100 p-4 md:block">
-            <div className="rounded-xl border border-slate-100 bg-slate-50 p-3 text-center">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+          <div className="hidden p-4 md:block">
+            <div className="card-dashed p-3 text-center">
+              <p className="text-[10px] font-extrabold uppercase tracking-wider text-ink-400">
                 Hôm nay là
               </p>
-              <p className="mt-1 text-xs font-bold text-slate-700">{todayLabel}</p>
-              <p className="mt-1 text-[10px] font-bold text-blue-600">
+              <p className="mt-1 text-xs font-extrabold text-ink-800">{todayLabel}</p>
+              <p className="mt-1.5 inline-flex rounded-full border-[1.5px] border-ink-800 bg-sun-200 px-2.5 py-0.5 text-[10px] font-extrabold text-ink-900">
                 {globalCompleted} mục đã hoàn thành
               </p>
             </div>
@@ -1279,7 +1280,7 @@ function App() {
       )}
 
       <div
-        className={`fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-xl transition-all ${
+        className={`fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full border-[1.5px] border-ink-800 bg-ink-900 px-5 py-3 text-sm font-extrabold text-white shadow-pop transition-all ${
           toast
             ? 'translate-y-0 opacity-100'
             : 'pointer-events-none translate-y-12 opacity-0'
@@ -1306,26 +1307,29 @@ function DashboardView({
     <section className="flex flex-col gap-6">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">
-            Chào mừng quay trở lại, Học viên!
+          <h2 className="font-display text-3xl font-medium text-ink-900">
+            Chào mừng quay trở lại,{' '}
+            <span className="marker font-bold">Học viên!</span>
           </h2>
-          <p className="mt-0.5 text-xs text-slate-400">
+          <p className="mt-1 text-xs font-semibold text-ink-400">
             Tiến trình học tập thông minh & phân tích hiệu quả IELTS, Auto và
             ghi chú.
           </p>
         </div>
-        <div className="flex items-center gap-2 rounded-xl border border-slate-100 bg-white px-4 py-2 text-xs font-semibold text-slate-600 shadow-sm">
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+        <div className="flex items-center gap-2 rounded-full border-[1.5px] border-ink-800 bg-paper px-4 py-2 text-xs font-extrabold text-ink-700 shadow-chip">
+          <span className="h-2.5 w-2.5 rounded-full border-[1.5px] border-ink-800 bg-teal-400" />
           <span>{syncStatus || 'Hệ thống đang hoạt động ổn định'}</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        <div className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm md:col-span-2">
-          <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 p-5">
-            <div className="flex items-center gap-2">
-              <CalendarCheck size={20} className="text-blue-600" />
-              <span className="text-base font-bold text-slate-700">
+        <div className="card overflow-hidden md:col-span-2">
+          <div className="flex items-center justify-between border-b-[1.5px] border-dashed border-ink-800/25 bg-teal-50 p-5">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sun-300 text-ink-900">
+                <CalendarCheck size={18} />
+              </span>
+              <span className="font-display text-lg font-bold text-ink-900">
                 {MONTH_NAMES[currentDate.getMonth()]} {currentDate.getFullYear()}
               </span>
             </div>
@@ -1337,18 +1341,18 @@ function DashboardView({
             selectedDate={selectedDate}
             selectDate={selectDate}
           />
-          <div className="flex items-center justify-between border-t border-slate-100 bg-slate-50/30 p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t-[1.5px] border-dashed border-ink-800/25 p-5">
             <div className="flex items-center gap-3.5">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-100 bg-blue-50">
-                <span className="text-sm font-bold text-blue-600">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sun-200">
+                <span className="text-sm font-extrabold text-ink-900">
                   {weekStats.percent}%
                 </span>
               </div>
               <div>
-                <h4 className="text-sm font-bold text-slate-700">
+                <h4 className="text-sm font-extrabold text-ink-900">
                   Tiến độ tổng quan
                 </h4>
-                <p className="mt-0.5 text-xs text-slate-400">
+                <p className="mt-0.5 text-xs font-semibold text-ink-400">
                   {weekStats.completed}/{weekStats.total} mục trong tuần này
                 </p>
               </div>
@@ -1356,7 +1360,7 @@ function DashboardView({
             <button
               type="button"
               onClick={() => setActiveView('tasks')}
-              className="rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-blue-600 shadow-sm transition-all hover:bg-slate-50"
+              className="btn btn-sm btn-outline"
             >
               Xem chi tiết
             </button>
@@ -1364,28 +1368,28 @@ function DashboardView({
         </div>
 
         <div className="flex flex-col gap-6">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 p-6 text-white shadow-lg shadow-blue-500/10">
-            <GraduationCap className="absolute -right-6 -bottom-6 h-28 w-28 text-white/15" />
-            <span className="rounded-full bg-white/20 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider">
+          <div className="relative overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-teal-500 p-6 text-white shadow-card">
+            <GraduationCap className="absolute -right-6 -bottom-6 h-28 w-28 text-white/20" />
+            <span className="inline-flex rounded-full border-[1.5px] border-ink-800 bg-sun-300 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-ink-900">
               Hành trình 2026
             </span>
-            <h3 className="mt-3 text-xl font-bold">
+            <h3 className="mt-3 font-display text-xl font-bold">
               Luyện IELTS & Kỹ năng chuyên môn
             </h3>
-            <p className="mt-2 text-xs leading-relaxed text-blue-100/90">
+            <p className="mt-2 text-xs font-semibold leading-relaxed text-white/85">
               Học đều đặn, tối ưu thời gian và ghi nhớ kiến thức cốt lõi qua hệ
               thống ghi chú thông minh.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-slate-100 bg-white p-5 shadow-sm">
-            <h4 className="mb-3 text-sm font-bold text-slate-700">
+          <div className="card p-5">
+            <h4 className="mb-3 font-display text-base font-bold text-ink-900">
               Chú thích lịch học
             </h4>
-            <div className="flex flex-col gap-2.5 text-xs text-slate-500">
-              <LegendDot color="bg-emerald-400" label="Đã hoàn thành tất cả mục học" />
-              <LegendDot color="bg-amber-400" label="Còn mục học chưa làm" />
-              <LegendDot color="bg-slate-200" label="Chưa có lịch hoặc chưa học" />
+            <div className="flex flex-col gap-2.5 text-xs font-semibold text-ink-500">
+              <LegendDot color="bg-teal-400" label="Đã hoàn thành tất cả mục học" />
+              <LegendDot color="bg-sun-300" label="Còn mục học chưa làm" />
+              <LegendDot color="bg-white" label="Chưa có lịch hoặc chưa học" />
             </div>
           </div>
         </div>
@@ -1405,26 +1409,26 @@ function CalendarView({
   return (
     <section className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-bold text-slate-800">
-          Lịch Học Chi Tiết
+        <h2 className="font-display text-3xl font-medium text-ink-900">
+          Lịch <span className="marker font-bold">Học Chi Tiết</span>
         </h2>
-        <p className="text-xs text-slate-400">
+        <p className="mt-1 text-xs font-semibold text-ink-400">
           Bấm chọn một ngày bất kỳ để thiết lập danh sách mục tiêu hoàn thành.
         </p>
       </div>
 
-      <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-        <div className="mb-6 flex items-center justify-between border-b border-slate-100 pb-4">
-          <span className="text-lg font-bold text-slate-700">
+      <div className="card p-6">
+        <div className="mb-6 flex items-center justify-between border-b-[1.5px] border-dashed border-ink-800/25 pb-4">
+          <span className="font-display text-xl font-bold text-ink-900">
             {MONTH_NAMES[currentDate.getMonth()]} {currentDate.getFullYear()}
           </span>
           <MonthControls changeMonth={changeMonth} labels />
         </div>
-        <div className="grid grid-cols-7 gap-4">
+        <div className="grid grid-cols-7 gap-3">
           {WEEKDAY_SHORT.map((day) => (
             <div
               key={day}
-              className="hidden text-xs font-bold uppercase tracking-wider text-slate-400 md:block"
+              className="hidden text-xs font-extrabold uppercase tracking-wider text-ink-400 md:block"
             >
               {day}
             </div>
@@ -1439,26 +1443,28 @@ function CalendarView({
                 key={cell.key}
                 type="button"
                 onClick={() => selectDate(cell.date)}
-                className={`min-h-28 rounded-2xl border p-3 text-left transition-all ${
+                className={`min-h-28 rounded-2xl border-[1.5px] p-3 text-left transition-all ${
                   selected
-                    ? 'border-blue-500 bg-blue-50 shadow-md shadow-blue-500/10'
-                    : 'border-slate-100 bg-white hover:bg-slate-50'
+                    ? 'border-ink-800 bg-teal-100 shadow-chip'
+                    : 'border-ink-800/20 bg-white hover:border-ink-800 hover:bg-teal-50'
                 } ${cell.muted ? 'opacity-45' : ''}`}
               >
                 <div className="flex items-center justify-between">
                   <span
-                    className={`text-sm font-bold ${
-                      today ? 'text-blue-600' : 'text-slate-700'
+                    className={`flex h-7 w-7 items-center justify-center rounded-full text-sm font-extrabold ${
+                      today
+                        ? 'border-[1.5px] border-ink-800 bg-sun-300 text-ink-900'
+                        : 'text-ink-800'
                     }`}
                   >
                     {cell.day}
                   </span>
                   {stats.total > 0 && (
                     <span
-                      className={`rounded-md px-1.5 py-0.5 text-[10px] font-bold ${
+                      className={`rounded-full border-[1.5px] border-ink-800 px-1.5 py-0.5 text-[10px] font-extrabold text-ink-900 ${
                         stats.completed === stats.total
-                          ? 'bg-emerald-50 text-emerald-700'
-                          : 'bg-amber-50 text-amber-700'
+                          ? 'bg-teal-200'
+                          : 'bg-sun-200'
                       }`}
                     >
                       {stats.completed}/{stats.total}
@@ -1469,13 +1475,13 @@ function CalendarView({
                   {tasks.slice(0, 2).map((task) => (
                     <div
                       key={task.id}
-                      className="truncate text-[10px] font-medium text-slate-500"
+                      className="truncate text-[10px] font-bold text-ink-500"
                     >
                       • {task.title}
                     </div>
                   ))}
                   {stats.total > 2 && (
-                    <div className="text-[9px] font-bold italic text-slate-400">
+                    <div className="text-[9px] font-bold italic text-ink-400">
                       +{stats.total - 2} nhiệm vụ nữa
                     </div>
                   )}
@@ -1504,19 +1510,19 @@ function TasksView({
 }) {
   return (
     <section className="flex flex-col gap-6">
-      <div className="flex flex-col justify-between gap-4 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm sm:flex-row sm:items-center">
+      <div className="card flex flex-col justify-between gap-4 p-4 sm:flex-row sm:items-center">
         <button
           type="button"
           onClick={() => setActiveView('dashboard')}
-          className="flex w-max items-center gap-2 rounded-xl bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm transition-all hover:bg-slate-100 hover:text-blue-600"
+          className="btn btn-sm btn-soft w-max"
         >
-          <ArrowLeft size={16} /> Quay lại Dashboard
+          <ArrowLeft size={15} /> Quay lại Dashboard
         </button>
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-slate-400">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-semibold text-ink-400">
             Bạn đang xem lịch chi tiết ngày:
           </span>
-          <span className="rounded-full border border-blue-100 bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600">
+          <span className="rounded-full border-[1.5px] border-ink-800 bg-teal-100 px-3 py-1 text-xs font-extrabold text-ink-900">
             {date.toLocaleDateString('vi-VN', {
               weekday: 'long',
               year: 'numeric',
@@ -1527,61 +1533,61 @@ function TasksView({
         </div>
       </div>
 
-      <div className="relative flex flex-col items-start justify-between gap-4 overflow-hidden rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:flex-row sm:items-center">
-        <div className="pointer-events-none absolute right-4 top-4 select-none text-6xl font-bold text-slate-100">
+      <div className="card relative flex flex-col items-start justify-between gap-4 overflow-hidden p-6 sm:flex-row sm:items-center">
+        <div className="pointer-events-none absolute right-4 top-2 select-none font-display text-7xl font-bold text-ink-50">
           {String(date.getDate()).padStart(2, '0')}
         </div>
         <div className="relative z-10">
-          <h2 className="flex items-center gap-3 text-3xl font-extrabold text-slate-800">
-            {VIETNAMESE_DAYS[date.getDay()]}
+          <h2 className="font-display text-3xl font-bold text-ink-900">
+            <span className="marker">{VIETNAMESE_DAYS[date.getDay()]}</span>
           </h2>
-          <p className="mt-1 text-xs font-extrabold uppercase tracking-wider text-slate-400">
+          <p className="mt-1 text-xs font-extrabold uppercase tracking-wider text-ink-400">
             {ENGLISH_DAYS[date.getDay()]}
           </p>
         </div>
-        <div className="relative z-10 flex w-full items-center justify-between gap-3 border-t border-slate-100 pt-3 sm:w-auto sm:justify-start sm:border-t-0 sm:pt-0">
-          <span className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-600">
+        <div className="relative z-10 flex w-full items-center justify-between gap-3 border-t-[1.5px] border-dashed border-ink-800/20 pt-3 sm:w-auto sm:justify-start sm:border-t-0 sm:pt-0">
+          <span className="rounded-full border-[1.5px] border-ink-800 bg-white px-3 py-1.5 text-xs font-extrabold text-ink-800">
             {tasks.length} mục
           </span>
-          <button
-            type="button"
-            onClick={openAddTask}
-            className="flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/15 transition-all hover:bg-blue-700"
-          >
+          <button type="button" onClick={openAddTask} className="btn btn-primary">
             <Plus size={16} /> Thêm mục mới
           </button>
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-100 bg-white p-4 shadow-sm">
-        <div className="mb-2 flex items-center justify-between text-xs font-bold text-slate-500">
-          <span>TIẾN ĐỘ HOÀN THÀNH NGÀY</span>
-          <span className="text-blue-600">{selectedStats.percent}%</span>
+      <div className="card p-4">
+        <div className="mb-2 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-ink-500">
+          <span>Tiến độ hoàn thành ngày</span>
+          <span className="text-ink-900">{selectedStats.percent}%</span>
         </div>
-        <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+        <div className="progress-track">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-500"
+            className="progress-fill"
             style={{ width: `${selectedStats.percent}%` }}
           />
         </div>
       </div>
 
       {tasks.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-white p-12 text-center">
-          <NotebookPen size={44} className="mb-3 text-slate-300" />
-          <h4 className="font-bold text-slate-700">Ngày này chưa có lịch học</h4>
+        <div className="card flex flex-col items-center justify-center p-12 text-center">
+          <span className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sun-100 text-ink-800">
+            <NotebookPen size={30} />
+          </span>
+          <h4 className="font-display text-lg font-bold text-ink-900">
+            Ngày này chưa có lịch học
+          </h4>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
             <button
               type="button"
               onClick={resetToDefaults}
-              className="rounded-xl bg-slate-100 px-4 py-2.5 text-xs font-semibold text-slate-600 transition-colors hover:bg-slate-200"
+              className="btn btn-sm btn-outline"
             >
               Khôi phục lịch mẫu
             </button>
             <button
               type="button"
               onClick={openAddTask}
-              className="rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-blue-700"
+              className="btn btn-sm btn-primary"
             >
               Thêm nhiệm vụ
             </button>
@@ -1624,23 +1630,25 @@ function TaskCard({
 
   return (
     <article
-      className={`rounded-2xl border p-5 shadow-sm transition-all ${styles.bg} ${styles.border}`}
+      className={`rounded-card border-[1.5px] p-5 shadow-card transition-all ${styles.bg} ${styles.border}`}
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             {task.time && (
               <span
-                className={`rounded-full border px-3 py-1 text-xs font-bold ${styles.badge}`}
+                className={`rounded-full border-[1.5px] px-3 py-0.5 text-xs font-extrabold ${styles.badge}`}
               >
                 {task.time}
               </span>
             )}
-            <Icon size={18} className={styles.accent} />
+            <span className="flex h-7 w-7 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-white">
+              <Icon size={14} className={styles.accent} />
+            </span>
           </div>
           <h3
-            className={`text-lg font-extrabold ${
-              task.completed ? 'text-slate-400' : styles.text
+            className={`font-display text-xl font-bold ${
+              task.completed ? 'text-ink-400 line-through' : styles.text
             }`}
           >
             {task.title}
@@ -1651,45 +1659,45 @@ function TaskCard({
           <button
             type="button"
             onClick={() => deleteTask(task.id)}
-            className="flex h-8 w-8 items-center justify-center rounded-full text-slate-300 transition-all hover:bg-rose-50 hover:text-rose-500"
+            className="icon-btn icon-btn-coral h-8 w-8"
             aria-label="Xóa nhiệm vụ"
           >
-            <Trash2 size={16} />
+            <Trash2 size={15} />
           </button>
           <button
             type="button"
             onClick={() => updateTask(task.id, { completed: !task.completed })}
-            className={`flex h-9 w-9 items-center justify-center rounded-full border-2 shadow-sm transition-all ${
+            className={`flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-ink-800 shadow-chip transition-all ${
               task.completed
-                ? 'border-emerald-500 bg-emerald-500 text-white'
-                : 'border-slate-300 bg-white text-slate-400 hover:border-blue-500'
+                ? 'bg-teal-400 text-white'
+                : 'bg-white text-ink-300 hover:bg-sun-100'
             }`}
             aria-label="Đánh dấu hoàn thành"
           >
-            {task.completed ? <Check size={18} /> : <Circle size={18} />}
+            {task.completed ? <Check size={18} strokeWidth={3} /> : <Circle size={18} />}
           </button>
         </div>
       </div>
 
-      <div className="mt-4 border-t border-slate-200/60 pt-4">
-        <div className="mb-3 flex flex-col justify-between gap-2 text-xs font-semibold text-slate-400 sm:flex-row sm:items-center">
+      <div className="mt-4 border-t-[1.5px] border-dashed border-ink-800/25 pt-4">
+        <div className="mb-3 flex flex-col justify-between gap-2 text-xs font-extrabold text-ink-500 sm:flex-row sm:items-center">
           <div className="flex items-center gap-2">
             <NotebookPen size={14} className={styles.accent} />
             <span>Ghi chú bài học</span>
           </div>
-          <div className="flex w-max flex-wrap items-center gap-2 rounded-lg border border-slate-200/30 bg-slate-100/55 px-2 py-1">
+          <div className="flex w-max flex-wrap items-center gap-2 rounded-full border-[1.5px] border-ink-800/20 bg-white px-3 py-1">
             <button
               type="button"
               onClick={() => setEditing(!editing)}
-              className="flex items-center gap-1 transition-colors hover:text-blue-600"
+              className="flex items-center gap-1 transition-colors hover:text-teal-600"
             >
               <StickyNote size={13} /> {editing ? 'Xem' : 'Sửa'}
             </button>
-            <span className="text-slate-300">|</span>
+            <span className="text-ink-200">|</span>
             <button
               type="button"
               onClick={() => openFullNote(task)}
-              className="flex items-center gap-1 transition-colors hover:text-blue-600"
+              className="flex items-center gap-1 transition-colors hover:text-teal-600"
             >
               <Expand size={13} /> Mở rộng
             </button>
@@ -1701,13 +1709,13 @@ function TaskCard({
             value={task.note || ''}
             onChange={(event) => updateTask(task.id, { note: event.target.value })}
             placeholder="Gõ từ vựng, ngữ pháp, các dòng lệnh... Dùng **từ khóa** để bôi đậm, `code` cho lệnh, '- ' cho danh sách."
-            className="min-h-24 w-full resize-y rounded-xl border border-slate-200 bg-white p-3.5 text-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="field-input min-h-24 resize-y font-medium"
           />
         ) : (
           <button
             type="button"
             onClick={() => setEditing(true)}
-            className="min-h-16 w-full rounded-xl border border-slate-100 bg-white/70 p-3.5 text-left text-sm shadow-sm transition-all hover:border-slate-200 hover:bg-white"
+            className="min-h-16 w-full rounded-2xl border-[1.5px] border-ink-800/20 bg-white p-3.5 text-left text-sm transition-all hover:border-ink-800"
           >
             {task.note ? (
               <div
@@ -1715,7 +1723,7 @@ function TaskCard({
                 dangerouslySetInnerHTML={{ __html: renderNoteHtml(task.note) }}
               />
             ) : (
-              <span className="flex items-center gap-1.5 text-xs italic text-slate-400">
+              <span className="flex items-center gap-1.5 text-xs font-semibold italic text-ink-400">
                 <StickyNote size={14} /> Click vào đây để soạn thảo ghi chú bài
                 học...
               </span>
@@ -1724,7 +1732,7 @@ function TaskCard({
         )}
       </div>
 
-      <div className="mt-3 flex items-center justify-between text-[11px] text-slate-400">
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] font-semibold text-ink-400">
         <span className="flex items-center gap-1.5">
           <Icon size={12} /> Lĩnh vực:{' '}
           {['orange', 'purple'].includes(task.theme)
@@ -1732,11 +1740,13 @@ function TaskCard({
             : 'Chuyên môn'}
         </span>
         {task.completed ? (
-          <span className="flex items-center gap-1 font-bold text-emerald-600">
-            <Check size={12} /> Đã hoàn tất
+          <span className="flex items-center gap-1 rounded-full border-[1.5px] border-ink-800 bg-teal-200 px-2.5 py-0.5 font-extrabold text-ink-900">
+            <Check size={12} strokeWidth={3} /> Đã hoàn tất
           </span>
         ) : (
-          <span className="font-medium text-amber-600">Chờ hoàn tất</span>
+          <span className="rounded-full border-[1.5px] border-dashed border-ink-800/50 px-2.5 py-0.5 font-extrabold text-ink-600">
+            Chờ hoàn tất
+          </span>
         )}
       </div>
     </article>
@@ -1747,19 +1757,23 @@ function NotesView({ notes, selectDate, openFullNote, openViewNote }) {
   return (
     <section className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-bold text-slate-800">Master Notes</h2>
-        <p className="text-xs text-slate-400">
+        <h2 className="font-display text-3xl font-medium text-ink-900">
+          Master <span className="marker font-bold">Notes</span>
+        </h2>
+        <p className="mt-1 text-xs font-semibold text-ink-400">
           Toàn bộ ghi chú đã lưu từ các nhiệm vụ học tập.
         </p>
       </div>
 
       {notes.length === 0 ? (
-        <div className="rounded-2xl border border-slate-100 bg-white p-12 text-center">
-          <StickyNote size={44} className="mx-auto mb-3 text-slate-300" />
-          <h4 className="font-bold text-slate-700">
+        <div className="card p-12 text-center">
+          <span className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sun-100 text-ink-800">
+            <StickyNote size={30} />
+          </span>
+          <h4 className="font-display text-lg font-bold text-ink-900">
             Chưa có ghi chú nào được lưu
           </h4>
-          <p className="mt-1 text-xs text-slate-400">
+          <p className="mt-1 text-xs font-semibold text-ink-400">
             Hãy bắt đầu viết ghi chú trong các nhiệm vụ để lưu trữ kiến thức tại
             đây.
           </p>
@@ -1771,27 +1785,27 @@ function NotesView({ notes, selectDate, openFullNote, openViewNote }) {
             return (
               <div
                 key={`${task.date}-${task.id}`}
-                className="flex flex-col justify-between rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+                className="card flex flex-col justify-between p-5 transition-transform hover:-translate-y-0.5"
               >
                 <div>
                   <div className="mb-3 flex items-center justify-between gap-3">
-                    <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                    <span className="rounded-full border-[1.5px] border-ink-800 bg-sun-100 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-ink-900">
                       {task.date} ({VIETNAMESE_DAYS[date.getDay()]})
                     </span>
-                    <span className="truncate text-xs font-bold text-blue-600">
+                    <span className="truncate text-xs font-extrabold text-teal-600">
                       {task.title}
                     </span>
                   </div>
                   <div
-                    className="study-note-preview max-h-48 overflow-y-auto border-t border-slate-50 pt-3 text-slate-600"
+                    className="study-note-preview max-h-48 overflow-y-auto border-t-[1.5px] border-dashed border-ink-800/20 pt-3 text-ink-600"
                     dangerouslySetInnerHTML={{ __html: renderNoteHtml(task.note) }}
                   />
                 </div>
-                <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-50 pt-3">
+                <div className="mt-4 flex items-center justify-between gap-2 border-t-[1.5px] border-dashed border-ink-800/20 pt-3">
                   <button
                     type="button"
                     onClick={() => selectDate(date)}
-                    className="text-xs font-bold text-slate-400 hover:underline"
+                    className="text-xs font-extrabold text-ink-400 underline decoration-dotted underline-offset-4 hover:text-ink-800"
                   >
                     Đi tới ngày này
                   </button>
@@ -1799,14 +1813,14 @@ function NotesView({ notes, selectDate, openFullNote, openViewNote }) {
                     <button
                       type="button"
                       onClick={() => openViewNote(task)}
-                      className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-200"
+                      className="btn btn-sm btn-outline"
                     >
                       Xem
                     </button>
                     <button
                       type="button"
                       onClick={() => openFullNote(task, task.date)}
-                      className="rounded-xl bg-blue-50 px-3 py-2 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-100"
+                      className="btn btn-sm btn-primary"
                     >
                       Sửa
                     </button>
@@ -1826,41 +1840,39 @@ function NoteViewModal({ task, close, edit }) {
   const date = parseDateString(task.date);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
-      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm">
+      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop">
+        <div className="flex items-center justify-between gap-3 border-b-[1.5px] border-ink-800/20 bg-teal-50 p-4">
           <div className="min-w-0">
-            <h3 className="truncate font-bold text-slate-800">{task.title}</h3>
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+            <h3 className="truncate font-display text-lg font-bold text-ink-900">
+              {task.title}
+            </h3>
+            <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-400">
               {task.date} ({VIETNAMESE_DAYS[date.getDay()]})
             </p>
           </div>
           <button
             type="button"
             onClick={close}
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+            className="icon-btn icon-btn-coral h-9 w-9"
           >
             <X size={18} />
           </button>
         </div>
         <div className="flex-1 overflow-y-auto p-6">
           <div
-            className="study-note-preview text-sm leading-relaxed text-slate-700"
+            className="study-note-preview text-sm leading-relaxed text-ink-700"
             dangerouslySetInnerHTML={{ __html: renderNoteHtml(task.note) }}
           />
         </div>
-        <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
-          <button
-            type="button"
-            onClick={close}
-            className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
-          >
+        <div className="flex justify-end gap-2 border-t-[1.5px] border-dashed border-ink-800/25 p-4">
+          <button type="button" onClick={close} className="btn btn-sm btn-outline">
             Đóng
           </button>
           <button
             type="button"
             onClick={() => edit(task)}
-            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            className="btn btn-sm btn-primary"
           >
             Sửa
           </button>
@@ -1881,26 +1893,28 @@ function DocumentsView({
     <section className="flex flex-col gap-6">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">Documents</h2>
-          <p className="text-xs text-slate-400">
+          <h2 className="font-display text-3xl font-medium text-ink-900">
+            <span className="marker font-bold">Documents</span>
+          </h2>
+          <p className="mt-1 text-xs font-semibold text-ink-400">
             Kho lưu trữ tài liệu văn bản của bạn — ví dụ câu hỏi Speaking IELTS,
             danh sách từ vựng, hoặc bất kỳ ghi chú dài nào cần tra cứu lại.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={openNewDocument}
-          className="flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/15 transition-all hover:bg-blue-700"
-        >
+        <button type="button" onClick={openNewDocument} className="btn btn-primary">
           <Plus size={16} /> Tạo tài liệu mới
         </button>
       </div>
 
       {documents.length === 0 ? (
-        <div className="rounded-2xl border border-slate-100 bg-white p-12 text-center">
-          <Library size={44} className="mx-auto mb-3 text-slate-300" />
-          <h4 className="font-bold text-slate-700">Chưa có tài liệu nào</h4>
-          <p className="mt-1 text-xs text-slate-400">
+        <div className="card p-12 text-center">
+          <span className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-teal-100 text-ink-800">
+            <Library size={30} />
+          </span>
+          <h4 className="font-display text-lg font-bold text-ink-900">
+            Chưa có tài liệu nào
+          </h4>
+          <p className="mt-1 text-xs font-semibold text-ink-400">
             Bấm &quot;Tạo tài liệu mới&quot; để bắt đầu lưu trữ nội dung học tập.
           </p>
         </div>
@@ -1909,41 +1923,41 @@ function DocumentsView({
           {documents.map((doc) => (
             <div
               key={doc.id}
-              className="flex flex-col justify-between rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+              className="card flex flex-col justify-between p-5 transition-transform hover:-translate-y-0.5"
             >
               <div>
                 <div className="mb-3 flex items-start justify-between gap-3">
-                  <h3 className="truncate text-sm font-extrabold text-slate-800">
+                  <h3 className="truncate font-display text-base font-bold text-ink-900">
                     {doc.title}
                   </h3>
-                  <span className="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                  <span className="shrink-0 rounded-full border-[1.5px] border-ink-800 bg-sky-100 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-ink-900">
                     {new Date(doc.updatedAt).toLocaleDateString('vi-VN')}
                   </span>
                 </div>
                 <div
-                  className="study-note-preview max-h-48 overflow-y-auto border-t border-slate-50 pt-3 text-slate-600"
+                  className="study-note-preview max-h-48 overflow-y-auto border-t-[1.5px] border-dashed border-ink-800/20 pt-3 text-ink-600"
                   dangerouslySetInnerHTML={{ __html: renderNoteHtml(doc.content) }}
                 />
               </div>
-              <div className="mt-4 flex justify-end gap-2 border-t border-slate-50 pt-3">
+              <div className="mt-4 flex justify-end gap-2 border-t-[1.5px] border-dashed border-ink-800/20 pt-3">
                 <button
                   type="button"
                   onClick={() => deleteDocument(doc.id)}
-                  className="rounded-xl bg-rose-50 px-3 py-2 text-xs font-bold text-rose-600 transition-colors hover:bg-rose-100"
+                  className="btn btn-sm btn-coral"
                 >
                   Xóa
                 </button>
                 <button
                   type="button"
                   onClick={() => openViewDocument(doc)}
-                  className="rounded-xl bg-slate-100 px-3 py-2 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-200"
+                  className="btn btn-sm btn-outline"
                 >
                   Xem
                 </button>
                 <button
                   type="button"
                   onClick={() => openEditDocument(doc)}
-                  className="rounded-xl bg-blue-50 px-3 py-2 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-100"
+                  className="btn btn-sm btn-primary"
                 >
                   Sửa
                 </button>
@@ -2109,7 +2123,9 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
     <section className="flex flex-col gap-6">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">Speaking</h2>
+          <h2 className="font-display text-3xl font-medium text-ink-900">
+            <span className="marker font-bold">Speaking</span>
+          </h2>
         </div>
         <div className="relative w-full sm:w-64">
           <input
@@ -2117,27 +2133,27 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
             placeholder="Tìm câu hỏi..."
-            className="field-input pr-10"
+            className="field-input rounded-full pr-10"
           />
           <Search
             size={16}
-            className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+            className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-ink-400"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         <aside className="flex flex-col gap-4 lg:col-span-4">
-          <div className="grid grid-cols-3 gap-1 rounded-xl bg-slate-100 p-1">
+          <div className="grid grid-cols-3 gap-1 rounded-full border-[1.5px] border-ink-800 bg-white p-1">
             {SPEAKING_PARTS.map((part) => (
               <button
                 key={part.id}
                 type="button"
                 onClick={() => changePart(part.id)}
-                className={`rounded-lg py-1.5 text-center text-xs font-bold transition-all ${
+                className={`rounded-full py-1.5 text-center text-xs font-extrabold transition-all ${
                   activePart === part.id
-                    ? 'bg-white text-blue-700 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-teal-500 text-white'
+                    : 'text-ink-500 hover:bg-ink-50 hover:text-ink-800'
                 }`}
               >
                 {part.label}
@@ -2146,13 +2162,13 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
           </div>
 
           <div className="flex items-center justify-between">
-            <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400">
+            <h3 className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-ink-400">
               <Compass size={16} /> Chủ đề
             </h3>
             <button
               type="button"
               onClick={() => setTopicModalOpen(true)}
-              className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-colors hover:bg-slate-200"
+              className="icon-btn h-8 w-8 border-ink-800 bg-sun-300 text-ink-900 hover:bg-sun-400"
               title="Thêm chủ đề mới"
             >
               <Plus size={14} />
@@ -2161,7 +2177,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
 
           <div className="flex max-h-[60vh] flex-col gap-2 overflow-y-auto pr-1">
             {activeTopicsList.length === 0 ? (
-              <p className="rounded-xl border border-slate-100 bg-white p-4 text-center text-xs italic text-slate-400">
+              <p className="card-dashed p-4 text-center text-xs font-semibold italic text-ink-400">
                 Chưa có chủ đề nào ở mục này
               </p>
             ) : (
@@ -2177,16 +2193,16 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                     type="button"
                     onClick={() => setSelectedTopicId(topic.id)}
                     title={topic.name}
-                    className={`w-full rounded-xl border-2 px-4 py-3 text-left text-sm font-semibold transition-all ${
+                    className={`w-full rounded-2xl border-[1.5px] px-4 py-3 text-left text-sm font-extrabold transition-all ${
                       isSelected
-                        ? 'border-blue-400 bg-blue-50 text-blue-700 shadow-sm'
-                        : 'border-slate-100 bg-white text-slate-600 hover:border-slate-200 hover:bg-slate-50'
+                        ? 'border-ink-800 bg-teal-100 text-ink-900 shadow-chip'
+                        : 'border-ink-800/20 bg-white text-ink-600 hover:border-ink-800 hover:bg-teal-50'
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
                       <span className="truncate">{topic.name}</span>
                       {totalCount > 0 && (
-                        <span className="shrink-0 rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700">
+                        <span className="shrink-0 rounded-full border-[1.5px] border-ink-800 bg-sun-200 px-1.5 py-0.5 text-[10px] font-extrabold text-ink-900">
                           {completedCount}/{totalCount}
                         </span>
                       )}
@@ -2200,22 +2216,24 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
 
         <div className="lg:col-span-8">
           {!selectedTopic ? (
-            <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-slate-100 bg-white p-12 text-center shadow-sm">
-              <FolderOpen size={40} className="text-slate-300" />
+            <div className="card flex flex-col items-center justify-center gap-4 p-12 text-center">
+              <span className="flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-coral-100 text-ink-800">
+                <FolderOpen size={30} />
+              </span>
               <div>
-                <h4 className="font-bold text-slate-700">
+                <h4 className="font-display text-lg font-bold text-ink-900">
                   Chưa chọn chủ đề nào
                 </h4>
-                <p className="mt-1 text-xs text-slate-400">
+                <p className="mt-1 text-xs font-semibold text-ink-400">
                   Hãy chọn một chủ đề bên trái hoặc tạo chủ đề mới để bắt đầu.
                 </p>
               </div>
             </div>
           ) : (
-            <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-              <div className="mb-5 flex items-center justify-between gap-3 border-b border-slate-100 pb-4">
+            <div className="card p-6">
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b-[1.5px] border-dashed border-ink-800/25 pb-4">
                 <div>
-                  <h3 className="text-xl font-extrabold text-slate-800">
+                  <h3 className="font-display text-2xl font-bold text-ink-900">
                     {selectedTopic.name}
                   </h3>
                 </div>
@@ -2223,23 +2241,23 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                   <button
                     type="button"
                     onClick={() => setQuestionModalOpen(true)}
-                    className="flex items-center gap-1.5 rounded-xl border border-blue-200 px-3 py-1.5 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-50"
+                    className="btn btn-sm btn-outline"
                   >
                     <Plus size={14} /> Thêm câu hỏi
                   </button>
                   <button
                     type="button"
                     onClick={() => deleteTopic(selectedTopic.id)}
-                    className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-300 transition-colors hover:bg-rose-50 hover:text-rose-500"
+                    className="icon-btn icon-btn-coral h-8 w-8"
                     title="Xóa chủ đề"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={15} />
                   </button>
                 </div>
               </div>
 
               {selectedTopic.questions.length === 0 ? (
-                <p className="py-12 text-center text-sm italic text-slate-400">
+                <p className="py-12 text-center text-sm font-semibold italic text-ink-400">
                   Chưa có câu hỏi nào trong chủ đề này. Nhấn &quot;Thêm câu hỏi&quot;
                   để bắt đầu.
                 </p>
@@ -2248,20 +2266,20 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                   {selectedTopic.questions.map((q) => (
                     <div
                       key={q.id}
-                      className={`rounded-2xl border p-4 shadow-sm transition-all ${
+                      className={`rounded-card border-[1.5px] p-4 transition-all ${
                         q.completed
-                          ? 'border-emerald-200 bg-emerald-50/40'
-                          : 'border-slate-200 bg-white'
+                          ? 'border-ink-800 bg-teal-50'
+                          : 'border-ink-800/20 bg-white'
                       }`}
                     >
                       <div className="flex items-start gap-3">
                         <button
                           type="button"
                           onClick={() => toggleQuestionComplete(q.id)}
-                          className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all ${
+                          className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800 transition-all ${
                             q.completed
-                              ? 'border-emerald-600 bg-emerald-500 text-white'
-                              : 'border-slate-300 text-transparent hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-500'
+                              ? 'bg-teal-400 text-white'
+                              : 'bg-white text-transparent hover:bg-sun-100'
                           }`}
                           title={
                             q.completed
@@ -2272,8 +2290,8 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                           <Check size={12} strokeWidth={3} />
                         </button>
                         <p
-                          className={`flex-1 text-[15px] font-semibold leading-relaxed ${
-                            q.completed ? 'text-slate-600' : 'text-slate-800'
+                          className={`flex-1 text-[15px] font-bold leading-relaxed ${
+                            q.completed ? 'text-ink-500' : 'text-ink-900'
                           }`}
                         >
                           {q.text}
@@ -2281,21 +2299,23 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                         <button
                           type="button"
                           onClick={() => deleteQuestion(q.id)}
-                          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-slate-300 transition-colors hover:bg-rose-50 hover:text-rose-500"
+                          className="icon-btn icon-btn-coral h-7 w-7"
                           title="Xóa câu hỏi"
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={13} />
                         </button>
                       </div>
 
-                      <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50/70 p-3">
-                        <div className="mb-2 flex items-center justify-between gap-2 text-[11px] font-bold">
-                          <span className="text-slate-400">Câu trả lời</span>
+                      <div className="mt-4 rounded-2xl border-[1.5px] border-dashed border-ink-800/30 bg-ink-50/60 p-3">
+                        <div className="mb-2 flex items-center justify-between gap-2 text-[11px] font-extrabold">
+                          <span className="uppercase tracking-wider text-ink-400">
+                            Câu trả lời
+                          </span>
                           {savingStates[q.id] === 'saving' && (
-                            <span className="text-amber-500">Đang lưu...</span>
+                            <span className="text-sun-600">Đang lưu...</span>
                           )}
                           {savingStates[q.id] === 'saved' && (
-                            <span className="text-emerald-500">Đã tự lưu</span>
+                            <span className="text-teal-600">Đã tự lưu</span>
                           )}
                         </div>
 
@@ -2305,7 +2325,7 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                             onMouseDown={(event) => event.preventDefault()}
                             onClick={() => applyAnswerFormatting(q.id, 'bold')}
                             title="In đậm phần đã bôi đen"
-                            className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-800"
+                            className="icon-btn h-7 w-7"
                           >
                             <Bold size={14} />
                           </button>
@@ -2313,10 +2333,10 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                             type="button"
                             onMouseDown={(event) => event.preventDefault()}
                             onClick={() =>
-                              applyAnswerFormatting(q.id, 'hiliteColor', '#fef08a')
+                              applyAnswerFormatting(q.id, 'hiliteColor', '#fbd95f')
                             }
                             title="Tô màu phần đã bôi đen"
-                            className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-200 hover:text-slate-800"
+                            className="icon-btn h-7 w-7"
                           >
                             <Highlighter size={14} />
                           </button>
@@ -2350,19 +2370,19 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
       </div>
 
       {topicModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm">
           <form
             onSubmit={submitAddTopic}
-            className="flex w-full max-w-md flex-col gap-4 rounded-2xl bg-white p-6 shadow-2xl"
+            className="flex w-full max-w-md flex-col gap-4 rounded-card border-[1.5px] border-ink-800 bg-paper p-6 shadow-pop"
           >
             <div className="flex items-center justify-between">
-              <h4 className="text-lg font-bold text-slate-800">
+              <h4 className="font-display text-xl font-bold text-ink-900">
                 Thêm chủ đề nói mới
               </h4>
               <button
                 type="button"
                 onClick={() => setTopicModalOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+                className="icon-btn icon-btn-coral h-9 w-9"
               >
                 <X size={18} />
               </button>
@@ -2398,14 +2418,11 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
               <button
                 type="button"
                 onClick={() => setTopicModalOpen(false)}
-                className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
+                className="btn btn-sm btn-outline"
               >
                 Hủy
               </button>
-              <button
-                type="submit"
-                className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-              >
+              <button type="submit" className="btn btn-sm btn-primary">
                 Lưu chủ đề
               </button>
             </div>
@@ -2414,19 +2431,19 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
       )}
 
       {questionModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm">
           <form
             onSubmit={submitAddQuestion}
-            className="flex w-full max-w-md flex-col gap-4 rounded-2xl bg-white p-6 shadow-2xl"
+            className="flex w-full max-w-md flex-col gap-4 rounded-card border-[1.5px] border-ink-800 bg-paper p-6 shadow-pop"
           >
             <div className="flex items-center justify-between">
-              <h4 className="text-lg font-bold text-slate-800">
+              <h4 className="font-display text-xl font-bold text-ink-900">
                 Thêm câu hỏi luyện nói
               </h4>
               <button
                 type="button"
                 onClick={() => setQuestionModalOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+                className="icon-btn icon-btn-coral h-9 w-9"
               >
                 <X size={18} />
               </button>
@@ -2445,14 +2462,11 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
               <button
                 type="button"
                 onClick={() => setQuestionModalOpen(false)}
-                className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
+                className="btn btn-sm btn-outline"
               >
                 Hủy
               </button>
-              <button
-                type="submit"
-                className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-              >
+              <button type="submit" className="btn btn-sm btn-primary">
                 Lưu câu hỏi
               </button>
             </div>
@@ -2470,13 +2484,16 @@ function TestingAnswerRenderer({ text, onWordClick }) {
       {paragraphs.map((para, pi) => {
         const tokens = para.split(/(\w+)/);
         return (
-          <p key={pi} className="mb-3 text-sm leading-relaxed text-slate-700 last:mb-0">
+          <p
+            key={pi}
+            className="mb-3 text-sm font-medium leading-relaxed text-ink-700 last:mb-0"
+          >
             {tokens.map((token, i) => {
               if (i % 2 === 1) {
                 return (
                   <span
                     key={i}
-                    className="cursor-pointer rounded px-px hover:bg-blue-50 hover:text-blue-700"
+                    className="cursor-pointer rounded px-px hover:bg-sun-200 hover:text-ink-900"
                     onClick={(e) => onWordClick(token, e)}
                   >
                     {token}
@@ -2610,8 +2627,10 @@ function TestingView() {
     <section className="flex flex-col gap-6">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">Testing Q&amp;A</h2>
-          <p className="mt-0.5 text-xs text-slate-400">
+          <h2 className="font-display text-3xl font-medium text-ink-900">
+            Testing <span className="marker font-bold">Q&amp;A</span>
+          </h2>
+          <p className="mt-1 text-xs font-semibold text-ink-400">
             {totalQuestions} câu hỏi · {TESTING_DATA.length} sections
           </p>
         </div>
@@ -2621,11 +2640,11 @@ function TestingView() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Tìm câu hỏi..."
-            className="field-input pr-10"
+            className="field-input rounded-full pr-10"
           />
           <Search
             size={16}
-            className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+            className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-ink-400"
           />
         </div>
       </div>
@@ -2634,7 +2653,7 @@ function TestingView() {
         <aside className="lg:col-span-4">
           <div className="flex max-h-[72vh] flex-col gap-1.5 overflow-y-auto pr-1">
             {filteredSections.length === 0 ? (
-              <p className="rounded-xl border border-slate-100 bg-white p-4 text-center text-xs italic text-slate-400">
+              <p className="card-dashed p-4 text-center text-xs font-semibold italic text-ink-400">
                 Không tìm thấy câu hỏi nào
               </p>
             ) : (
@@ -2646,23 +2665,23 @@ function TestingView() {
                     <button
                       type="button"
                       onClick={() => toggleSection(section.id)}
-                      className="flex w-full items-center justify-between gap-2 rounded-xl border border-slate-100 bg-white px-3 py-2.5 text-left transition-colors hover:bg-slate-50"
+                      className="flex w-full items-center justify-between gap-2 rounded-2xl border-[1.5px] border-ink-800/20 bg-white px-3 py-2.5 text-left transition-colors hover:border-ink-800 hover:bg-teal-50"
                     >
                       <div className="flex min-w-0 items-center gap-2">
-                        <span className="shrink-0 rounded bg-blue-50 px-1.5 py-0.5 text-[10px] font-bold text-blue-600">
+                        <span className="shrink-0 rounded-full border-[1.5px] border-ink-800 bg-sun-200 px-1.5 py-0.5 text-[10px] font-extrabold text-ink-900">
                           {origIdx + 1}
                         </span>
-                        <span className="truncate text-xs font-semibold text-slate-700">
+                        <span className="truncate text-xs font-extrabold text-ink-800">
                           {section.title}
                         </span>
                       </div>
                       <div className="flex shrink-0 items-center gap-1.5">
-                        <span className="rounded-full bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-500">
+                        <span className="rounded-full border-[1.5px] border-ink-800/25 px-1.5 py-0.5 text-[10px] font-extrabold text-ink-500">
                           {section.questions.length}
                         </span>
                         <ChevronRight
                           size={13}
-                          className={`text-slate-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                          className={`text-ink-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
                         />
                       </div>
                     </button>
@@ -2675,10 +2694,10 @@ function TestingView() {
                               key={q.id}
                               type="button"
                               onClick={() => selectQuestion(section.id, q.id)}
-                              className={`w-full rounded-lg border-l-2 px-3 py-2 text-left text-xs transition-all ${
+                              className={`w-full rounded-xl border-l-[3px] px-3 py-2 text-left text-xs font-semibold transition-all ${
                                 isSelected
-                                  ? 'border-blue-500 bg-blue-50 font-semibold text-blue-700'
-                                  : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50'
+                                  ? 'border-ink-800 bg-teal-100 font-extrabold text-ink-900'
+                                  : 'border-ink-800/20 bg-white text-ink-600 hover:border-ink-800 hover:bg-ink-50'
                               }`}
                             >
                               <span className="line-clamp-2">{q.question}</span>
@@ -2696,27 +2715,31 @@ function TestingView() {
 
         <div className="lg:col-span-8">
           {!fullSelectedQ ? (
-            <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-slate-100 bg-white p-12 text-center shadow-sm">
-              <FolderOpen size={40} className="text-slate-300" />
+            <div className="card flex flex-col items-center justify-center gap-4 p-12 text-center">
+              <span className="flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sky-100 text-ink-800">
+                <FolderOpen size={30} />
+              </span>
               <div>
-                <h4 className="font-bold text-slate-700">Chưa chọn câu hỏi nào</h4>
-                <p className="mt-1 text-xs text-slate-400">
+                <h4 className="font-display text-lg font-bold text-ink-900">
+                  Chưa chọn câu hỏi nào
+                </h4>
+                <p className="mt-1 text-xs font-semibold text-ink-400">
                   Chọn một câu hỏi từ danh sách bên trái để xem nội dung.
                 </p>
               </div>
             </div>
           ) : (
-            <div className="rounded-2xl border border-slate-100 bg-white shadow-sm">
-              <div className="border-b border-slate-100 px-6 py-4">
-                <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400">
+            <div className="card overflow-hidden">
+              <div className="border-b-[1.5px] border-dashed border-ink-800/25 bg-teal-50 px-6 py-4">
+                <p className="mb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-ink-400">
                   {fullSelectedQ.sectionTitle}
                 </p>
-                <h3 className="text-base font-bold leading-snug text-slate-800">
+                <h3 className="font-display text-lg font-bold leading-snug text-ink-900">
                   {fullSelectedQ.question}
                 </h3>
               </div>
               <div className="px-6 py-5">
-                <p className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                <p className="mb-3 text-[10px] font-extrabold uppercase tracking-wider text-ink-400">
                   Bấm vào bất kỳ từ nào để xem nghĩa tiếng Việt
                 </p>
                 <TestingAnswerRenderer text={fullSelectedQ.answer} onWordClick={handleWordClick} />
@@ -2728,15 +2751,17 @@ function TestingView() {
 
       {tooltip && (
         <div
-          className="fixed z-50 max-w-xs rounded-xl border border-blue-100 bg-white p-3 shadow-xl ring-1 ring-blue-50"
+          className="fixed z-50 max-w-xs rounded-2xl border-[1.5px] border-ink-800 bg-paper p-3 shadow-pop"
           style={{ top: tooltip.y, left: tooltip.x }}
           onClick={(e) => e.stopPropagation()}
         >
-          <p className="mb-1 text-xs font-bold text-blue-700">{tooltip.word}</p>
+          <p className="mb-1 text-xs font-extrabold text-teal-600">{tooltip.word}</p>
           {tooltip.loading ? (
-            <p className="text-xs italic text-slate-400">Đang dịch...</p>
+            <p className="text-xs font-semibold italic text-ink-400">Đang dịch...</p>
           ) : (
-            <p className="text-xs leading-relaxed text-slate-600">{tooltip.translation}</p>
+            <p className="text-xs font-semibold leading-relaxed text-ink-600">
+              {tooltip.translation}
+            </p>
           )}
         </div>
       )}
@@ -2767,20 +2792,21 @@ function SettingsView({
   return (
     <section className="flex flex-col gap-6">
       <div>
-        <h2 className="text-2xl font-bold text-slate-800">Settings</h2>
-        <p className="text-xs text-slate-400">
+        <h2 className="font-display text-3xl font-medium text-ink-900">
+          <span className="marker font-bold">Settings</span>
+        </h2>
+        <p className="mt-1 text-xs font-semibold text-ink-400">
           Lập lịch hàng loạt theo rule, xem lại rule đã tạo và quản lý dữ liệu.
         </p>
       </div>
 
-      <form
-        onSubmit={submit}
-        className="flex flex-col gap-5 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm"
-      >
+      <form onSubmit={submit} className="card flex flex-col gap-5 p-6">
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-          <div className="flex items-center gap-2">
-            <Settings size={18} className="text-blue-600" />
-            <h3 className="font-bold text-slate-700">
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-teal-100 text-ink-800">
+              <Settings size={17} />
+            </span>
+            <h3 className="font-display text-lg font-bold text-ink-900">
               {editingRuleId ? 'Sửa rule lịch học' : 'Tạo lịch tự động'}
             </h3>
           </div>
@@ -2788,7 +2814,7 @@ function SettingsView({
             <button
               type="button"
               onClick={cancelRuleEdit}
-              className="w-max rounded-xl bg-slate-100 px-3 py-2 text-xs font-bold text-slate-600 transition-colors hover:bg-slate-200"
+              className="btn btn-sm btn-outline w-max"
             >
               Hủy sửa
             </button>
@@ -2827,7 +2853,7 @@ function SettingsView({
         </div>
 
         <div>
-          <label className="mb-2 block text-xs font-bold text-slate-500">
+          <label className="mb-2 block text-xs font-extrabold uppercase tracking-wide text-ink-500">
             Chọn thứ trong tuần
           </label>
           <div className="flex flex-wrap gap-2">
@@ -2836,10 +2862,10 @@ function SettingsView({
                 key={day}
                 type="button"
                 onClick={() => toggleWeekday(index)}
-                className={`rounded-xl border px-3 py-2 text-xs font-bold transition-colors ${
+                className={`rounded-full border-[1.5px] px-3.5 py-2 text-xs font-extrabold transition-colors ${
                   bulkTask.weekdays.includes(index)
-                    ? 'border-blue-500 bg-blue-50 text-blue-700'
-                    : 'border-slate-200 bg-white text-slate-500 hover:bg-slate-50'
+                    ? 'border-ink-800 bg-teal-500 text-white shadow-chip'
+                    : 'border-ink-800/25 bg-white text-ink-500 hover:border-ink-800 hover:bg-ink-50'
                 }`}
               >
                 {day}
@@ -2904,34 +2930,35 @@ function SettingsView({
           </Field>
         </div>
 
-        <button
-          type="submit"
-          className="flex w-max items-center gap-2 rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/15 transition-all hover:bg-blue-700"
-        >
+        <button type="submit" className="btn btn-primary w-max">
           <Plus size={16} /> {editingRuleId ? 'Cập nhật rule' : 'Áp dụng lịch'}
         </button>
       </form>
 
-      <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+      <div className="card p-6">
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
           <div>
-            <h3 className="font-bold text-slate-700">Rule hiện tại</h3>
-            <p className="mt-1 text-xs text-slate-400">
+            <h3 className="font-display text-lg font-bold text-ink-900">
+              Rule hiện tại
+            </h3>
+            <p className="mt-1 text-xs font-semibold text-ink-400">
               Tất cả rule đã lưu, kèm trạng thái đã apply vào lịch học.
             </p>
           </div>
-          <span className="w-max rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-600">
+          <span className="w-max rounded-full border-[1.5px] border-ink-800 bg-sun-200 px-3 py-1 text-xs font-extrabold text-ink-900">
             {rules.length} rule
           </span>
         </div>
 
         {rules.length === 0 ? (
-          <div className="mt-5 rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center">
-            <CalendarDays size={32} className="mx-auto mb-2 text-slate-300" />
-            <p className="text-sm font-bold text-slate-600">
+          <div className="card-dashed mt-5 p-6 text-center">
+            <span className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sun-100 text-ink-800">
+              <CalendarDays size={26} />
+            </span>
+            <p className="font-display text-base font-bold text-ink-900">
               Chưa có rule nào được tạo
             </p>
-            <p className="mt-1 text-xs text-slate-400">
+            <p className="mt-1 text-xs font-semibold text-ink-400">
               Sau khi bấm Áp dụng lịch, rule sẽ xuất hiện ở đây để bạn xem, sửa hoặc xóa.
             </p>
           </div>
@@ -2950,16 +2977,14 @@ function SettingsView({
         )}
       </div>
 
-      <div className="rounded-2xl border border-rose-100 bg-white p-6 shadow-sm">
-        <h3 className="font-bold text-slate-700">Quản lý dữ liệu</h3>
-        <p className="mt-1 text-xs text-slate-400">
+      <div className="rounded-card border-[1.5px] border-ink-800 bg-coral-50 p-6 shadow-card">
+        <h3 className="font-display text-lg font-bold text-ink-900">
+          Quản lý dữ liệu
+        </h3>
+        <p className="mt-1 text-xs font-semibold text-ink-400">
           Dữ liệu được lưu trên máy và đồng bộ với server khi có mạng.
         </p>
-        <button
-          type="button"
-          onClick={clearAllData}
-          className="mt-4 flex items-center gap-2 rounded-xl bg-rose-50 px-4 py-2.5 text-sm font-semibold text-rose-600 transition-colors hover:bg-rose-100"
-        >
+        <button type="button" onClick={clearAllData} className="btn btn-coral mt-4">
           <Trash2 size={16} /> Xóa tất cả dữ liệu
         </button>
       </div>
@@ -2976,62 +3001,68 @@ function RuleCard({ rule, isEditing, deleteRule, editRule }) {
 
   return (
     <article
-      className={`rounded-2xl border p-4 ${
-        isEditing ? 'border-blue-300 bg-blue-50' : 'border-slate-100 bg-slate-50/60'
+      className={`rounded-card border-[1.5px] p-4 ${
+        isEditing ? 'border-ink-800 bg-teal-100 shadow-chip' : 'border-ink-800/20 bg-white'
       }`}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="mb-2 flex flex-wrap items-center gap-2">
             <span
-              className={`rounded-full border px-2.5 py-1 text-[10px] font-bold ${styles.badge}`}
+              className={`rounded-full border-[1.5px] px-2.5 py-0.5 text-[10px] font-extrabold ${styles.badge}`}
             >
               {THEME_LABELS[rule.theme] || rule.theme}
             </span>
-            <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700">
+            <span className="rounded-full border-[1.5px] border-dashed border-ink-800/50 px-2.5 py-0.5 text-[10px] font-extrabold text-ink-600">
               Đã apply {rule.appliedCount || 0} buổi
             </span>
           </div>
-          <h4 className="truncate text-sm font-extrabold text-slate-800">
+          <h4 className="truncate font-display text-base font-bold text-ink-900">
             {rule.title}
           </h4>
         </div>
         {isEditing && (
-          <span className="rounded-full bg-blue-600 px-2.5 py-1 text-[10px] font-bold text-white">
+          <span className="shrink-0 rounded-full border-[1.5px] border-ink-800 bg-sun-300 px-2.5 py-0.5 text-[10px] font-extrabold text-ink-900">
             Đang sửa
           </span>
         )}
       </div>
 
-      <dl className="mt-3 grid grid-cols-1 gap-2 text-xs text-slate-500 sm:grid-cols-2">
+      <dl className="mt-3 grid grid-cols-1 gap-2 text-xs text-ink-500 sm:grid-cols-2">
         <div>
-          <dt className="font-bold text-slate-400">Khoảng ngày</dt>
-          <dd className="mt-0.5 text-slate-700">
+          <dt className="text-[10px] font-extrabold uppercase tracking-wide text-ink-400">
+            Khoảng ngày
+          </dt>
+          <dd className="mt-0.5 font-bold text-ink-800">
             {rule.startDate} - {rule.endDate}
           </dd>
         </div>
         <div>
-          <dt className="font-bold text-slate-400">Thời gian</dt>
-          <dd className="mt-0.5 text-slate-700">{timeText}</dd>
+          <dt className="text-[10px] font-extrabold uppercase tracking-wide text-ink-400">
+            Thời gian
+          </dt>
+          <dd className="mt-0.5 font-bold text-ink-800">{timeText}</dd>
         </div>
         <div className="sm:col-span-2">
-          <dt className="font-bold text-slate-400">Thứ áp dụng</dt>
-          <dd className="mt-0.5 text-slate-700">{weekdayText}</dd>
+          <dt className="text-[10px] font-extrabold uppercase tracking-wide text-ink-400">
+            Thứ áp dụng
+          </dt>
+          <dd className="mt-0.5 font-bold text-ink-800">{weekdayText}</dd>
         </div>
       </dl>
 
-      <div className="mt-4 flex justify-end gap-2 border-t border-slate-200/70 pt-3">
+      <div className="mt-4 flex justify-end gap-2 border-t-[1.5px] border-dashed border-ink-800/25 pt-3">
         <button
           type="button"
           onClick={() => editRule(rule)}
-          className="rounded-xl bg-white px-3 py-2 text-xs font-bold text-blue-600 shadow-sm ring-1 ring-slate-200 transition-colors hover:bg-blue-50"
+          className="btn btn-sm btn-outline"
         >
           Sửa
         </button>
         <button
           type="button"
           onClick={() => deleteRule(rule.id)}
-          className="rounded-xl bg-rose-50 px-3 py-2 text-xs font-bold text-rose-600 transition-colors hover:bg-rose-100"
+          className="btn btn-sm btn-coral"
         >
           Xóa
         </button>
@@ -3042,14 +3073,16 @@ function RuleCard({ rule, isEditing, deleteRule, editRule }) {
 
 function AddTaskModal({ newTask, setNewTask, close, submit }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-5">
-          <h3 className="font-bold text-slate-800">Thêm nhiệm vụ học tập</h3>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm">
+      <div className="w-full max-w-lg overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop">
+        <div className="flex items-center justify-between border-b-[1.5px] border-ink-800/20 bg-teal-50 p-5">
+          <h3 className="font-display text-xl font-bold text-ink-900">
+            Thêm nhiệm vụ học tập
+          </h3>
           <button
             type="button"
             onClick={close}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+            className="icon-btn icon-btn-coral h-9 w-9"
           >
             <X size={18} />
           </button>
@@ -3133,17 +3166,10 @@ function AddTaskModal({ newTask, setNewTask, close, submit }) {
             />
           </Field>
           <div className="flex justify-end gap-2 pt-2">
-            <button
-              type="button"
-              onClick={close}
-              className="rounded-xl bg-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-200"
-            >
+            <button type="button" onClick={close} className="btn btn-sm btn-outline">
               Hủy
             </button>
-            <button
-              type="submit"
-              className="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/15 transition-colors hover:bg-blue-700"
-            >
+            <button type="submit" className="btn btn-sm btn-primary">
               Thêm nhiệm vụ
             </button>
           </div>
@@ -3171,35 +3197,37 @@ function FullNoteModal({ draft, setDraft, close, save }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
-      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
-          <h3 className="font-bold text-slate-800">Soạn ghi chú</h3>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm">
+      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop">
+        <div className="flex items-center justify-between border-b-[1.5px] border-ink-800/20 bg-teal-50 p-4">
+          <h3 className="font-display text-xl font-bold text-ink-900">
+            Soạn ghi chú
+          </h3>
           <button
             type="button"
             onClick={close}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+            className="icon-btn icon-btn-coral h-9 w-9"
           >
             <X size={18} />
           </button>
         </div>
 
-        <div className="flex items-center gap-1 border-b border-slate-100 bg-white px-4 py-2">
+        <div className="flex items-center gap-1.5 border-b-[1.5px] border-dashed border-ink-800/25 bg-white px-4 py-2">
           <button
             type="button"
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('bold')}
             title="In đậm phần đã bôi đen"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+            className="icon-btn h-8 w-8"
           >
             <Bold size={16} />
           </button>
           <button
             type="button"
             onMouseDown={(event) => event.preventDefault()}
-            onClick={() => applyFormatting('hiliteColor', '#fef08a')}
+            onClick={() => applyFormatting('hiliteColor', '#fbd95f')}
             title="Tô màu phần đã bôi đen"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+            className="icon-btn h-8 w-8"
           >
             <Highlighter size={16} />
           </button>
@@ -3219,22 +3247,14 @@ function FullNoteModal({ draft, setDraft, close, save }) {
           onInput={(event) => setDraft(event.currentTarget.innerHTML)}
           onPaste={handlePaste}
           data-placeholder="Viết ghi chú ở đây... Bôi đen chữ rồi bấm nút để in đậm/tô màu."
-          className="rich-note-cell min-h-0 flex-1 overflow-y-auto p-5 text-sm leading-relaxed outline-none"
+          className="rich-note-cell min-h-0 flex-1 overflow-y-auto p-5 text-sm font-medium leading-relaxed outline-none"
         />
 
-        <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
-          <button
-            type="button"
-            onClick={close}
-            className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
-          >
+        <div className="flex justify-end gap-2 border-t-[1.5px] border-dashed border-ink-800/25 p-4">
+          <button type="button" onClick={close} className="btn btn-sm btn-outline">
             Đóng
           </button>
-          <button
-            type="button"
-            onClick={save}
-            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-          >
+          <button type="button" onClick={save} className="btn btn-sm btn-primary">
             Lưu ghi chú
           </button>
         </div>
@@ -3266,21 +3286,21 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
-      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
-          <h3 className="font-bold text-slate-800">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm">
+      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop">
+        <div className="flex items-center justify-between border-b-[1.5px] border-ink-800/20 bg-teal-50 p-4">
+          <h3 className="font-display text-xl font-bold text-ink-900">
             {isEditing ? 'Sửa tài liệu' : 'Tạo tài liệu mới'}
           </h3>
           <button
             type="button"
             onClick={close}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+            className="icon-btn icon-btn-coral h-9 w-9"
           >
             <X size={18} />
           </button>
         </div>
-        <div className="border-b border-slate-100 p-4">
+        <div className="border-b-[1.5px] border-dashed border-ink-800/25 p-4">
           <input
             type="text"
             value={draft.title}
@@ -3292,22 +3312,22 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
           />
         </div>
 
-        <div className="flex items-center gap-1 border-b border-slate-100 bg-white px-4 py-2">
+        <div className="flex items-center gap-1.5 border-b-[1.5px] border-dashed border-ink-800/25 bg-white px-4 py-2">
           <button
             type="button"
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('bold')}
             title="In đậm phần đã bôi đen"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+            className="icon-btn h-8 w-8"
           >
             <Bold size={16} />
           </button>
           <button
             type="button"
             onMouseDown={(event) => event.preventDefault()}
-            onClick={() => applyFormatting('hiliteColor', '#fef08a')}
+            onClick={() => applyFormatting('hiliteColor', '#fbd95f')}
             title="Tô màu phần đã bôi đen"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-800"
+            className="icon-btn h-8 w-8"
           >
             <Highlighter size={16} />
           </button>
@@ -3330,22 +3350,14 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
           }}
           onPaste={handlePaste}
           data-placeholder="Dán hoặc soạn nội dung tài liệu ở đây... Bôi đen chữ rồi bấm nút để in đậm/tô màu."
-          className="rich-note-cell min-h-0 flex-1 overflow-y-auto p-5 text-sm leading-relaxed outline-none"
+          className="rich-note-cell min-h-0 flex-1 overflow-y-auto p-5 text-sm font-medium leading-relaxed outline-none"
         />
 
-        <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
-          <button
-            type="button"
-            onClick={close}
-            className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
-          >
+        <div className="flex justify-end gap-2 border-t-[1.5px] border-dashed border-ink-800/25 p-4">
+          <button type="button" onClick={close} className="btn btn-sm btn-outline">
             Đóng
           </button>
-          <button
-            type="button"
-            onClick={save}
-            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
-          >
+          <button type="button" onClick={save} className="btn btn-sm btn-primary">
             Lưu tài liệu
           </button>
         </div>
@@ -3358,40 +3370,38 @@ function DocumentViewModal({ doc, close, edit }) {
   if (!doc) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-sm">
-      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50 p-4">
-          <h3 className="truncate font-bold text-slate-800">{doc.title}</h3>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm">
+      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop">
+        <div className="flex items-center justify-between gap-3 border-b-[1.5px] border-ink-800/20 bg-teal-50 p-4">
+          <h3 className="truncate font-display text-xl font-bold text-ink-900">
+            {doc.title}
+          </h3>
           <button
             type="button"
             onClick={close}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
+            className="icon-btn icon-btn-coral h-9 w-9"
           >
             <X size={18} />
           </button>
         </div>
         <div className="flex-1 overflow-y-auto p-6">
           <div
-            className="study-note-preview text-sm leading-relaxed text-slate-700"
+            className="study-note-preview text-sm leading-relaxed text-ink-700"
             dangerouslySetInnerHTML={{
               __html: doc.content
                 ? renderNoteHtml(doc.content)
-                : '<span class="text-slate-400 italic">Tài liệu chưa có nội dung.</span>',
+                : '<span class="text-ink-400 italic">Tài liệu chưa có nội dung.</span>',
             }}
           />
         </div>
-        <div className="flex justify-end gap-2 border-t border-slate-100 p-4">
-          <button
-            type="button"
-            onClick={close}
-            className="rounded-xl bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-200"
-          >
+        <div className="flex justify-end gap-2 border-t-[1.5px] border-dashed border-ink-800/25 p-4">
+          <button type="button" onClick={close} className="btn btn-sm btn-outline">
             Đóng
           </button>
           <button
             type="button"
             onClick={() => edit(doc)}
-            className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            className="btn btn-sm btn-primary"
           >
             Sửa
           </button>
@@ -3404,7 +3414,7 @@ function DocumentViewModal({ doc, close, edit }) {
 function MiniCalendar({ cells, data, selectedDate, selectDate }) {
   return (
     <div className="p-6">
-      <div className="mb-4 grid grid-cols-7 gap-y-2 text-center text-xs font-bold uppercase tracking-widest text-slate-400">
+      <div className="mb-4 grid grid-cols-7 gap-y-2 text-center text-xs font-extrabold uppercase tracking-widest text-ink-400">
         {WEEKDAY_SHORT.map((day) => (
           <div key={day}>{day}</div>
         ))}
@@ -3417,27 +3427,27 @@ function MiniCalendar({ cells, data, selectedDate, selectDate }) {
           const today = isSameDate(cell.date, new Date());
           const dot =
             stats.total === 0
-              ? 'bg-slate-200'
+              ? 'bg-ink-200'
               : stats.completed === stats.total
-                ? 'bg-emerald-400'
-                : 'bg-amber-400';
+                ? 'bg-teal-400'
+                : 'bg-sun-400';
           return (
             <button
               key={cell.key}
               type="button"
               onClick={() => selectDate(cell.date)}
-              className={`relative flex h-11 items-center justify-center rounded-xl text-sm font-medium transition-all ${
+              className={`relative flex h-11 items-center justify-center rounded-full border-[1.5px] text-sm font-bold transition-all ${
                 selected
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+                  ? 'border-ink-800 bg-teal-500 text-white shadow-chip'
                   : today
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'bg-slate-50/20 text-slate-700 hover:bg-slate-100'
+                    ? 'border-ink-800 bg-sun-300 text-ink-900'
+                    : 'border-transparent text-ink-700 hover:border-ink-800/30 hover:bg-teal-50'
               } ${cell.muted ? 'opacity-40' : ''}`}
             >
               {cell.day}
               {stats.total > 0 && (
                 <span
-                  className={`absolute bottom-1 h-1 w-1 rounded-full ${selected ? 'bg-white' : dot}`}
+                  className={`absolute bottom-1 h-1.5 w-1.5 rounded-full ${selected ? 'bg-white' : dot}`}
                 />
               )}
             </button>
@@ -3450,22 +3460,22 @@ function MiniCalendar({ cells, data, selectedDate, selectDate }) {
 
 function MonthControls({ changeMonth, labels = false }) {
   return (
-    <div className="flex gap-1.5">
+    <div className="flex gap-2">
       <button
         type="button"
         onClick={() => changeMonth(-1)}
-        className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white p-2 text-slate-600 transition-all hover:bg-slate-50"
+        className="icon-btn h-9 gap-2 border-ink-800 px-2.5 hover:bg-coral-100"
       >
-        <ChevronLeft size={14} />
-        {labels && <span className="hidden text-xs font-semibold sm:inline">Tháng trước</span>}
+        <ChevronLeft size={15} />
+        {labels && <span className="hidden text-xs font-extrabold sm:inline">Tháng trước</span>}
       </button>
       <button
         type="button"
         onClick={() => changeMonth(1)}
-        className="flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white p-2 text-slate-600 transition-all hover:bg-slate-50"
+        className="icon-btn h-9 gap-2 border-ink-800 px-2.5 hover:bg-coral-100"
       >
-        {labels && <span className="hidden text-xs font-semibold sm:inline">Tháng sau</span>}
-        <ChevronRight size={14} />
+        {labels && <span className="hidden text-xs font-extrabold sm:inline">Tháng sau</span>}
+        <ChevronRight size={15} />
       </button>
     </div>
   );
@@ -3474,7 +3484,7 @@ function MonthControls({ changeMonth, labels = false }) {
 function LegendDot({ color, label }) {
   return (
     <div className="flex items-center gap-2">
-      <span className={`h-3 w-3 rounded-full ${color}`} />
+      <span className={`h-3.5 w-3.5 rounded-full border-[1.5px] border-ink-800 ${color}`} />
       <span>{label}</span>
     </div>
   );
@@ -3483,7 +3493,7 @@ function LegendDot({ color, label }) {
 function Field({ label, children }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-xs font-bold text-slate-500">
+      <span className="mb-1.5 block text-xs font-extrabold uppercase tracking-wide text-ink-500">
         {label}
       </span>
       {children}

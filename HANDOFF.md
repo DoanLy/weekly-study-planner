@@ -23,7 +23,20 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Master Notes: sắp xếp ghi chú mới thêm/sửa lên đầu (mới nhất)
+### Thay toàn bộ UI style sang phong cách "sticker" teal/vàng/coral (mới nhất)
+Người dùng gửi 1 ảnh mockup app học tiếng Anh và yêu cầu: **giữ nguyên 100% tính năng, chỉ đổi UI style theo ảnh**; giữ nguyên layout desktop hiện tại (không bóp về mobile); làm hết một lượt rồi mới review.
+
+Đặc điểm style mới: nền kem, thẻ bo góc lớn + **viền mảnh 1.5px màu đậm** kiểu sticker + bóng mềm, nút dạng viên thuốc (chính = teal đặc, phụ = viền nét đứt), chấm/đường phân cách nét đứt, nhãn pill viền đậm, gạch highlight vàng dưới từ khóa tiêu đề, font bo tròn.
+
+- [tailwind.config.js](tailwind.config.js): thêm bảng màu mới `ink` (đen-xanh làm màu viền/chữ), `teal` (ghi đè teal mặc định), `sun`, `coral`, `sky`, `cream`, `paper`; thêm `fontFamily.sans = Nunito`, `fontFamily.display = Baloo 2`; `borderRadius.card = 1.375rem`; shadow `card`/`pop`/`chip`.
+- [index.html](index.html): thêm link Google Fonts (Nunito + Baloo 2, có subset tiếng Việt).
+- [src/index.css](src/index.css): thêm `@layer components` gồm `.card`, `.card-soft`, `.card-dashed`, `.btn` + biến thể (`.btn-primary/.btn-outline/.btn-sun/.btn-soft/.btn-coral/.btn-sm`), `.icon-btn`, `.icon-btn-coral`, `.pill`, `.progress-track`, `.progress-fill`; class `.marker` (gradient vàng kiểu bút dạ quang); đổi `.field-input` + `.study-note-preview` sang bảng màu mới.
+- [src/App.jsx](src/App.jsx): rewrite className toàn bộ các view/modal (sidebar, Dashboard, Calendar, Tasks, TaskCard, Notes, Documents, Speaking, Testing, Settings, RuleCard, 5 modal, MiniCalendar, MonthControls, LegendDot, Field). `THEME_STYLES` **giữ nguyên key** (`orange/purple/blue/teal/slate` — đây là giá trị lưu trong DB) nhưng đổi class bên trong sang bảng màu mới (orange→sun, purple→coral, blue→sky, teal→teal, slate→ink). Màu highlight của nút "tô màu" trong editor đổi `#fef08a` → `#fbd95f`.
+- **Không đụng tới logic**: không sửa state, hàm xử lý, `localStorage`, `/api/data`, cấu trúc dữ liệu. `grep` xác nhận không còn class màu cũ (`slate-/blue-/indigo-/rose-/amber-/emerald-/purple-/orange-`) trong `src/App.jsx`.
+- [.claude/launch.json](.claude/launch.json): thêm cấu hình thứ 2 `weekly-study-planner-ui-only` (`npm run dev`, port 5174) — **chạy Vite thuần, không có `/api/*` nên không kết nối DB thật**, dùng cho các lần chỉ cần kiểm tra giao diện. Cấu hình `vercel dev` cũ (port 5173, có DB thật) vẫn giữ nguyên.
+- Đã verify: `npm run build` pass; chạy `weekly-study-planner-ui-only` và click qua đủ 8 tab (Dashboard/Calendar/Tasks/Notes/Documents/Speaking/Testing/Settings) — không có lỗi console, app không unmount; mở + đóng modal "Thêm mục mới" OK; computed style xác nhận nền `#F4F2EE`, font Nunito đã load, nút chính bo tròn 9999px nền `#2F978F`, thẻ bo 22px viền `#1B2E31`, thanh tiến độ viền nét đứt + fill vàng `#FBD95F`, `.marker` có gradient vàng. **Chưa chụp được ảnh màn hình** do Browser pane không hiển thị trong phiên này.
+
+### Master Notes: sắp xếp ghi chú mới thêm/sửa lên đầu
 Người dùng muốn ở trang Master Notes (`NotesView`), note nào mới được thêm/sửa gần nhất thì hiển thị đầu tiên — trước đó danh sách chỉ sort theo ngày của task tăng dần (`allStoredTasks`), nên note thêm sau nhưng gắn ngày cũ hơn vẫn bị chìm xuống dưới.
 
 - Thêm field mới `noteUpdatedAt` (ISO timestamp) trên task, set ở 3 chỗ ghi note: `createTask()` ([src/App.jsx:213](src/App.jsx:213), khi tạo task mới kèm note luôn), `updateTask()` ([src/App.jsx:758](src/App.jsx:758), khi patch có key `note` — dùng cho ô textarea sửa nhanh inline trong `TaskCard`), `saveFullNote()` ([src/App.jsx:904](src/App.jsx:904), khi lưu từ modal "Soạn ghi chú").

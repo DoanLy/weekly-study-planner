@@ -4,10 +4,100 @@
 
 body {
   margin: 0;
+  background-color: #f4f2ee;
+  font-family:
+    'Nunito',
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  /* ---- Khối nền dạng "sticker": bo góc lớn + viền mảnh đậm + bóng mềm ---- */
+  .card {
+    @apply rounded-card border-[1.5px] border-ink-800 bg-paper shadow-card;
+  }
+
+  .card-soft {
+    @apply rounded-card border-[1.5px] border-ink-800/20 bg-paper;
+  }
+
+  .card-dashed {
+    @apply rounded-card border-[1.5px] border-dashed border-ink-800/40 bg-white/60;
+  }
+
+  /* ---- Nút bấm dạng viên thuốc ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] px-4 py-2.5 text-sm font-extrabold transition-all duration-150 active:translate-y-px;
+  }
+
+  .btn-sm {
+    @apply gap-1.5 px-3 py-1.5 text-xs;
+  }
+
+  .btn-primary {
+    @apply border-ink-800 bg-teal-500 text-white shadow-chip hover:bg-teal-600;
+  }
+
+  .btn-outline {
+    @apply border-dashed border-ink-800 bg-transparent text-ink-700 hover:bg-ink-50;
+  }
+
+  .btn-sun {
+    @apply border-ink-800 bg-sun-300 text-ink-900 shadow-chip hover:bg-sun-400;
+  }
+
+  .btn-soft {
+    @apply border-ink-800/25 bg-ink-50 text-ink-600 hover:border-ink-800/60 hover:bg-ink-100;
+  }
+
+  .btn-coral {
+    @apply border-ink-800 bg-coral-200 text-ink-900 hover:bg-coral-300;
+  }
+
+  /* ---- Nút icon tròn ---- */
+  .icon-btn {
+    @apply flex shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800/25 bg-white text-ink-500 transition-all hover:border-ink-800 hover:text-ink-800;
+  }
+
+  .icon-btn-coral {
+    @apply border-ink-800 bg-coral-200 text-ink-800 hover:bg-coral-300;
+  }
+
+  /* ---- Nhãn/pill nhỏ ---- */
+  .pill {
+    @apply inline-flex items-center gap-1 rounded-full border-[1.5px] border-ink-800 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide;
+  }
+
+  .pill-lg {
+    @apply px-3 py-1 text-xs normal-case tracking-normal;
+  }
+
+  /* ---- Thanh tiến độ nét đứt ---- */
+  .progress-track {
+    @apply h-3 w-full overflow-hidden rounded-full border-[1.5px] border-dashed border-ink-800/40 bg-white;
+  }
+
+  .progress-fill {
+    @apply h-full rounded-full bg-sun-300 transition-all duration-500;
+  }
+}
+
+/* ---- Gạch highlight vàng dưới từ khóa (kiểu bút dạ quang) ---- */
+.marker {
+  background-image: linear-gradient(
+    to top,
+    rgba(251, 217, 95, 0.85) 0,
+    rgba(251, 217, 95, 0.85) 0.42em,
+    transparent 0.42em
+  );
+  padding: 0 0.1em;
 }
 
 .rich-note-cell:empty::before {
-  color: #94a3b8;
+  color: #a1b6b8;
   content: attr(data-placeholder);
   pointer-events: none;
 }
@@ -19,19 +109,27 @@ body {
 
 .field-input {
   width: 100%;
-  border-radius: 0.75rem;
-  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  border: 1.5px solid rgba(27, 46, 49, 0.25);
+  background: #ffffff;
   padding: 0.625rem 1rem;
   font-size: 0.875rem;
+  font-weight: 600;
+  color: #122123;
   outline: none;
   transition:
     border-color 150ms ease,
     box-shadow 150ms ease;
 }
 
+.field-input::placeholder {
+  font-weight: 500;
+  color: #a1b6b8;
+}
+
 .field-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgb(37 99 235 / 0.15);
+  border-color: #1b2e31;
+  box-shadow: 0 0 0 3px rgba(47, 151, 143, 0.22);
 }
 
 .study-note-preview {
@@ -45,21 +143,21 @@ body {
 }
 
 .study-note-preview strong {
-  color: #1e40af;
+  color: #1c625e;
   font-weight: 800;
 }
 
 .study-note-preview code {
-  border-radius: 0.375rem;
-  background: #f1f5f9;
+  border-radius: 0.5rem;
+  background: #eaf7f5;
   padding: 0.1rem 0.35rem;
-  color: #be123c;
+  color: #ce4f46;
   font-size: 0.85em;
 }
 
 .study-note-preview mark {
-  border-radius: 0.25rem;
-  background: #fef08a;
+  border-radius: 0.35rem;
+  background: #fbd95f;
   padding: 0.05rem 0.25rem;
   color: inherit;
 }
