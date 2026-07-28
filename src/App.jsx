@@ -1641,7 +1641,7 @@ function TaskCard({
             </span>
             <h3
               className={`font-display text-xl font-bold ${
-                task.completed ? 'text-ink-400 line-through' : styles.text
+                task.completed ? 'text-ink-400' : styles.text
               }`}
             >
               {task.title}

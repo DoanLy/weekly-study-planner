@@ -23,7 +23,13 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Tasks: gộp icon + tiêu đề thành 1 hàng, dời giờ học xuống footer card (mới nhất)
+### Tasks: task hoàn thành chỉ làm mờ tiêu đề, bỏ gạch ngang (mới nhất)
+Người dùng không thích tiêu đề bị gạch ngang (`line-through`) khi tick hoàn thành — chỉ cần làm mờ chữ.
+
+- [src/App.jsx:1644](src/App.jsx:1644) (`TaskCard`): class khi `task.completed` đổi từ `'text-ink-400 line-through'` → `'text-ink-400'`. Đây là chỗ duy nhất trong `src/App.jsx` dùng `line-through`.
+- Đã verify qua `weekly-study-planner-ui-only-b` (cổng 5176, không chạm DB thật): tick hoàn thành → `textDecorationLine: "none"`, màu chữ chuyển sang xám mờ `rgb(114, 137, 140)`, badge footer đổi thành "Đã hoàn tất"; bỏ tick thì trở lại "Chờ hoàn tất". Không lỗi console, `npm run build` pass.
+
+### Tasks: gộp icon + tiêu đề thành 1 hàng, dời giờ học xuống footer card
 Tiếp theo thay đổi bên dưới, người dùng gửi thêm 1 ảnh mockup: icon tròn nằm bên trái, tiêu đề nằm ngay cạnh trên cùng 1 hàng, không còn pill giờ ở đầu card. Hỏi lại thì người dùng chọn phương án **đưa giờ học xuống dòng "Lĩnh vực" ở cuối card**.
 
 - [src/App.jsx:1637](src/App.jsx:1637) (`TaskCard`): khối header giờ là 1 `div` flex chứa icon tròn (`h-9 w-9`, icon `size={16}`, có `shrink-0`) + `<h3>` tiêu đề. Bỏ hẳn hàng badge giờ ở đầu card.
