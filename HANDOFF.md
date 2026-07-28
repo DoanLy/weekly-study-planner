@@ -23,7 +23,15 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Tasks: đưa tiêu đề nhiệm vụ lên trên hàng badge giờ/icon (mới nhất)
+### Tasks: gộp icon + tiêu đề thành 1 hàng, dời giờ học xuống footer card (mới nhất)
+Tiếp theo thay đổi bên dưới, người dùng gửi thêm 1 ảnh mockup: icon tròn nằm bên trái, tiêu đề nằm ngay cạnh trên cùng 1 hàng, không còn pill giờ ở đầu card. Hỏi lại thì người dùng chọn phương án **đưa giờ học xuống dòng "Lĩnh vực" ở cuối card**.
+
+- [src/App.jsx:1637](src/App.jsx:1637) (`TaskCard`): khối header giờ là 1 `div` flex chứa icon tròn (`h-9 w-9`, icon `size={16}`, có `shrink-0`) + `<h3>` tiêu đề. Bỏ hẳn hàng badge giờ ở đầu card.
+- Footer card: `Lĩnh vực: ...` và giờ học (icon `Clock` + `task.time`) nằm cùng 1 span flex-wrap (`gap-x-2.5 gap-y-1`); giờ chỉ render khi `task.time` có giá trị.
+- Thêm import `Clock` từ `lucide-react`. `THEME_STYLES[...].badge` **vẫn còn dùng** ở chỗ khác ([src/App.jsx:3013](src/App.jsx:3013), card rule trong Settings) nên không xoá key này.
+- Đã verify qua `weekly-study-planner-ui-only-b` (cổng 5176, Vite thuần, không chạm DB thật): cả 3 card đều có icon nằm trái tiêu đề trên cùng 1 hàng (tâm lệch < 6px, icon 36×36), footer hiển thị đúng `Lĩnh vực: ... | <giờ>` (vd `Lĩnh vực: Chuyên môn 10:00 - 12:00`), không lỗi console; `npm run build` pass. **Vẫn không chụp được ảnh màn hình** (Browser pane không hiển thị trong phiên này).
+
+### Tasks: đưa tiêu đề nhiệm vụ lên trên hàng badge giờ/icon
 Người dùng gửi ảnh chụp 1 card trong menu Tasks, khoanh đỏ tiêu đề ("Học listening theo sách Collin") và yêu cầu chỉnh tiêu đề lên trên — trước đó hàng badge (giờ học + icon môn) nằm ở dòng đầu, tiêu đề nằm dưới.
 
 - [src/App.jsx:1637](src/App.jsx:1637) (`TaskCard`): đảo thứ tự trong khối `.min-w-0` — `<h3>` tiêu đề lên đầu, khối badge giờ + icon xuống dưới; class của khối badge đổi `mb-3` → `mt-3` để khoảng cách vẫn 12px. Không đụng logic, không đổi gì khác.

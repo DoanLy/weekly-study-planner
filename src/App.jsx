@@ -13,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Circle,
+  Clock,
   Code2,
   Compass,
   Expand,
@@ -1634,24 +1635,17 @@ function TaskCard({
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <h3
-            className={`font-display text-xl font-bold ${
-              task.completed ? 'text-ink-400 line-through' : styles.text
-            }`}
-          >
-            {task.title}
-          </h3>
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            {task.time && (
-              <span
-                className={`rounded-full border-[1.5px] px-3 py-0.5 text-xs font-extrabold ${styles.badge}`}
-              >
-                {task.time}
-              </span>
-            )}
-            <span className="flex h-7 w-7 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-white">
-              <Icon size={14} className={styles.accent} />
+          <div className="flex items-center gap-2.5">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-white">
+              <Icon size={16} className={styles.accent} />
             </span>
+            <h3
+              className={`font-display text-xl font-bold ${
+                task.completed ? 'text-ink-400 line-through' : styles.text
+              }`}
+            >
+              {task.title}
+            </h3>
           </div>
         </div>
 
@@ -1733,11 +1727,18 @@ function TaskCard({
       </div>
 
       <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] font-semibold text-ink-400">
-        <span className="flex items-center gap-1.5">
-          <Icon size={12} /> Lĩnh vực:{' '}
-          {['orange', 'purple'].includes(task.theme)
-            ? 'IELTS English'
-            : 'Chuyên môn'}
+        <span className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+          <span className="flex items-center gap-1.5">
+            <Icon size={12} /> Lĩnh vực:{' '}
+            {['orange', 'purple'].includes(task.theme)
+              ? 'IELTS English'
+              : 'Chuyên môn'}
+          </span>
+          {task.time && (
+            <span className="flex items-center gap-1.5">
+              <Clock size={12} /> {task.time}
+            </span>
+          )}
         </span>
         {task.completed ? (
           <span className="flex items-center gap-1 rounded-full border-[1.5px] border-ink-800 bg-teal-200 px-2.5 py-0.5 font-extrabold text-ink-900">
