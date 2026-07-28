@@ -23,7 +23,14 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Thay toàn bộ UI style sang phong cách "sticker" teal/vàng/coral (mới nhất)
+### Tasks: đưa tiêu đề nhiệm vụ lên trên hàng badge giờ/icon (mới nhất)
+Người dùng gửi ảnh chụp 1 card trong menu Tasks, khoanh đỏ tiêu đề ("Học listening theo sách Collin") và yêu cầu chỉnh tiêu đề lên trên — trước đó hàng badge (giờ học + icon môn) nằm ở dòng đầu, tiêu đề nằm dưới.
+
+- [src/App.jsx:1637](src/App.jsx:1637) (`TaskCard`): đảo thứ tự trong khối `.min-w-0` — `<h3>` tiêu đề lên đầu, khối badge giờ + icon xuống dưới; class của khối badge đổi `mb-3` → `mt-3` để khoảng cách vẫn 12px. Không đụng logic, không đổi gì khác.
+- Đã verify bằng `weekly-study-planner-ui-only-b` (Vite thuần, cổng 5176, KHÔNG có `/api/*` nên không chạm DB thật): thứ tự DOM trong card là `H3` → `DIV` badge, vị trí h3 top 907.5 / badge top 975.5 (cách 12px), không có lỗi console. **Không chụp được ảnh màn hình** vì Browser pane không hiển thị trong phiên này (viewport 0x0, không compositing frame) — hạn chế môi trường đã gặp ở phiên trước.
+- [.claude/launch.json](.claude/launch.json): thêm cấu hình thứ 3 `weekly-study-planner-ui-only-b` (cổng 5176) để chạy được preview khi cổng 5174 đang bị phiên chat khác chiếm.
+
+### Thay toàn bộ UI style sang phong cách "sticker" teal/vàng/coral
 Người dùng gửi 1 ảnh mockup app học tiếng Anh và yêu cầu: **giữ nguyên 100% tính năng, chỉ đổi UI style theo ảnh**; giữ nguyên layout desktop hiện tại (không bóp về mobile); làm hết một lượt rồi mới review.
 
 Đặc điểm style mới: nền kem, thẻ bo góc lớn + **viền mảnh 1.5px màu đậm** kiểu sticker + bóng mềm, nút dạng viên thuốc (chính = teal đặc, phụ = viền nét đứt), chấm/đường phân cách nét đứt, nhãn pill viền đậm, gạch highlight vàng dưới từ khóa tiêu đề, font bo tròn.

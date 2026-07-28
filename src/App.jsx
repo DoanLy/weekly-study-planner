@@ -1634,7 +1634,14 @@ function TaskCard({
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <div className="mb-3 flex flex-wrap items-center gap-2">
+          <h3
+            className={`font-display text-xl font-bold ${
+              task.completed ? 'text-ink-400 line-through' : styles.text
+            }`}
+          >
+            {task.title}
+          </h3>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
             {task.time && (
               <span
                 className={`rounded-full border-[1.5px] px-3 py-0.5 text-xs font-extrabold ${styles.badge}`}
@@ -1646,13 +1653,6 @@ function TaskCard({
               <Icon size={14} className={styles.accent} />
             </span>
           </div>
-          <h3
-            className={`font-display text-xl font-bold ${
-              task.completed ? 'text-ink-400 line-through' : styles.text
-            }`}
-          >
-            {task.title}
-          </h3>
         </div>
 
         <div className="flex items-center gap-2">
