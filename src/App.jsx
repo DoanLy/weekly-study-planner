@@ -1890,6 +1890,13 @@ function DocumentsView({
   openViewDocument,
   openNewDocument,
 }) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const query = searchQuery.trim().toLowerCase();
+  const filteredDocuments = useMemo(() => {
+    if (!query) return documents;
+    return documents.filter((doc) => doc.title.toLowerCase().includes(query));
+  }, [documents, query]);
+
   return (
     <section className="flex flex-col gap-6">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -1902,9 +1909,24 @@ function DocumentsView({
             danh sách từ vựng, hoặc bất kỳ ghi chú dài nào cần tra cứu lại.
           </p>
         </div>
-        <button type="button" onClick={openNewDocument} className="btn btn-primary">
-          <Plus size={16} /> Tạo tài liệu mới
-        </button>
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+          <div className="relative w-full sm:w-64">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Tìm theo tiêu đề..."
+              className="field-input rounded-full pr-10"
+            />
+            <Search
+              size={16}
+              className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-ink-400"
+            />
+          </div>
+          <button type="button" onClick={openNewDocument} className="btn btn-primary">
+            <Plus size={16} /> Tạo tài liệu mới
+          </button>
+        </div>
       </div>
 
       {documents.length === 0 ? (
@@ -1919,9 +1941,21 @@ function DocumentsView({
             Bấm &quot;Tạo tài liệu mới&quot; để bắt đầu lưu trữ nội dung học tập.
           </p>
         </div>
+      ) : filteredDocuments.length === 0 ? (
+        <div className="card p-12 text-center">
+          <span className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-teal-100 text-ink-800">
+            <Search size={30} />
+          </span>
+          <h4 className="font-display text-lg font-bold text-ink-900">
+            Không tìm thấy tài liệu nào
+          </h4>
+          <p className="mt-1 text-xs font-semibold text-ink-400">
+            Thử tìm với từ khóa khác trong tiêu đề.
+          </p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {documents.map((doc) => (
+          {filteredDocuments.map((doc) => (
             <div
               key={doc.id}
               className="card flex flex-col justify-between p-5 transition-transform hover:-translate-y-0.5"

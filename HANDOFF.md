@@ -23,7 +23,15 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Tasks: task hoàn thành chỉ làm mờ tiêu đề, bỏ gạch ngang (mới nhất)
+### Documents: thêm ô tìm kiếm theo tiêu đề (mới nhất)
+Người dùng muốn ở menu Documents có thể search tài liệu theo tiêu đề (trước đó chỉ có danh sách card, không lọc được).
+
+- `DocumentsView` ([src/App.jsx:1886](src/App.jsx:1886)): thêm state `searchQuery` + `filteredDocuments` (`useMemo`, lọc `doc.title` theo `includes()` không phân biệt hoa/thường). Ô input đặt cạnh nút "Tạo tài liệu mới", cùng pattern UI với ô search ở Testing/Speaking (`field-input rounded-full`, icon `Search` lucide).
+- Thêm empty-state riêng khi search không ra kết quả ("Không tìm thấy tài liệu nào") — khác với empty-state gốc khi chưa có tài liệu nào.
+- Đã verify qua `weekly-study-planner-ui-only-b` (cổng 5176, Vite thuần, không chạm DB thật): tạo 2 tài liệu test ("Speaking Part 1 Questions", "Vocabulary List Unit 5"), gõ "vocab" chỉ lọc đúng 1 kết quả, gõ từ khoá không khớp ra đúng empty-state "Không tìm thấy tài liệu nào". Không lỗi console.
+- **Lưu ý gặp lại**: gõ phím `Delete`/`ctrl+a` qua Browser pane vào input React-controlled không đáng tin (giống bug đã ghi nhận trước đây) — phải dùng `form_input` để set giá trị trực tiếp mới verify được logic chính xác.
+
+### Tasks: task hoàn thành chỉ làm mờ tiêu đề, bỏ gạch ngang
 Người dùng không thích tiêu đề bị gạch ngang (`line-through`) khi tick hoàn thành — chỉ cần làm mờ chữ.
 
 - [src/App.jsx:1644](src/App.jsx:1644) (`TaskCard`): class khi `task.completed` đổi từ `'text-ink-400 line-through'` → `'text-ink-400'`. Đây là chỗ duy nhất trong `src/App.jsx` dùng `line-through`.
