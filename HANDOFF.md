@@ -4,6 +4,8 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 **Quy tắc chuẩn cho project này: luôn cập nhật file này TRƯỚC MỖI LẦN `git push`.**
 
+**Quy tắc thứ hai: mỗi khi đã làm xong TẤT CẢ yêu cầu của người dùng trong phiên (không còn việc gì dở dang), phải tự động `git push` code lên GitHub — không cần người dùng nhắc lại.**
+
 ## Thông tin project
 
 - Local source: `C:\Users\lenovo\Documents\Codex\2026-06-02\b-n-c-n-nh-app\work\weekly-study-planner`
