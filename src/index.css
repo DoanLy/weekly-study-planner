@@ -162,6 +162,108 @@ body {
   color: inherit;
 }
 
+/* ---- Tiêu đề + danh sách trong editor và preview ----
+   Tailwind preflight xoá hết font-size/font-weight của h1-h6 và
+   list-style/padding của ul/ol, nên nút "Cỡ chữ" (H1/H2/H3) cùng 2 nút danh
+   sách trong toolbar Documents áp đúng thẻ nhưng nhìn y hệt văn bản thường —
+   trông như nút bị hỏng. Khai báo lại ở đây cho cả lúc soạn
+   (.rich-note-cell) và lúc xem (.study-note-preview). */
+.rich-note-cell h1,
+.rich-note-cell h2,
+.rich-note-cell h3,
+.study-note-preview h1,
+.study-note-preview h2,
+.study-note-preview h3 {
+  margin: 0.9rem 0 0.4rem;
+  font-family:
+    'Baloo 2',
+    'Nunito',
+    'Segoe UI',
+    system-ui,
+    sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #122123;
+}
+
+.rich-note-cell h1,
+.study-note-preview h1 {
+  font-size: 1.5rem;
+}
+
+.rich-note-cell h2,
+.study-note-preview h2 {
+  font-size: 1.25rem;
+}
+
+.rich-note-cell h3,
+.study-note-preview h3 {
+  font-size: 1.0625rem;
+}
+
+.rich-note-cell > :first-child,
+.study-note-preview > :first-child {
+  margin-top: 0;
+}
+
+.rich-note-cell ul,
+.rich-note-cell ol,
+.study-note-preview ul,
+.study-note-preview ol {
+  margin: 0.45rem 0;
+  padding-left: 1.65rem;
+  list-style-position: outside;
+}
+
+.rich-note-cell ul,
+.study-note-preview ul {
+  list-style-type: disc;
+}
+
+.rich-note-cell ol,
+.study-note-preview ol {
+  list-style-type: decimal;
+}
+
+.rich-note-cell ul ul,
+.study-note-preview ul ul {
+  list-style-type: circle;
+}
+
+.rich-note-cell ul ul ul,
+.study-note-preview ul ul ul {
+  list-style-type: square;
+}
+
+.rich-note-cell ol ol,
+.study-note-preview ol ol {
+  list-style-type: lower-alpha;
+}
+
+.rich-note-cell ol ol ol,
+.study-note-preview ol ol ol {
+  list-style-type: lower-roman;
+}
+
+.rich-note-cell li,
+.study-note-preview li {
+  margin: 0.15rem 0;
+}
+
+/* Danh sách lồng nhau không cần thêm khoảng cách trên/dưới của chính nó. */
+.rich-note-cell li > ul,
+.rich-note-cell li > ol,
+.study-note-preview li > ul,
+.study-note-preview li > ol {
+  margin: 0.15rem 0;
+}
+
+.rich-note-cell li::marker,
+.study-note-preview li::marker {
+  color: #2f978f;
+  font-weight: 800;
+}
+
 .rich-note-cell table,
 .study-note-preview table {
   border-collapse: collapse;

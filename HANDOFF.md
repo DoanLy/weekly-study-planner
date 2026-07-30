@@ -25,7 +25,30 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Sửa 2 nút danh sách trong toolbar Documents + nút "Tạo tài liệu mới" bị xuống hàng (mới nhất)
+### Sửa thật 3 nút toolbar Documents "không dùng được": thiếu CSS cho h1-h3 và ul/ol (mới nhất)
+Người dùng gửi lại đúng ảnh khoanh đỏ 3 nút như phiên trước (dropdown "Cỡ chữ", danh sách dấu đầu dòng, danh sách đánh số) và báo vẫn "bị lỗi không sử dụng được". Phiên trước kết luận sai rằng dropdown "Cỡ chữ" không có bug và đã sửa xong 2 nút danh sách — vì lúc đó chỉ verify bằng cách **đọc `innerHTML`** (thấy thẻ đúng thì cho là xong), không đo xem nó **hiển thị** ra sao.
+
+**Nguyên nhân gốc (chung cho cả 3 nút): Tailwind preflight.** `@tailwind base` reset:
+- `h1..h6 { font-size: inherit; font-weight: inherit; }` → bấm H1/H2/H3 áp đúng thẻ nhưng render **y hệt** `<p>`.
+- `ul, ol { list-style: none; margin: 0; padding: 0; }` → `<ul>/<ol>` sinh ra **không có dấu đầu dòng, không có số, không thụt lề**.
+
+Trong [src/index.css](src/index.css) trước đây **không có** rule nào khai lại font-size/weight cho `h1-h3` hay `list-style/padding` cho `ul/ol` trong `.rich-note-cell` / `.study-note-preview` (chỉ có rule cho `table`, `strong`, `code`, `mark`). Nên `execCommand` chạy đúng, HTML lưu đúng, mà mắt người dùng thấy **không có gì thay đổi** → đúng nghĩa "nút bị lỗi".
+
+Đã đo tận tay để chứng minh (trước khi sửa, click thật qua `computer` tool): bấm H1 lên 1 `<p>` → ra `<h1>` nhưng `fontSize` vẫn `14px`, `fontWeight` vẫn `500`, chiều cao vẫn `23px` — **giống hệt** `<p>` bên dưới. Bấm nút danh sách → ra `<div><ul><li>...</li></ul></div>` (fix `<div>` của phiên trước hoạt động tốt) nhưng `listStyleType: "none"`, `paddingLeft: "0px"`, `li` nằm ở đúng x = 318px, **bằng chính x của đoạn văn thường**.
+
+- **Sửa** ([src/index.css](src/index.css), khối CSS mới ngay trước phần `table`): khai lại cho cả `.rich-note-cell` (lúc soạn) và `.study-note-preview` (lúc xem/preview card):
+  - `h1/h2/h3` → font `Baloo 2` (font `display` của app), `font-weight: 700`, màu `#122123`, cỡ `1.5rem / 1.25rem / 1.0625rem`, `margin: 0.9rem 0 0.4rem`; thêm `> :first-child { margin-top: 0 }` để dòng đầu không bị thụt xuống.
+  - `ul/ol` → `padding-left: 1.65rem`, `list-style-position: outside`, `disc` / `decimal`; danh sách lồng nhau: `ul ul` → `circle`, `ul ul ul` → `square`, `ol ol` → `lower-alpha`, `ol ol ol` → `lower-roman`; `li { margin: 0.15rem 0 }`; `li::marker` màu teal `#2f978f` + `font-weight: 800` cho khớp style app.
+- **Đã verify bằng click thật** (`computer` tool, `weekly-study-planner-ui-only` cổng 5174, Vite thuần nên KHÔNG chạm DB thật) sau khi reload full trang:
+  - H1 = 24px/700/Baloo 2 (cao 31px) vs `<p>` = 14px/500 (cao 23px) → khác biệt rõ mắt thường.
+  - H1 → H2 (20px) → H3 (17px) → "Văn bản thường" (`<p>` 14px/500) round-trip đúng, HTML về lại `<p>` sạch.
+  - Nút dấu đầu dòng: `listStyleType: disc`, `paddingLeft: 26.4px`, `li` thụt 27px so với đoạn thường, `::marker` màu `rgb(47, 151, 143)`. Nút đánh số: `decimal`, cùng thụt lề.
+  - Lưu tài liệu → card preview (`.study-note-preview`) và modal "Xem" đều render đúng H1 24px + `disc`/`decimal` + marker teal. Không lỗi console. `npm run build` pass.
+- **Ảnh hưởng phụ (lành tính, đã kiểm)**: note cũ dạng markdown render qua `formatNoteHtml()` ra `<ul class="list-disc pl-5 space-y-1">` — rule mới `.study-note-preview ul` (2 class) thắng `.pl-5` (1 class) nên thụt lề đổi `20px → 26.4px`, cho đồng bộ với list của editor; `space-y-1` vẫn thắng cho khoảng cách giữa `li` (4px), không vỡ gì.
+- Đã xoá tài liệu test tự tạo khỏi `localStorage` của cổng 5174, dừng server và xác nhận không còn process `node` nào.
+- **Bài học quan trọng**: trong project này (Tailwind có preflight), verify tính năng định dạng **không được chỉ đọc `innerHTML`** — phải đo `getComputedStyle` / `getBoundingClientRect` để chắc là nó thật sự **hiển thị khác đi**. Thẻ đúng ≠ nhìn thấy đúng.
+
+### Sửa 2 nút danh sách trong toolbar Documents + nút "Tạo tài liệu mới" bị xuống hàng
 Người dùng gửi ảnh khoanh đỏ 3 nút trong toolbar `DocumentModal` (dropdown "Cỡ chữ", danh sách dấu đầu dòng, danh sách đánh số) báo "bị lỗi không sử dụng được". Kiểm tra qua `weekly-study-planner-ui-only` (cổng 5174, Vite thuần, không chạm DB thật):
 
 - **Dropdown "Cỡ chữ" thực ra vẫn hoạt động đúng** — không có bug. Chỉ là lúc đầu tôi test bằng `button.click()` qua JS (không kích hoạt được React onClick trong môi trường Browser pane này), test lại bằng click thật (`computer` tool / người dùng) thì áp H1/H2/H3/Văn bản thường đúng như mong đợi.
