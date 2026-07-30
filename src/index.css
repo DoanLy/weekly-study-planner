@@ -164,10 +164,11 @@ body {
 
 /* ---- Tiêu đề + danh sách trong editor và preview ----
    Tailwind preflight xoá hết font-size/font-weight của h1-h6 và
-   list-style/padding của ul/ol, nên nút "Cỡ chữ" (H1/H2/H3) cùng 2 nút danh
-   sách trong toolbar Documents áp đúng thẻ nhưng nhìn y hệt văn bản thường —
-   trông như nút bị hỏng. Khai báo lại ở đây cho cả lúc soạn
-   (.rich-note-cell) và lúc xem (.study-note-preview). */
+   list-style/padding của ul/ol, nên 2 nút danh sách trong toolbar Documents áp
+   đúng thẻ nhưng nhìn y hệt văn bản thường — trông như nút bị hỏng. Khai báo
+   lại ở đây cho cả lúc soạn (.rich-note-cell) và lúc xem
+   (.study-note-preview). Phần h1-h3 vẫn cần giữ dù toolbar không còn nút tiêu
+   đề: tài liệu cũ và nội dung dán từ Word/web vẫn có thể chứa các thẻ này. */
 .rich-note-cell h1,
 .rich-note-cell h2,
 .rich-note-cell h3,

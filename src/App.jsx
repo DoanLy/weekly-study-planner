@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import TESTING_DATA from './testing-data.json';
 import { TESTING_GLOSSARY } from './testing-glossary.js';
 import {
+  AArrowDown,
+  AArrowUp,
   AlignCenter,
   AlignLeft,
   AlignRight,
@@ -3353,21 +3355,16 @@ function FullNoteModal({ draft, setDraft, close, save }) {
   );
 }
 
+/* Các bậc cỡ chữ (px) cho 2 nút tăng/giảm trong toolbar Documents. */
+const FONT_SIZE_STEPS = [12, 14, 16, 18, 20, 24, 28, 32, 40, 48];
+
+/* execCommand('fontSize') chỉ nhận 1-7 và sinh ra <font size="n">. Dùng 7 làm
+   dấu tạm để tìm lại đúng các đoạn vừa được bọc, rồi thay bằng <span> có
+   font-size px cụ thể. */
+const FONT_SIZE_MARKER = '7';
+
 function DocumentModal({ draft, isEditing, setDraft, close, save }) {
   const editorRef = useRef(null);
-  const sizeMenuRef = useRef(null);
-  const [sizeMenuOpen, setSizeMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (!sizeMenuOpen) return undefined;
-    function handleClickOutside(event) {
-      if (sizeMenuRef.current && !sizeMenuRef.current.contains(event.target)) {
-        setSizeMenuOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [sizeMenuOpen]);
 
   function applyFormatting(command, value) {
     const el = editorRef.current;
@@ -3384,9 +3381,70 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
     setDraft((current) => ({ ...current, content: el.innerHTML }));
   }
 
-  function applyBlock(tag) {
-    applyFormatting('formatBlock', tag);
-    setSizeMenuOpen(false);
+  /* Tăng/giảm cỡ chữ phần đang bôi đen 1 bậc. Nếu chưa bôi đen gì thì áp cho cả
+     dòng (block) đang có con trỏ, để bấm nút lúc nào cũng thấy kết quả. */
+  function changeFontSize(step) {
+    const el = editorRef.current;
+    if (!el) return;
+    el.focus();
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return;
+    if (!el.contains(selection.getRangeAt(0).startContainer)) return;
+
+    if (selection.isCollapsed) {
+      let block = selection.getRangeAt(0).startContainer;
+      while (block && block.parentNode !== el) {
+        block = block.parentNode;
+      }
+      if (!block) return;
+      const blockRange = document.createRange();
+      blockRange.selectNodeContents(block);
+      selection.removeAllRanges();
+      selection.addRange(blockRange);
+    }
+
+    const range = selection.getRangeAt(0);
+    let startNode = range.startContainer;
+    if (startNode.nodeType === Node.ELEMENT_NODE) {
+      // Sau mỗi lần bấm, vùng chọn bao trọn <span> vừa tạo nên startContainer là
+      // thẻ cha; phải đi xuống node con ở vị trí bắt đầu mới đọc ra cỡ chữ thật,
+      // không thì lần bấm thứ hai lại đọc cỡ của thẻ cha và áp lại y cỡ cũ.
+      startNode = startNode.childNodes[range.startOffset] || startNode;
+    }
+    if (startNode.nodeType === Node.TEXT_NODE) startNode = startNode.parentNode;
+    const currentSize = parseFloat(window.getComputedStyle(startNode).fontSize);
+    const nextSize =
+      step > 0
+        ? FONT_SIZE_STEPS.find((size) => size > currentSize + 0.5)
+        : FONT_SIZE_STEPS.filter((size) => size < currentSize - 0.5).pop();
+    if (!nextSize) return; // đã ở bậc lớn nhất/nhỏ nhất
+
+    document.execCommand('fontSize', false, FONT_SIZE_MARKER);
+    const spans = Array.from(
+      el.querySelectorAll(`font[size="${FONT_SIZE_MARKER}"]`)
+    ).map((font) => {
+      const span = document.createElement('span');
+      span.style.fontSize = `${nextSize}px`;
+      while (font.firstChild) span.appendChild(font.firstChild);
+      // Cỡ chữ đặt sẵn ở bên trong sẽ đè lên cỡ mới nên phải bỏ đi.
+      span.querySelectorAll('[style*="font-size"]').forEach((inner) => {
+        inner.style.fontSize = '';
+        if (!inner.getAttribute('style')) inner.removeAttribute('style');
+      });
+      font.replaceWith(span);
+      return span;
+    });
+
+    // Giữ lại vùng bôi đen để bấm tăng/giảm liên tiếp vẫn tác dụng lên cùng đoạn.
+    if (spans.length > 0) {
+      const newRange = document.createRange();
+      newRange.setStartBefore(spans[0]);
+      newRange.setEndAfter(spans[spans.length - 1]);
+      selection.removeAllRanges();
+      selection.addRange(newRange);
+    }
+
+    setDraft((current) => ({ ...current, content: el.innerHTML }));
   }
 
   function clearFormatting() {
@@ -3495,56 +3553,24 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5 border-y-[1.5px] border-dashed border-ink-800/25 bg-white px-4 py-2">
-          <div className="relative" ref={sizeMenuRef}>
-            <button
-              type="button"
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => setSizeMenuOpen((open) => !open)}
-              title="Cỡ chữ / tiêu đề"
-              className="icon-btn h-8 gap-0.5 px-2"
-            >
-              <span className="text-[10px] font-black leading-none">A</span>
-              <span className="text-sm font-black leading-none">A</span>
-              <ChevronDown size={12} />
-            </button>
-            {sizeMenuOpen && (
-              <div className="absolute left-0 top-full z-10 mt-1.5 w-48 overflow-hidden rounded-2xl border-[1.5px] border-ink-800 bg-white py-1 shadow-pop">
-                <button
-                  type="button"
-                  onMouseDown={(event) => event.preventDefault()}
-                  onClick={() => applyBlock('H1')}
-                  className="block w-full px-4 py-2 text-left font-display text-lg font-bold text-ink-900 hover:bg-teal-50"
-                >
-                  Tiêu đề lớn (H1)
-                </button>
-                <button
-                  type="button"
-                  onMouseDown={(event) => event.preventDefault()}
-                  onClick={() => applyBlock('H2')}
-                  className="block w-full px-4 py-2 text-left font-display text-base font-bold text-ink-900 hover:bg-teal-50"
-                >
-                  Tiêu đề vừa (H2)
-                </button>
-                <button
-                  type="button"
-                  onMouseDown={(event) => event.preventDefault()}
-                  onClick={() => applyBlock('H3')}
-                  className="block w-full px-4 py-2 text-left font-display text-sm font-bold text-ink-900 hover:bg-teal-50"
-                >
-                  Tiêu đề nhỏ (H3)
-                </button>
-                <div className="my-1 h-px bg-ink-800/15" />
-                <button
-                  type="button"
-                  onMouseDown={(event) => event.preventDefault()}
-                  onClick={() => applyBlock('P')}
-                  className="block w-full px-4 py-2 text-left text-sm font-medium text-ink-600 hover:bg-teal-50"
-                >
-                  Văn bản thường
-                </button>
-              </div>
-            )}
-          </div>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => changeFontSize(1)}
+            title="Tăng cỡ chữ"
+            className="icon-btn h-8 w-8"
+          >
+            <AArrowUp size={17} />
+          </button>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => changeFontSize(-1)}
+            title="Giảm cỡ chữ"
+            className="icon-btn h-8 w-8"
+          >
+            <AArrowDown size={17} />
+          </button>
 
           <div className="mx-0.5 h-5 w-px bg-ink-800/15" />
 

@@ -25,7 +25,30 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Sửa thật 3 nút toolbar Documents "không dùng được": thiếu CSS cho h1-h3 và ul/ol (mới nhất)
+### Documents: bỏ dropdown tiêu đề H1/H2/H3, đổi thành 2 nút tăng/giảm cỡ chữ (mới nhất)
+Ngay sau khi sửa CSS ở phần dưới, người dùng gửi ảnh dropdown "Cỡ chữ" (đã hiện ra menu H1/H2/H3/Văn bản thường) và yêu cầu **bỏ hẳn tính năng tiêu đề lớn/vừa/nhỏ, đổi thành tăng/giảm font size**.
+
+- [src/App.jsx](src/App.jsx) — `DocumentModal`:
+  - Xoá hẳn dropdown: state `sizeMenuOpen`, ref `sizeMenuRef`, `useEffect` bắt `mousedown` để đóng menu, hàm `applyBlock()`, và toàn bộ JSX menu 4 mục. Thay bằng **2 nút** `AArrowUp` / `AArrowDown` (lucide) — tiêu đề "Tăng cỡ chữ" / "Giảm cỡ chữ" — đặt đúng vị trí cũ ở đầu toolbar.
+  - Hàm mới `changeFontSize(step)` + 2 hằng module-level: `FONT_SIZE_STEPS = [12, 14, 16, 18, 20, 24, 28, 32, 40, 48]` (px, cỡ mặc định của editor là 14px) và `FONT_SIZE_MARKER = '7'`.
+  - **Cách hoạt động**: `execCommand('fontSize')` chỉ nhận giá trị 1-7 (cỡ cố định kiểu HTML cổ) nên không dùng trực tiếp được. Cách làm: gọi `execCommand('fontSize', false, '7')` để Chrome tự bọc **đúng** các đoạn đang chọn trong `<font size="7">` (kể cả selection cắt ngang nhiều thẻ), rồi tự tay thay từng `<font size="7">` thành `<span style="font-size: Npx">`. Đây là cách chuẩn để có cỡ chữ px tuỳ ý mà vẫn nhờ được Chrome xử lý phần chia selection.
+  - Sau khi bọc, **strip mọi `font-size` inline nằm bên trong** span mới (`span.querySelectorAll('[style*="font-size"]')`) — nếu không, cỡ cũ ở thẻ con sẽ đè lên cỡ mới và nút trông như không có tác dụng (vd khi bôi đen vùng có nhiều cỡ khác nhau).
+  - Sau đó **set lại vùng bôi đen** trùm các span vừa tạo, để bấm tăng/giảm liên tiếp vẫn tác dụng lên cùng đoạn (không phải bôi đen lại mỗi lần).
+  - **Không bôi đen gì** (chỉ có con trỏ) thì tự mở rộng vùng chọn ra **cả dòng** (block là con trực tiếp của editor) rồi mới áp — để bấm nút lúc nào cũng thấy kết quả, giống hành vi cũ của dropdown tiêu đề.
+  - Chạm bậc nhỏ nhất/lớn nhất thì `changeFontSize` return sớm, không sinh thẻ rác.
+- **Bug đã gặp và sửa ngay trong lúc verify**: lần bấm đầu đúng (14→16) nhưng bấm lần 2, lần 3 **không đổi gì** (kẹt ở 16px). Nguyên nhân: sau lần bấm đầu, vùng chọn được set bằng `setStartBefore(span)`/`setEndAfter(span)` nên `range.startContainer` là **thẻ cha `<p>`** (element node), không phải text node — `getComputedStyle(startContainer)` trả về 14px của `<p>` thay vì 16px của span, nên nó tính "bậc tiếp theo sau 14" = 16 và áp lại y cỡ cũ. Sửa: nếu `startContainer` là element thì đi xuống `startContainer.childNodes[range.startOffset]` trước khi đọc computed style.
+- [src/index.css](src/index.css): **giữ nguyên** CSS cho `h1-h3` (chỉ sửa comment) — toolbar không còn nút tiêu đề nhưng tài liệu cũ và nội dung dán từ Word/web vẫn có thể chứa `<h1>/<h2>/<h3>`, bỏ CSS đi thì các tài liệu đó vỡ định dạng.
+- **Đã verify bằng click thật** (`computer` tool, `weekly-study-planner-ui-only` cổng 5174, Vite thuần nên KHÔNG chạm DB thật):
+  - Tăng liên tiếp: 14 → 16 → 18 → 20 → 24, HTML luôn sạch (`<p><span style="font-size: 24px;">…</span></p>`), **0 span lồng nhau, 0 thẻ `<font>` sót lại**, vùng bôi đen được giữ sau mỗi lần bấm.
+  - Giảm liên tiếp: 24 → 20 → 18. Bấm giảm quá 4 lần từ 16 → dừng đúng ở 12px (bậc nhỏ nhất), không crash, không sinh markup rác.
+  - Không bôi đen, chỉ đặt con trỏ giữa dòng → cả dòng đó tăng 14 → 16 và dòng được select lại để bấm tiếp.
+  - Bôi đen vùng có 2 cỡ khác nhau (18px + 12px) → cả 2 về cùng 20px (1 bậc trên cỡ ở đầu vùng chọn), không còn span lồng.
+  - Lưu tài liệu → `content` trong localStorage đúng `font-size: 20px`, card preview render đúng 20px; mở lại "Sửa" seed đúng 20px và bấm tăng tiếp ra 24px.
+  - Kết hợp với nút khác: In đậm trên đoạn 24px → `<span style="font-size:24px"><b>…</b></span>` (giữ cả 2); "Xóa định dạng" reset về 14px sạch; nút danh sách trên đoạn 20px vẫn ra `<ul><li>` có bullet teal và giữ cỡ 20px.
+  - Không lỗi console; `npm run build` pass; `grep` xác nhận không còn sót tham chiếu `sizeMenu`/`applyBlock`/text menu cũ.
+- Đã xoá tài liệu test khỏi `localStorage` cổng 5174, dừng server, xác nhận không còn process `node`.
+
+### Sửa thật 3 nút toolbar Documents "không dùng được": thiếu CSS cho h1-h3 và ul/ol
 Người dùng gửi lại đúng ảnh khoanh đỏ 3 nút như phiên trước (dropdown "Cỡ chữ", danh sách dấu đầu dòng, danh sách đánh số) và báo vẫn "bị lỗi không sử dụng được". Phiên trước kết luận sai rằng dropdown "Cỡ chữ" không có bug và đã sửa xong 2 nút danh sách — vì lúc đó chỉ verify bằng cách **đọc `innerHTML`** (thấy thẻ đúng thì cho là xong), không đo xem nó **hiển thị** ra sao.
 
 **Nguyên nhân gốc (chung cho cả 3 nút): Tailwind preflight.** `@tailwind base` reset:
