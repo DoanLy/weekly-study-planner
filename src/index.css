@@ -105,6 +105,9 @@ body {
 .rich-note-cell,
 .study-note-preview {
   white-space: pre-wrap;
+  /* Chuỗi dài không có dấu cách (link Google Drive...) phải tự ngắt dòng, không
+     thì nó tràn ngang ra ngoài khung — nhất là trên màn hình hẹp. */
+  overflow-wrap: break-word;
 }
 
 .field-input {

@@ -3734,8 +3734,8 @@ function DocumentViewModal({ doc, close, edit }) {
   if (!doc) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm">
-      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-2 backdrop-blur-sm sm:p-4">
+      <div className="flex h-[95vh] w-[96vw] max-w-[100rem] flex-col overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop">
         <div className="flex items-center justify-between gap-3 border-b-[1.5px] border-ink-800/20 bg-teal-50 p-4">
           <h3 className="truncate font-display text-xl font-bold text-ink-900">
             {doc.title}
@@ -3748,7 +3748,7 @@ function DocumentViewModal({ doc, close, edit }) {
             <X size={18} />
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-6 md:p-8">
           <div
             className="study-note-preview text-sm leading-relaxed text-ink-700"
             dangerouslySetInnerHTML={{

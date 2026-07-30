@@ -25,7 +25,21 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Documents: bỏ dropdown tiêu đề H1/H2/H3, đổi thành 2 nút tăng/giảm cỡ chữ (mới nhất)
+### Documents: mở rộng modal "Xem tài liệu" gần full màn hình (mới nhất)
+Người dùng gửi ảnh modal `DocumentViewModal` (tài liệu "Link video học tiếng anh" — toàn link Google Drive dài) và yêu cầu "chỉnh chế độ xem tài liệu to hơn, gần full màn hình cũng được".
+
+- `DocumentViewModal` ([src/App.jsx:3733](src/App.jsx:3733)): khung đổi `h-[82vh] w-full max-w-2xl` → `h-[95vh] w-[96vw] max-w-[100rem]`; lớp overlay `p-4` → `p-2 sm:p-4` (mobile lấy thêm chỗ); vùng nội dung `p-6` → `p-6 md:p-8`. Đặt `max-w-[100rem]` (1600px) để trên màn hình rất rộng không bị kéo dòng chữ dài quá khó đọc.
+- **Việc phát sinh phát hiện lúc test**: link dài không có dấu cách (link Google Drive) **tràn ngang** ra ngoài khung nội dung trên màn hình hẹp (`scrollWidth > clientWidth`) — lỗi có sẵn từ trước, không phải do lần đổi này (khung cũ hẹp hơn nên còn tệ hơn). Sửa trong [src/index.css](src/index.css): thêm `overflow-wrap: break-word` vào rule dùng chung `.rich-note-cell, .study-note-preview` — áp cho cả editor và mọi chỗ preview (Documents, Notes, Tasks, Speaking).
+- **Chỉ đổi modal Xem** theo đúng yêu cầu; modal `DocumentModal` (Sửa) vẫn giữ `max-w-2xl` (672×590) như cũ — chưa đổi vì người dùng chỉ nói "chế độ xem".
+- Đã verify bằng click thật (`weekly-study-planner-ui-only` cổng 5174, Vite thuần nên KHÔNG chạm DB thật), dùng 1 tài liệu test dựng đúng kiểu nội dung trong ảnh (nhãn + 5 link Drive dài):
+  - 1280×720: khung 1229×684 = **96% × 95%** viewport; cả 5 link nằm gọn **1 dòng** (23px/dòng) và toàn bộ nội dung **không cần scroll** nữa (ảnh người dùng gửi thì có scrollbar).
+  - 1920×1080: khung 1600×1026 = 83% × 95% (bị chặn bởi `max-w-[100rem]`, đúng ý định).
+  - 375×812 (mobile): khung 359×771, footer vẫn thấy, **không tràn ngang** cả ở cấp trang lẫn trong khung nội dung; link dài tự ngắt thành 2 dòng (46px) thay vì tràn ra ngoài — trước khi thêm `overflow-wrap` thì `contentOverflowX = true`.
+  - Nút "Sửa" trong footer vẫn mở đúng modal Sửa; editor cũng nhận `overflow-wrap: break-word`, không tràn ngang.
+- **Lưu ý**: console có 2 warning React `Encountered two children with the same key, s1q10` — do `src/testing-data.json` có **2 câu hỏi trùng id `s1q10`** (lỗi dữ liệu có sẵn, không liên quan thay đổi này, thuộc menu Testing). Đã tách ra thành việc riêng, chưa sửa trong phiên này.
+- Đã xoá tài liệu test khỏi `localStorage` cổng 5174, dừng server, xác nhận không còn process `node`; `npm run build` pass.
+
+### Documents: bỏ dropdown tiêu đề H1/H2/H3, đổi thành 2 nút tăng/giảm cỡ chữ
 Ngay sau khi sửa CSS ở phần dưới, người dùng gửi ảnh dropdown "Cỡ chữ" (đã hiện ra menu H1/H2/H3/Văn bản thường) và yêu cầu **bỏ hẳn tính năng tiêu đề lớn/vừa/nhỏ, đổi thành tăng/giảm font size**.
 
 - [src/App.jsx](src/App.jsx) — `DocumentModal`:
