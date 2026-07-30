@@ -30,7 +30,7 @@ body {
 
   /* ---- Nút bấm dạng viên thuốc ---- */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border-[1.5px] px-4 py-2.5 text-sm font-extrabold transition-all duration-150 active:translate-y-px;
+    @apply inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border-[1.5px] px-4 py-2.5 text-sm font-extrabold transition-all duration-150 active:translate-y-px;
   }
 
   .btn-sm {

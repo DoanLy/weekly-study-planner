@@ -25,7 +25,19 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Documents: bổ sung toolbar soạn thảo đầy đủ (mới nhất)
+### Sửa 2 nút danh sách trong toolbar Documents + nút "Tạo tài liệu mới" bị xuống hàng (mới nhất)
+Người dùng gửi ảnh khoanh đỏ 3 nút trong toolbar `DocumentModal` (dropdown "Cỡ chữ", danh sách dấu đầu dòng, danh sách đánh số) báo "bị lỗi không sử dụng được". Kiểm tra qua `weekly-study-planner-ui-only` (cổng 5174, Vite thuần, không chạm DB thật):
+
+- **Dropdown "Cỡ chữ" thực ra vẫn hoạt động đúng** — không có bug. Chỉ là lúc đầu tôi test bằng `button.click()` qua JS (không kích hoạt được React onClick trong môi trường Browser pane này), test lại bằng click thật (`computer` tool / người dùng) thì áp H1/H2/H3/Văn bản thường đúng như mong đợi.
+- **2 nút danh sách (`insertUnorderedList`/`insertOrderedList`) có bug thật**: đúng như quirk Chrome đã ghi nhận trước đây khi làm `insertTable()` — khi áp lên nội dung đang nằm trong `<p>` (trường hợp phổ biến nhất, mọi tài liệu nhiều dòng), Chrome lồng `<ul>`/`<ol>` **bên trong** `<p>` (`<p><ul>...</ul></p>`, HTML invalid). Lúc soạn thì trông vẫn có vẻ ra danh sách nên dễ tưởng là "không phản ứng gì cả" nếu người dùng test bằng cách lưu rồi mở lại — sau khi lưu (`innerHTML` lưu thành chuỗi) rồi tải lại (reparse), trình duyệt tự "sửa" thành `<p></p><ul>...</ul><p></p>` (2 đoạn rỗng thừa bao quanh), nhìn như định dạng bị vỡ / mất tác dụng.
+  - **Sửa** ở `applyFormatting()` trong `DocumentModal` ([src/App.jsx:3372](src/App.jsx:3372)): trước khi gọi `execCommand('insertUnorderedList'|'insertOrderedList')`, gọi thêm `execCommand('formatBlock', false, 'div')` để chuyển block đang chọn từ `<p>` sang `<div>` trước — `<div>` chứa `<ul>/<ol>` là HTML hợp lệ nên Chrome không còn lồng sai nữa.
+  - Đã verify: chọn 1 `<p>` hoặc nhiều `<p>` liền nhau rồi bấm nút → ra đúng `<ul>/<ol>` sạch (không còn bọc trong thẻ khác); reparse lại (mô phỏng lưu/tải lại) HTML giữ nguyên y hệt, không sinh `<p>` rỗng thừa; bấm lại nút để tắt danh sách (toggle-off) vẫn hoạt động như cũ (Chrome tự chuyển về `<span style="font-size...">` + `<br>` — quirk có sẵn từ trước, không phải do thay đổi lần này, không phải lỗi mới); test cả trường hợp không có `<p>` bao ngoài (gõ trực tiếp/toggle nhiều lần) không bị ảnh hưởng.
+- **Việc phát sinh thêm trong lúc test**: người dùng báo icon + chữ trên nút "Tạo tài liệu mới" (trang Documents) bị xấu, tự xuống hàng. Nguyên nhân: hàng chứa ô tìm kiếm (`w-64` cố định) + nút này dùng `justify-between` với phần tiêu đề/mô tả bên trái — khi mô tả dài chiếm nhiều chỗ, hàng bên phải bị co lại, nút (flex item mặc định `flex-shrink: 1`, không có `white-space: nowrap`) bị ép nhỏ hơn nội dung text nên chữ "Tạo tài liệu mới" tự ngắt xuống 2 dòng.
+  - **Sửa** ở class `.btn` dùng chung trong [src/index.css](src/index.css): thêm `shrink-0 whitespace-nowrap` — áp dụng cho **mọi** nút `.btn` trong app (không riêng nút này) để tránh cả lớp lỗi tương tự với nút có label dài khác.
+  - Đã verify: đo `getBoundingClientRect()` trước/sau — trước cao 62.67px (2 dòng), sau chỉ còn 42.67px (1 dòng đúng như các nút khác); `npm run build` pass.
+- Đã dừng server + xác nhận không còn process `node` nào chạy (`tasklist | findstr node` rỗng).
+
+### Documents: bổ sung toolbar soạn thảo đầy đủ
 Người dùng gửi ảnh mô tả 1 toolbar rich-text đầy đủ (dropdown cỡ chữ/tiêu đề, in đậm/nghiêng/gạch chân, tô màu nền/chữ, căn lề, danh sách, chèn bảng, xóa định dạng) và yêu cầu bổ sung vào editor "Tạo tài liệu mới" — trước đó `DocumentModal` chỉ có 2 nút (Bold + Highlighter).
 
 - `DocumentModal` ([src/App.jsx:3346](src/App.jsx:3346)): toolbar giờ có 13 nút, tất cả vẫn dùng `document.execCommand` (đúng pattern cũ), cách nhau bằng divider dọc:

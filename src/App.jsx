@@ -3373,6 +3373,13 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
     const el = editorRef.current;
     if (!el) return;
     el.focus();
+    if (command === 'insertUnorderedList' || command === 'insertOrderedList') {
+      // Chrome nests the new <ul>/<ol> INSIDE the current <p> (invalid HTML —
+      // gets silently mangled into stray empty <p> tags once saved and reparsed)
+      // unless the surrounding block is a <div> first. Same quirk already
+      // worked around for insertTable() below.
+      document.execCommand('formatBlock', false, 'div');
+    }
     document.execCommand(command, false, value);
     setDraft((current) => ({ ...current, content: el.innerHTML }));
   }
