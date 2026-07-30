@@ -25,7 +25,23 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Tasks: thiết kế lại UI cho gọn (mới nhất)
+### Documents: bổ sung toolbar soạn thảo đầy đủ (mới nhất)
+Người dùng gửi ảnh mô tả 1 toolbar rich-text đầy đủ (dropdown cỡ chữ/tiêu đề, in đậm/nghiêng/gạch chân, tô màu nền/chữ, căn lề, danh sách, chèn bảng, xóa định dạng) và yêu cầu bổ sung vào editor "Tạo tài liệu mới" — trước đó `DocumentModal` chỉ có 2 nút (Bold + Highlighter).
+
+- `DocumentModal` ([src/App.jsx:3346](src/App.jsx:3346)): toolbar giờ có 13 nút, tất cả vẫn dùng `document.execCommand` (đúng pattern cũ), cách nhau bằng divider dọc:
+  1. Dropdown "Cỡ chữ" (2 chữ "A" + `ChevronDown`, state `sizeMenuOpen` + `sizeMenuRef`, đóng khi click ra ngoài qua `useEffect`/`mousedown` listener) → `applyBlock('H1'|'H2'|'H3'|'P')` dùng `execCommand('formatBlock', ...)`.
+  2. Bold/Italic/Underline (`execCommand('bold'|'italic'|'underline')`).
+  3. Highlight nền (giữ nguyên, `#fbd95f`) + tô màu chữ mới (`Baseline` icon, `execCommand('foreColor', '#CE4F46')` — 1 màu cố định, không có color picker, theo đúng pattern đơn giản có sẵn của nút highlight).
+  4. Căn trái/giữa/phải (`justifyLeft/Center/Right`).
+  5. Danh sách dấu đầu dòng/đánh số (`insertUnorderedList`/`insertOrderedList`).
+  6. Chèn bảng (`insertTable()`, hàm mới) + Xóa định dạng (`clearFormatting()`, hàm mới, đẩy `ml-auto` sang phải cuối thanh).
+- **Bug đã sửa lúc verify**: `insertTable()` ban đầu dùng `execCommand('insertHTML', ...)` — nếu con trỏ đang ở trong `<h1>`/list, bảng bị chèn **lồng bên trong** thẻ đó (HTML invalid, vd `<h1><table>...</table></h1>`). Sửa bằng cách tự thao tác DOM (`Range`/`Selection`) để tìm block-level con trực tiếp của editor chứa con trỏ, rồi chèn `<table>` + `<div><br></div>` (placeholder để gõ tiếp) làm **sibling** ngay sau block đó — không bao giờ lồng vào heading/list nữa. Chọn `<div>` thay vì `<p>` cho placeholder vì đã phát hiện thêm 1 quirk khác của Chrome: `execCommand('insertUnorderedList')` áp lên nội dung trong `<p>` đôi khi lồng `<ul>` **bên trong** `<p>` (HTML invalid, tự "sửa" thành 2 `<p>` rỗng khi parse lại) — dùng `<div>` thì Chrome thay thế sạch thành `<ul>`, không lồng.
+- CSS mới trong [src/index.css](src/index.css): style viền/padding cho `table/td/th` trong cả `.rich-note-cell` (đang soạn) và `.study-note-preview` (xem/preview), header row có nền teal nhạt.
+- Thêm import icon mới từ `lucide-react`: `AlignCenter, AlignLeft, AlignRight, Baseline, Eraser, Italic, List, ListOrdered, Table, Underline` (giữ alphabet như các import cũ).
+- Đã verify qua `weekly-study-planner-ui-only` (cổng 5174, Vite thuần, KHÔNG chạm DB thật — trang hiện rõ "Mất kết nối, đang dùng dữ liệu trên máy"): test từng nút qua click thật + đọc `innerHTML` sau mỗi thao tác — Bold/Italic/Underline/Align/Highlight/Text color/Clear formatting đều ra đúng HTML mong đợi; dropdown H1/H2/H3/Văn bản thường áp đúng thẻ và tự đóng; chèn bảng khi con trỏ trong H1 giờ ra đúng `<h1>text</h1><table>...</table><div><br></div>` (không còn lồng); lưu tài liệu + mở lại "Sửa" load đúng lại nội dung đã lưu; không có lỗi console. Đã dừng server + xác nhận (không xóa được tài liệu test do `window.confirm` bị chặn trong môi trường headless — vô hại vì đây là localStorage riêng của server ui-only, tách biệt hoàn toàn khỏi DB thật).
+- **Lưu ý cho lần sau**: nếu thêm nút toolbar mới dùng `execCommand`, cẩn thận với quirk lồng thẻ khi cursor đang trong 1 block "đặc biệt" (heading/list/table) — nên test cụ thể case này thay vì chỉ test trên văn bản thường.
+
+### Tasks: thiết kế lại UI cho gọn
 Người dùng gửi ảnh trang Tasks và nói UI "nhìn rối và chiếm diện tích", yêu cầu làm lại UI nhưng **giữ nguyên toàn bộ tính năng**.
 
 - **Header gộp 3 thẻ thành 1** ([src/App.jsx:1517](src/App.jsx:1517), `TasksView`): trước đó là 3 card riêng (thanh "Quay lại Dashboard" + dòng ngày; hero tên thứ + số ngày watermark + "3 mục" + nút thêm; card tiến độ). Giờ chỉ còn 1 card: nút back thu về `icon-btn` tròn 36px, tiêu đề `Thứ Năm 30/07/2026` (`text-2xl`), dòng phụ gộp `THURSDAY · N mục · đã xong X/Y`, nút "Thêm mục mới" (`btn-sm`), và thanh tiến độ mảnh (`h-2`) + `%` ở hàng dưới. Gap section `6` → `3`, gap list card `4` → `2.5`. Empty-state cũng nén lại (`p-12` → `p-8`, icon 64 → 48px).

@@ -161,3 +161,27 @@ body {
   padding: 0.05rem 0.25rem;
   color: inherit;
 }
+
+.rich-note-cell table,
+.study-note-preview table {
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+.rich-note-cell table td,
+.rich-note-cell table th,
+.study-note-preview table td,
+.study-note-preview table th {
+  border: 1.5px solid rgba(27, 46, 49, 0.25);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.rich-note-cell table th,
+.study-note-preview table th {
+  background: #eaf7f5;
+  font-weight: 800;
+  color: #1c625e;
+}

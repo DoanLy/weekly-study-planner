@@ -2,8 +2,12 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import TESTING_DATA from './testing-data.json';
 import { TESTING_GLOSSARY } from './testing-glossary.js';
 import {
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
   ArrowLeft,
   BarChart3,
+  Baseline,
   Bold,
   BookOpen,
   Bot,
@@ -17,16 +21,20 @@ import {
   Clock,
   Code2,
   Compass,
+  Eraser,
   Expand,
   FlaskConical,
   FolderOpen,
   GraduationCap,
   Headphones,
   Highlighter,
+  Italic,
   Languages,
   LayoutDashboard,
   Library,
+  List,
   ListChecks,
+  ListOrdered,
   Menu,
   Mic,
   NotebookPen,
@@ -36,7 +44,9 @@ import {
   Settings,
   SlidersHorizontal,
   StickyNote,
+  Table,
   Trash2,
+  Underline,
   X,
 } from 'lucide-react';
 
@@ -3345,12 +3355,97 @@ function FullNoteModal({ draft, setDraft, close, save }) {
 
 function DocumentModal({ draft, isEditing, setDraft, close, save }) {
   const editorRef = useRef(null);
+  const sizeMenuRef = useRef(null);
+  const [sizeMenuOpen, setSizeMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!sizeMenuOpen) return undefined;
+    function handleClickOutside(event) {
+      if (sizeMenuRef.current && !sizeMenuRef.current.contains(event.target)) {
+        setSizeMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [sizeMenuOpen]);
 
   function applyFormatting(command, value) {
     const el = editorRef.current;
     if (!el) return;
     el.focus();
     document.execCommand(command, false, value);
+    setDraft((current) => ({ ...current, content: el.innerHTML }));
+  }
+
+  function applyBlock(tag) {
+    applyFormatting('formatBlock', tag);
+    setSizeMenuOpen(false);
+  }
+
+  function clearFormatting() {
+    const el = editorRef.current;
+    if (!el) return;
+    el.focus();
+    document.execCommand('removeFormat');
+    document.execCommand('formatBlock', false, 'P');
+    setDraft((current) => ({ ...current, content: el.innerHTML }));
+  }
+
+  function insertTable() {
+    const el = editorRef.current;
+    if (!el) return;
+    el.focus();
+    const cols = 3;
+    const headerCells = Array.from(
+      { length: cols },
+      (_, index) => `<th>Cột ${index + 1}</th>`
+    ).join('');
+    const bodyRow = Array.from(
+      { length: cols },
+      (_, index) => `<td>Cột ${index + 1}</td>`
+    ).join('');
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML =
+      '<table class="doc-table"><tbody>' +
+      `<tr>${headerCells}</tr>` +
+      `<tr>${bodyRow}</tr>` +
+      `<tr>${bodyRow}</tr>` +
+      '</tbody></table>';
+    const table = wrapper.firstChild;
+    const paragraph = document.createElement('div');
+    paragraph.innerHTML = '<br>';
+
+    // Insert as siblings of the top-level block under the editor root, so the
+    // table never ends up nested inside a heading/list the cursor happened to be in.
+    const selection = window.getSelection();
+    let referenceNode = el.lastChild;
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      if (el.contains(range.startContainer)) {
+        let node = range.startContainer;
+        while (node && node.parentNode !== el) {
+          node = node.parentNode;
+        }
+        if (node) referenceNode = node;
+      }
+    }
+
+    if (referenceNode && referenceNode.parentNode === el) {
+      el.insertBefore(table, referenceNode.nextSibling);
+      el.insertBefore(paragraph, table.nextSibling);
+    } else {
+      el.appendChild(table);
+      el.appendChild(paragraph);
+    }
+
+    if (selection) {
+      const newRange = document.createRange();
+      newRange.setStart(paragraph, 0);
+      newRange.collapse(true);
+      selection.removeAllRanges();
+      selection.addRange(newRange);
+    }
+
     setDraft((current) => ({ ...current, content: el.innerHTML }));
   }
 
@@ -3392,7 +3487,60 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
           />
         </div>
 
-        <div className="flex items-center gap-1.5 border-b-[1.5px] border-dashed border-ink-800/25 bg-white px-4 py-2">
+        <div className="flex flex-wrap items-center gap-1.5 border-y-[1.5px] border-dashed border-ink-800/25 bg-white px-4 py-2">
+          <div className="relative" ref={sizeMenuRef}>
+            <button
+              type="button"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() => setSizeMenuOpen((open) => !open)}
+              title="Cỡ chữ / tiêu đề"
+              className="icon-btn h-8 gap-0.5 px-2"
+            >
+              <span className="text-[10px] font-black leading-none">A</span>
+              <span className="text-sm font-black leading-none">A</span>
+              <ChevronDown size={12} />
+            </button>
+            {sizeMenuOpen && (
+              <div className="absolute left-0 top-full z-10 mt-1.5 w-48 overflow-hidden rounded-2xl border-[1.5px] border-ink-800 bg-white py-1 shadow-pop">
+                <button
+                  type="button"
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => applyBlock('H1')}
+                  className="block w-full px-4 py-2 text-left font-display text-lg font-bold text-ink-900 hover:bg-teal-50"
+                >
+                  Tiêu đề lớn (H1)
+                </button>
+                <button
+                  type="button"
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => applyBlock('H2')}
+                  className="block w-full px-4 py-2 text-left font-display text-base font-bold text-ink-900 hover:bg-teal-50"
+                >
+                  Tiêu đề vừa (H2)
+                </button>
+                <button
+                  type="button"
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => applyBlock('H3')}
+                  className="block w-full px-4 py-2 text-left font-display text-sm font-bold text-ink-900 hover:bg-teal-50"
+                >
+                  Tiêu đề nhỏ (H3)
+                </button>
+                <div className="my-1 h-px bg-ink-800/15" />
+                <button
+                  type="button"
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => applyBlock('P')}
+                  className="block w-full px-4 py-2 text-left text-sm font-medium text-ink-600 hover:bg-teal-50"
+                >
+                  Văn bản thường
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className="mx-0.5 h-5 w-px bg-ink-800/15" />
+
           <button
             type="button"
             onMouseDown={(event) => event.preventDefault()}
@@ -3405,11 +3553,114 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
           <button
             type="button"
             onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('italic')}
+            title="In nghiêng phần đã bôi đen"
+            className="icon-btn h-8 w-8"
+          >
+            <Italic size={16} />
+          </button>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('underline')}
+            title="Gạch chân phần đã bôi đen"
+            className="icon-btn h-8 w-8"
+          >
+            <Underline size={16} />
+          </button>
+
+          <div className="mx-0.5 h-5 w-px bg-ink-800/15" />
+
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('hiliteColor', '#fbd95f')}
-            title="Tô màu phần đã bôi đen"
+            title="Tô màu nền phần đã bôi đen"
             className="icon-btn h-8 w-8"
           >
             <Highlighter size={16} />
+          </button>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('foreColor', '#CE4F46')}
+            title="Tô màu chữ phần đã bôi đen"
+            className="icon-btn h-8 w-8 text-coral-600"
+          >
+            <Baseline size={16} />
+          </button>
+
+          <div className="mx-0.5 h-5 w-px bg-ink-800/15" />
+
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('justifyLeft')}
+            title="Căn trái"
+            className="icon-btn h-8 w-8"
+          >
+            <AlignLeft size={16} />
+          </button>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('justifyCenter')}
+            title="Căn giữa"
+            className="icon-btn h-8 w-8"
+          >
+            <AlignCenter size={16} />
+          </button>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('justifyRight')}
+            title="Căn phải"
+            className="icon-btn h-8 w-8"
+          >
+            <AlignRight size={16} />
+          </button>
+
+          <div className="mx-0.5 h-5 w-px bg-ink-800/15" />
+
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('insertUnorderedList')}
+            title="Danh sách dấu đầu dòng"
+            className="icon-btn h-8 w-8"
+          >
+            <List size={16} />
+          </button>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => applyFormatting('insertOrderedList')}
+            title="Danh sách đánh số"
+            className="icon-btn h-8 w-8"
+          >
+            <ListOrdered size={16} />
+          </button>
+
+          <div className="mx-0.5 h-5 w-px bg-ink-800/15" />
+
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={insertTable}
+            title="Chèn bảng"
+            className="icon-btn h-8 w-8"
+          >
+            <Table size={16} />
+          </button>
+
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={clearFormatting}
+            title="Xóa định dạng"
+            className="icon-btn ml-auto h-8 w-8"
+          >
+            <Eraser size={16} />
           </button>
         </div>
 
