@@ -10,6 +10,7 @@ import {
   CalendarCheck,
   CalendarDays,
   Check,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Circle,
@@ -519,6 +520,27 @@ function renderNoteHtml(text) {
   if (!text) return '';
   if (HTML_TAG_PATTERN.test(text)) return text;
   return formatNoteHtml(text);
+}
+
+/* Rút ghi chú về 1 dòng text thuần để xem nhanh khi card đang thu gọn. */
+function noteToPlainText(text) {
+  if (!text) return '';
+  let value = text;
+  if (HTML_TAG_PATTERN.test(value)) {
+    value = value
+      .replace(/<br\s*\/?>/gi, ' ')
+      .replace(/<\/(p|div|li|h[1-6]|tr)>/gi, ' ')
+      .replace(/<[^>]*>/g, '')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'");
+  } else {
+    value = value.replace(/[*`>#]/g, '');
+  }
+  return value.replace(/\s+/g, ' ').trim();
 }
 
 const PASTE_UNSAFE_SELECTOR = 'script,style,link,meta,object,embed,iframe';
@@ -1510,74 +1532,64 @@ function TasksView({
   updateTask,
 }) {
   return (
-    <section className="flex flex-col gap-6">
-      <div className="card flex flex-col justify-between gap-4 p-4 sm:flex-row sm:items-center">
-        <button
-          type="button"
-          onClick={() => setActiveView('dashboard')}
-          className="btn btn-sm btn-soft w-max"
-        >
-          <ArrowLeft size={15} /> Quay lại Dashboard
-        </button>
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold text-ink-400">
-            Bạn đang xem lịch chi tiết ngày:
-          </span>
-          <span className="rounded-full border-[1.5px] border-ink-800 bg-teal-100 px-3 py-1 text-xs font-extrabold text-ink-900">
-            {date.toLocaleDateString('vi-VN', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </span>
-        </div>
-      </div>
-
-      <div className="card relative flex flex-col items-start justify-between gap-4 overflow-hidden p-6 sm:flex-row sm:items-center">
-        <div className="pointer-events-none absolute right-4 top-2 select-none font-display text-7xl font-bold text-ink-50">
-          {String(date.getDate()).padStart(2, '0')}
-        </div>
-        <div className="relative z-10">
-          <h2 className="font-display text-3xl font-bold text-ink-900">
-            <span className="marker">{VIETNAMESE_DAYS[date.getDay()]}</span>
-          </h2>
-          <p className="mt-1 text-xs font-extrabold uppercase tracking-wider text-ink-400">
-            {ENGLISH_DAYS[date.getDay()]}
-          </p>
-        </div>
-        <div className="relative z-10 flex w-full items-center justify-between gap-3 border-t-[1.5px] border-dashed border-ink-800/20 pt-3 sm:w-auto sm:justify-start sm:border-t-0 sm:pt-0">
-          <span className="rounded-full border-[1.5px] border-ink-800 bg-white px-3 py-1.5 text-xs font-extrabold text-ink-800">
-            {tasks.length} mục
-          </span>
-          <button type="button" onClick={openAddTask} className="btn btn-primary">
-            <Plus size={16} /> Thêm mục mới
+    <section className="flex flex-col gap-3">
+      <div className="card px-4 py-3">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <button
+            type="button"
+            onClick={() => setActiveView('dashboard')}
+            className="icon-btn h-9 w-9"
+            title="Quay lại Dashboard"
+            aria-label="Quay lại Dashboard"
+          >
+            <ArrowLeft size={16} />
+          </button>
+          <div className="min-w-0 flex-1">
+            <h2 className="flex flex-wrap items-baseline gap-x-2 font-display text-2xl font-bold leading-tight text-ink-900">
+              <span className="marker">{VIETNAMESE_DAYS[date.getDay()]}</span>
+              <span className="text-sm font-extrabold text-ink-400">
+                {date.toLocaleDateString('vi-VN', {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+                })}
+              </span>
+            </h2>
+            <p className="text-[10px] font-extrabold uppercase tracking-wider text-ink-400">
+              {ENGLISH_DAYS[date.getDay()]} · {tasks.length} mục · đã xong{' '}
+              {selectedStats.completed}/{selectedStats.total}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={openAddTask}
+            className="btn btn-sm btn-primary"
+          >
+            <Plus size={15} /> Thêm mục mới
           </button>
         </div>
-      </div>
-
-      <div className="card p-4">
-        <div className="mb-2 flex items-center justify-between text-xs font-extrabold uppercase tracking-wider text-ink-500">
-          <span>Tiến độ hoàn thành ngày</span>
-          <span className="text-ink-900">{selectedStats.percent}%</span>
-        </div>
-        <div className="progress-track">
-          <div
-            className="progress-fill"
-            style={{ width: `${selectedStats.percent}%` }}
-          />
+        <div className="mt-2.5 flex items-center gap-2.5">
+          <div className="progress-track h-2">
+            <div
+              className="progress-fill"
+              style={{ width: `${selectedStats.percent}%` }}
+            />
+          </div>
+          <span className="shrink-0 text-[11px] font-extrabold text-ink-600">
+            {selectedStats.percent}%
+          </span>
         </div>
       </div>
 
       {tasks.length === 0 ? (
-        <div className="card flex flex-col items-center justify-center p-12 text-center">
-          <span className="mb-4 flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sun-100 text-ink-800">
-            <NotebookPen size={30} />
+        <div className="card flex flex-col items-center justify-center gap-3 p-8 text-center">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sun-100 text-ink-800">
+            <NotebookPen size={22} />
           </span>
-          <h4 className="font-display text-lg font-bold text-ink-900">
+          <h4 className="font-display text-base font-bold text-ink-900">
             Ngày này chưa có lịch học
           </h4>
-          <div className="mt-4 flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap justify-center gap-2">
             <button
               type="button"
               onClick={resetToDefaults}
@@ -1595,7 +1607,7 @@ function TasksView({
           </div>
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2.5">
           {tasks.map((task) => (
             <TaskCard
               key={task.id}
@@ -1628,128 +1640,161 @@ function TaskCard({
 }) {
   const styles = THEME_STYLES[task.theme] || THEME_STYLES.teal;
   const Icon = ICONS[task.icon] || GraduationCap;
+  const [expanded, setExpanded] = useState(false);
+  const noteOpen = expanded || editing;
+  const notePreview = noteToPlainText(task.note);
+  const field = ['orange', 'purple'].includes(task.theme)
+    ? 'IELTS English'
+    : 'Chuyên môn';
+
+  const toggleNote = () => {
+    if (noteOpen && editing) setEditing(false);
+    setExpanded(!noteOpen);
+  };
 
   return (
     <article
-      className={`rounded-card border-[1.5px] p-5 shadow-card transition-all ${styles.bg} ${styles.border}`}
+      className={`rounded-card border-[1.5px] px-3.5 py-3 shadow-card transition-all ${styles.bg} ${styles.border}`}
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={() => updateTask(task.id, { completed: !task.completed })}
+          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800 shadow-chip transition-all ${
+            task.completed
+              ? 'bg-teal-400 text-white'
+              : 'bg-white text-ink-200 hover:bg-sun-100'
+          }`}
+          title={task.completed ? 'Bỏ đánh dấu hoàn thành' : 'Đánh dấu hoàn thành'}
+          aria-label="Đánh dấu hoàn thành"
+        >
+          {task.completed ? <Check size={15} strokeWidth={3} /> : <Circle size={14} />}
+        </button>
+
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-white">
-              <Icon size={16} className={styles.accent} />
-            </span>
+          <div className="flex min-w-0 items-center gap-2">
+            <Icon
+              size={14}
+              className={`shrink-0 ${task.completed ? 'text-ink-300' : styles.accent}`}
+            />
             <h3
-              className={`font-display text-xl font-bold ${
+              className={`truncate font-display text-base font-bold leading-tight ${
                 task.completed ? 'text-ink-400' : styles.text
               }`}
             >
               {task.title}
             </h3>
           </div>
+          <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 pl-[22px] text-[10px] font-bold text-ink-400">
+            {task.time && (
+              <span className="flex items-center gap-1">
+                <Clock size={10} /> {task.time}
+              </span>
+            )}
+            <span>{field}</span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5">
+          <button
+            type="button"
+            onClick={toggleNote}
+            className={`flex items-center gap-1 rounded-full border-[1.5px] px-2.5 py-1 text-[11px] font-extrabold transition-all ${
+              noteOpen
+                ? 'border-ink-800 bg-white text-ink-800'
+                : 'border-ink-800/25 bg-white/70 text-ink-500 hover:border-ink-800'
+            }`}
+            aria-expanded={noteOpen}
+            title="Ghi chú bài học"
+          >
+            <NotebookPen size={12} />
+            <span className="hidden sm:inline">Ghi chú</span>
+            {task.note && (
+              <span className="h-1.5 w-1.5 rounded-full bg-teal-500" />
+            )}
+            <ChevronDown
+              size={12}
+              className={`transition-transform ${noteOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+          <button
+            type="button"
+            onClick={() => openFullNote(task)}
+            className="icon-btn h-7 w-7"
+            title="Mở rộng ghi chú"
+            aria-label="Mở rộng ghi chú"
+          >
+            <Expand size={13} />
+          </button>
           <button
             type="button"
             onClick={() => deleteTask(task.id)}
-            className="icon-btn icon-btn-coral h-8 w-8"
+            className="icon-btn icon-btn-coral h-7 w-7"
+            title="Xóa nhiệm vụ"
             aria-label="Xóa nhiệm vụ"
           >
-            <Trash2 size={15} />
-          </button>
-          <button
-            type="button"
-            onClick={() => updateTask(task.id, { completed: !task.completed })}
-            className={`flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-ink-800 shadow-chip transition-all ${
-              task.completed
-                ? 'bg-teal-400 text-white'
-                : 'bg-white text-ink-300 hover:bg-sun-100'
-            }`}
-            aria-label="Đánh dấu hoàn thành"
-          >
-            {task.completed ? <Check size={18} strokeWidth={3} /> : <Circle size={18} />}
+            <Trash2 size={13} />
           </button>
         </div>
       </div>
 
-      <div className="mt-4 border-t-[1.5px] border-dashed border-ink-800/25 pt-4">
-        <div className="mb-3 flex flex-col justify-between gap-2 text-xs font-extrabold text-ink-500 sm:flex-row sm:items-center">
-          <div className="flex items-center gap-2">
-            <NotebookPen size={14} className={styles.accent} />
-            <span>Ghi chú bài học</span>
-          </div>
-          <div className="flex w-max flex-wrap items-center gap-2 rounded-full border-[1.5px] border-ink-800/20 bg-white px-3 py-1">
+      {!noteOpen && notePreview && (
+        <button
+          type="button"
+          onClick={() => setExpanded(true)}
+          className="mt-2 flex w-full items-center gap-1.5 text-left text-[11px] font-semibold text-ink-400 transition-colors hover:text-ink-700"
+        >
+          <StickyNote size={12} className="shrink-0" />
+          <span className="truncate">{notePreview}</span>
+        </button>
+      )}
+
+      {noteOpen && (
+        <div className="mt-3 border-t-[1.5px] border-dashed border-ink-800/25 pt-3">
+          {editing ? (
+            <textarea
+              value={task.note || ''}
+              onChange={(event) => updateTask(task.id, { note: event.target.value })}
+              placeholder="Gõ từ vựng, ngữ pháp, các dòng lệnh... Dùng **từ khóa** để bôi đậm, `code` cho lệnh, '- ' cho danh sách."
+              className="field-input min-h-24 resize-y font-medium"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setEditing(true)}
+              className="min-h-12 w-full rounded-2xl border-[1.5px] border-ink-800/20 bg-white p-3 text-left text-sm transition-all hover:border-ink-800"
+            >
+              {task.note ? (
+                <div
+                  className="study-note-preview"
+                  dangerouslySetInnerHTML={{ __html: renderNoteHtml(task.note) }}
+                />
+              ) : (
+                <span className="flex items-center gap-1.5 text-xs font-semibold italic text-ink-400">
+                  <StickyNote size={14} /> Click vào đây để soạn thảo ghi chú bài
+                  học...
+                </span>
+              )}
+            </button>
+          )}
+          <div className="mt-2 flex flex-wrap items-center justify-end gap-2">
             <button
               type="button"
               onClick={() => setEditing(!editing)}
-              className="flex items-center gap-1 transition-colors hover:text-teal-600"
+              className="btn btn-sm btn-soft"
             >
-              <StickyNote size={13} /> {editing ? 'Xem' : 'Sửa'}
+              <StickyNote size={12} /> {editing ? 'Xem' : 'Sửa'}
             </button>
-            <span className="text-ink-200">|</span>
             <button
               type="button"
               onClick={() => openFullNote(task)}
-              className="flex items-center gap-1 transition-colors hover:text-teal-600"
+              className="btn btn-sm btn-outline"
             >
-              <Expand size={13} /> Mở rộng
+              <Expand size={12} /> Mở rộng
             </button>
           </div>
         </div>
-
-        {editing ? (
-          <textarea
-            value={task.note || ''}
-            onChange={(event) => updateTask(task.id, { note: event.target.value })}
-            placeholder="Gõ từ vựng, ngữ pháp, các dòng lệnh... Dùng **từ khóa** để bôi đậm, `code` cho lệnh, '- ' cho danh sách."
-            className="field-input min-h-24 resize-y font-medium"
-          />
-        ) : (
-          <button
-            type="button"
-            onClick={() => setEditing(true)}
-            className="min-h-16 w-full rounded-2xl border-[1.5px] border-ink-800/20 bg-white p-3.5 text-left text-sm transition-all hover:border-ink-800"
-          >
-            {task.note ? (
-              <div
-                className="study-note-preview"
-                dangerouslySetInnerHTML={{ __html: renderNoteHtml(task.note) }}
-              />
-            ) : (
-              <span className="flex items-center gap-1.5 text-xs font-semibold italic text-ink-400">
-                <StickyNote size={14} /> Click vào đây để soạn thảo ghi chú bài
-                học...
-              </span>
-            )}
-          </button>
-        )}
-      </div>
-
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] font-semibold text-ink-400">
-        <span className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-          <span className="flex items-center gap-1.5">
-            <Icon size={12} /> Lĩnh vực:{' '}
-            {['orange', 'purple'].includes(task.theme)
-              ? 'IELTS English'
-              : 'Chuyên môn'}
-          </span>
-          {task.time && (
-            <span className="flex items-center gap-1.5">
-              <Clock size={12} /> {task.time}
-            </span>
-          )}
-        </span>
-        {task.completed ? (
-          <span className="flex items-center gap-1 rounded-full border-[1.5px] border-ink-800 bg-teal-200 px-2.5 py-0.5 font-extrabold text-ink-900">
-            <Check size={12} strokeWidth={3} /> Đã hoàn tất
-          </span>
-        ) : (
-          <span className="rounded-full border-[1.5px] border-dashed border-ink-800/50 px-2.5 py-0.5 font-extrabold text-ink-600">
-            Chờ hoàn tất
-          </span>
-        )}
-      </div>
+      )}
     </article>
   );
 }

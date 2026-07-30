@@ -25,7 +25,20 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Documents: thêm ô tìm kiếm theo tiêu đề (mới nhất)
+### Tasks: thiết kế lại UI cho gọn (mới nhất)
+Người dùng gửi ảnh trang Tasks và nói UI "nhìn rối và chiếm diện tích", yêu cầu làm lại UI nhưng **giữ nguyên toàn bộ tính năng**.
+
+- **Header gộp 3 thẻ thành 1** ([src/App.jsx:1517](src/App.jsx:1517), `TasksView`): trước đó là 3 card riêng (thanh "Quay lại Dashboard" + dòng ngày; hero tên thứ + số ngày watermark + "3 mục" + nút thêm; card tiến độ). Giờ chỉ còn 1 card: nút back thu về `icon-btn` tròn 36px, tiêu đề `Thứ Năm 30/07/2026` (`text-2xl`), dòng phụ gộp `THURSDAY · N mục · đã xong X/Y`, nút "Thêm mục mới" (`btn-sm`), và thanh tiến độ mảnh (`h-2`) + `%` ở hàng dưới. Gap section `6` → `3`, gap list card `4` → `2.5`. Empty-state cũng nén lại (`p-12` → `p-8`, icon 64 → 48px).
+- **TaskCard 1 hàng + ghi chú thu gọn** ([src/App.jsx:1610](src/App.jsx:1610)): checkbox hoàn thành (28px) chuyển sang **bên trái**, kế đó là icon môn + tiêu đề (`text-base`, `truncate`) và dòng meta nhỏ `giờ · lĩnh vực`; bên phải là 3 nút: pill "Ghi chú" (có chevron + chấm teal nếu đã có nội dung), `Mở rộng` (icon `Expand`), `Xóa`.
+- Vùng ghi chú **mặc định đóng** — đây là chỗ tiết kiệm diện tích nhiều nhất. State cục bộ `expanded` trong `TaskCard`; `noteOpen = expanded || editing` nên khi parent bật `editingNotes[task.id]` thì vùng note vẫn tự mở. Khi đóng mà task có note thì hiện **1 dòng preview text thuần** (`truncate`), click vào là mở.
+- Thêm helper `noteToPlainText()` ([src/App.jsx:524](src/App.jsx:524)) để rút note (cả dạng HTML lẫn markdown) về 1 dòng cho preview. Thêm import `ChevronDown`.
+- **Tính năng giữ nguyên đủ**: tick hoàn thành, xóa, `Sửa`/`Xem` (toggle textarea inline), `Mở rộng` (modal soạn ghi chú), click ô trống để bắt đầu soạn, tiến độ ngày, thêm mục, quay lại Dashboard. **Chỉ bỏ 1 thứ hiển thị dư**: badge "Chờ hoàn tất / Đã hoàn tất" ở footer card — trạng thái này đã thể hiện bằng checkbox (teal + dấu check) và tiêu đề mờ đi.
+- Số đo thực tế (desktop 1280×720, `weekly-study-planner-ui-only-c` cổng 5177, Vite thuần nên KHÔNG chạm DB thật): header 98px (trước là 3 card ~330px), mỗi card 64px khi đóng note / 88px khi có preview 1 dòng / 176px khi mở note / 230px khi đang sửa. Cả ngày 3 mục cao 321px, không phải scroll (trước đó 1 card đã cao hơn 300px).
+- Đã verify từng tính năng bằng JS click + đọc DOM: mở/đóng note, click ô trống → textarea, gõ note → collapse thấy đúng 1 dòng preview + chấm teal, `Mở rộng` mở modal "Soạn ghi chú" đúng nội dung rồi đóng, tick hoàn thành → checkbox `rgb(69,175,166)` + tiêu đề `rgb(114,137,140)` + header đổi thành "đã xong 1/3 · 33%", modal "Thêm nhiệm vụ" mở/đóng OK, nút back về Dashboard OK, mobile 375px không tràn ngang. Không lỗi console; `npm run build` pass. Đã hoàn tác dữ liệu test trong localStorage về nguyên trạng (3 task `completed:false`, `note:""`).
+- **Lưu ý môi trường (gặp lại)**: (1) Không chụp được screenshot — Browser pane không hiển thị. (2) Sau khi HMR, CSS Tailwind có thể **thiếu utility mới** (lúc đầu `md:w-64` không có → sidebar chiếm hết chiều rộng, mọi số đo layout sai bét); phải `navigate` reload full trang trước khi tin số đo. (3) `getComputedStyle` đọc ngay sau click cho ra **màu giữa transition** (checkbox teal đọc ra trắng) vì tab hidden nên transition không chạy tiếp — verify màu bằng cách reload rồi đo trên render đầu. (4) Đọc DOM phải ở lần gọi `javascript_tool` **sau** cú click, không cùng lần (React chưa re-render).
+- [.claude/launch.json](.claude/launch.json): thêm cấu hình thứ 4 `weekly-study-planner-ui-only-c` (cổng 5177) vì các cổng cũ có thể bị phiên chat khác chiếm.
+
+### Documents: thêm ô tìm kiếm theo tiêu đề
 Người dùng muốn ở menu Documents có thể search tài liệu theo tiêu đề (trước đó chỉ có danh sách card, không lọc được).
 
 - `DocumentsView` ([src/App.jsx:1886](src/App.jsx:1886)): thêm state `searchQuery` + `filteredDocuments` (`useMemo`, lọc `doc.title` theo `includes()` không phân biệt hoa/thường). Ô input đặt cạnh nút "Tạo tài liệu mới", cùng pattern UI với ô search ở Testing/Speaking (`field-input rounded-full`, icon `Search` lucide).
