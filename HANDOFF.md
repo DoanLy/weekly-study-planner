@@ -25,7 +25,23 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Documents: mở rộng modal "Xem tài liệu" gần full màn hình (mới nhất)
+### Documents: modal Sửa to bằng modal Xem + sửa bảng (thêm/xóa hàng cột) + highlight nút đang bật (mới nhất)
+Người dùng gửi ảnh modal "Sửa tài liệu" (khung nhỏ, toolbar không cho biết đang ở kiểu chữ nào) và yêu cầu 3 việc: (1) modal Sửa to ra như modal Xem, (2) bảng cho phép thêm/xóa hàng cột, (3) bấm chế độ nào thì sáng icon đó.
+
+Tất cả nằm trong `DocumentModal` ([src/App.jsx:3366](src/App.jsx:3366)) và [src/index.css](src/index.css):
+
+1. **Phóng to khung Sửa**: `h-[82vh] w-full max-w-2xl` → `h-[95vh] w-[96vw] max-w-[100rem]`, overlay `p-4` → `p-2 sm:p-4`, vùng soạn `p-5` → `p-6 md:p-8` — khớp đúng thông số `DocumentViewModal` đã đổi phiên trước. Đo thực tế ở 1280×720: khung 1229×684 (96% × 95% viewport).
+2. **Sửa bảng**: thêm thanh công cụ thứ hai (nền `bg-teal-50`, nhãn "BẢNG") **chỉ hiện khi con trỏ đang nằm trong một ô `<td>/<th>`** — 7 nút: Hàng trên / Hàng dưới / Cột trái / Cột phải / Xóa hàng / Xóa cột / Xóa bảng (class `.table-tool-btn`, `.table-tool-btn-danger`).
+   - Hàm mới: `getSelectedCell()` (module scope), `currentTableParts()`, `commitTableChange()`, `addTableRow()`, `addTableColumn()`, `deleteTableRow()`, `deleteTableColumn()`, `deleteTable()`.
+   - Chi tiết đáng nhớ: cột mới ở hàng tiêu đề tự sinh `<th>`, ở hàng thường sinh `<td>` (đọc thẻ của ô cùng cột trong chính hàng đó); thêm hàng thì con trỏ giữ nguyên **cột** đang đứng; xóa hết hàng hoặc hết cột thì **xóa luôn bảng rỗng**; `commitTableChange()` luôn đặt lại con trỏ vào một vị trí hợp lệ trong editor trước khi lưu — nếu không, vùng chọn trỏ vào node vừa bị xóa và toolbar đọc sai trạng thái (thanh công cụ bảng không chịu ẩn đi).
+   - `insertTable()` giờ đặt con trỏ vào **ô đầu tiên** của bảng vừa chèn (trước đây nhảy xuống đoạn trống bên dưới) để gõ được ngay và thanh công cụ bảng hiện lên luôn.
+3. **Highlight nút đang bật**: state `activeFormats` + `insideTable`, cập nhật qua `readToolbarState()` gắn vào sự kiện `document.selectionchange` (và gọi lại sau mỗi lần bấm nút). Dùng `document.queryCommandState` cho 8 lệnh trong `TOGGLE_COMMANDS` (đậm/nghiêng/gạch chân, 3 kiểu căn lề, 2 kiểu danh sách); 2 nút màu so bằng `queryCommandValue` + `normalizeColor()` (đưa `rgb(251, 217, 95)` và `#FBD95F` về cùng dạng `fbd95f`). Nút sáng = class `.icon-btn-on` (`bg-teal-200`), gắn qua helper `toolbarBtnClass()`. Nút "Chèn bảng" cũng sáng khi con trỏ đang ở trong bảng.
+   - Lưu ý khi test: `readToolbarState()` **bỏ qua** khi con trỏ ra ngoài editor (bấm sang ô tiêu đề) để toolbar không tắt hết đèn; và nút "Căn trái" luôn sáng với văn bản thường vì `queryCommandState('justifyLeft')` mặc định `true` — đúng như Word.
+- Đã verify bằng thao tác thật trên `weekly-study-planner-ui-only` (cổng 5174, Vite thuần, KHÔNG chạm DB thật), **không bấm "Lưu tài liệu"** nên không tạo dữ liệu rác: bôi đen → Đậm ⇒ `<b>` + nút sáng; Tô nền ⇒ `background-color: rgb(251, 217, 95)` + nút sáng; danh sách ⇒ nút bullet sáng, nút số không sáng; chèn bảng ⇒ 3×3, con trỏ ở ô đầu, thanh bảng hiện; Cột phải ⇒ 4 cột, hàng tiêu đề nhận `<th>`; Hàng trên/dưới ⇒ đúng vị trí, giữ cột; Xóa cột/Xóa hàng ⇒ đúng ô; Xóa bảng ⇒ bảng biến mất, thanh công cụ bảng ẩn, nút Chèn bảng hết sáng. Console không có lỗi. `npx vite build` pass.
+- **Chưa chụp được ảnh màn hình** (Browser pane không hiển thị nên tool screenshot timeout) — mọi kết luận ở trên đo bằng DOM/`getBoundingClientRect`, không phải nhìn ảnh.
+- Modal "Ghi chú" (`NoteModal`) **không đổi** — người dùng chỉ yêu cầu cho Documents.
+
+### Documents: mở rộng modal "Xem tài liệu" gần full màn hình
 Người dùng gửi ảnh modal `DocumentViewModal` (tài liệu "Link video học tiếng anh" — toàn link Google Drive dài) và yêu cầu "chỉnh chế độ xem tài liệu to hơn, gần full màn hình cũng được".
 
 - `DocumentViewModal` ([src/App.jsx:3733](src/App.jsx:3733)): khung đổi `h-[82vh] w-full max-w-2xl` → `h-[95vh] w-[96vw] max-w-[100rem]`; lớp overlay `p-4` → `p-2 sm:p-4` (mobile lấy thêm chỗ); vùng nội dung `p-6` → `p-6 md:p-8`. Đặt `max-w-[100rem]` (1600px) để trên màn hình rất rộng không bị kéo dòng chữ dài quá khó đọc.

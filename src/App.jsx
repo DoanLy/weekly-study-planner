@@ -3363,8 +3363,105 @@ const FONT_SIZE_STEPS = [12, 14, 16, 18, 20, 24, 28, 32, 40, 48];
    font-size px cụ thể. */
 const FONT_SIZE_MARKER = '7';
 
+/* Màu của 2 nút tô nền/tô chữ — khai báo một chỗ để vừa dùng khi bấm, vừa dùng
+   khi dò xem con trỏ có đang nằm trong đoạn đã tô màu đó không. */
+const HIGHLIGHT_COLOR = '#FBD95F';
+const TEXT_COLOR = '#CE4F46';
+
+/* Các lệnh execCommand có trạng thái bật/tắt, dùng để làm sáng nút trên toolbar. */
+const TOGGLE_COMMANDS = [
+  'bold',
+  'italic',
+  'underline',
+  'justifyLeft',
+  'justifyCenter',
+  'justifyRight',
+  'insertUnorderedList',
+  'insertOrderedList',
+];
+
+/* Đưa mọi kiểu màu (#fbd95f, rgb(251, 217, 95)...) về cùng dạng 'fbd95f' để so
+   sánh được với nhau. */
+function normalizeColor(value) {
+  if (!value) return '';
+  const text = String(value).trim().toLowerCase();
+  const rgb = text.match(/^rgba?\(([^)]+)\)$/);
+  if (rgb) {
+    const parts = rgb[1].split(',').map((part) => parseFloat(part));
+    if (parts.length >= 3 && parts.slice(0, 3).every((part) => !isNaN(part))) {
+      return parts
+        .slice(0, 3)
+        .map((part) => Math.round(part).toString(16).padStart(2, '0'))
+        .join('');
+    }
+  }
+  if (text.startsWith('#')) return text.slice(1);
+  return text;
+}
+
+function isCommandColor(commands, color) {
+  const target = normalizeColor(color);
+  return commands.some((command) => {
+    try {
+      return normalizeColor(document.queryCommandValue(command)) === target;
+    } catch {
+      return false;
+    }
+  });
+}
+
+function toolbarBtnClass(isActive) {
+  return `icon-btn h-8 w-8${isActive ? ' icon-btn-on' : ''}`;
+}
+
+/* Ô <td>/<th> đang đặt con trỏ, hoặc null nếu con trỏ không ở trong bảng nào. */
+function getSelectedCell(root) {
+  const selection = window.getSelection();
+  if (!selection || selection.rangeCount === 0) return null;
+  let node = selection.getRangeAt(0).startContainer;
+  if (!root.contains(node)) return null;
+  if (node.nodeType !== Node.ELEMENT_NODE) node = node.parentNode;
+  const cell = node && node.closest ? node.closest('td, th') : null;
+  return cell && root.contains(cell) ? cell : null;
+}
+
 function DocumentModal({ draft, isEditing, setDraft, close, save }) {
   const editorRef = useRef(null);
+  const [activeFormats, setActiveFormats] = useState({});
+  const [insideTable, setInsideTable] = useState(false);
+
+  /* Dò lại xem con trỏ đang nằm trong kiểu chữ nào / trong bảng hay không, để
+     tô sáng đúng các nút trên toolbar. */
+  function readToolbarState() {
+    const el = editorRef.current;
+    if (!el) return;
+    const selection = window.getSelection();
+    const anchor = selection && selection.anchorNode;
+    // Con trỏ ra ngoài editor (bấm sang ô tiêu đề, sang nút...) thì giữ nguyên
+    // trạng thái cũ thay vì tắt hết đèn của toolbar.
+    if (!anchor || !el.contains(anchor)) return;
+    const next = {};
+    TOGGLE_COMMANDS.forEach((command) => {
+      try {
+        next[command] = document.queryCommandState(command);
+      } catch {
+        next[command] = false;
+      }
+    });
+    next.hiliteColor = isCommandColor(
+      ['hiliteColor', 'backColor'],
+      HIGHLIGHT_COLOR
+    );
+    next.foreColor = isCommandColor(['foreColor'], TEXT_COLOR);
+    setActiveFormats(next);
+    setInsideTable(Boolean(getSelectedCell(el)));
+  }
+
+  useEffect(() => {
+    document.addEventListener('selectionchange', readToolbarState);
+    return () =>
+      document.removeEventListener('selectionchange', readToolbarState);
+  }, []);
 
   function applyFormatting(command, value) {
     const el = editorRef.current;
@@ -3379,6 +3476,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
     }
     document.execCommand(command, false, value);
     setDraft((current) => ({ ...current, content: el.innerHTML }));
+    readToolbarState();
   }
 
   /* Tăng/giảm cỡ chữ phần đang bôi đen 1 bậc. Nếu chưa bôi đen gì thì áp cho cả
@@ -3454,6 +3552,125 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
     document.execCommand('removeFormat');
     document.execCommand('formatBlock', false, 'P');
     setDraft((current) => ({ ...current, content: el.innerHTML }));
+    readToolbarState();
+  }
+
+  /* Ô / hàng / bảng đang đặt con trỏ; null nếu con trỏ không ở trong bảng. */
+  function currentTableParts() {
+    const el = editorRef.current;
+    if (!el) return null;
+    const cell = getSelectedCell(el);
+    if (!cell) return null;
+    const row = cell.parentElement;
+    const table = cell.closest('table');
+    if (!row || !table) return null;
+    return { el, cell, row, table };
+  }
+
+  /* Sau mỗi lần thêm/xóa hàng cột: đặt lại con trỏ vào một chỗ hợp lệ bên trong
+     editor (nếu không, vùng chọn trỏ vào node vừa bị xóa và toolbar đọc sai
+     trạng thái), rồi lưu nội dung mới. */
+  function commitTableChange(el, focusCell) {
+    el.focus();
+    const selection = window.getSelection();
+    if (selection) {
+      const range = document.createRange();
+      if (focusCell && el.contains(focusCell)) {
+        range.selectNodeContents(focusCell);
+        range.collapse(true);
+      } else {
+        range.selectNodeContents(el);
+        range.collapse(false);
+      }
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    setDraft((current) => ({ ...current, content: el.innerHTML }));
+    readToolbarState();
+  }
+
+  /* direction: -1 = thêm hàng phía trên, 1 = thêm hàng phía dưới. */
+  function addTableRow(direction) {
+    const parts = currentTableParts();
+    if (!parts) return;
+    const { el, cell, row } = parts;
+    const newRow = document.createElement('tr');
+    Array.from(row.cells).forEach(() => {
+      const created = document.createElement('td');
+      created.innerHTML = '<br>';
+      newRow.appendChild(created);
+    });
+    row.parentNode.insertBefore(
+      newRow,
+      direction > 0 ? row.nextSibling : row
+    );
+    // Con trỏ nhảy xuống/lên đúng cột đang đứng, không nhảy về cột đầu.
+    commitTableChange(el, newRow.cells[cell.cellIndex] || newRow.cells[0]);
+  }
+
+  /* direction: -1 = thêm cột bên trái, 1 = thêm cột bên phải. */
+  function addTableColumn(direction) {
+    const parts = currentTableParts();
+    if (!parts) return;
+    const { el, cell, row, table } = parts;
+    const index = cell.cellIndex;
+    let focusCell = null;
+    Array.from(table.rows).forEach((tableRow) => {
+      // Ô mẫu của chính hàng đó quyết định thẻ mới là <th> hay <td>, để cột mới
+      // ở hàng tiêu đề vẫn là ô tiêu đề.
+      const reference =
+        tableRow.cells[index] || tableRow.cells[tableRow.cells.length - 1];
+      const created = document.createElement(
+        reference && reference.tagName === 'TH' ? 'th' : 'td'
+      );
+      created.innerHTML = '<br>';
+      const target = tableRow.cells[index + (direction > 0 ? 1 : 0)];
+      tableRow.insertBefore(created, target || null);
+      if (tableRow === row) focusCell = created;
+    });
+    commitTableChange(el, focusCell);
+  }
+
+  function deleteTableRow() {
+    const parts = currentTableParts();
+    if (!parts) return;
+    const { el, row, table } = parts;
+    const fallback = row.nextElementSibling || row.previousElementSibling;
+    row.remove();
+    if (table.rows.length === 0) {
+      table.remove();
+      commitTableChange(el, null);
+      return;
+    }
+    commitTableChange(el, fallback ? fallback.cells[0] : table.rows[0].cells[0]);
+  }
+
+  function deleteTableColumn() {
+    const parts = currentTableParts();
+    if (!parts) return;
+    const { el, cell, row, table } = parts;
+    const index = cell.cellIndex;
+    Array.from(table.rows).forEach((tableRow) => {
+      if (tableRow.cells[index]) tableRow.deleteCell(index);
+    });
+    // Xóa cột cuối cùng thì bỏ luôn cái bảng rỗng đi.
+    if (!table.rows[0] || table.rows[0].cells.length === 0) {
+      table.remove();
+      commitTableChange(el, null);
+      return;
+    }
+    const focusRow = row.parentNode ? row : table.rows[0];
+    commitTableChange(
+      el,
+      focusRow.cells[Math.min(index, focusRow.cells.length - 1)]
+    );
+  }
+
+  function deleteTable() {
+    const parts = currentTableParts();
+    if (!parts) return;
+    parts.table.remove();
+    commitTableChange(parts.el, null);
   }
 
   function insertTable() {
@@ -3503,15 +3720,24 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
       el.appendChild(paragraph);
     }
 
+    // Đặt con trỏ vào ô đầu tiên: gõ được ngay, và thanh công cụ bảng (thêm/xóa
+    // hàng cột) hiện lên luôn cho người dùng thấy.
     if (selection) {
+      const firstCell = table.querySelector('th, td');
       const newRange = document.createRange();
-      newRange.setStart(paragraph, 0);
-      newRange.collapse(true);
+      if (firstCell) {
+        newRange.selectNodeContents(firstCell);
+        newRange.collapse(true);
+      } else {
+        newRange.setStart(paragraph, 0);
+        newRange.collapse(true);
+      }
       selection.removeAllRanges();
       selection.addRange(newRange);
     }
 
     setDraft((current) => ({ ...current, content: el.innerHTML }));
+    readToolbarState();
   }
 
   function handlePaste(event) {
@@ -3526,8 +3752,8 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm">
-      <div className="flex h-[82vh] w-full max-w-2xl flex-col overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-2 backdrop-blur-sm sm:p-4">
+      <div className="flex h-[95vh] w-[96vw] max-w-[100rem] flex-col overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop">
         <div className="flex items-center justify-between border-b-[1.5px] border-ink-800/20 bg-teal-50 p-4">
           <h3 className="font-display text-xl font-bold text-ink-900">
             {isEditing ? 'Sửa tài liệu' : 'Tạo tài liệu mới'}
@@ -3579,7 +3805,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('bold')}
             title="In đậm phần đã bôi đen"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(activeFormats.bold)}
           >
             <Bold size={16} />
           </button>
@@ -3588,7 +3814,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('italic')}
             title="In nghiêng phần đã bôi đen"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(activeFormats.italic)}
           >
             <Italic size={16} />
           </button>
@@ -3597,7 +3823,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('underline')}
             title="Gạch chân phần đã bôi đen"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(activeFormats.underline)}
           >
             <Underline size={16} />
           </button>
@@ -3607,18 +3833,18 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
           <button
             type="button"
             onMouseDown={(event) => event.preventDefault()}
-            onClick={() => applyFormatting('hiliteColor', '#fbd95f')}
+            onClick={() => applyFormatting('hiliteColor', HIGHLIGHT_COLOR)}
             title="Tô màu nền phần đã bôi đen"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(activeFormats.hiliteColor)}
           >
             <Highlighter size={16} />
           </button>
           <button
             type="button"
             onMouseDown={(event) => event.preventDefault()}
-            onClick={() => applyFormatting('foreColor', '#CE4F46')}
+            onClick={() => applyFormatting('foreColor', TEXT_COLOR)}
             title="Tô màu chữ phần đã bôi đen"
-            className="icon-btn h-8 w-8 text-coral-600"
+            className={`${toolbarBtnClass(activeFormats.foreColor)} text-coral-600`}
           >
             <Baseline size={16} />
           </button>
@@ -3630,7 +3856,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('justifyLeft')}
             title="Căn trái"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(activeFormats.justifyLeft)}
           >
             <AlignLeft size={16} />
           </button>
@@ -3639,7 +3865,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('justifyCenter')}
             title="Căn giữa"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(activeFormats.justifyCenter)}
           >
             <AlignCenter size={16} />
           </button>
@@ -3648,7 +3874,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('justifyRight')}
             title="Căn phải"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(activeFormats.justifyRight)}
           >
             <AlignRight size={16} />
           </button>
@@ -3660,7 +3886,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('insertUnorderedList')}
             title="Danh sách dấu đầu dòng"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(activeFormats.insertUnorderedList)}
           >
             <List size={16} />
           </button>
@@ -3669,7 +3895,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             onMouseDown={(event) => event.preventDefault()}
             onClick={() => applyFormatting('insertOrderedList')}
             title="Danh sách đánh số"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(activeFormats.insertOrderedList)}
           >
             <ListOrdered size={16} />
           </button>
@@ -3681,7 +3907,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             onMouseDown={(event) => event.preventDefault()}
             onClick={insertTable}
             title="Chèn bảng"
-            className="icon-btn h-8 w-8"
+            className={toolbarBtnClass(insideTable)}
           >
             <Table size={16} />
           </button>
@@ -3696,6 +3922,74 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
             <Eraser size={16} />
           </button>
         </div>
+
+        {/* Thanh công cụ bảng: chỉ hiện khi con trỏ đang nằm trong một ô bảng. */}
+        {insideTable && (
+          <div className="flex flex-wrap items-center gap-1.5 border-b-[1.5px] border-dashed border-ink-800/25 bg-teal-50 px-4 py-2">
+            <span className="mr-1 text-[11px] font-extrabold uppercase tracking-wide text-teal-700">
+              Bảng
+            </span>
+            <button
+              type="button"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() => addTableRow(-1)}
+              className="table-tool-btn"
+            >
+              <Plus size={13} /> Hàng trên
+            </button>
+            <button
+              type="button"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() => addTableRow(1)}
+              className="table-tool-btn"
+            >
+              <Plus size={13} /> Hàng dưới
+            </button>
+            <button
+              type="button"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() => addTableColumn(-1)}
+              className="table-tool-btn"
+            >
+              <Plus size={13} /> Cột trái
+            </button>
+            <button
+              type="button"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() => addTableColumn(1)}
+              className="table-tool-btn"
+            >
+              <Plus size={13} /> Cột phải
+            </button>
+
+            <div className="mx-0.5 h-5 w-px bg-ink-800/15" />
+
+            <button
+              type="button"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={deleteTableRow}
+              className="table-tool-btn table-tool-btn-danger"
+            >
+              <Trash2 size={13} /> Xóa hàng
+            </button>
+            <button
+              type="button"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={deleteTableColumn}
+              className="table-tool-btn table-tool-btn-danger"
+            >
+              <Trash2 size={13} /> Xóa cột
+            </button>
+            <button
+              type="button"
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={deleteTable}
+              className="table-tool-btn table-tool-btn-danger"
+            >
+              <Trash2 size={13} /> Xóa bảng
+            </button>
+          </div>
+        )}
 
         <div
           ref={(el) => {
@@ -3714,7 +4008,7 @@ function DocumentModal({ draft, isEditing, setDraft, close, save }) {
           }}
           onPaste={handlePaste}
           data-placeholder="Dán hoặc soạn nội dung tài liệu ở đây... Bôi đen chữ rồi bấm nút để in đậm/tô màu."
-          className="rich-note-cell min-h-0 flex-1 overflow-y-auto p-5 text-sm font-medium leading-relaxed outline-none"
+          className="rich-note-cell min-h-0 flex-1 overflow-y-auto p-6 text-sm font-medium leading-relaxed outline-none md:p-8"
         />
 
         <div className="flex justify-end gap-2 border-t-[1.5px] border-dashed border-ink-800/25 p-4">

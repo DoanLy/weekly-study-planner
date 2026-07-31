@@ -66,6 +66,21 @@ body {
     @apply border-ink-800 bg-coral-200 text-ink-800 hover:bg-coral-300;
   }
 
+  /* Nút định dạng đang bật (in đậm, căn giữa, danh sách...) trong toolbar soạn
+     thảo — để người dùng nhìn là biết con trỏ đang ở kiểu chữ nào. */
+  .icon-btn-on {
+    @apply border-ink-800 bg-teal-200 text-ink-900 shadow-chip hover:bg-teal-300;
+  }
+
+  /* ---- Nút nhỏ cho thanh công cụ bảng (thêm/xóa hàng cột) ---- */
+  .table-tool-btn {
+    @apply inline-flex items-center gap-1 rounded-full border-[1.5px] border-ink-800/25 bg-white px-2.5 py-1 text-[11px] font-extrabold text-ink-600 transition-all hover:border-ink-800 hover:text-ink-900;
+  }
+
+  .table-tool-btn-danger {
+    @apply text-coral-600 hover:border-coral-600 hover:text-coral-700;
+  }
+
   /* ---- Nhãn/pill nhỏ ---- */
   .pill {
     @apply inline-flex items-center gap-1 rounded-full border-[1.5px] border-ink-800 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wide;
