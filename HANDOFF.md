@@ -11,7 +11,7 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 - Local source: `C:\Users\lenovo\Documents\Codex\2026-06-02\b-n-c-n-nh-app\work\weekly-study-planner`
 - GitHub: https://github.com/DoanLy/weekly-study-planner.git (branch `main`)
 - Vercel project: `files-mentioned-by-the-user-weeklyplanner` (org `doanlys-projects`), production tại https://files-mentioned-by-the-user-weeklyp.vercel.app/
-- Toàn bộ UI nằm trong 1 file: `src/App.jsx` (~2400 dòng, React + Vite + Tailwind + lucide-react)
+- Toàn bộ UI nằm trong 1 file: `src/App.jsx` (~4980 dòng, React + Vite + Tailwind + lucide-react)
 - **Data lưu trong Postgres (Neon, qua Vercel Marketplace integration)**, không còn dùng Google Sheets. Local state vẫn cache trong `localStorage` (key `weekly-study-planner-data`) để mở app offline được, đồng bộ 2 chiều với API `/api/data` (`api/data.js`, serverless function dùng `@neondatabase/serverless`).
   - Bảng Postgres: `app_data(id text primary key, data jsonb, updated_at timestamptz)` — chỉ 1 row cố định `id = 'planner'` chứa toàn bộ state.
   - Env var cần thiết: `DATABASE_URL` (Vercel tự inject vào Production/Preview/Development; local dev cần chạy `npx vercel env pull .env.local` để có file này — đã có sẵn, không cần chạy lại trừ khi bị mất).
@@ -25,7 +25,48 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Documents: modal Sửa to bằng modal Xem + sửa bảng (thêm/xóa hàng cột) + highlight nút đang bật (mới nhất)
+### Menu mới "Playbook" — Cẩm nang quy trình QC dự án (Shift-Left) (mới nhất)
+
+Người dùng dán nguyên một file HTML độc lập ("Cẩm Nang Quy Trình QC Dự Án - Shift-Left Testing Playbook", Tailwind CDN + lucide + dark mode) và yêu cầu: **lấy y nguyên nội dung, còn UI thì làm cho hợp với web hiện tại**. Tất cả nằm trong `src/App.jsx`.
+
+**Nội dung giữ nguyên 100% từ file gốc**: 3 giai đoạn (Khởi tạo ý tưởng / Định hình thiết kế / Chi tiết hóa tính năng) với 13 nhiệm vụ checklist (4 + 4 + 5), phần "aside" của từng giai đoạn (Mẹo phản biện / Điểm mù Storyboard / Tỷ lệ phân bổ Test Case 60-20-20), 4 Nguyên Tắc Vàng, và 4 mẫu tài liệu (DoR & DoD, Test Plan, Test Case, Q&A Storyboard) copy được ra clipboard.
+- **Lưu ý số liệu**: file gốc ghi cứng "0/15 mục" trong HTML nhưng JS của nó đếm số checkbox thật = **13**. Bản này hiển thị 13 (đúng), không phải 15.
+
+**UI viết lại hoàn toàn theo design system của app** (không dùng Tailwind CDN/lucide script/dark mode của file gốc):
+- Bảng màu gốc → bảng màu app: amber → `sun`, blue → `sky`, emerald/indigo → `teal`, slate → `ink`. Map trong hằng `PLAYBOOK_TONES`.
+- Dùng lại class có sẵn trong [src/index.css](src/index.css): `.card`, `.card-dashed`, `.btn`/`.btn-sm`/`.btn-primary`/`.btn-sun`/`.btn-soft`/`.btn-outline`, `.pill`, `.progress-track`/`.progress-fill`, `.icon-btn`, `.marker` — không thêm CSS mới, không sửa `index.css`.
+- Bỏ nút dark mode (app không có dark mode). Bỏ header/footer riêng của file gốc, gộp vào layout `main` sẵn có.
+- Checkbox: `<input class="sr-only">` bên trong `<label>`, vẽ ô tick tròn `border-[1.5px] border-ink-800` + `bg-teal-500` khi bật, dòng chữ gạch ngang khi xong — hợp phong cách "sticker" của app.
+- Khối "4 Nguyên Tắc Vàng" (gốc là gradient indigo→slate) → nền đặc `bg-ink-800` + chữ trắng + số thứ tự `text-sun-300`, các thẻ con `bg-white/10 border-white/25`.
+
+**Các thành phần mới thêm vào `src/App.jsx`** (đặt ngay trước `SettingsView`):
+- Dữ liệu: `PLAYBOOK_TONES`, `PLAYBOOK_STAGES`, `PLAYBOOK_PRINCIPLES`, `PLAYBOOK_TEMPLATE_TABS`, `PLAYBOOK_TEMPLATES`, `PLAYBOOK_TOTAL_TASKS`.
+- `renderPlaybookText()` — cho phép in nghiêng bằng cú pháp `*...*` ngay trong chuỗi dữ liệu (dùng cho `*Empty State*`, `*Loading State*`... và câu hỏi trong tab Mẹo), khỏi phải nhét JSX vào mảng data.
+- `PlaybookView` (bộ lọc tab: Tất cả / GĐ1 / GĐ2 / GĐ3 / 4 Nguyên Tắc Vàng + thẻ tiến độ + nút "Mẫu tài liệu" và "In / Xuất PDF").
+- `PlaybookStageCard` (1 giai đoạn: header + danh sách nhiệm vụ + cột aside 3 kiểu `tips`/`notes`/`ratio`).
+- `PlaybookTemplateModal` (4 tab mẫu, nút Sao chép dùng `navigator.clipboard` và fallback `execCommand`, đóng bằng nút X / click nền / phím Escape).
+
+**Trạng thái checklist lưu vào data đồng bộ, KHÔNG dùng localStorage riêng** (file gốc dùng key `qc_playbook_checklist_state`):
+- Thêm field `playbookChecklist: []` (mảng id nhiệm vụ đã tick) vào `EMPTY_DATA` và cả 2 nhánh của `normalizeData()` → đi chung đường `/api/data` + `localStorage` như mọi dữ liệu khác, nên tick ở máy này thì máy khác cũng thấy. Dữ liệu cũ trong DB không có field này vẫn chạy bình thường (normalize về `[]`).
+- Handler trong `App()`: `togglePlaybookTask(taskId)` và `resetPlaybookChecklist()`.
+
+**Nav**: thêm `{ id: 'playbook', label: 'Playbook', icon: ShieldCheck }` vào `navItems`, đặt giữa `testing` và `settings`; thêm nhánh render `activeView === 'playbook'`.
+
+**Icon lucide-react thêm vào import**: `Award, ClipboardList, Copy, Eye, FileText, Gem, Layers, Lightbulb, Package, PieChart, Printer, RotateCcw, ShieldCheck, Sparkles, Table2`.
+
+**Đã verify** trên `weekly-study-planner-ui-only` (cổng 5174, Vite thuần — **KHÔNG chạm DB thật**), thao tác thật bằng `.click()` trên DOM:
+- Vào menu Playbook: hiện đủ 3 giai đoạn + 4 nguyên tắc, `0/13 mục hoàn thành`, 3 dòng "Output:", 3 nút "Xem ... mẫu".
+- Tick 1 nhiệm vụ ⇒ `1/13`, `playbookChecklist: ["s1_t1"]` trong localStorage. Bấm "Đặt lại" ⇒ về `0/13`, mảng rỗng.
+- Lọc tab "Định hình (GĐ2)" ⇒ chỉ còn 4 checkbox, ẩn GĐ1/GĐ3 và phần Nguyên tắc. Về "Tất cả các bước" ⇒ 13 checkbox.
+- Modal mẫu tài liệu: mở đúng tab mặc định DoR & DoD (1058 ký tự), chuyển sang tab "Cấu trúc Test Case" ⇒ nội dung đổi đúng, giữ nguyên cả backtick `` `TC_AUTH_LOGIN_001` ``. Đóng bằng nút X OK.
+- `*...*` render thành 5 thẻ `<em>` đúng chỗ, **không còn dấu `*` nào lọt ra text**.
+- Mobile 375px: `scrollWidth === clientWidth === 375`, **không tràn ngang**, không phần tử nào vượt mép phải.
+- Console không có lỗi JS (chỉ 2 lỗi 404 của `/api/data` — đúng như mong đợi vì chạy Vite thuần không có serverless function).
+- `npm run build` pass (717 kB JS / 31 kB CSS).
+- **Chưa chụp được ảnh màn hình** (Browser pane không hiển thị nên tool screenshot timeout) — mọi kết luận đo bằng DOM, không phải nhìn ảnh. Số đo layout ở cỡ desktop trong pane ẩn cũng không tin được (aside chiếm hết bề ngang, `main` bị đẩy ra ngoài) nhưng **màn Dashboard cũ đo ra y hệt**, tức là artifact của pane ẩn chứ không phải lỗi mới.
+- Sau `preview_stop` đã xác nhận không còn listener cổng 5173/5174 và không còn process `node.exe` nào.
+
+### Documents: modal Sửa to bằng modal Xem + sửa bảng (thêm/xóa hàng cột) + highlight nút đang bật
 Người dùng gửi ảnh modal "Sửa tài liệu" (khung nhỏ, toolbar không cho biết đang ở kiểu chữ nào) và yêu cầu 3 việc: (1) modal Sửa to ra như modal Xem, (2) bảng cho phép thêm/xóa hàng cột, (3) bấm chế độ nào thì sáng icon đó.
 
 Tất cả nằm trong `DocumentModal` ([src/App.jsx:3366](src/App.jsx:3366)) và [src/index.css](src/index.css):

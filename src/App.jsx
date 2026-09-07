@@ -8,6 +8,7 @@ import {
   AlignLeft,
   AlignRight,
   ArrowLeft,
+  Award,
   BarChart3,
   Baseline,
   Bold,
@@ -20,33 +21,47 @@ import {
   ChevronLeft,
   ChevronRight,
   Circle,
+  ClipboardList,
   Clock,
   Code2,
   Compass,
+  Copy,
   Eraser,
   Expand,
+  Eye,
+  FileText,
   FlaskConical,
   FolderOpen,
+  Gem,
   GraduationCap,
   Headphones,
   Highlighter,
   Italic,
   Languages,
+  Layers,
   LayoutDashboard,
   Library,
+  Lightbulb,
   List,
   ListChecks,
   ListOrdered,
   Menu,
   Mic,
   NotebookPen,
+  Package,
+  PieChart,
   Plus,
+  Printer,
   RefreshCw,
+  RotateCcw,
   Search,
   Settings,
+  ShieldCheck,
   SlidersHorizontal,
+  Sparkles,
   StickyNote,
   Table,
+  Table2,
   Trash2,
   Underline,
   X,
@@ -99,6 +114,7 @@ const EMPTY_DATA = {
   scheduleRules: [],
   documents: [],
   speakingTopics: EMPTY_SPEAKING_TOPICS,
+  playbookChecklist: [],
   legacyWeeks: null,
   defaultRulesSeeded: false,
 };
@@ -190,6 +206,9 @@ function normalizeData(value) {
         : [],
       documents: Array.isArray(value.documents) ? value.documents : [],
       speakingTopics: normalizeSpeakingTopics(value.speakingTopics),
+      playbookChecklist: Array.isArray(value.playbookChecklist)
+        ? value.playbookChecklist
+        : [],
     };
   }
 
@@ -198,6 +217,7 @@ function normalizeData(value) {
     scheduleRules: [],
     documents: [],
     speakingTopics: EMPTY_SPEAKING_TOPICS,
+    playbookChecklist: [],
     legacyWeeks: value,
     defaultRulesSeeded: false,
   };
@@ -1056,6 +1076,22 @@ function App() {
     }));
   }
 
+  function togglePlaybookTask(taskId) {
+    setData((current) => {
+      const checklist = current.playbookChecklist || [];
+      return {
+        ...current,
+        playbookChecklist: checklist.includes(taskId)
+          ? checklist.filter((id) => id !== taskId)
+          : [...checklist, taskId],
+      };
+    });
+  }
+
+  function resetPlaybookChecklist() {
+    setData((current) => ({ ...current, playbookChecklist: [] }));
+  }
+
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'calendar', label: 'Calendar', icon: CalendarDays },
@@ -1064,6 +1100,7 @@ function App() {
     { id: 'documents', label: 'Documents', icon: Library },
     { id: 'speaking', label: 'Speaking', icon: Mic },
     { id: 'testing', label: 'Testing', icon: FlaskConical },
+    { id: 'playbook', label: 'Playbook', icon: ShieldCheck },
     { id: 'settings', label: 'Settings', icon: SlidersHorizontal },
   ];
 
@@ -1248,6 +1285,14 @@ function App() {
         )}
 
         {activeView === 'testing' && <TestingView />}
+
+        {activeView === 'playbook' && (
+          <PlaybookView
+            checklist={data.playbookChecklist || []}
+            toggleTask={togglePlaybookTask}
+            resetChecklist={resetPlaybookChecklist}
+          />
+        )}
 
         {activeView === 'settings' && (
           <SettingsView
@@ -2858,6 +2903,778 @@ function TestingView() {
         </div>
       )}
     </section>
+  );
+}
+
+/* =========================================================================
+   PLAYBOOK — Cẩm nang quy trình QC dự án (Shift-Left Testing)
+   Nội dung: 3 giai đoạn từ ý tưởng đến sẵn sàng thực thi + 4 nguyên tắc vàng
+   + bộ mẫu tài liệu (DoR/DoD, Test Plan, Test Case, Q&A Storyboard).
+   ========================================================================= */
+
+const PLAYBOOK_TONES = {
+  sun: {
+    header: 'bg-sun-50',
+    number: 'bg-sun-300 text-ink-900',
+    badge: 'bg-sun-200 text-ink-900',
+    accent: 'text-sun-600',
+    bullet: 'text-sun-600',
+    tab: 'bg-sun-200 text-ink-900',
+  },
+  sky: {
+    header: 'bg-sky-50',
+    number: 'bg-sky-300 text-ink-900',
+    badge: 'bg-sky-200 text-ink-900',
+    accent: 'text-sky-600',
+    bullet: 'text-sky-600',
+    tab: 'bg-sky-200 text-ink-900',
+  },
+  teal: {
+    header: 'bg-teal-50',
+    number: 'bg-teal-300 text-ink-900',
+    badge: 'bg-teal-200 text-ink-900',
+    accent: 'text-teal-600',
+    bullet: 'text-teal-600',
+    tab: 'bg-teal-200 text-ink-900',
+  },
+};
+
+const PLAYBOOK_STAGES = [
+  {
+    id: 'stage1',
+    number: 1,
+    tone: 'sun',
+    navLabel: 'Khởi tạo (Chưa có Plan/Wireframe)',
+    title: 'GIAI ĐOẠN 1: KHỞI TẠO Ý TƯỞNG',
+    badge: 'Chưa có Plan & Storyboard',
+    goal: 'Mục tiêu: Đặt câu hỏi phản biện, làm rõ bối cảnh và thiết lập chuẩn mực chất lượng ngay từ đầu.',
+    output: 'DoR/DoD, Q&A Logic, Test Strategy sơ lược',
+    tasks: [
+      {
+        id: 's1_t1',
+        title: '1. Nắm bắt bối cảnh kinh doanh (Business Context)',
+        detail:
+          'Xác định ai là đối tượng người dùng cuối (B2B, B2C)? Đâu là tính năng sống còn (Must-have features) quyết định sự thành bại của dự án?',
+      },
+      {
+        id: 's1_t2',
+        title: '2. Phản biện và làm rõ yêu cầu phi chức năng (Non-Functional)',
+        detail:
+          'Truy vấn về Performance (dự kiến CCU là bao nhiêu?), nền tảng hỗ trợ tối thiểu (Android/iOS, Chrome/Safari), và tính tuân thủ bảo mật dữ liệu nhạy cảm.',
+      },
+      {
+        id: 's1_t3',
+        title: '3. Thiết lập luật chơi chung (DoR & DoD, Bug Lifecycle)',
+        detail:
+          'Thống nhất với BA, Dev & PM về tiêu chuẩn nhận task (DoR), tiêu chuẩn hoàn thành nghiệm thu (DoD), và quy tắc phân loại mức độ nghiêm trọng của Bug (Severity/Priority).',
+      },
+      {
+        id: 's1_t4',
+        title: '4. Đề xuất môi trường & ma trận thiết bị kiểm thử',
+        detail:
+          'Thống nhất các môi trường kiểm thử cần thiết (Dev, Staging, UAT) và lập ma trận phiên bản trình duyệt, thiết bị phổ biến nhất của người dùng mục tiêu.',
+      },
+    ],
+    aside: {
+      kind: 'tips',
+      icon: Lightbulb,
+      title: 'Mẹo phản biện cho QC',
+      items: [
+        'Luôn hỏi: *"Hành vi mong muốn nếu người dùng mất kết nối Internet giữa chừng là gì?"*',
+        'Hỏi về giới hạn số lượng và dung lượng dữ liệu tối đa hệ thống có thể lưu trữ.',
+        'Chủ động đề xuất chuẩn bị công cụ kiểm thử tự động (Automation/API test) sớm nếu dự án có quy mô lớn.',
+      ],
+    },
+    template: { key: 'dor-dod', label: 'Xem mẫu chuẩn DoR & DoD', icon: Copy },
+  },
+  {
+    id: 'stage2',
+    number: 2,
+    tone: 'sky',
+    navLabel: 'Định hình (Đã có Clip & Storyboard)',
+    title: 'GIAI ĐOẠN 2: ĐỊNH HÌNH THIẾT KẾ',
+    badge: 'Đã có Clip Function & Storyboard',
+    goal: 'Mục tiêu: Kiểm thử tĩnh (Static Testing) trên giao diện, lập Test Plan tổng quan và ước lượng thời gian (Estimate).',
+    output: 'High-level Test Plan, Estimate sơ bộ, Mindmap Scenarios, Q&A UI',
+    tasks: [
+      {
+        id: 's2_t1',
+        title: '1. Lập Test Plan tổng quan & Ước lượng (High-level Estimate)',
+        detail:
+          'Xác định tính năng In-scope/Out-of-scope. Ước lượng thời gian theo tỷ lệ chuẩn: Viết TC (30%) - Thực thi Test (40%) - Regression & Re-test lỗi (30%).',
+      },
+      {
+        id: 's2_t2',
+        title: '2. Rà soát 4 trạng thái màn hình thiếu sót (Missing UI States)',
+        detail:
+          'Soi storyboard xem đã có: *Empty State* (khi trống rỗng), *Loading State* (đang tải), *Error State* (lỗi mạng/server) và *Partial/Overflow State* (text quá dài làm vỡ layout) chưa?',
+      },
+      {
+        id: 's2_t3',
+        title:
+          '3. Vẽ Mindmap / Test Scenarios theo hành trình người dùng (User Journey)',
+        detail:
+          'Lập danh sách kịch bản mức tổng thể (High-level scenarios) để bao quát toàn bộ flow trước khi viết chi tiết, phát hiện các luồng cụt (Dead-end screens).',
+      },
+      {
+        id: 's2_t4',
+        title: '4. Tổng hợp bảng Q&A Storyboard và họp Sync với BA/Designer',
+        detail:
+          'Ghi nhận các điểm bất hợp lý về mặt UX (nút bấm quá nhỏ, thiếu nút Back, luồng đi lặp lại) và chốt giải pháp trước khi đưa sang Dev.',
+      },
+    ],
+    aside: {
+      kind: 'notes',
+      icon: Eye,
+      title: 'Điểm mù thường gặp ở Storyboard',
+      items: [
+        {
+          label: 'Luồng cụt (Dead-end):',
+          text: 'Người dùng ấn vào trang chi tiết nhưng không có nút Cancel/Close để quay lại.',
+        },
+        {
+          label: 'Không đồng nhất (Inconsistency):',
+          text: 'Màn hình A dùng chữ "Đồng ý", màn B lại dùng chữ "Xác nhận".',
+        },
+        {
+          label: 'Click đúp (Double-click):',
+          text: 'Chưa có cơ chế vô hiệu hóa (disable) nút sau khi người dùng bấm gửi dữ liệu.',
+        },
+      ],
+    },
+    template: { key: 'test-plan', label: 'Xem dàn ý Test Plan mẫu', icon: FileText },
+  },
+  {
+    id: 'stage3',
+    number: 3,
+    tone: 'teal',
+    navLabel: 'Chi tiết hóa (User Stories & AC)',
+    title: 'GIAI ĐOẠN 3: CHI TIẾT HÓA TÍNH NĂNG',
+    badge: 'Đã có User Stories & AC',
+    goal: 'Mục tiêu: Chuyển hóa yêu cầu thành Test Case cụ thể, chuẩn bị sẵn Test Data và Collections API trước khi nhận code.',
+    output: 'Detailed Test Cases, Re-estimate, Test Data & Postman Scripts',
+    tasks: [
+      {
+        id: 's3_t1',
+        title: '1. Rà soát tính đo lường được của Acceptance Criteria (AC)',
+        detail:
+          'Loại bỏ các từ ngữ mơ hồ như "nhanh", "dễ dùng". Đổi thành chỉ số đo đếm được (vd: "Phản hồi trong < 2s", "Giới hạn 10-50 ký tự").',
+      },
+      {
+        id: 's3_t2',
+        title: '2. Thiết kế Test Case theo kỹ thuật chuẩn (BVA, EP, Decision Table)',
+        detail:
+          'Áp dụng Phân tích giá trị biên (BVA), Phân vùng tương đương (EP), Bảng quyết định kết hợp điều kiện phức tạp. Đảm bảo tỷ lệ 20% Happy Path, 60% Negative/Edge Cases, 20% Security cơ bản.',
+      },
+      {
+        id: 's3_t3',
+        title: '3. Re-estimate chuẩn xác dựa trên số lượng Test Case cụ thể',
+        detail:
+          'Đếm chính xác tổng Test Case để tính công thực thi thực tế. Báo động ngay cho PM nếu phát sinh kịch bản vượt quá thời gian ban đầu.',
+      },
+      {
+        id: 's3_t4',
+        title: '4. Tổ chức Test Case Walkthrough (Review 3 bên: BA - Dev - QC)',
+        detail:
+          'Trình bày bộ Test Case trước khi Dev code. Giúp Dev tự unit test kỹ hơn và xác nhận lại với BA xem đã đúng kỳ vọng khách hàng chưa.',
+      },
+      {
+        id: 's3_t5',
+        title: '5. Chuẩn bị Test Data & Script API (Postman/Swagger)',
+        detail:
+          'Tạo sẵn tài khoản phân quyền, file mẫu (đúng format, file quá dung lượng, file độc hại). Viết sẵn assertions API để test backend ngay khi dev xong mà không cần đợi UI.',
+      },
+    ],
+    aside: {
+      kind: 'ratio',
+      icon: PieChart,
+      title: 'Tỷ lệ phân bổ Test Case chuẩn',
+      bars: [
+        { label: 'Negative / Edge Cases', percent: 60, fill: 'bg-teal-400' },
+        { label: 'Happy Path (Luồng chuẩn)', percent: 20, fill: 'bg-sky-400' },
+        { label: 'Validation / Security cơ bản', percent: 20, fill: 'bg-coral-300' },
+      ],
+      note: 'Test API trước giúp tìm ra 80% bug logic nghiệp vụ nhanh gấp 3 lần so với chờ có giao diện UI.',
+    },
+    template: { key: 'test-case', label: 'Xem cấu trúc Test Case chuẩn', icon: Table2 },
+  },
+];
+
+const PLAYBOOK_PRINCIPLES = [
+  {
+    number: '01',
+    title: 'Càng sớm, càng rẻ',
+    text: 'Phát hiện lỗi logic ở Storyboard chỉ mất 5 phút sửa bản vẽ. Để lọt đến khi code xong mất 2 ngày dev + test lại.',
+  },
+  {
+    number: '02',
+    title: 'Viết trước khi Test',
+    text: 'Tuyệt đối không test tự do (Ad-hoc) khi nhận tính năng mới. Luôn bám theo kịch bản rõ ràng để không bị sót luồng.',
+  },
+  {
+    number: '03',
+    title: 'Đồng hành cùng Team',
+    text: 'QC không phải "cảnh sát vạch lá tìm sâu". QC là người bạn đồng hành bảo vệ chất lượng trải nghiệm của khách hàng.',
+  },
+  {
+    number: '04',
+    title: 'Luôn hiểu chữ "Tại sao"',
+    text: 'Đừng chỉ quan tâm màn hình vẽ gì. Hãy hiểu tại sao người dùng cần tính năng này để lường trước hành vi thực tế.',
+  },
+];
+
+const PLAYBOOK_TEMPLATE_TABS = [
+  { key: 'dor-dod', label: '1. Chuẩn DoR & DoD' },
+  { key: 'test-plan', label: '2. Dàn ý Test Plan' },
+  { key: 'test-case', label: '3. Cấu trúc Test Case' },
+  { key: 'qa-log', label: '4. Bảng Q&A Storyboard' },
+];
+
+const PLAYBOOK_TEMPLATES = {
+  'dor-dod': `### 1. DEFINITION OF READY (DoR) - Tiêu chuẩn để QC nhận User Story:
+[ ] User Story có mô tả nghiệp vụ (User Persona, Want, Benefit) rõ ràng.
+[ ] Acceptance Criteria (AC) chi tiết, đo lường được, không dùng từ mơ hồ.
+[ ] Thiết kế Wireframe/Storyboard (Figma) đã hoàn tất và chốt với PO.
+[ ] Các trạng thái đặc biệt (Empty, Loading, Error, Overflow) đã được định nghĩa.
+[ ] API Documentation (Swagger/Postman) đã được Dev bàn giao cấu trúc request/response.
+[ ] Đã được làm rõ tất cả câu hỏi trong bảng Q&A.
+
+---
+
+### 2. DEFINITION OF DONE (DoD) - Tiêu chuẩn tính năng sẵn sàng nghiệm thu:
+[ ] Tất cả Test Cases đã được thực thi và cập nhật kết quả trên Test Management tool.
+[ ] Tỷ lệ Pass rate đạt tối thiểu 95% (Happy Path và luồng chính đạt 100%).
+[ ] Không còn tồn đọng bất kỳ Defect nào thuộc mức Critical hoặc Blocker.
+[ ] Các Defect mức Major/Minor còn lại đã được PO/PM chấp thuận và dời sang sprint sau.
+[ ] Đã kiểm tra Cross-browser & Cross-device trên danh sách thiết bị cam kết.
+[ ] Bản build đã được deploy thành công lên môi trường Staging/UAT.`,
+
+  'test-plan': `## HIGH-LEVEL TEST PLAN (DÀN Ý KẾ HOẠCH KIỂM THỬ)
+
+1. TỔNG QUAN DỰ ÁN (Project Overview)
+   - Mục tiêu kiểm thử (Test Objectives)
+   - Đối tượng người dùng mục tiêu
+
+2. PHẠM VI KIỂM THỬ (Scope of Testing)
+   - In-scope: [Liệt kê các module tính năng trong Storyboard sẽ test]
+   - Out-of-scope: [Các tính năng hoãn lại, Payment 3rd party sandbox, ...]
+
+3. CHIẾN LƯỢC KIỂM THỬ (Test Strategy)
+   - Loại hình kiểm thử: Functional Testing, UI/UX Testing, API Testing, Regression Testing
+   - Quy trình quản lý lỗi (Bug Life Cycle & Severity matrix)
+
+4. MÔI TRƯỜNG & THIẾT BỊ (Test Environment & Matrix)
+   - Môi trường: Dev, Staging, Production-like
+   - Web Browsers: Chrome (phiên bản mới nhất), Safari (iOS & MacOS), Edge
+   - Mobile Devices: iPhone 13/14 (iOS 16+), Samsung Galaxy / Xiaomi (Android 12+)
+
+5. ƯỚC LƯỢNG & PHÂN BỔ THỜI GIAN (Effort Estimation)
+   - Phân tích & Thiết kế Test Case: 30% tổng thời gian
+   - Thực thi kiểm thử vòng 1 (Test Execution): 40%
+   - Regression Testing & Xác thực Bug (Re-test): 30%
+
+6. TIÊU CHUẨN NGHIỆM THU (Suspension & Exit Criteria)
+   - Điều kiện dừng: Khi môi trường lỗi không thể deploy hoặc có blocker ở login.
+   - Điều kiện hoàn thành: Đạt chuẩn DoD đã thống nhất.`,
+
+  'test-case': `## CẤU TRÚC TEST CASE CHUẨN (Chuẩn hóa để import Excel/Jira/TestRail)
+
+| Trường (Field) | Mô tả chi tiết | Ví dụ cụ thể |
+| :--- | :--- | :--- |
+| **Test Case ID** | Định danh duy nhất theo module | \`TC_AUTH_LOGIN_001\` |
+| **Module / Feature** | Nhóm chức năng | Đăng nhập hệ thống (Authentication) |
+| **Title / Summary** | Tóm tắt mục tiêu kiểm thử | Kiểm tra đăng nhập thành công với email và password hợp lệ |
+| **Type** | Loại kiểm thử | Functional / Happy Path / Boundary / Security |
+| **Priority** | Mức độ ưu tiên | High / Medium / Low |
+| **Pre-conditions** | Điều kiện tiên quyết | Tài khoản 'test_user@example.com' đã kích hoạt và tồn tại trong DB |
+| **Test Steps** | Các bước thực hiện tuần tự | 1. Mở trang đăng nhập\\n2. Nhập Email hợp lệ\\n3. Nhập Mật khẩu đúng\\n4. Nhấn nút "Đăng nhập" |
+| **Test Data** | Dữ liệu cụ thể mang ra test | Email: test_user@example.com | Pass: P@ssword123 |
+| **Expected Result** | Kết quả mong đợi chính xác | 1. Hiển thị thông báo "Đăng nhập thành công"\\n2. Điều hướng về Dashboard\\n3. Header hiển thị đúng tên người dùng |
+| **Post-conditions** | Trạng thái sau kiểm thử | Token JWT được lưu vào sessionStorage |`,
+
+  'qa-log': `## MẪU BẢNG GHI NHẬN Q&A REVIEW STORYBOARD & WIREFRAME
+
+| No. | Screen ID / Name | Yêu cầu hiện tại | Thắc mắc / Kịch bản ngoại lệ của QC | Đề xuất giải pháp của QC | BA / Designer phản hồi | Trạng thái |
+| :-- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 01 | SCR_04 (Checkout) | Bấm "Đặt hàng" tạo đơn | Nếu người dùng ấn nút 2 lần liên tục thì sao? | Cần disable nút ngay sau click và hiển thị spinner | Đồng ý, Dev sẽ debounce 2s | [DONE] |
+| 02 | SCR_02 (List View) | Hiển thị lịch sử giao dịch | Chưa có thiết kế khi người dùng mới tạo chưa có đơn nào? | Bổ sung màn hình Empty State kèm nút "Mua sắm ngay" | Designer sẽ bổ sung vào Figma | [IN PROGRESS] |
+| 03 | SCR_03 (Input OTP) | Nhập mã 6 chữ số | Nếu mã OTP gửi đến điện thoại bị trễ quá 60s? | Hiển thị nút "Gửi lại mã OTP" sau bộ đếm lùi 60 giây | BA xác nhận theo logic này | [CLOSED] |`,
+};
+
+const PLAYBOOK_TOTAL_TASKS = PLAYBOOK_STAGES.reduce(
+  (sum, stage) => sum + stage.tasks.length,
+  0,
+);
+
+/* Cho phép in nghiêng bằng cú pháp *...* ngay trong chuỗi nội dung, khỏi phải
+   nhét JSX vào mảng dữ liệu ở trên. */
+function renderPlaybookText(text) {
+  return text.split(/(\*[^*]+\*)/g).map((chunk, index) => {
+    if (chunk.length > 2 && chunk.startsWith('*') && chunk.endsWith('*')) {
+      return (
+        <em key={index} className="font-extrabold italic text-ink-600">
+          {chunk.slice(1, -1)}
+        </em>
+      );
+    }
+    return <span key={index}>{chunk}</span>;
+  });
+}
+
+function PlaybookView({ checklist, toggleTask, resetChecklist }) {
+  const [activeTab, setActiveTab] = useState('all');
+  const [templateKey, setTemplateKey] = useState(null);
+
+  const checkedCount = PLAYBOOK_STAGES.reduce(
+    (sum, stage) =>
+      sum + stage.tasks.filter((task) => checklist.includes(task.id)).length,
+    0,
+  );
+  const percent =
+    PLAYBOOK_TOTAL_TASKS === 0
+      ? 0
+      : Math.round((checkedCount / PLAYBOOK_TOTAL_TASKS) * 100);
+
+  const tabs = [
+    { id: 'all', label: 'Tất cả các bước' },
+    ...PLAYBOOK_STAGES.map((stage) => ({
+      id: stage.id,
+      label: stage.navLabel,
+      number: stage.number,
+      tone: stage.tone,
+    })),
+    { id: 'principles', label: '4 Nguyên Tắc Vàng', icon: Award },
+  ];
+
+  const visibleStages = PLAYBOOK_STAGES.filter(
+    (stage) => activeTab === 'all' || activeTab === stage.id,
+  );
+  const showPrinciples = activeTab === 'all' || activeTab === 'principles';
+
+  return (
+    <section className="flex flex-col gap-6">
+      <div className="flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-end">
+        <div>
+          <span className="pill border-ink-800 bg-teal-100 text-ink-900">
+            <Sparkles size={11} /> Shift-Left · Best Practice
+          </span>
+          <h2 className="mt-2 font-display text-3xl font-medium text-ink-900">
+            QC Execution <span className="marker font-bold">Playbook</span>
+          </h2>
+          <p className="mt-1 max-w-2xl text-xs font-semibold text-ink-400">
+            Quy trình QC 3 giai đoạn (Idea → Test Execution). Ngăn chặn đến 70% lỗi
+            phát sinh từ khâu phân tích — bám checklist từng bước để bảo đảm tính
+            sẵn sàng trước khi nhận bàn giao code.
+          </p>
+        </div>
+        <div className="flex shrink-0 flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setTemplateKey('dor-dod')}
+            className="btn btn-sm btn-sun"
+          >
+            <Layers size={14} /> Mẫu tài liệu
+          </button>
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="btn btn-sm btn-soft"
+          >
+            <Printer size={14} /> In / Xuất PDF
+          </button>
+        </div>
+      </div>
+
+      <div className="card flex flex-col gap-2 p-5">
+        <div className="flex items-center justify-between gap-3">
+          <p className="flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-wider text-ink-500">
+            <ClipboardList size={14} className="text-teal-600" />
+            Tiến độ checklist dự án
+          </p>
+          <span className="font-display text-xl font-bold text-teal-600">
+            {percent}%
+          </span>
+        </div>
+        <div className="progress-track">
+          <div className="progress-fill" style={{ width: `${percent}%` }} />
+        </div>
+        <div className="flex items-center justify-between gap-3">
+          <p className="text-[11px] font-extrabold text-ink-400">
+            {checkedCount}/{PLAYBOOK_TOTAL_TASKS} mục hoàn thành
+          </p>
+          <button
+            type="button"
+            onClick={resetChecklist}
+            className="inline-flex items-center gap-1 text-[11px] font-extrabold text-ink-400 transition-colors hover:text-coral-600"
+          >
+            <RotateCcw size={12} /> Đặt lại
+          </button>
+        </div>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2">
+        {tabs.map((tab) => {
+          const active = activeTab === tab.id;
+          const TabIcon = tab.icon;
+          const tone = tab.tone ? PLAYBOOK_TONES[tab.tone] : null;
+          return (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={`btn btn-sm ${active ? 'btn-primary' : 'btn-soft'}`}
+            >
+              {tab.number && (
+                <span
+                  className={`flex h-5 w-5 items-center justify-center rounded-full border-[1.5px] border-ink-800 text-[10px] font-extrabold ${
+                    active ? 'bg-sun-300 text-ink-900' : tone.tab
+                  }`}
+                >
+                  {tab.number}
+                </span>
+              )}
+              {TabIcon && <TabIcon size={14} />}
+              {tab.label}
+            </button>
+          );
+        })}
+      </div>
+
+      {visibleStages.map((stage) => (
+        <PlaybookStageCard
+          key={stage.id}
+          stage={stage}
+          checklist={checklist}
+          toggleTask={toggleTask}
+          openTemplate={setTemplateKey}
+        />
+      ))}
+
+      {showPrinciples && (
+        <div className="overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-ink-800 p-6 shadow-card sm:p-8">
+          <div className="mb-6 flex items-center gap-3">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-900 bg-sun-300 text-ink-900">
+              <Gem size={20} />
+            </span>
+            <div>
+              <h3 className="font-display text-xl font-bold text-white">
+                4 NGUYÊN TẮC VÀNG CHO QC
+              </h3>
+              <p className="text-[11px] font-semibold text-ink-200">
+                Kim chỉ nam cốt lõi trong mọi dự án phần mềm
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {PLAYBOOK_PRINCIPLES.map((item) => (
+              <div
+                key={item.number}
+                className="rounded-2xl border-[1.5px] border-white/25 bg-white/10 p-4 transition-colors hover:bg-white/20"
+              >
+                <p className="font-display text-2xl font-bold text-sun-300">
+                  {item.number}
+                </p>
+                <h4 className="mt-1 text-sm font-extrabold text-white">
+                  {item.title}
+                </h4>
+                <p className="mt-1.5 text-xs font-semibold leading-relaxed text-ink-100">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {templateKey && (
+        <PlaybookTemplateModal
+          activeKey={templateKey}
+          setActiveKey={setTemplateKey}
+          close={() => setTemplateKey(null)}
+        />
+      )}
+    </section>
+  );
+}
+
+function PlaybookStageCard({ stage, checklist, toggleTask, openTemplate }) {
+  const tone = PLAYBOOK_TONES[stage.tone];
+  const AsideIcon = stage.aside.icon;
+  const TemplateIcon = stage.template.icon;
+  const done = stage.tasks.filter((task) => checklist.includes(task.id)).length;
+
+  return (
+    <div className="card overflow-hidden">
+      <div
+        className={`flex flex-wrap items-start justify-between gap-4 border-b-[1.5px] border-dashed border-ink-800/25 p-5 sm:p-6 ${tone.header}`}
+      >
+        <div className="flex items-start gap-3">
+          <span
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800 font-display text-lg font-bold shadow-chip ${tone.number}`}
+          >
+            {stage.number}
+          </span>
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="font-display text-lg font-bold text-ink-900 sm:text-xl">
+                {stage.title}
+              </h3>
+              <span className={`pill pill-lg border-ink-800 ${tone.badge}`}>
+                {stage.badge}
+              </span>
+            </div>
+            <p className="mt-1 text-xs font-semibold text-ink-500">{stage.goal}</p>
+          </div>
+        </div>
+        <div className="flex flex-col items-start gap-2">
+          <span className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-ink-800/25 bg-white px-3 py-1.5 text-[11px] font-semibold text-ink-500">
+            <Package size={13} className={tone.accent} />
+            Output: <b className="text-ink-800">{stage.output}</b>
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-ink-800/25 bg-white px-3 py-1 text-[11px] font-extrabold text-ink-500">
+            <Check size={12} className={tone.accent} />
+            {done}/{stage.tasks.length} mục đã xong
+          </span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 p-5 sm:p-6 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <h4 className="mb-3 flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-wider text-ink-400">
+            <ListChecks size={14} className={tone.accent} />
+            Nhiệm vụ hành động trọng tâm
+          </h4>
+          <div className="flex flex-col gap-2.5">
+            {stage.tasks.map((task) => {
+              const checked = checklist.includes(task.id);
+              return (
+                <label
+                  key={task.id}
+                  className={`flex cursor-pointer items-start gap-3 rounded-2xl border-[1.5px] p-3.5 transition-all ${
+                    checked
+                      ? 'border-ink-800 bg-teal-50'
+                      : 'border-ink-800/20 bg-white hover:border-ink-800 hover:bg-ink-50'
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={() => toggleTask(task.id)}
+                    className="sr-only"
+                  />
+                  <span
+                    className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800 transition-colors ${
+                      checked ? 'bg-teal-500 text-white' : 'bg-white text-transparent'
+                    }`}
+                  >
+                    <Check size={12} strokeWidth={3.5} />
+                  </span>
+                  <div>
+                    <p
+                      className={`text-sm font-extrabold ${
+                        checked ? 'text-ink-400 line-through' : 'text-ink-800'
+                      }`}
+                    >
+                      {task.title}
+                    </p>
+                    <p className="mt-0.5 text-xs font-semibold leading-relaxed text-ink-400">
+                      {renderPlaybookText(task.detail)}
+                    </p>
+                  </div>
+                </label>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="card-dashed flex flex-col justify-between gap-4 p-5">
+          <div>
+            <h4
+              className={`mb-3 flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider ${tone.accent}`}
+            >
+              <AsideIcon size={14} /> {stage.aside.title}
+            </h4>
+
+            {stage.aside.kind === 'tips' && (
+              <ul className="flex flex-col gap-2">
+                {stage.aside.items.map((item, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start gap-2 text-xs font-semibold leading-relaxed text-ink-600"
+                  >
+                    <span className={`font-extrabold ${tone.bullet}`}>•</span>
+                    <span>{renderPlaybookText(item)}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {stage.aside.kind === 'notes' && (
+              <div className="flex flex-col gap-2">
+                {stage.aside.items.map((item) => (
+                  <p
+                    key={item.label}
+                    className="text-xs font-semibold leading-relaxed text-ink-600"
+                  >
+                    <span className={`font-extrabold ${tone.bullet}`}>• </span>
+                    <b className="text-ink-800">{item.label}</b> {item.text}
+                  </p>
+                ))}
+              </div>
+            )}
+
+            {stage.aside.kind === 'ratio' && (
+              <div className="flex flex-col gap-3">
+                {stage.aside.bars.map((bar) => (
+                  <div key={bar.label} className="flex flex-col gap-1">
+                    <div className="flex items-center justify-between gap-2 text-[11px] font-extrabold text-ink-600">
+                      <span>{bar.label}</span>
+                      <span>{bar.percent}%</span>
+                    </div>
+                    <div className="progress-track h-2.5">
+                      <div
+                        className={`h-full rounded-full ${bar.fill}`}
+                        style={{ width: `${bar.percent}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+                <p className="rounded-2xl border-[1.5px] border-ink-800/20 bg-teal-50 p-3 text-[11px] font-semibold leading-relaxed text-ink-600">
+                  💡 <b className="text-ink-800">Kinh nghiệm:</b> {stage.aside.note}
+                </p>
+              </div>
+            )}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => openTemplate(stage.template.key)}
+            className="btn btn-sm btn-outline w-full"
+          >
+            <TemplateIcon size={14} /> {stage.template.label}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PlaybookTemplateModal({ activeKey, setActiveKey, close }) {
+  const [copied, setCopied] = useState(false);
+  const content = PLAYBOOK_TEMPLATES[activeKey] || '';
+
+  useEffect(() => {
+    setCopied(false);
+  }, [activeKey]);
+
+  useEffect(() => {
+    if (!copied) return undefined;
+    const timer = window.setTimeout(() => setCopied(false), 2500);
+    return () => window.clearTimeout(timer);
+  }, [copied]);
+
+  useEffect(() => {
+    function handleKey(event) {
+      if (event.key === 'Escape') close();
+    }
+    document.addEventListener('keydown', handleKey);
+    return () => document.removeEventListener('keydown', handleKey);
+  }, [close]);
+
+  async function copyContent() {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopied(true);
+      return;
+    } catch {
+      // Trình duyệt chặn Clipboard API (không phải https, thiếu quyền) —
+      // quay về cách cũ bằng execCommand.
+    }
+    const area = document.createElement('textarea');
+    area.value = content;
+    document.body.appendChild(area);
+    area.select();
+    try {
+      document.execCommand('copy');
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+    document.body.removeChild(area);
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-ink-900/40 p-4 backdrop-blur-sm"
+      onClick={close}
+    >
+      <div
+        className="flex max-h-[88vh] w-full max-w-3xl flex-col overflow-hidden rounded-card border-[1.5px] border-ink-800 bg-paper shadow-pop"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="flex items-center justify-between gap-3 border-b-[1.5px] border-ink-800/20 bg-teal-50 p-5">
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sun-300 text-ink-900">
+              <Layers size={18} />
+            </span>
+            <div>
+              <h3 className="font-display text-lg font-bold text-ink-900">
+                Bộ mẫu tài liệu QC chuẩn
+              </h3>
+              <p className="text-[11px] font-semibold text-ink-400">
+                Sao chép nhanh để dùng ngay trong Jira, Confluence hoặc Google Sheets
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={close}
+            className="icon-btn icon-btn-coral h-9 w-9"
+            aria-label="Đóng"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="flex gap-2 overflow-x-auto border-b-[1.5px] border-dashed border-ink-800/20 px-5 py-3">
+          {PLAYBOOK_TEMPLATE_TABS.map((tab) => (
+            <button
+              key={tab.key}
+              type="button"
+              onClick={() => setActiveKey(tab.key)}
+              className={`btn btn-sm ${
+                activeKey === tab.key ? 'btn-primary' : 'btn-soft'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-5">
+          <pre className="overflow-x-auto whitespace-pre-wrap rounded-2xl border-[1.5px] border-ink-800 bg-ink-800 p-4 font-mono text-[11px] leading-relaxed text-ink-100">
+            {content}
+          </pre>
+        </div>
+
+        <div className="flex items-center justify-between gap-3 border-t-[1.5px] border-ink-800/20 bg-ink-50 p-4">
+          <span
+            className={`inline-flex items-center gap-1 text-xs font-extrabold text-teal-600 ${
+              copied ? '' : 'invisible'
+            }`}
+          >
+            <Check size={14} /> Đã sao chép vào bộ nhớ đệm!
+          </span>
+          <button
+            type="button"
+            onClick={copyContent}
+            className="btn btn-sm btn-primary"
+          >
+            <Copy size={14} /> Sao chép nội dung
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
