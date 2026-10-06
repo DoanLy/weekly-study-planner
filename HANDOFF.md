@@ -25,7 +25,15 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Menu mới "Playbook" — Cẩm nang quy trình QC dự án (Shift-Left) (mới nhất)
+### Thay toàn bộ câu trả lời Speaking Part 1 theo văn phong ebook "IELTS Speaking Part 1 - Bài mẫu cho 20 chủ đề" (Nguyễn Huyền) (mới nhất)
+- **Yêu cầu**: giữ nguyên câu hỏi, viết lại câu trả lời của cả 224 câu hỏi Part 1 (41 chủ đề) theo đúng văn phong/level của ebook PDF (`D:\ENGLISH\HUYỀN NGUYỄN\...pdf`): level beginner, từ vựng đơn giản, 2–3 câu ngắn (12–35 từ, TB ~20), mở bằng câu trả lời thẳng rồi 1–2 lý do/ví dụ.
+- **Lựa chọn người dùng đã xác nhận**: KHÔNG thêm dòng "Keywords"; CÓ tô vàng 1–2 cụm từ hay mỗi câu (`<span style="background-color:#fbd95f">`, đúng màu nút highlight hiện tại của editor); câu hỏi trùng/gần trùng với ebook thì dùng nguyên văn bài mẫu trong PDF (vd Shopping, Reading, Food, Hometown, Work or studies...); ghi đè toàn bộ 224 câu.
+- **Cách làm**: dữ liệu câu trả lời ở [scripts/data/speaking-part1-answers.mjs](scripts/data/speaking-part1-answers.mjs), nạp bằng `node --env-file=.env.local scripts/fill-speaking-answers.mjs scripts/data/speaking-part1-answers.mjs --force` (khớp theo text câu hỏi; câu "What do you think is the most important at the moment?" xuất hiện ở 2 chủ đề nên dùng chung 1 câu trả lời).
+- **Backup** câu trả lời cũ: `backups/speaking-part1-backup-2026-10-06.json` (chỉ ở máy local, đã thêm `backups/` vào `.gitignore`).
+- **Đã verify**: matched=224 filled=224 unmatched=0; id/text câu hỏi và trạng thái `completed` không đổi; Part 2 (62) / Part 3 (62) không bị đụng; `GET /api/data` trên production trả về câu trả lời mới.
+- **Lưu ý**: tab web nào đang mở từ trước khi cập nhật cần reload, tránh state cũ trong tab tự lưu đè lên.
+
+### Menu mới "Playbook" — Cẩm nang quy trình QC dự án (Shift-Left)
 
 Người dùng dán nguyên một file HTML độc lập ("Cẩm Nang Quy Trình QC Dự Án - Shift-Left Testing Playbook", Tailwind CDN + lucide + dark mode) và yêu cầu: **lấy y nguyên nội dung, còn UI thì làm cho hợp với web hiện tại**. Tất cả nằm trong `src/App.jsx`.
 

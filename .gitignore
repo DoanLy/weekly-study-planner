@@ -6,3 +6,6 @@ dist
 .vercel
 .env*
 .claude/scheduled_tasks.lock
+
+# Local backups of live DB data (personal content, never commit)
+backups/
