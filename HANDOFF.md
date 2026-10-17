@@ -4,7 +4,10 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 **Quy tắc chuẩn cho project này: luôn cập nhật file này TRƯỚC MỖI LẦN `git push`.**
 
-**Quy tắc thứ hai: mỗi khi đã làm xong TẤT CẢ yêu cầu của người dùng trong phiên (không còn việc gì dở dang), phải tự động `git push` code lên GitHub — không cần người dùng nhắc lại.**
+**Quy tắc thứ hai (BẮT BUỘC, nhắc lại lần 2 ngày 2026-10-17): làm xong là PUSH NGAY — không chờ người dùng hỏi "push chưa", không hỏi xin phép push.**
+- Xong mỗi yêu cầu (đã build + verify xong) → cập nhật file này → `git add` **tất cả** file đã thay đổi → `git commit` → `git push origin main`, ngay trong cùng lượt trả lời.
+- Áp dụng cho mọi thay đổi, kể cả nhỏ. Chỉ không push khi việc còn dở dang hoặc đang chờ người dùng xác nhận một điểm chưa rõ.
+- Báo lại cho người dùng mã commit đã push ở cuối câu trả lời.
 
 ## Thông tin project
 

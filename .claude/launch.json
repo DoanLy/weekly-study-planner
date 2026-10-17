@@ -4,25 +4,55 @@
     {
       "name": "weekly-study-planner",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["vercel", "dev", "--listen", "5173", "--yes"],
+      "runtimeArgs": [
+        "vercel",
+        "dev",
+        "--listen",
+        "5173",
+        "--yes"
+      ],
       "port": 5173
     },
     {
       "name": "weekly-study-planner-ui-only",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "5174"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5174"
+      ],
       "port": 5174
     },
     {
       "name": "weekly-study-planner-ui-only-b",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "5176"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5176"
+      ],
       "port": 5176
+    },
+    {
+      "name": "flashlearn-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "C:/Users/lenovo/flashlearn", "run", "dev", "--", "--port", "5190", "--strictPort"],
+      "port": 5190
     },
     {
       "name": "weekly-study-planner-ui-only-c",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "5177"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5177"
+      ],
       "port": 5177
     }
   ]
