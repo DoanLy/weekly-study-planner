@@ -25,7 +25,12 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Thay toàn bộ câu trả lời Speaking Part 1 theo văn phong ebook "IELTS Speaking Part 1 - Bài mẫu cho 20 chủ đề" (Nguyễn Huyền) (mới nhất)
+### Nút nghe phát âm (🔊) cho câu hỏi + câu trả lời Speaking (mới nhất)
+- **Yêu cầu / lựa chọn người dùng đã xác nhận**: dùng giọng có sẵn của trình duyệt (Web Speech API `speechSynthesis`, miễn phí, không API key); 2 nút riêng (1 cạnh câu hỏi, 1 trên toolbar ô "Câu trả lời" cạnh nút B/tô màu); không có tuỳ chọn giọng/tốc độ (en-US, 1x).
+- **Code** ([src/App.jsx](src/App.jsx), ngay trên `SPEAKING_PARTS`): hook `useSpeech()` (chỉ 1 câu đọc tại 1 thời điểm, bấm lại = dừng, `cancel()` khi unmount), `pickEnglishVoice()` ưu tiên giọng en-US có chữ Natural/Online/Google, `htmlToPlainText()` bỏ thẻ in đậm/tô màu trước khi đọc, component `SpeakButton` (đang đọc → icon `Square` + class `icon-btn-on`). Câu trả lời đọc từ DOM của ô contentEditable (`answerRefs`) nên đọc được cả nội dung vừa gõ chưa lưu. Đổi chủ đề/Part → tự dừng.
+- **Verify**: chạy `weekly-study-planner-ui-only` (cổng 5174, không chạm DB), tạo topic test cục bộ; `speechSynthesis.speaking === true` sau khi bấm, text gửi đi là plain text, nút dừng làm `speaking` về false. Máy người dùng chỉ có giọng Microsoft David/Mark/Zira (hơi robot) — cài thêm giọng Natural hoặc dùng Chrome sẽ hay hơn.
+
+### Thay toàn bộ câu trả lời Speaking Part 1 theo văn phong ebook "IELTS Speaking Part 1 - Bài mẫu cho 20 chủ đề" (Nguyễn Huyền)
 - **Yêu cầu**: giữ nguyên câu hỏi, viết lại câu trả lời của cả 224 câu hỏi Part 1 (41 chủ đề) theo đúng văn phong/level của ebook PDF (`D:\ENGLISH\HUYỀN NGUYỄN\...pdf`): level beginner, từ vựng đơn giản, 2–3 câu ngắn (12–35 từ, TB ~20), mở bằng câu trả lời thẳng rồi 1–2 lý do/ví dụ.
 - **Lựa chọn người dùng đã xác nhận**: KHÔNG thêm dòng "Keywords"; CÓ tô vàng 1–2 cụm từ hay mỗi câu (`<span style="background-color:#fbd95f">`, đúng màu nút highlight hiện tại của editor); câu hỏi trùng/gần trùng với ebook thì dùng nguyên văn bài mẫu trong PDF (vd Shopping, Reading, Food, Hometown, Work or studies...); ghi đè toàn bộ 224 câu.
 - **Cách làm**: dữ liệu câu trả lời ở [scripts/data/speaking-part1-answers.mjs](scripts/data/speaking-part1-answers.mjs), nạp bằng `node --env-file=.env.local scripts/fill-speaking-answers.mjs scripts/data/speaking-part1-answers.mjs --force` (khớp theo text câu hỏi; câu "What do you think is the most important at the moment?" xuất hiện ở 2 chủ đề nên dùng chung 1 câu trả lời).

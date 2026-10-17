@@ -59,11 +59,13 @@ import {
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
+  Square,
   StickyNote,
   Table,
   Table2,
   Trash2,
   Underline,
+  Volume2,
   X,
 } from 'lucide-react';
 
@@ -2107,6 +2109,73 @@ function DocumentsView({
   );
 }
 
+function pickEnglishVoice() {
+  const voices = window.speechSynthesis?.getVoices() || [];
+  return (
+    voices.find((v) => v.lang === 'en-US' && /natural|online|google/i.test(v.name)) ||
+    voices.find((v) => v.lang === 'en-US') ||
+    voices.find((v) => v.lang?.startsWith('en')) ||
+    null
+  );
+}
+
+function htmlToPlainText(html) {
+  const el = document.createElement('div');
+  el.innerHTML = html || '';
+  return (el.innerText || el.textContent || '').replace(/\s+/g, ' ').trim();
+}
+
+function useSpeech() {
+  const [speakingKey, setSpeakingKey] = useState(null);
+  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+
+  useEffect(() => {
+    if (!supported) return undefined;
+    // Chrome loads voices asynchronously; touching getVoices() kicks that off.
+    window.speechSynthesis.getVoices();
+    return () => window.speechSynthesis.cancel();
+  }, [supported]);
+
+  function toggle(key, text) {
+    if (!supported) return;
+    const synth = window.speechSynthesis;
+    synth.cancel();
+    if (speakingKey === key || !text) {
+      setSpeakingKey(null);
+      return;
+    }
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voice = pickEnglishVoice();
+    if (voice) utterance.voice = voice;
+    utterance.lang = voice?.lang || 'en-US';
+    utterance.rate = 1;
+    const clear = () => setSpeakingKey((current) => (current === key ? null : current));
+    utterance.onend = clear;
+    utterance.onerror = clear;
+    setSpeakingKey(key);
+    synth.speak(utterance);
+  }
+
+  return { supported, speakingKey, toggle };
+}
+
+function SpeakButton({ speech, speechKey, getText, label, className = 'h-7 w-7' }) {
+  if (!speech.supported) return null;
+  const active = speech.speakingKey === speechKey;
+  return (
+    <button
+      type="button"
+      onMouseDown={(event) => event.preventDefault()}
+      onClick={() => speech.toggle(speechKey, getText())}
+      title={active ? 'Dừng đọc' : label}
+      aria-label={active ? 'Dừng đọc' : label}
+      className={`icon-btn ${className} ${active ? 'icon-btn-on' : ''}`}
+    >
+      {active ? <Square size={12} fill="currentColor" /> : <Volume2 size={14} />}
+    </button>
+  );
+}
+
 const SPEAKING_PARTS = [
   { id: 'part1', label: 'Part 1' },
   { id: 'part2', label: 'Part 2' },
@@ -2126,6 +2195,11 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
   const [newQuestionText, setNewQuestionText] = useState('');
   const savingTimeouts = useRef({});
   const answerRefs = useRef({});
+  const speech = useSpeech();
+
+  useEffect(() => {
+    if (speech.supported) window.speechSynthesis.cancel();
+  }, [selectedTopicId, activePart, speech.supported]);
 
   function changePart(partId) {
     setActivePart(partId);
@@ -2433,6 +2507,12 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                         >
                           {q.text}
                         </p>
+                        <SpeakButton
+                          speech={speech}
+                          speechKey={`${q.id}:q`}
+                          getText={() => q.text}
+                          label="Nghe phát âm câu hỏi"
+                        />
                         <button
                           type="button"
                           onClick={() => deleteQuestion(q.id)}
@@ -2477,6 +2557,16 @@ function SpeakingView({ speakingTopics, setSpeakingTopics }) {
                           >
                             <Highlighter size={14} />
                           </button>
+                          <SpeakButton
+                            speech={speech}
+                            speechKey={`${q.id}:a`}
+                            getText={() =>
+                              htmlToPlainText(
+                                answerRefs.current[q.id]?.innerHTML ?? q.userNote,
+                              )
+                            }
+                            label="Nghe phát âm câu trả lời"
+                          />
                         </div>
                         <div
                           ref={(el) => {
