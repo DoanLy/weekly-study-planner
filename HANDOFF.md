@@ -28,7 +28,12 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Menu mới "Writing Task 1" — tài liệu IELTS Writing Task 1 band 5.0 (mới nhất)
+### Writing Task 1: gộp "Hiểu đề" + "Cấu trúc 4 đoạn" thành tab "Tổng quan" (mới nhất)
+- **Yêu cầu (người dùng đã xác nhận)**: xoá nội dung PHẦN 1 (Hiểu đề) và PHẦN 2 (Cấu trúc 4 đoạn + Quy trình 20 phút), thay bằng 1 tab **Tổng quan** chứa câu "Ba loại biểu đồ có tất cả **5 dạng phổ biến**" + bảng Loại/Dạng/Đặc điểm (Line 1 dạng, Bar 2 dạng, Pie 2 dạng). Chọn phương án **đánh số lại**: Tổng quan = PHẦN 1, Paraphrase = 2, Từ vựng = 3, 5 dạng biểu đồ = 4, Công thức tổng = 5.
+- **Sửa**: [src/writing-task1.md](src/writing-task1.md) (nội dung + số PHẦN) và `SECTION_TAB_LABELS` trong [src/WritingTask1View.jsx](src/WritingTask1View.jsx). Bảng dùng ô đầu trống cho dòng thứ 2 của Bar/Pie.
+- **Verify** (ui-only cổng 5174): tab "Tổng quan" hiện đúng bảng 5 dòng; `vite build` pass.
+
+### Menu mới "Writing Task 1" — tài liệu IELTS Writing Task 1 band 5.0
 - **Yêu cầu**: người dùng dán nguyên tài liệu Markdown "Hướng dẫn IELTS Writing Task 1 (biểu đồ cột, đường, tròn) cho band 5.0" (6 PHẦN, có công thức viết nhanh cho 5 dạng + bài mẫu) và yêu cầu tạo **1 menu mới tên "Writing Task 1"** để xem và học.
 - **Nội dung giữ nguyên văn** trong [src/writing-task1.md](src/writing-task1.md) (import bằng `?raw` của Vite). Muốn sửa nội dung → sửa file .md này, không cần đụng code.
 - **Giao diện** ở file riêng [src/WritingTask1View.jsx](src/WritingTask1View.jsx) (không nhồi thêm vào App.jsx): bộ đọc Markdown tối giản tự viết (tiêu đề ###/####/#####, bảng, khối ``` , trích dẫn >, danh sách lồng, `**đậm**`, `*nghiêng*` kể cả nghiêng chứa đậm, `code`) — không thêm thư viện. Chia tab theo PHẦN 1–6 (+ "Tất cả"), mỗi PHẦN 1 `.card`. Khối công thức nền tối, chỗ cần điền `[ ... ]` tô vàng, nhãn INTRO/OVERVIEW/BODY tô xanh. Bài mẫu (blockquote) nền teal-50, cụm in đậm màu teal-800. Bảng cuộn ngang riêng trên mobile.

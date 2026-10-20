@@ -7,17 +7,16 @@ import GUIDE_MD from './writing-task1.md?raw';
 // tiêu đề, bảng, khối code, trích dẫn, danh sách lồng, **đậm**, *nghiêng*,
 // `code`) + giao diện chia tab theo từng "PHẦN".
 
-// Tên ngắn cho thanh tab, theo thứ tự PHẦN 1..6 trong tài liệu.
+// Tên ngắn cho thanh tab, theo thứ tự PHẦN 1..5 trong tài liệu.
 const SECTION_TAB_LABELS = [
-  'Hiểu đề',
-  'Cấu trúc 4 đoạn',
+  'Tổng quan',
   'Paraphrase',
   'Từ vựng & mẫu câu',
   '5 dạng biểu đồ & bài mẫu',
   'Công thức tổng',
 ];
 
-// PHẦN chứa các mục "### ... DẠNG N: ..." (PHẦN 5) được tách thành 1 tab cho
+// PHẦN chứa các mục "### ... DẠNG N: ..." (PHẦN 4) được tách thành 1 tab cho
 // mỗi loại biểu đồ (Line / Bar / Pie) thay vì 1 tab chung.
 const CHART_TAB_LABELS = {
   1: { label: 'Line graph', emoji: '📈' },

@@ -1,48 +1,20 @@
 # Hướng dẫn IELTS Writing Task 1 (biểu đồ cột, đường, tròn) cho band 5.0
 
-## PHẦN 1. HIỂU ĐỀ TASK 1
+## PHẦN 1. TỔNG QUAN
 
-| Yêu cầu | Chi tiết |
-|---|---|
-| Thời gian | **20 phút**. Không dùng quá 20 phút vì Task 2 được nhiều điểm hơn |
-| Số từ | **Ít nhất 150 từ**. Nên viết 160–190 từ |
-| Nhiệm vụ | **Mô tả** số liệu, **chọn ý chính** và **so sánh** |
-| Không được làm | Đưa ý kiến cá nhân, giải thích nguyên nhân ("because people are lazy…"), viết kết luận kiểu "I think" |
+Ba loại biểu đồ có tất cả **5 dạng phổ biến**:
 
-**Bài được chấm theo 4 tiêu chí (mỗi tiêu chí 25%):**
-- **Task Achievement:** có Overview không? Có chọn được ý chính và có số liệu không?
-- **Coherence & Cohesion:** chia đoạn có hợp lý không? Từ nối có tự nhiên không?
-- **Lexical Resource:** từ vựng có đúng và có đa dạng không?
-- **Grammar:** có dùng đúng thì không? Có câu ghép không?
-
-> 💡 **Lỗi số 1 khiến học sinh bị kẹt ở 5.0 là không có đoạn Overview, hoặc Overview viết sai.** Ở mức 5.0, chỉ cần sửa lỗi này là bạn đã lên điểm rõ rệt.
-
----
-
-## PHẦN 2. CẤU TRÚC 4 ĐOẠN (DÙNG CHO MỌI BIỂU ĐỒ)
-
-```
-Đoạn 1 – INTRODUCTION (1 câu):  Paraphrase lại đề bài
-Đoạn 2 – OVERVIEW (2 câu):      2 đặc điểm nổi bật nhất, KHÔNG có số liệu
-Đoạn 3 – BODY 1 (3–4 câu):      Mô tả chi tiết nhóm số liệu thứ nhất, có số
-Đoạn 4 – BODY 2 (3–4 câu):      Mô tả chi tiết nhóm số liệu thứ hai, có số
-```
-
-**Task 1 không cần đoạn kết luận.** Overview đã làm nhiệm vụ tổng kết rồi. Overview có thể đặt ngay sau Introduction (cách tôi khuyên dùng) hoặc đặt ở cuối bài.
-
-### Quy trình 20 phút
-
-| Bước | Thời gian | Việc cần làm |
+| Loại | Dạng | Đặc điểm |
 |---|---|---|
-| 1 | 3–4 phút | Đọc đề và xác định: biểu đồ nói về cái gì, **đơn vị** là gì (%, nghìn người, triệu đô…), **thời gian** (quá khứ, hiện tại hay tương lai) |
-| 2 | 1 phút | Tìm 2 ý cho Overview: cái gì cao nhất/thấp nhất? Xu hướng chung tăng hay giảm? |
-| 3 | 1 phút | Quyết định chia Body 1 và Body 2 ra sao (xem cách chia cho từng dạng ở Phần 5) |
-| 4 | 12–13 phút | Viết bài |
-| 5 | 2 phút | Kiểm tra: thì động từ, số nhiều (-s), đơn vị, giới từ (to/by/at) |
+| Đường (Line) | Có thời gian (luôn luôn) | Mô tả xu hướng |
+| Cột (Bar) | ① Không có thời gian | Chỉ so sánh |
+|  | ② Có thời gian | Xu hướng + so sánh |
+| Tròn (Pie) | ① Một biểu đồ | So sánh các phần |
+|  | ② Hai biểu đồ trở lên (qua các năm) | So sánh sự thay đổi |
 
 ---
 
-## PHẦN 3. PARAPHRASE ĐƠN GIẢN MÀ HIỆU QUẢ
+## PHẦN 2. PARAPHRASE ĐƠN GIẢN MÀ HIỆU QUẢ
 
 Câu mở bài chỉ cần **viết lại đề bằng cách khác**. Có 3 kỹ thuật, bạn chỉ cần dùng 2 trong 3.
 
@@ -81,7 +53,7 @@ Câu mở bài chỉ cần **viết lại đề bằng cách khác**. Có 3 kỹ
 
 ---
 
-## PHẦN 4. TỪ VỰNG VÀ MẪU CÂU CỐT LÕI
+## PHẦN 3. TỪ VỰNG VÀ MẪU CÂU CỐT LÕI
 
 ### 4.1. Từ vựng xu hướng (dùng cho biểu đồ đường và biểu đồ cột có thời gian)
 
@@ -157,7 +129,7 @@ Hai câu cùng một nghĩa. Bạn nên xen kẽ cả hai cấu trúc để bài
 
 ---
 
-## PHẦN 5. TỪNG DẠNG BIỂU ĐỒ VÀ BÀI MẪU
+## PHẦN 4. TỪNG DẠNG BIỂU ĐỒ VÀ BÀI MẪU
 
 Ba loại biểu đồ có tất cả **5 dạng phổ biến**:
 
@@ -471,7 +443,7 @@ BODY 2     [N] years later, the picture was very different.
 
 ---
 
-## PHẦN 6. CÔNG THỨC VIẾT NHANH (học thuộc)
+## PHẦN 5. CÔNG THỨC VIẾT NHANH (học thuộc)
 
 ```
 INTRO:     The [loại biểu đồ] [shows/compares/illustrates] [how many/how much/what percentage]
