@@ -12,6 +12,10 @@ Ba loại biểu đồ có tất cả **5 dạng phổ biến**:
 | Tròn (Pie) | ① Một biểu đồ | So sánh các phần |
 |  | ② Hai biểu đồ trở lên (qua các năm) | So sánh sự thay đổi |
 
+```chart
+{"type":"gallery","items":[{"title":"Line graph","note":"Có thời gian · xu hướng","chart":{"type":"line","labels":["1","2","3","4","5"],"series":[{"name":"A","values":[2,4,3,6,8]},{"name":"B","values":[7,6,5,4,2]}]}},{"title":"Bar ① không thời gian","note":"Chỉ so sánh","chart":{"type":"bar","labels":["A","B","C","D"],"series":[{"name":"Men","values":[6,4,3,5]},{"name":"Women","values":[4,5,3,2]}]}},{"title":"Bar ② có thời gian","note":"Xu hướng + so sánh","chart":{"type":"bar","labels":["2005","2010","2015","2020"],"series":[{"name":"X","values":[9,7,5,3]},{"name":"Y","values":[1,4,8,9]}]}},{"title":"Pie ① một biểu đồ","note":"So sánh các phần","chart":{"type":"pie","pies":[{"slices":[{"name":"A","value":40},{"name":"B","value":25},{"name":"C","value":20},{"name":"D","value":15}]}]}},{"title":"Pie ② hai biểu đồ+","note":"So sánh sự thay đổi","chart":{"type":"pie","pies":[{"label":"2000","slices":[{"name":"A","value":50},{"name":"B","value":30},{"name":"C","value":20}]},{"label":"2020","slices":[{"name":"A","value":25},{"name":"B","value":35},{"name":"C","value":40}]}]}}]}
+```
+
 ---
 
 ## PHẦN 2. PARAPHRASE ĐƠN GIẢN MÀ HIỆU QUẢ
@@ -193,6 +197,10 @@ BODY 2     Between [năm] and [năm], [A] overtook [B] and became the most popul
 | History Museum | 400 | 380 | 350 | 300 | 280 | 250 |
 | Art Gallery | 150 | 150 | 160 | 150 | 155 | 150 |
 
+```chart
+{"type":"line","title":"Visitors to three museums, 2010–2020","unit":"nghìn người","labels":["2010","2012","2014","2016","2018","2020"],"series":[{"name":"Science Museum","values":[200,250,320,380,420,500]},{"name":"History Museum","values":[400,380,350,300,280,250]},{"name":"Art Gallery","values":[150,150,160,150,155,150]}]}
+```
+
 **Phân tích:**
 - Science tăng, History giảm, và Science vượt History trong khoảng 2014–2016.
 - Art Gallery gần như đi ngang và luôn thấp nhất.
@@ -260,6 +268,10 @@ BODY 2     For [nhóm còn lại], [B] [is / are] [higher / more active] than [A
 | Men | 6 | 5 | 3 | 2 | 1.5 |
 | Women | 4 | 4 | 3 | 3 | 2.5 |
 
+```chart
+{"type":"bar","title":"Average weekly exercise by age group","unit":"giờ/tuần","labels":["16–24","25–34","35–44","45–54","55+"],"series":[{"name":"Men","values":[6,5,3,2,1.5]},{"name":"Women","values":[4,4,3,3,2.5]}]}
+```
+
 ##### Bài mẫu (≈165 từ). Đề không có năm nên bài dùng **hiện tại đơn**
 
 > The bar chart **compares** the average number of hours that men and women **in five age groups** spend on exercise each week.
@@ -310,6 +322,10 @@ BODY 2     In contrast, the proportion of [nhóm] with [B] rose dramatically,
 | Landline phone | 90% | 75% | 55% | 30% |
 | Laptop | 20% | 45% | 60% | 65% |
 | Smartphone | 5% | 40% | 80% | 95% |
+
+```chart
+{"type":"bar","title":"Households owning three devices, 2005–2020","unit":"%","labels":["2005","2010","2015","2020"],"series":[{"name":"Landline phone","values":[90,75,55,30]},{"name":"Laptop","values":[20,45,60,65]},{"name":"Smartphone","values":[5,40,80,95]}]}
+```
 
 **Phân tích:** smartphone và laptop tăng, landline giảm. Smartphone vượt landline và đứng đầu năm 2020. Chia đoạn: Body 1 tả landline (giảm), Body 2 tả smartphone + laptop (tăng).
 
@@ -376,6 +392,10 @@ BODY 2     The remaining [100 − tổng A+B]% was divided among [N] smaller cat
 
 Housing 35% · Food 25% · Transport 15% · Entertainment 10% · Education 10% · Other 5%
 
+```chart
+{"type":"pie","title":"Monthly family spending, 2020","unit":"%","pies":[{"slices":[{"name":"Housing","value":35},{"name":"Food","value":25},{"name":"Transport","value":15},{"name":"Entertainment","value":10},{"name":"Education","value":10},{"name":"Other","value":5}]}]}
+```
+
 ##### Bài mẫu (≈160 từ)
 
 > The pie chart **illustrates how** an average family spent its monthly income **in** a country **in** 2020.
@@ -428,6 +448,10 @@ BODY 2     [N] years later, the picture was very different.
 | Gas | 25% | 30% |
 | Nuclear | 15% | 15% |
 | Renewables | 10% | 30% |
+
+```chart
+{"type":"pie","title":"Sources of electricity, 2000 vs 2020","unit":"%","pies":[{"label":"2000","slices":[{"name":"Coal","value":50},{"name":"Gas","value":25},{"name":"Nuclear","value":15},{"name":"Renewables","value":10}]},{"label":"2020","slices":[{"name":"Coal","value":25},{"name":"Gas","value":30},{"name":"Nuclear","value":15},{"name":"Renewables","value":30}]}]}
+```
 
 ##### Bài mẫu (≈170 từ)
 

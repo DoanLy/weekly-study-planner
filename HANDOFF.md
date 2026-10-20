@@ -28,7 +28,13 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Writing Task 1: gộp "Hiểu đề" + "Cấu trúc 4 đoạn" thành tab "Tổng quan" (mới nhất)
+### Writing Task 1: thêm hình minh hoạ biểu đồ (mới nhất)
+- **Yêu cầu**: thêm hình minh hoạ từng loại biểu đồ ở tab Tổng quan và cho từng đề ví dụ.
+- **Cách làm**: khối ```chart (JSON) trong [src/writing-task1.md](src/writing-task1.md) → `parseBlocks` tạo block `chart` → component mới [src/ChartFigure.jsx](src/ChartFigure.jsx) vẽ bằng SVG thuần (không thêm thư viện). Hỗ trợ `line`, `bar` (cột nhóm), `pie` (1 hoặc nhiều hình tròn, legend dùng chung màu), `gallery` (lưới thẻ thu nhỏ). Cú pháp JSON ghi ở đầu ChartFigure.jsx.
+- **Vị trí**: Tổng quan có gallery 5 thẻ (Line, Bar ①, Bar ②, Pie ①, Pie ②) dữ liệu minh hoạ; 5 đề ví dụ ở PHẦN 4 có hình vẽ đúng số liệu trong bảng đề, đặt ngay sau bảng số liệu.
+- **Verify**: 12 SVG render (6 gallery + 6 đề), toạ độ khớp số liệu; `vite build` pass. Lưu ý: công cụ screenshot của browser pane bị phóng to khi pane hẹp (DPR 2, innerWidth 400) → kiểm tra bằng DOM.
+
+### Writing Task 1: gộp "Hiểu đề" + "Cấu trúc 4 đoạn" thành tab "Tổng quan"
 - **Yêu cầu (người dùng đã xác nhận)**: xoá nội dung PHẦN 1 (Hiểu đề) và PHẦN 2 (Cấu trúc 4 đoạn + Quy trình 20 phút), thay bằng 1 tab **Tổng quan** chứa câu "Ba loại biểu đồ có tất cả **5 dạng phổ biến**" + bảng Loại/Dạng/Đặc điểm (Line 1 dạng, Bar 2 dạng, Pie 2 dạng). Chọn phương án **đánh số lại**: Tổng quan = PHẦN 1, Paraphrase = 2, Từ vựng = 3, 5 dạng biểu đồ = 4, Công thức tổng = 5.
 - **Sửa**: [src/writing-task1.md](src/writing-task1.md) (nội dung + số PHẦN) và `SECTION_TAB_LABELS` trong [src/WritingTask1View.jsx](src/WritingTask1View.jsx). Bảng dùng ô đầu trống cho dòng thứ 2 của Bar/Pie.
 - **Verify** (ui-only cổng 5174): tab "Tổng quan" hiện đúng bảng 5 dòng; `vite build` pass.

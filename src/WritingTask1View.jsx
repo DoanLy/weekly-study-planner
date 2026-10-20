@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { BarChart3, Printer, Sparkles } from 'lucide-react';
 import GUIDE_MD from './writing-task1.md?raw';
+import ChartFigure from './ChartFigure';
 
 // Nội dung tài liệu nằm nguyên văn trong writing-task1.md (Markdown). File này
 // chỉ là bộ đọc Markdown tối giản (đủ cho đúng các cú pháp tài liệu dùng:
@@ -138,11 +139,14 @@ function parseBlocks(lines) {
     if (line.trim() === '') {
       i += 1;
     } else if (line.startsWith('```')) {
+      const lang = line.slice(3).trim();
       const code = [];
       i += 1;
       while (i < lines.length && !lines[i].startsWith('```')) code.push(lines[i++]);
       i += 1;
-      blocks.push({ type: 'code', text: code.join('\n') });
+      // Khối ```chart chứa JSON dữ liệu → vẽ hình minh hoạ (xem ChartFigure.jsx).
+      if (lang === 'chart') blocks.push({ type: 'chart', spec: JSON.parse(code.join('\n')) });
+      else blocks.push({ type: 'code', text: code.join('\n') });
     } else if (/^#{3,6} /.test(line)) {
       const level = line.match(/^#+/)[0].length;
       blocks.push({ type: 'heading', level, text: line.slice(level + 1).trim() });
@@ -331,6 +335,8 @@ function Blocks({ blocks, inQuote = false }) {
             </code>
           </pre>
         );
+      case 'chart':
+        return <ChartFigure key={index} spec={block.spec} />;
       case 'quote':
         return (
           <blockquote
