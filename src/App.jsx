@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import TESTING_DATA from './testing-data.json';
 import { TESTING_GLOSSARY } from './testing-glossary.js';
+import WritingTask1View from './WritingTask1View.jsx';
 import {
   AArrowDown,
   AArrowUp,
@@ -13,6 +14,7 @@ import {
   Baseline,
   Bold,
   BookOpen,
+  PenLine,
   Bot,
   CalendarCheck,
   CalendarDays,
@@ -1101,6 +1103,7 @@ function App() {
     { id: 'notes', label: 'Notes', icon: StickyNote },
     { id: 'documents', label: 'Documents', icon: Library },
     { id: 'speaking', label: 'Speaking', icon: Mic },
+    { id: 'writing-task1', label: 'Writing Task 1', icon: PenLine },
     { id: 'testing', label: 'Testing', icon: FlaskConical },
     { id: 'playbook', label: 'Playbook', icon: ShieldCheck },
     { id: 'settings', label: 'Settings', icon: SlidersHorizontal },
@@ -1285,6 +1288,8 @@ function App() {
             setSpeakingTopics={updateSpeakingTopics}
           />
         )}
+
+        {activeView === 'writing-task1' && <WritingTask1View />}
 
         {activeView === 'testing' && <TestingView />}
 

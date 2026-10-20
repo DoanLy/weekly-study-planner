@@ -28,7 +28,14 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Nút nghe phát âm (🔊) cho câu hỏi + câu trả lời Speaking (mới nhất)
+### Menu mới "Writing Task 1" — tài liệu IELTS Writing Task 1 band 5.0 (mới nhất)
+- **Yêu cầu**: người dùng dán nguyên tài liệu Markdown "Hướng dẫn IELTS Writing Task 1 (biểu đồ cột, đường, tròn) cho band 5.0" (6 PHẦN, có công thức viết nhanh cho 5 dạng + bài mẫu) và yêu cầu tạo **1 menu mới tên "Writing Task 1"** để xem và học.
+- **Nội dung giữ nguyên văn** trong [src/writing-task1.md](src/writing-task1.md) (import bằng `?raw` của Vite). Muốn sửa nội dung → sửa file .md này, không cần đụng code.
+- **Giao diện** ở file riêng [src/WritingTask1View.jsx](src/WritingTask1View.jsx) (không nhồi thêm vào App.jsx): bộ đọc Markdown tối giản tự viết (tiêu đề ###/####/#####, bảng, khối ``` , trích dẫn >, danh sách lồng, `**đậm**`, `*nghiêng*` kể cả nghiêng chứa đậm, `code`) — không thêm thư viện. Chia tab theo PHẦN 1–6 (+ "Tất cả"), mỗi PHẦN 1 `.card`. Khối công thức nền tối, chỗ cần điền `[ ... ]` tô vàng, nhãn INTRO/OVERVIEW/BODY tô xanh. Bài mẫu (blockquote) nền teal-50, cụm in đậm màu teal-800. Bảng cuộn ngang riêng trên mobile.
+- **Nav**: `{ id: 'writing-task1', label: 'Writing Task 1', icon: PenLine }` đặt sau Speaking. Nội dung tĩnh, không lưu gì vào DB.
+- **Verify** (`weekly-study-planner-ui-only`, cổng 5174, không chạm DB): 6 PHẦN, 14 bảng, 7 khối công thức, 11 khối trích dẫn — khớp số trong file .md; không còn dấu `*` hay `|---` lọt ra chữ; tab "5 dạng biểu đồ" chỉ hiện 1 PHẦN; mobile 375px không tràn ngang; console chỉ có 404 `/api/data` (bình thường với Vite thuần); `vite build` pass.
+
+### Nút nghe phát âm (🔊) cho câu hỏi + câu trả lời Speaking
 - **Yêu cầu / lựa chọn người dùng đã xác nhận**: dùng giọng có sẵn của trình duyệt (Web Speech API `speechSynthesis`, miễn phí, không API key); 2 nút riêng (1 cạnh câu hỏi, 1 trên toolbar ô "Câu trả lời" cạnh nút B/tô màu); không có tuỳ chọn giọng/tốc độ (en-US, 1x).
 - **Code** ([src/App.jsx](src/App.jsx), ngay trên `SPEAKING_PARTS`): hook `useSpeech()` (chỉ 1 câu đọc tại 1 thời điểm, bấm lại = dừng, `cancel()` khi unmount), `pickEnglishVoice()` ưu tiên giọng en-US có chữ Natural/Online/Google, `htmlToPlainText()` bỏ thẻ in đậm/tô màu trước khi đọc, component `SpeakButton` (đang đọc → icon `Square` + class `icon-btn-on`). Câu trả lời đọc từ DOM của ô contentEditable (`answerRefs`) nên đọc được cả nội dung vừa gõ chưa lưu. Đổi chủ đề/Part → tự dừng.
 - **Verify**: chạy `weekly-study-planner-ui-only` (cổng 5174, không chạm DB), tạo topic test cục bộ; `speechSynthesis.speaking === true` sau khi bấm, text gửi đi là plain text, nút dừng làm `speaking` về false. Máy người dùng chỉ có giọng Microsoft David/Mark/Zira (hơi robot) — cài thêm giọng Natural hoặc dùng Chrome sẽ hay hơn.
