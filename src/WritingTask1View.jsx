@@ -17,31 +17,84 @@ const SECTION_TAB_LABELS = [
   'Công thức tổng',
 ];
 
+// PHẦN chứa các mục "### ... DẠNG N: ..." (PHẦN 5) được tách thành 1 tab cho
+// mỗi loại biểu đồ (Line / Bar / Pie) thay vì 1 tab chung.
+const CHART_TAB_LABELS = {
+  1: { label: 'Line graph', emoji: '📈' },
+  2: { label: 'Bar chart', emoji: '📊' },
+  3: { label: 'Pie chart', emoji: '🥧' },
+};
+
+function splitCharts(lines) {
+  const intro = [];
+  const charts = [];
+  for (const line of lines) {
+    const match = line.match(/^### .*DẠNG (\d+):\s*(.*)$/);
+    if (match) {
+      charts.push({ number: match[1], heading: match[2].trim(), lines: [] });
+    } else if (charts.length) {
+      charts[charts.length - 1].lines.push(line);
+    } else {
+      intro.push(line);
+    }
+  }
+  return { intro, charts };
+}
+
 function parseGuide(markdown) {
   const lines = markdown.replace(/\r\n/g, '\n').split('\n');
   const titleLine = lines.find((line) => line.startsWith('# '));
-  const sections = [];
+  const rawSections = [];
   let current = null;
   for (const line of lines) {
     if (line.startsWith('## ')) {
       current = { title: line.slice(3).trim(), lines: [] };
-      sections.push(current);
+      rawSections.push(current);
     } else if (current) {
       current.lines.push(line);
     }
   }
+
+  const sections = [];
+  const pages = [];
+  rawSections.forEach((section, index) => {
+    const match = section.title.match(/^PHẦN\s+(\d+)\.\s*(.*)$/);
+    const number = match ? match[1] : String(index + 1);
+    const heading = match ? match[2] : section.title;
+    const full = {
+      id: `part-${index + 1}`,
+      badge: number,
+      kicker: `Phần ${number}`,
+      heading,
+      tabLabel: SECTION_TAB_LABELS[index] || section.title,
+      blocks: parseBlocks(section.lines),
+    };
+    sections.push(full);
+
+    const { intro, charts } = splitCharts(section.lines);
+    if (!charts.length) {
+      pages.push(full);
+      return;
+    }
+    // Mẹo "Cách dùng công thức" ở đầu PHẦN được lặp lại trên đầu mỗi tab biểu đồ.
+    const tips = parseBlocks(intro).filter((block) => block.type === 'quote');
+    charts.forEach((chart) => {
+      const tab = CHART_TAB_LABELS[chart.number] || { label: chart.heading, emoji: chart.number };
+      pages.push({
+        id: `chart-${chart.number}`,
+        badge: tab.emoji,
+        kicker: `Phần ${number} · Dạng ${chart.number}`,
+        heading: chart.heading,
+        tabLabel: tab.label,
+        blocks: [...tips, ...parseBlocks(chart.lines)],
+      });
+    });
+  });
+
   return {
     title: titleLine ? titleLine.slice(2).trim() : 'IELTS Writing Task 1',
-    sections: sections.map((section, index) => {
-      const match = section.title.match(/^PHẦN\s+(\d+)\.\s*(.*)$/);
-      return {
-        id: `part-${index + 1}`,
-        number: match ? match[1] : String(index + 1),
-        heading: match ? match[2] : section.title,
-        tabLabel: SECTION_TAB_LABELS[index] || section.title,
-        blocks: parseBlocks(section.lines),
-      };
-    }),
+    sections,
+    pages,
   };
 }
 
@@ -349,9 +402,10 @@ export default function WritingTask1View() {
   const guide = useMemo(() => parseGuide(GUIDE_MD), []);
   const [activeTab, setActiveTab] = useState('all');
 
-  const visibleSections = guide.sections.filter(
-    (section) => activeTab === 'all' || activeTab === section.id,
-  );
+  const visibleSections =
+    activeTab === 'all'
+      ? guide.sections
+      : guide.pages.filter((page) => page.id === activeTab);
 
   const selectTab = (id) => {
     setActiveTab(id);
@@ -383,7 +437,7 @@ export default function WritingTask1View() {
         >
           <BarChart3 size={14} /> Tất cả
         </button>
-        {guide.sections.map((section) => {
+        {guide.pages.map((section) => {
           const active = activeTab === section.id;
           return (
             <button
@@ -397,7 +451,7 @@ export default function WritingTask1View() {
                   active ? 'bg-sun-300 text-ink-900' : 'bg-teal-100 text-ink-900'
                 }`}
               >
-                {section.number}
+                {section.badge}
               </span>
               {section.tabLabel}
             </button>
@@ -409,11 +463,11 @@ export default function WritingTask1View() {
         <article key={section.id} className="card flex min-w-0 flex-col gap-4 p-5 md:p-7">
           <header className="flex items-start gap-3">
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-[1.5px] border-ink-800 bg-sun-300 font-display text-lg font-bold text-ink-900 shadow-chip">
-              {section.number}
+              {section.badge}
             </span>
             <div className="min-w-0">
               <p className="text-[11px] font-extrabold uppercase tracking-wider text-ink-400">
-                Phần {section.number}
+                {section.kicker}
               </p>
               <h3 className="font-display text-2xl font-bold leading-tight text-ink-900">
                 {section.heading}
