@@ -28,12 +28,7 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Writing Task 1: thêm mục "stand at" (mới nhất)
-- **Yêu cầu**: thêm giải thích cụm "stand at" + các cụm thay thế vào tab Từ vựng & mẫu câu.
-- **Sửa**: [src/writing-task1.md](src/writing-task1.md) PHẦN 3 có mục mới **4.5. Nêu số liệu tại một thời điểm: "stand at"** (cấu trúc, bảng theo thì, lỗi hay gặp, bảng cụm thay thế was/accounted for/reached/was recorded at/there were, đoạn ví dụ). Mục "Mẫu câu so sánh" → 4.6, "Chọn thì động từ" → 4.7.
-- **Verify** (ui-only cổng 5174): mục mới render đủ tiêu đề, bảng, trích dẫn; `vite build` pass.
-
-### Writing Task 1: thêm hình minh hoạ biểu đồ
+### Writing Task 1: thêm hình minh hoạ biểu đồ (mới nhất)
 - **Yêu cầu**: thêm hình minh hoạ từng loại biểu đồ ở tab Tổng quan và cho từng đề ví dụ.
 - **Cách làm**: khối ```chart (JSON) trong [src/writing-task1.md](src/writing-task1.md) → `parseBlocks` tạo block `chart` → component mới [src/ChartFigure.jsx](src/ChartFigure.jsx) vẽ bằng SVG thuần (không thêm thư viện). Hỗ trợ `line`, `bar` (cột nhóm), `pie` (1 hoặc nhiều hình tròn, legend dùng chung màu), `gallery` (lưới thẻ thu nhỏ). Cú pháp JSON ghi ở đầu ChartFigure.jsx.
 - **Vị trí**: Tổng quan có gallery 5 thẻ (Line, Bar ①, Bar ②, Pie ①, Pie ②) dữ liệu minh hoạ; 5 đề ví dụ ở PHẦN 4 có hình vẽ đúng số liệu trong bảng đề, đặt ngay sau bảng số liệu.

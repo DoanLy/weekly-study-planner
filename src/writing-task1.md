@@ -113,41 +113,7 @@ Hai câu cùng một nghĩa. Bạn nên xen kẽ cả hai cấu trúc để bài
 | 52% | **just over / slightly more than** half |
 | 198 | **approximately / about / around** 200 |
 
-### 4.5. Nêu số liệu tại một thời điểm: "stand at"
-
-**stand at** = "ở mức", "đạt mức". Cụm này dùng để nêu **giá trị tại một thời điểm**, hay dùng nhất ở **điểm đầu** và **điểm cuối** của xu hướng.
-
-**Cấu trúc:** Chủ ngữ + **stand(s) / stood at** + số liệu + (in + năm)
-
-> *In 2000, sales **stood at** $50 million, before rising sharply to $120 million in 2010.*
-
-| Thì | Dạng đúng | Ví dụ |
-|---|---|---|
-| Năm trong quá khứ | **stood at** | *The unemployment rate **stood at** 5% in 2010.* |
-| Không có năm | **stands / stand at** | *The figure for coffee **stands at** 30%.* |
-| Năm trong tương lai | **is expected to stand at** | *It **is expected to stand at** 60% in 2050.* |
-
-**Hay đi kèm từ chỉ mức xấp xỉ:** stood at **approximately / roughly / just over / just under / nearly** 40%
-
-**Lỗi hay gặp:**
-- ❌ *stood **on** 5%* / *stood **in** 5%* → ✅ *stood **at** 5%* (chỉ dùng **at**)
-- ❌ *was stood at* → ✅ *stood at* (nội động từ, **không chia bị động**)
-- ❌ *standed* → ✅ ***stood*** (quá khứ bất quy tắc)
-
-**Cụm thay thế** (để không lặp *stood at*):
-
-| Cụm | Dùng khi | Ví dụ |
-|---|---|---|
-| **was / were** | mọi trường hợp (đơn giản nhất) | *Sales **were** $50 million in 2000.* |
-| **accounted for** | phần trăm, tỷ trọng (rất hợp Pie chart) | *Coal **accounted for** 40% of electricity.* |
-| **reached / hit** | số liệu **tăng lên tới** mức đó | *The figure **reached** 90% in 2015.* |
-| **was recorded at** | trang trọng hơn một chút | *The rate **was recorded at** 12%.* |
-| **there were** + số | số lượng (người, xe, khách…) | ***There were** 2 million visitors in 1990.* |
-
-**Ví dụ một đoạn ngắn (Line graph):**
-> *In 1995, the proportion of households with internet access **stood at** just 10%. This figure rose steadily over the next decade, **reaching** 55% in 2005, and eventually **stood at** roughly 90% in 2015.*
-
-### 4.6. Mẫu câu so sánh
+### 4.5. Mẫu câu so sánh
 
 - *X was **higher than** Y.* / *X was **the highest**.*
 - *X was **twice as high as** Y.* (gấp đôi)
@@ -157,7 +123,7 @@ Hai câu cùng một nghĩa. Bạn nên xen kẽ cả hai cấu trúc để bài
 - *X was 30%, **compared with** 20% for Y.*
 - ***The figure for** X was…* (cụm này cực kỳ hữu ích để tránh lặp chủ ngữ dài)
 
-### 4.7. Chọn thì động từ
+### 4.6. Chọn thì động từ
 
 | Thời gian trong đề | Thì |
 |---|---|
