@@ -1,0 +1,1142 @@
+{
+  "id": "fd-final",
+  "title": "IELTS Foundation – Final Test",
+  "subtitle": "Listening 4 phần (40 câu) + Reading 3 bài (40 câu): Hello Happiness, One Who Hopes (Esperanto), Driverless cars – không có Writing",
+  "pages": "Trang 86–113",
+  "sections": [
+    {
+      "skill": "listening",
+      "title": "Listening – Part 1",
+      "note": "Nguồn: **Cambridge IELTS 15 – Test 4 – Part 1** (Customer Satisfaction Survey – Sophie Bird) – KHÔNG phải bài mẫu ielts.org. Đối chiếu transcript trên engnovate.com (https://engnovate.com/ielts-listening-tests/cambridge-ielts-15-academic-listening-test-4/) – tất cả 10 đáp án khớp. Không có audio nên dẫn chứng là ý transcript diễn đạt lại.",
+      "groups": [
+        {
+          "range": "Questions 1–10",
+          "instruction": "Complete the form below.\nWrite ONE WORD AND/OR A NUMBER for each answer.",
+          "instruction_vi": "Hoàn thành mẫu đơn dưới đây. Viết MỘT TỪ VÀ/HOẶC MỘT CON SỐ cho mỗi câu trả lời.",
+          "context": "**Customer Satisfaction Survey**\n\n**Customer details**\nName: Sophie Bird\nOccupation: 1 ______\nReasons for travel today: 2 ______\n\n**Journey information**\nName of station returning to: 3 ______\nType of ticket purchased: Standard 4 ______ ticket\nCost of ticket: 5 £ ______\nWhen ticket was purchased: Yesterday\nWhere ticket was bought: 6 ______\n\n**Satisfaction with journey**\nMost satisfied with: The wifi\nLeast satisfied with: The 7 ______ this morning\n\n**Satisfaction with station facilities**\nMost satisfied with: How much 8 ______ was provided\nLeast satisfied with: Lack of seats, particularly on the 9 ______\nNeither satisfied nor dissatisfied with: The 10 ______ available",
+          "questions": [
+            {
+              "no": "1",
+              "prompt": "Occupation: ______",
+              "prompt_vi": "Nghề nghiệp: ______",
+              "answer": "journalist",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ chỉ nghề nghiệp** (số ít, vì nói về 1 người).\nKhi người khảo sát hỏi nghề nghiệp, Sophie trả lời cô là nhà báo. Bẫy thường gặp ở câu hỏi nghề: người nói có thể nhắc một nghề cũ hoặc nghề ‘đang định làm’ rồi mới nói nghề hiện tại – phải nghe đến nghề HIỆN TẠI.\nChính tả: **journalist** (không phải ‘journalism’ – đó là ngành báo chí, không phải nghề của người).",
+              "evidence": "(ý transcript) I'm a journalist.",
+              "evidence_vi": "Tôi là nhà báo."
+            },
+            {
+              "no": "2",
+              "prompt": "Reasons for travel today: ______",
+              "prompt_vi": "Lý do đi lại hôm nay: ______",
+              "answer": "shopping",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ / V-ing chỉ mục đích chuyến đi**.\nĐây là chỗ có bẫy kinh điển: người nghe dễ đoán Sophie đi công tác (vì cô là nhà báo – ‘work/business’), nhưng hôm nay cô KHÔNG đi làm mà đi mua sắm. Từ ‘today’ trong đề chính là tín hiệu: lý do của riêng hôm nay khác với thường ngày.\nViết **shopping** (1 từ).",
+              "evidence": "(ý transcript) It's my day off – I came here to do some shopping.",
+              "evidence_vi": "Hôm nay tôi được nghỉ – tôi đến đây để mua sắm."
+            },
+            {
+              "no": "3",
+              "prompt": "Name of station returning to: ______",
+              "prompt_vi": "Tên ga sẽ quay về: ______",
+              "answer": "Staunfirth",
+              "confidence": "high",
+              "explanation": "Loại từ: **tên riêng** → gần như chắc chắn sẽ được **đánh vần** trong Part 1.\nSophie đánh vần tên ga: S-T-A-U-N-F-I-R-T-H. Nghe kỹ từng chữ cái, đặc biệt cặp dễ nhầm: U/W không có ở đây, nhưng ‘A-U’ dễ bị viết thành ‘O’ theo cách phát âm. Viết hoa chữ cái đầu vì là tên riêng.",
+              "evidence": "(ý transcript) Staunfirth, where I live – spelt S-T-A-U-N-F-I-R-T-H.",
+              "evidence_vi": "Staunfirth, nơi tôi sống – đánh vần S-T-A-U-N-F-I-R-T-H."
+            },
+            {
+              "no": "4",
+              "prompt": "Type of ticket purchased: Standard ______ ticket",
+              "prompt_vi": "Loại vé đã mua: vé ______ hạng thường",
+              "answer": "return",
+              "confidence": "high",
+              "explanation": "Loại từ: **tính từ/danh từ chỉ loại vé** đứng giữa ‘Standard’ và ‘ticket’. Các loại vé tàu ở Anh: single (một chiều), return (khứ hồi), open return, season ticket…\nĐề đã cho ‘Name of station returning to’ → cô đi rồi quay về → vé **return** (khứ hồi). Bẫy: người nói có thể nhắc ‘single’ trước (ví dụ ‘I thought about a single…’) rồi chốt ‘return’.",
+              "evidence": "(ý transcript) No rail card – I just got a normal return ticket.",
+              "evidence_vi": "Không có thẻ giảm giá – tôi chỉ mua vé khứ hồi thường."
+            },
+            {
+              "no": "5",
+              "prompt": "Cost of ticket: £ ______",
+              "prompt_vi": "Giá vé: ______ bảng Anh",
+              "answer": "23.70",
+              "confidence": "high",
+              "explanation": "Loại từ: **con số (giá tiền)**. Ký hiệu £ đã có sẵn nên chỉ ghi số: **23.70**.\nBẫy số: thường có số bị sửa (ví dụ giá gốc rồi giá có giảm/ thẻ giảm giá), hoặc nhầm ‘seventy’ (70) với ‘seventeen’ (17), ‘thirty’ với ‘thirteen’. Nghe trọng âm: seVENteen (nhấn cuối) – SEVenty (nhấn đầu).\nĐáp án **23.70** đã đối chiếu transcript Cam 15 Test 4.",
+              "evidence": "(ý transcript) I paid £23.70.",
+              "evidence_vi": "Tôi trả 23,70 bảng."
+            },
+            {
+              "no": "6",
+              "prompt": "Where ticket was bought: ______",
+              "prompt_vi": "Nơi mua vé: ______",
+              "answer": "online",
+              "confidence": "high",
+              "explanation": "Loại từ: **trạng từ/danh từ chỉ nơi chốn**: at the station, from a machine, online, by phone…\nBẫy: Sophie thường mua vé ở quầy/ máy bán vé ở ga, nhưng lần này (hôm qua) cô mua **online**. Lại là kiểu ‘thói quen thường ngày ≠ lần này’.",
+              "evidence": "(ý transcript) I got an e-ticket online.",
+              "evidence_vi": "Tôi mua vé điện tử trên mạng."
+            },
+            {
+              "no": "7",
+              "prompt": "Least satisfied with: The ______ this morning",
+              "prompt_vi": "Ít hài lòng nhất với: ______ sáng nay",
+              "answer": "delay",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ số ít** (sau ‘The’, trước ‘this morning’).\nPhàn nàn kinh điển về tàu hoả: tàu bị **trễ** (delay). Paraphrase: ‘the train was late / held up’ → ‘the delay’. Có thể ‘delays’ cũng hợp ngữ pháp nhưng đáp án chuẩn là **delay** (một lần trễ sáng nay).",
+              "evidence": "(ý transcript) The train was about 15 minutes behind schedule this morning.",
+              "evidence_vi": "Sáng nay tàu trễ khoảng 15 phút."
+            },
+            {
+              "no": "8",
+              "prompt": "Most satisfied with: How much ______ was provided",
+              "prompt_vi": "Hài lòng nhất với: lượng ______ được cung cấp",
+              "answer": "information",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ không đếm được** (đi với ‘How much … was’).\nVề tiện ích nhà ga, Sophie khen việc được cung cấp nhiều **thông tin** (bảng thông báo, loa thông báo về chuyến tàu). Lưu ý chính tả: **information** không có ‘s’ (không đếm được) – viết ‘informations’ là sai.",
+              "evidence": "(ý transcript) They've improved the amount of information about train times.",
+              "evidence_vi": "Họ đã tăng lượng thông tin về giờ tàu."
+            },
+            {
+              "no": "9",
+              "prompt": "Least satisfied with: Lack of seats, particularly on the ______",
+              "prompt_vi": "Ít hài lòng nhất: thiếu chỗ ngồi, nhất là ở trên ______",
+              "answer": "platforms",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ chỉ khu vực trong nhà ga** (sau ‘on the’).\nThiếu ghế ngồi đặc biệt là trên **sân ga** (platforms). Bẫy: có thể nhắc ‘waiting room’ hay ‘café’ trước (những chỗ có ghế tạm đủ) rồi mới nói platforms thiếu ghế. ‘on the platform’ (số ít) thường cũng được chấp nhận, đáp án chuẩn ghi **platforms**.",
+              "evidence": "(ý transcript) There aren't enough places to sit down, especially on the platforms.",
+              "evidence_vi": "Không đủ chỗ ngồi, nhất là trên sân ga."
+            },
+            {
+              "no": "10",
+              "prompt": "Neither satisfied nor dissatisfied with: The ______ available",
+              "prompt_vi": "Không hài lòng cũng không bất mãn với: ______ sẵn có",
+              "answer": "parking",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ** chỉ một tiện ích của nhà ga.\n‘Neither satisfied nor dissatisfied’ = ý kiến trung lập, kiểu ‘it's OK / nothing special’. Sophie nói về chỗ **đỗ xe** (parking) – không tốt cũng không tệ. Paraphrase: ‘the car park is all right, I suppose’ → parking available.",
+              "evidence": "(ý transcript) The parking – I don't really have an opinion as I never use it.",
+              "evidence_vi": "Bãi đỗ xe – tôi không có ý kiến vì chưa bao giờ dùng."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "listening",
+      "title": "Listening – Part 2",
+      "note": "Nguồn: **Cambridge IELTS Trainer 2 – Test 5 – Part 2** (Young Explorer programme) – đối chiếu transcript trên engnovate.com (https://engnovate.com/ielts-listening-tests/ielts-trainer-2-academic-listening-test-5/). Trang không có answer key chính thức – đáp án suy ra trực tiếp từ transcript; Q17 cần suy luận nên để medium.",
+      "groups": [
+        {
+          "range": "Questions 11–12",
+          "instruction": "Which TWO opportunities does the Young Explorer Programme offer to participants?\nChoose TWO letters, A–E.",
+          "instruction_vi": "Chương trình Young Explorer mang lại HAI cơ hội nào cho người tham gia? Chọn HAI chữ cái, A–E.",
+          "context": "A  Improving negotiation skills\nB  Developing supportive relationships\nC  Acquiring a new physical skill\nD  Learning about environmental issues\nE  Competing for an award",
+          "questions": [
+            {
+              "no": "11–12",
+              "prompt": "Which TWO opportunities does the Young Explorer Programme offer to participants?",
+              "prompt_vi": "Chương trình Young Explorer mang lại HAI cơ hội nào cho người tham gia?",
+              "options": [
+                "A. Improving negotiation skills",
+                "B. Developing supportive relationships",
+                "C. Acquiring a new physical skill",
+                "D. Learning about environmental issues",
+                "E. Competing for an award"
+              ],
+              "answer": "A, B",
+              "confidence": "high",
+              "explanation": "Hai cơ hội chương trình mang lại:\n• **A – improving negotiation skills**: người nói khuyến khích **lắng nghe ý kiến người khác và đi đến quyết định tốt nhất cho cả nhóm** (= đàm phán).\n• **B – developing supportive relationships**: \"**vài lời tử tế và động viên có tác dụng lớn**\" (= quan hệ hỗ trợ nhau).\nC: trekking/kayaking chỉ là hoạt động, không nói là \"học kỹ năng mới\"; D không được nhắc; E sai vì bà dặn **đừng coi đây là cuộc đua**.",
+              "evidence": "(ý transcript) Listen properly to the opinions of others and reach a decision that's best for everyone… some kind words and encouragement can go a long way.",
+              "evidence_vi": "Lắng nghe ý kiến người khác và đi đến quyết định tốt nhất cho mọi người… vài lời tử tế và động viên có tác dụng rất lớn."
+            }
+          ]
+        },
+        {
+          "range": "Questions 13–14",
+          "instruction": "Which TWO subjects must groups study in their preliminary training?\nChoose TWO letters, A–E.",
+          "instruction_vi": "Các nhóm BẮT BUỘC phải học HAI nội dung nào trong khoá huấn luyện ban đầu? Chọn HAI chữ cái, A–E.",
+          "context": "A  Finding sources of water\nB  Operating cooking equipment\nC  Knowing how to follow a route\nD  Searching for safe things to eat\nE  Using wood to build shelters",
+          "questions": [
+            {
+              "no": "13–14",
+              "prompt": "Which TWO subjects must groups study in their preliminary training?",
+              "prompt_vi": "Các nhóm bắt buộc phải học hai nội dung nào trong khoá huấn luyện ban đầu?",
+              "options": [
+                "A. Finding sources of water",
+                "B. Operating cooking equipment",
+                "C. Knowing how to follow a route",
+                "D. Searching for safe things to eat",
+                "E. Using wood to build shelters"
+              ],
+              "answer": "B, C",
+              "confidence": "high",
+              "explanation": "Hai nội dung bắt buộc trong buổi huấn luyện đầu:\n• **B – operating cooking equipment**: phải dùng **bếp di động và nhiên liệu**, sẽ được hướng dẫn dùng an toàn.\n• **C – following a route**: học **đọc bản đồ và dùng la bàn** để đi đúng hướng.\nA: sông suối chỉ nhắc khi chọn chỗ dựng lều; D: đồ ăn phải **mang theo**, không tìm kiếm; E: chỉ học dựng lều, không dùng gỗ dựng chỗ trú.",
+              "evidence": "(ý transcript) You'll also have to use a portable stove and the fuel it requires… learning how to read a map and use a compass.",
+              "evidence_vi": "Bạn cũng phải dùng bếp di động và nhiên liệu của nó… học cách đọc bản đồ và dùng la bàn."
+            }
+          ]
+        },
+        {
+          "range": "Questions 15–20",
+          "instruction": "What does the speaker say about each of the following tracks?\nWrite the correct letter A, B, C or D next to Questions 15–20.",
+          "instruction_vi": "Người nói nói gì về mỗi tuyến đường mòn sau? Viết chữ cái đúng A, B, C hoặc D bên cạnh câu 15–20.",
+          "context": "**Tracks**\n15 Northface\n16 Blue River\n17 Pioneer\n18 Edgewater\n19 Murray\n20 Lakeside\n\nA  It is likely to be busy\nB  It may be unsafe in places\nC  It is currently closed to the public\nD  It is divided into two sections",
+          "questions": [
+            {
+              "no": "15",
+              "prompt": "Northface",
+              "prompt_vi": "Tuyến Northface",
+              "answer": "C",
+              "confidence": "high",
+              "explanation": "Northface: đang **bảo trì**, nên **hiện không ai được dùng** → **C – currently closed to the public**.",
+              "evidence": "(ý transcript) Some maintenance work is taking place, so people aren't allowed to use it at the moment.",
+              "evidence_vi": "Đang có công việc bảo trì nên hiện mọi người không được sử dụng."
+            },
+            {
+              "no": "16",
+              "prompt": "Blue River",
+              "prompt_vi": "Tuyến Blue River",
+              "answer": "B",
+              "confidence": "high",
+              "explanation": "Blue River: **dễ trượt trên đá khi lội qua sông** (phải qua sông nhiều lần) → **B – may be unsafe in places**.",
+              "evidence": "(ý transcript) It's easy to slip on the rocks when you're crossing the river.",
+              "evidence_vi": "Rất dễ trượt chân trên đá khi lội qua sông."
+            },
+            {
+              "no": "17",
+              "prompt": "Pioneer",
+              "prompt_vi": "Tuyến Pioneer",
+              "answer": "D",
+              "confidence": "medium",
+              "explanation": "Pioneer: đi khoảng một ngày rưỡi thì tuyến **kết thúc ở thị trấn Richmond** rồi tiếp tục ở phía bên kia thị trấn → tuyến **chia làm hai đoạn** → **D**. Để medium vì phải suy luận từ mô tả.",
+              "evidence": "(ý transcript) You follow the track for about a day and a half, and then it comes to an end at a town called Richmond.",
+              "evidence_vi": "Bạn đi theo tuyến khoảng một ngày rưỡi, rồi nó dừng ở một thị trấn tên Richmond."
+            },
+            {
+              "no": "18",
+              "prompt": "Edgewater",
+              "prompt_vi": "Tuyến Edgewater",
+              "answer": "A",
+              "confidence": "high",
+              "explanation": "Edgewater: **rất nổi tiếng**, có thể gặp **nhiều nhóm khác đang đi bộ** → **A – likely to be busy**.",
+              "evidence": "(ý transcript) It's very popular, and you'll probably come across a number of other groups.",
+              "evidence_vi": "Tuyến này rất nổi tiếng, có lẽ bạn sẽ gặp nhiều nhóm khác."
+            },
+            {
+              "no": "19",
+              "prompt": "Murray",
+              "prompt_vi": "Tuyến Murray",
+              "answer": "B",
+              "confidence": "high",
+              "explanation": "Murray: đi **sát mép vách đá trên lối rất hẹp**, cần thận trọng → **B – may be unsafe in places**. (Phương án B được dùng 2 lần.)",
+              "evidence": "(ý transcript) You'd be walking right next to the cliff edge on a very narrow path.",
+              "evidence_vi": "Bạn sẽ đi sát mép vách đá trên một lối rất hẹp."
+            },
+            {
+              "no": "20",
+              "prompt": "Lakeside",
+              "prompt_vi": "Tuyến Lakeside",
+              "answer": "A",
+              "confidence": "high",
+              "explanation": "Lakeside: là **điểm du lịch**, có thể phải **đi chung với rất nhiều du khách** → **A – likely to be busy**. (Phương án A được dùng 2 lần.)",
+              "evidence": "(ý transcript) It's a bit of a tourist attraction, and you could well be sharing the track with many other visitors.",
+              "evidence_vi": "Nơi này là điểm du lịch, rất có thể bạn sẽ đi chung với nhiều du khách khác."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "listening",
+      "title": "Listening – Part 3",
+      "note": "Nguồn: **Cambridge IELTS Trainer 2 – Test 5 – Part 3** (tutor + Kiara & Finn – the future of work) – đối chiếu transcript trên engnovate.com (https://engnovate.com/ielts-listening-tests/ielts-trainer-2-academic-listening-test-5/). Không có answer key chính thức – đáp án suy ra từ transcript; Q25 có hai cách hiểu nên để medium.",
+      "groups": [
+        {
+          "range": "Questions 21–26",
+          "instruction": "Choose the correct letter, A, B or C.",
+          "instruction_vi": "Chọn chữ cái đúng, A, B hoặc C.",
+          "context": "**The Future of Work**",
+          "questions": [
+            {
+              "no": "21",
+              "prompt": "Kiara and Finn agree that the articles they read on the future of work",
+              "prompt_vi": "Kiara và Finn đồng ý rằng những bài báo họ đã đọc về tương lai của công việc",
+              "options": [
+                "A. mainly reflect the concerns of older employees",
+                "B. refer to the end of a traditional career path",
+                "C. tend to exaggerate the likely changes"
+              ],
+              "answer": "C",
+              "confidence": "high",
+              "explanation": "Cả hai đồng ý các bài báo: có vài tác giả **đưa ra khẳng định mạnh mà không có dẫn chứng** → **C – tend to exaggerate the likely changes**.\nA sai: bài viết nhắm cả sinh viên mới ra trường lẫn người đi làm lâu năm. B: chuyện hết lối thăng tiến truyền thống chỉ được nhắc, không phải điểm hai bạn đồng ý về các bài báo.",
+              "evidence": "(ý transcript) A couple of writers just made some strong statements without really backing them up.",
+              "evidence_vi": "Vài tác giả chỉ đưa ra khẳng định mạnh mà không có dẫn chứng."
+            },
+            {
+              "no": "22",
+              "prompt": "What point does Kiara make about the phrase “job title”?",
+              "prompt_vi": "Kiara nêu quan điểm gì về cụm từ “chức danh công việc”?",
+              "options": [
+                "A. It is no longer relevant in modern times",
+                "B. It shows colleagues how to interact with each other",
+                "C. It will only apply to people higher up in an organization"
+              ],
+              "answer": "A",
+              "confidence": "high",
+              "explanation": "Về cụm \"job title\": Kiara nói trước đây chức danh định nghĩa con người, nhưng **giờ chúng ta đang dần bỏ thuật ngữ này** → **A – no longer relevant in modern times**.",
+              "evidence": "(ý transcript) It looks like we're moving away from the term 'job title'.",
+              "evidence_vi": "Có vẻ như chúng ta đang dần bỏ thuật ngữ 'chức danh công việc'."
+            },
+            {
+              "no": "23",
+              "prompt": "What issue affecting young employees is Finn most concerned about?",
+              "prompt_vi": "Vấn đề nào ảnh hưởng tới nhân viên trẻ khiến Finn lo lắng nhất?",
+              "options": [
+                "A. lack of job security",
+                "B. income inequality",
+                "C. poor chances of promotion"
+              ],
+              "answer": "B",
+              "confidence": "high",
+              "explanation": "Mối lo lớn nhất của Finn: nếu **chỉ kiếm lương tối thiểu thì sống sao** → **B – income inequality**.\nA (mất việc) và C (thăng tiến) là bẫy.",
+              "evidence": "(ý transcript) If you're only earning the minimum wage – how do you get by? That's my biggest worry.",
+              "evidence_vi": "Nếu chỉ kiếm lương tối thiểu thì sống kiểu gì? Đó là mối lo lớn nhất của tôi."
+            },
+            {
+              "no": "24",
+              "prompt": "What is Kiara’s attitude towards the Richards-Greeves survey on work-life balance?",
+              "prompt_vi": "Thái độ của Kiara đối với cuộc khảo sát Richards-Greeves về cân bằng công việc – cuộc sống là gì?",
+              "options": [
+                "A. She thinks that the findings are predictable",
+                "B. She is curious about the kind of work the interviewees do",
+                "C. She believes it would be useful to know what the questions were"
+              ],
+              "answer": "C",
+              "confidence": "high",
+              "explanation": "Thái độ của Kiara với khảo sát Richards-Greeves: cô **tự hỏi khảo sát thực sự hỏi những câu gì** → **C – useful to know what the questions were**.",
+              "evidence": "(ý transcript) I wonder what the survey actually asked? Was it just 'Will your work-life balance improve'?",
+              "evidence_vi": "Tôi tự hỏi khảo sát thực sự hỏi gì? Chỉ là 'cân bằng công việc–cuộc sống có cải thiện không' thôi à?"
+            },
+            {
+              "no": "25",
+              "prompt": "Finn and Kiara agree that if employees are obliged to learn new skills,",
+              "prompt_vi": "Finn và Kiara đồng ý rằng nếu nhân viên bị bắt buộc học kỹ năng mới thì",
+              "options": [
+                "A. they should learn ones which might be useful in another job",
+                "B. they should not be forced to learn them in their own time",
+                "C. they should receive better guidance from training departments"
+              ],
+              "answer": "A",
+              "confidence": "medium",
+              "explanation": "Nếu buộc phải học kỹ năng mới: hai bạn nói **người khôn ngoan sẽ học những thứ giúp ích nếu phải chuyển công ty** → **A – learn ones useful in another job**.\nB là bẫy: việc phải học vào cuối tuần/ngoài giờ được nhắc như thực tế, chứ không phải điều hai bạn thống nhất. Để medium.",
+              "evidence": "(ý transcript) If you were smart, you'd study things that would help you if you had to change companies.",
+              "evidence_vi": "Nếu khôn ngoan, bạn sẽ học những thứ giúp ích nếu phải chuyển công ty."
+            },
+            {
+              "no": "26",
+              "prompt": "When Finn talks about the impact of mobile technology, Kiara responds by",
+              "prompt_vi": "Khi Finn nói về tác động của công nghệ di động, Kiara đáp lại bằng cách",
+              "options": [
+                "A. emphasizing the possible disadvantages",
+                "B. describing her personal experience",
+                "C. mentioning groups who benefit most from devices"
+              ],
+              "answer": "B",
+              "confidence": "high",
+              "explanation": "Finn nói về công nghệ di động, Kiara đáp bằng **trải nghiệm bản thân**: có máy tính bảng giúp cô **cân đối việc học và gia đình** → **B – describing her personal experience**.\nA là bẫy: cô có nói báo chí hay nói mặt xấu, nhưng ý chính là kể trải nghiệm tích cực của mình.",
+              "evidence": "(ý transcript) Having a tablet I can carry with me means I can manage my studies and my family commitments more easily.",
+              "evidence_vi": "Có máy tính bảng mang theo giúp tôi quản lý việc học và gia đình dễ hơn."
+            }
+          ]
+        },
+        {
+          "range": "Questions 27–30",
+          "instruction": "What impact might Artificial Intelligence (AI) have on each of the following professions?\nChoose FOUR answers from the box and write the correct letter, A–F, next to Questions 27–30.",
+          "instruction_vi": "Trí tuệ nhân tạo (AI) có thể tác động như thế nào tới mỗi nghề sau? Chọn BỐN đáp án trong khung và viết chữ cái đúng A–F bên cạnh câu 27–30.",
+          "context": "**Impact of Artificial Intelligence (AI)**\nA  It will give them a greater sense of satisfaction\nB  It will encourage them to compete with one another\nC  It will reduce the level of stress they have\nD  It may eventually lead to their jobs disappearing\nE  It could prevent them from coming to harm\nF  It will enable them to do tasks they have not trained for\n\n27 Architects\n28 Doctors\n29 Lawyers\n30 Sports referees",
+          "questions": [
+            {
+              "no": "27",
+              "prompt": "Architects",
+              "prompt_vi": "Kiến trúc sư",
+              "answer": "B",
+              "confidence": "high",
+              "explanation": "Architects: khi **một kiến trúc sư dùng AI thì các đối thủ cùng khu vực cũng phải dùng** → **B – encourage them to compete with one another**.",
+              "evidence": "(ý transcript) As soon as one architect starts to use AI, all the rival architects will have to use AI too.",
+              "evidence_vi": "Ngay khi một kiến trúc sư dùng AI, mọi đối thủ cũng sẽ phải dùng."
+            },
+            {
+              "no": "28",
+              "prompt": "Doctors",
+              "prompt_vi": "Bác sĩ",
+              "answer": "F",
+              "confidence": "high",
+              "explanation": "Doctors: chuyên gia bệnh viện có thể dùng AI + thực tế ảo để **hướng dẫn bác sĩ làm một ca phức tạp** → **F – do tasks they have not trained for**.",
+              "evidence": "(ý transcript) A hospital specialist could use AI and virtual reality to guide a doctor through a complex procedure.",
+              "evidence_vi": "Chuyên gia bệnh viện có thể dùng AI và thực tế ảo để hướng dẫn bác sĩ làm một thủ thuật phức tạp."
+            },
+            {
+              "no": "29",
+              "prompt": "Lawyers",
+              "prompt_vi": "Luật sư",
+              "answer": "C",
+              "confidence": "high",
+              "explanation": "Lawyers: AI giúp làm nhiều việc thường ngày, nên **giảm bớt lo âu** → anxiety go away = **C – reduce the level of stress**.",
+              "evidence": "(ý transcript) AI could help them with routine tasks, and that should make some of that anxiety go away.",
+              "evidence_vi": "AI có thể giúp họ việc thường ngày, và điều đó sẽ làm bớt lo âu."
+            },
+            {
+              "no": "30",
+              "prompt": "Sports referees",
+              "prompt_vi": "Trọng tài thể thao",
+              "answer": "D",
+              "confidence": "high",
+              "explanation": "Sports referees: một ngày nào đó **AI có thể khiến trọng tài con người không còn cần thiết** → **D – jobs disappearing**. (A và E không dùng.)",
+              "evidence": "(ý transcript) One day, AI might do away with the need for human referees.",
+              "evidence_vi": "Một ngày nào đó, AI có thể khiến không cần trọng tài là người nữa."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "listening",
+      "title": "Listening – Part 4",
+      "note": "Nguồn: **Cambridge IELTS 15 – Test 4 – Part 4** (How the Industrial Revolution affected life in Britain) – đối chiếu transcript trên engnovate.com (https://engnovate.com/ielts-listening-tests/cambridge-ielts-15-academic-listening-test-4/); 10/10 đáp án khớp. Dẫn chứng là ý transcript diễn đạt lại.",
+      "groups": [
+        {
+          "range": "Questions 31–40",
+          "instruction": "Complete the notes below.\nWrite ONE WORD ONLY for each answer.",
+          "instruction_vi": "Hoàn thành ghi chú dưới đây. Chỉ viết MỘT TỪ cho mỗi câu trả lời.",
+          "context": "**How the Industrial Revolution affected life in Britain**\n\n**19th century**\n• For the first time, people’s possessions were used to measure Britain’s 31 ______.\n• Developments in production of goods and in 32 ______ greatly changed lives.\n\n**MAIN AREAS OF CHANGE**\n**Manufacturing**\n• The Industrial Revolution would not have happened without the new types of 33 ______ that were used then.\n• The leading industry was 34 ______ (its products became widely available).\n• New 35 ______ made factories necessary and so more people moved into towns.\n**Transport**\n• The railways took the place of canals.\n• Because of the new transport:\n  – Greater access to 36 ______ made people more aware of what they could buy in shops.\n  – When shopping, people were not limited to buying 37 ______ goods.\n**Retailing**\n• The first department stores were opened.\n• The displays of goods were more visible:\n  – Inside stores because of better 38 ______\n  – Outside stores, because 39 ______ were bigger\n• 40 ______ that was persuasive became much more common.",
+          "questions": [
+            {
+              "no": "31",
+              "prompt": "For the first time, people’s possessions were used to measure Britain’s ______.",
+              "prompt_vi": "Lần đầu tiên, tài sản của người dân được dùng để đo lường ______ của nước Anh.",
+              "answer": "wealth",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ** (sau sở hữu cách ‘Britain’s’), không đếm được.\nÝ bài: thế kỷ 19, sự giàu có của quốc gia lần đầu được đánh giá qua đồ đạc/ của cải mà người dân sở hữu. Paraphrase: possessions ≈ ‘what people owned’; measure ≈ ‘judged / assessed by’. Bẫy: ‘economy’, ‘success’ có thể nghe thấy nhưng từ gắn với ‘measured’ là **wealth**.",
+              "evidence": "(ý transcript) Possessions were used as an indication of the wealth of the country.",
+              "evidence_vi": "Tài sản của người dân được dùng làm thước đo sự giàu có của đất nước."
+            },
+            {
+              "no": "32",
+              "prompt": "Developments in production of goods and in ______ greatly changed lives.",
+              "prompt_vi": "Những phát triển trong sản xuất hàng hoá và trong ______ đã thay đổi lớn cuộc sống.",
+              "answer": "technology",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ** song song với ‘production of goods’ (and in ___).\nNgười giảng nói cuộc sống thay đổi nhờ tiến bộ trong sản xuất hàng hoá và trong **công nghệ**. Chính tả: technology (không phải ‘technologies’ – vẫn được chấp nhận nếu bài nói số nhiều, nhưng đáp án gốc là số ít).",
+              "evidence": "(ý transcript) Improvements in how goods were made as well as in technology.",
+              "evidence_vi": "Những cải tiến trong cách sản xuất hàng hoá cũng như trong công nghệ."
+            },
+            {
+              "no": "33",
+              "prompt": "The Industrial Revolution would not have happened without the new types of ______ that were used then.",
+              "prompt_vi": "Cách mạng Công nghiệp đã không thể xảy ra nếu không có các loại ______ mới được dùng thời đó.",
+              "answer": "power",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ** sau ‘new types of’.\nCác dạng **năng lượng** mới (hơi nước, than) là điều kiện tiên quyết của Cách mạng Công nghiệp. Paraphrase: ‘would not have happened without’ ≈ ‘was only possible because of / depended on’. Bẫy: ‘energy’ cũng hợp nghĩa nhưng từ người giảng dùng là **power** (steam power, water power).",
+              "evidence": "(ý transcript) It wouldn't have happened if it weren't for these new sources of power.",
+              "evidence_vi": "Điều đó đã không xảy ra nếu không có những nguồn năng lượng mới này."
+            },
+            {
+              "no": "34",
+              "prompt": "The leading industry was ______ (its products became widely available).",
+              "prompt_vi": "Ngành công nghiệp hàng đầu là ______ (sản phẩm của nó trở nên phổ biến rộng rãi).",
+              "answer": "textiles",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ chỉ ngành công nghiệp**.\nNgành dệt may (textiles) là ngành dẫn đầu của Cách mạng Công nghiệp Anh; vải vóc, quần áo trở nên rẻ và phổ biến. ‘textile’ (số ít, dùng như tính từ ‘textile industry’) thường cũng được chấp nhận. Paraphrase: leading ≈ ‘the most important / main’.",
+              "evidence": "(ý transcript) The most advanced industry for much of the 19th century was textiles.",
+              "evidence_vi": "Ngành tiên tiến nhất trong phần lớn thế kỷ 19 là dệt may."
+            },
+            {
+              "no": "35",
+              "prompt": "New ______ made factories necessary and so more people moved into towns.",
+              "prompt_vi": "Những ______ mới khiến nhà máy trở nên cần thiết và vì thế nhiều người chuyển vào thị trấn/ thành phố hơn.",
+              "answer": "machines",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ số nhiều** (sau ‘New’, động từ ‘made’ không cho biết số, nhưng ý là nhiều cỗ máy).\nMáy móc mới quá lớn để đặt trong nhà → cần nhà máy → công nhân dồn về thành thị. Lưu ý số nhiều: **machines** (thiếu ‘s’ có thể bị tính sai). ‘machinery’ (không đếm được) cũng hợp nghĩa nếu bài nói dùng từ đó.",
+              "evidence": "(ý transcript) Enormous new machines were now being created, so factories were needed.",
+              "evidence_vi": "Những cỗ máy mới khổng lồ ra đời nên cần đến nhà máy."
+            },
+            {
+              "no": "36",
+              "prompt": "Greater access to ______ made people more aware of what they could buy in shops.",
+              "prompt_vi": "Việc tiếp cận ______ dễ dàng hơn khiến người dân biết rõ hơn những gì họ có thể mua ở cửa hàng.",
+              "answer": "newspapers",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ** (sau ‘access to’).\nĐường sắt giúp báo chí phát hành toàn quốc nhanh chóng → người dân đọc quảng cáo trên **báo** → biết có hàng gì để mua. Lưu ý số nhiều **newspapers**. Paraphrase: ‘more aware of what they could buy’ ≈ ‘found out about products’.",
+              "evidence": "(ý transcript) The goods transported included newspapers, so people learnt what was for sale.",
+              "evidence_vi": "Hàng được chuyên chở có cả báo chí, nên người ta biết có gì để mua."
+            },
+            {
+              "no": "37",
+              "prompt": "When shopping, people were not limited to buying ______ goods.",
+              "prompt_vi": "Khi mua sắm, người dân không còn bị giới hạn ở việc mua hàng ______.",
+              "answer": "local",
+              "confidence": "high",
+              "explanation": "Loại từ: **tính từ** (trước danh từ ‘goods’).\nTrước đây người ta chỉ mua được hàng sản xuất tại **địa phương**; nhờ đường sắt, hàng hoá từ nơi khác được chở đến. Paraphrase: ‘not limited to’ ≈ ‘no longer had to rely only on’.",
+              "evidence": "(ý transcript) People could buy goods from far away instead of just in the local market.",
+              "evidence_vi": "Người ta có thể mua hàng từ nơi xa thay vì chỉ ở chợ địa phương."
+            },
+            {
+              "no": "38",
+              "prompt": "The displays of goods were more visible inside stores because of better ______.",
+              "prompt_vi": "Hàng hoá trưng bày dễ nhìn thấy hơn bên trong cửa hàng nhờ ______ tốt hơn.",
+              "answer": "lighting",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ** (sau ‘better’).\nTrong cửa hàng: **ánh sáng/ hệ thống chiếu sáng** (đèn khí gas, sau đó đèn điện) tốt hơn → hàng hoá rõ ràng, hấp dẫn hơn. Chính tả: **lighting** (không phải ‘light’ – vẫn có thể được chấp nhận nhưng ‘lighting’ là đáp án gốc).",
+              "evidence": "(ý transcript) Improved lighting inside greatly increased the visibility of the goods.",
+              "evidence_vi": "Ánh sáng trong cửa hàng tốt hơn giúp hàng hoá dễ thấy hơn nhiều."
+            },
+            {
+              "no": "39",
+              "prompt": "The displays were more visible outside stores, because ______ were bigger.",
+              "prompt_vi": "Hàng trưng bày dễ nhìn thấy hơn từ bên ngoài cửa hàng vì ______ to hơn.",
+              "answer": "windows",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ số nhiều** (động từ ‘were’).\nNgoài cửa hàng: **cửa kính trưng bày** (shop windows) to hơn nhờ kỹ thuật sản xuất kính mới. Đừng quên ‘s’: ‘were’ yêu cầu số nhiều → windows.",
+              "evidence": "(ý transcript) It made it possible for windows to be much larger than previously.",
+              "evidence_vi": "Điều đó cho phép cửa kính lớn hơn nhiều so với trước."
+            },
+            {
+              "no": "40",
+              "prompt": "______ that was persuasive became much more common.",
+              "prompt_vi": "______ có tính thuyết phục trở nên phổ biến hơn nhiều.",
+              "answer": "advertising",
+              "confidence": "high",
+              "explanation": "Loại từ: **danh từ không đếm được** (động từ ‘was’ số ít).\n**Quảng cáo** mang tính thuyết phục (thuyết phục người mua) phát triển mạnh. Lưu ý: chỗ trống dùng ‘was’ → danh từ không đếm được ‘advertising’; nếu viết ‘advertisements’ thì không khớp ngữ pháp với ‘was’.",
+              "evidence": "(ý transcript) There was an explosion in advertising.",
+              "evidence_vi": "Quảng cáo bùng nổ."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "reading",
+      "title": "Reading – Passage 1",
+      "note": "Bài ‘Hello Happiness!’ (Questions 1–13). Đáp án tìm trực tiếp từ bài đọc.",
+      "passage": {
+        "title": "Hello Happiness!",
+        "title_vi": "Chào hạnh phúc!",
+        "paragraphs": [
+          {
+            "label": "1",
+            "en": "Ask 100 people what would make them happy, and a sizable majority would say “winning the lottery.” Yet, if they won a vast fortune, within a year they would be back to their previous level of happiness. The fact is that money has many uses, but more money does not mean more happiness. Surveys carried out in recent years by leading psychologists and sociologists all confirm that while individuals may increase their material wealth during the course of their lifetime, this has no bearing on their well-being. And what is true for individuals can be applied on a larger scale to the world population. Statistically, wealthier nations do not achieve higher scores on the happiness-ometer than developing or underdeveloped nations. Once the basic criteria of adequate shelter and nutrition are satisfied, increased wealth plays no significant role. So why the obsession with getting rich? The answer, say researchers, is simple. Call it jealousy, competitiveness, or just keeping up with the Joneses, however well we are doing, there is always someone else who is doing better. Just as we acquire a new $25,000 car, our neighbour parks his brand spanking new $40,000 set of wheels in his drive, causing us much consternation, but fueling us with new aspirations in the process. And so the cycle continues. Money, or material wealth, may be a prime mover, but it is not the foundation of our well-being.",
+            "vi": "Hãy hỏi 100 người điều gì sẽ khiến họ hạnh phúc, và phần lớn sẽ trả lời “trúng xổ số”. Thế nhưng, nếu họ thực sự trúng một gia tài khổng lồ, chỉ trong vòng một năm họ sẽ trở lại mức hạnh phúc như trước. Sự thật là tiền có nhiều công dụng, nhưng nhiều tiền hơn không có nghĩa là hạnh phúc hơn. Các cuộc khảo sát do những nhà tâm lý học và xã hội học hàng đầu thực hiện trong những năm gần đây đều khẳng định rằng dù mỗi cá nhân có thể tăng của cải vật chất trong suốt cuộc đời, điều đó không hề ảnh hưởng đến hạnh phúc của họ. Và điều đúng với cá nhân cũng có thể áp dụng ở quy mô lớn hơn cho dân số thế giới. Về mặt thống kê, các quốc gia giàu hơn không đạt điểm cao hơn trên ‘thước đo hạnh phúc’ so với các quốc gia đang phát triển hay kém phát triển. Một khi các tiêu chí cơ bản về chỗ ở và dinh dưỡng đầy đủ được đáp ứng, sự giàu có tăng thêm không đóng vai trò đáng kể nào. Vậy tại sao lại có nỗi ám ảnh làm giàu? Các nhà nghiên cứu cho rằng câu trả lời rất đơn giản. Gọi đó là ghen tị, tính ganh đua, hay chỉ là ‘đua đòi với hàng xóm’ – dù chúng ta đang sống tốt đến đâu, luôn có ai đó sống tốt hơn. Đúng lúc ta vừa mua một chiếc xe 25.000 đô, người hàng xóm lại đỗ chiếc xe mới cứng 40.000 đô trước cửa nhà, khiến ta vô cùng bực bội, nhưng đồng thời cũng tiếp cho ta những khát vọng mới. Và vòng luẩn quẩn cứ thế tiếp diễn. Tiền bạc, hay của cải vật chất, có thể là động lực chính, nhưng nó không phải là nền tảng cho hạnh phúc của chúng ta."
+          },
+          {
+            "label": "2",
+            "en": "If money isn’t the key to happiness, then what is? In all 44 countries surveyed by a prominent research centre, family life provided the greatest source of satisfaction. Married people live on average three years longer and enjoy greater physical and psychological health than the unmarried and, surprisingly, couples in a cohabitational relationship. Having a family enhances well-being, and spending more time with one’s family helps even more. Social interaction among families, neighbourhoods, workplaces, communities and religious groups correlates strongly with subjective well-being. In fact, the degree of individuals’ social connections is the best benchmark of their happiness.",
+            "vi": "Nếu tiền không phải là chìa khoá của hạnh phúc, vậy đâu mới là chìa khoá? Ở cả 44 quốc gia được một trung tâm nghiên cứu nổi tiếng khảo sát, đời sống gia đình là nguồn mang lại sự thoả mãn lớn nhất. Người đã kết hôn sống lâu hơn trung bình ba năm và có sức khoẻ thể chất lẫn tinh thần tốt hơn so với người chưa kết hôn và, thật đáng ngạc nhiên, so với cả các cặp đôi sống chung không kết hôn. Có gia đình giúp nâng cao hạnh phúc, và dành nhiều thời gian hơn cho gia đình còn giúp ích nhiều hơn nữa. Sự giao lưu xã hội giữa các gia đình, khu phố, nơi làm việc, cộng đồng và các nhóm tôn giáo có tương quan chặt chẽ với cảm nhận hạnh phúc chủ quan. Thực tế, mức độ kết nối xã hội của mỗi người là thước đo tốt nhất cho hạnh phúc của họ."
+          },
+          {
+            "label": "3",
+            "en": "Friendship is another major factor. Indeed, to return to the dollar-equals-happiness equation, in one survey, having a friend converted into $50,000 worth of happiness, and confirms the well-known phenomenon that loneliness can lead to depression. Work is another area central to well-being, and certain features correlate highly with happiness. These include autonomy over how, where, and at what pace work is done, trust between employer and employee, fair treatment, and active participation in the making of decisions. Occupationally, happiness tends to be more common among professionals and managers, that is, people who are in control of the work they do, rather than subservient to their bosses, inequality implies less control for those who are in the weaker position, although there are more risks of losing their privileges for those in the stronger position.",
+            "vi": "Tình bạn là một yếu tố quan trọng khác. Thật vậy, quay lại với phương trình ‘tiền bằng hạnh phúc’, trong một cuộc khảo sát, việc có một người bạn được quy đổi thành lượng hạnh phúc trị giá 50.000 đô la, và điều đó khẳng định hiện tượng ai cũng biết là sự cô đơn có thể dẫn đến trầm cảm. Công việc là một lĩnh vực trọng yếu khác đối với hạnh phúc, và một số đặc điểm nhất định có tương quan cao với hạnh phúc. Chúng bao gồm quyền tự chủ về cách làm, nơi làm và tốc độ làm việc, sự tin tưởng giữa chủ và nhân viên, sự đối xử công bằng, và việc tích cực tham gia vào quá trình ra quyết định. Xét theo nghề nghiệp, hạnh phúc thường phổ biến hơn ở giới chuyên môn và quản lý, tức là những người làm chủ được công việc của mình thay vì phải phục tùng cấp trên; sự bất bình đẳng đồng nghĩa với việc người ở vị thế yếu hơn có ít quyền kiểm soát hơn, mặc dù người ở vị thế mạnh hơn lại có nhiều nguy cơ mất đặc quyền hơn."
+          },
+          {
+            "label": "4",
+            "en": "Control of one’s life in general is also key. Happiness is clearly correlated with the presence of favourable events such as promotion or marriage, and the absence of troubles or bad luck such as accidents, being laid off or conflicts. These events on their own signal the success or failure to reach one’s goals, and therefore the control one has. On a national level, the more that governments recognise individual preferences, the happier their citizens will be. Choice, and citizens’ belief that they can affect the political process, increase subjective well-being. Furthermore, evidence exists for an association between unhappiness and poor health: people from underdeveloped countries are among the unhappiest in the world, and their life expectancy has been falling steadily. People are more satisfied in societies which minimally restrict their freedom of action, in other words, where they are in control rather than being controlled. Happy people are characterised by the belief that they are able to control their situation, whereas unhappy people tend to believe that they are a victim of fate. Happy people are also more psychologically resilient, assertive and open to experience.",
+            "vi": "Việc làm chủ cuộc sống nói chung cũng là yếu tố then chốt. Hạnh phúc rõ ràng có liên quan đến sự xuất hiện của những sự kiện tốt đẹp như được thăng chức hay kết hôn, và sự vắng mặt của rắc rối hay vận rủi như tai nạn, bị sa thải hay xung đột. Bản thân những sự kiện này báo hiệu việc một người thành công hay thất bại trong việc đạt mục tiêu, và do đó cho thấy mức độ kiểm soát mà người đó có. Ở cấp độ quốc gia, chính phủ càng tôn trọng sở thích của từng cá nhân thì người dân càng hạnh phúc. Quyền lựa chọn, và niềm tin của người dân rằng họ có thể tác động đến tiến trình chính trị, làm tăng cảm nhận hạnh phúc chủ quan. Hơn nữa, có bằng chứng về mối liên hệ giữa sự bất hạnh và sức khoẻ kém: người dân ở các nước kém phát triển thuộc nhóm bất hạnh nhất thế giới, và tuổi thọ của họ liên tục giảm. Con người hài lòng hơn ở những xã hội hạn chế tối thiểu quyền tự do hành động của họ, nói cách khác, nơi họ làm chủ thay vì bị kiểm soát. Người hạnh phúc có đặc điểm là tin rằng mình có thể kiểm soát hoàn cảnh, trong khi người bất hạnh thường tin rằng mình là nạn nhân của số phận. Người hạnh phúc cũng có sức bật tâm lý tốt hơn, quyết đoán hơn và cởi mở hơn với trải nghiệm mới."
+          },
+          {
+            "label": "5",
+            "en": "But how good is the evidence for this alternative viewpoint then - that happiness, and not financial status, contributes to good health, and long life? A study of nuns, spanning seven decades, supports this theory. Autobiographies written by the nuns in their early 1920s were scored for positive and negative emotions. Nuns expressing the most positive emotions lived on average ten years longer than those expressing the least positive emotions. Happy people, it seems, are much less likely to fall ill and die than unhappy people.",
+            "vi": "Vậy bằng chứng cho quan điểm khác này – rằng chính hạnh phúc, chứ không phải tình trạng tài chính, góp phần mang lại sức khoẻ tốt và tuổi thọ cao – đáng tin đến đâu? Một nghiên cứu về các nữ tu kéo dài bảy thập kỷ ủng hộ giả thuyết này. Những cuốn tự truyện do các nữ tu viết vào đầu thập niên 1920 được chấm điểm theo các cảm xúc tích cực và tiêu cực. Những nữ tu thể hiện nhiều cảm xúc tích cực nhất sống lâu hơn trung bình mười năm so với những người thể hiện ít cảm xúc tích cực nhất. Có vẻ như người hạnh phúc ít có khả năng mắc bệnh và qua đời hơn nhiều so với người bất hạnh."
+          },
+          {
+            "label": "6",
+            "en": "But what must we do to be happy? Experts cite the old maxim “be happy with what you’ve got.” Look around you, they say, and identify the positive factors in your life. Concentrating on the negative aspects of one’s life is a no-no, and so is worrying. Worrying is a negative thinking habit that is nearly always about something that lies in the future. It stems, apparently, from our cave dwelling days, when we had to think on a day-to-day basis about how and where to find food and warmth, for example. But in the modern world, worrying simply undermines our ability to enjoy life in the present. More often than not, the things we worry about never come to pass anyway. Just as important is not to dwell on the past - past mistakes, bad experiences, missed opportunities and so on.",
+            "vi": "Nhưng chúng ta phải làm gì để hạnh phúc? Các chuyên gia trích dẫn câu châm ngôn cũ “hãy hài lòng với những gì mình đang có”. Họ khuyên: hãy nhìn xung quanh và nhận ra những yếu tố tích cực trong cuộc sống của bạn. Tập trung vào mặt tiêu cực của cuộc sống là điều tối kỵ, và lo lắng cũng vậy. Lo lắng là một thói quen suy nghĩ tiêu cực gần như luôn hướng về điều gì đó trong tương lai. Có vẻ như nó bắt nguồn từ thời ta còn sống trong hang động, khi hằng ngày ta phải nghĩ xem tìm thức ăn và hơi ấm bằng cách nào và ở đâu. Nhưng trong thế giới hiện đại, lo lắng chỉ làm suy giảm khả năng tận hưởng cuộc sống ở hiện tại. Thường thì những điều ta lo lắng rốt cuộc chẳng bao giờ xảy ra. Quan trọng không kém là đừng day dứt mãi về quá khứ – những sai lầm, trải nghiệm tồi tệ, cơ hội bị bỏ lỡ, v.v."
+          },
+          {
+            "label": "7",
+            "en": "What else can we do? Well, engage in a loving relationship with another adult, and work hard to sustain it. Try to plan frequent interactions with your family, friends and neighbours (in that order). Make sure you’re not working so hard that you’ve no time left for personal relationships and leisure. If you are, leave your job voluntarily to become self-employed, but don’t get sacked — that’s more damaging to well-being than the loss of a spouse, and its effects last longer. In your spare time, join a club, volunteer for community service, or take up religion.",
+            "vi": "Chúng ta còn có thể làm gì nữa? Hãy tham gia một mối quan hệ yêu thương với một người trưởng thành khác, và nỗ lực để duy trì nó. Hãy cố gắng lên kế hoạch thường xuyên gặp gỡ gia đình, bạn bè và hàng xóm (theo đúng thứ tự đó). Hãy chắc chắn rằng bạn không làm việc quá sức đến mức không còn thời gian cho các mối quan hệ cá nhân và giải trí. Nếu đúng là như vậy, hãy tự nguyện nghỉ việc để làm tự do, nhưng đừng để bị đuổi việc – điều đó gây hại cho hạnh phúc còn hơn cả việc mất đi người bạn đời, và ảnh hưởng của nó kéo dài lâu hơn. Vào thời gian rảnh, hãy tham gia một câu lạc bộ, làm tình nguyện phục vụ cộng đồng, hoặc theo một tôn giáo."
+          },
+          {
+            "label": "8",
+            "en": "If none of the above works, then vote for a political party with the same agenda as the King of Bhutan, who announced that his nation’s objective is national happiness.",
+            "vi": "Nếu tất cả những điều trên đều không hiệu quả, hãy bỏ phiếu cho một đảng chính trị có cùng chương trình nghị sự với Quốc vương Bhutan – người đã tuyên bố rằng mục tiêu của đất nước ông là hạnh phúc quốc gia."
+          }
+        ]
+      },
+      "groups": [
+        {
+          "range": "Questions 1–3",
+          "instruction": "Choose THREE letters A–G.\nCircle the correct letters, A–G, below.\nNB Your answers may be given in any order.\nWhich THREE of the following statements are true, according to the text?",
+          "instruction_vi": "Chọn BA chữ cái A–G (thứ tự bất kỳ). BA nhận định nào sau đây là đúng theo bài đọc?",
+          "context": "A  Money can bring misery.\nB  Wealthier nations place more emphasis on happiness than poorer ones.\nC  Securing a place to live is a basic human need.\nD  The desire for social status is global phenomenon.\nE  An unmarried couple living together are less likely to be happy than a married couple.\nF  The less responsibility one has, the happier one is.\nG  Involvement in policy making can increase well-being.",
+          "questions": [
+            {
+              "no": "1–3",
+              "prompt": "Which THREE of the following statements are true, according to the text?",
+              "prompt_vi": "Theo bài đọc, BA nhận định nào sau đây là đúng?",
+              "options": [
+                "A. Money can bring misery.",
+                "B. Wealthier nations place more emphasis on happiness than poorer ones.",
+                "C. Securing a place to live is a basic human need.",
+                "D. The desire for social status is global phenomenon.",
+                "E. An unmarried couple living together are less likely to be happy than a married couple.",
+                "F. The less responsibility one has, the happier one is.",
+                "G. Involvement in policy making can increase well-being."
+              ],
+              "answer": "C, E, G (thứ tự bất kỳ)",
+              "explanation": "**C – ĐÚNG**: ‘Once the basic criteria of **adequate shelter** and nutrition are satisfied…’ → shelter = a place to live; basic criteria = basic human need.\n**E – ĐÚNG**: ‘Married people live on average three years longer and enjoy greater physical and psychological health than the unmarried and, surprisingly, **couples in a cohabitational relationship**.’ → cohabitational relationship = an unmarried couple living together; họ kém hơn cặp đã kết hôn.\n**G – ĐÚNG**: ‘Choice, and citizens’ belief that they can **affect the political process**, increase subjective well-being.’ (và ở đoạn công việc: ‘active participation in the making of decisions’) → involvement in policy making.\n\nCác phương án sai:\n**A** – bài chỉ nói tiền không làm ta hạnh phúc HƠN (‘more money does not mean more happiness’), không nói tiền gây ra đau khổ (misery).\n**B** – bài nói nước giàu không có điểm hạnh phúc cao hơn; không nói nước giàu ‘coi trọng’ hạnh phúc hơn (ngược lại, ví dụ coi trọng hạnh phúc là Bhutan).\n**D** – ‘keeping up with the Joneses’ được nêu như lời giải thích chung, nhưng bài không khẳng định mong muốn địa vị xã hội là hiện tượng toàn cầu.\n**F** – trái với bài: người hạnh phúc là ‘professionals and managers… in control of the work they do’ (nhiều trách nhiệm/ quyền kiểm soát hơn).",
+              "evidence": "Once the basic criteria of adequate shelter and nutrition are satisfied, increased wealth plays no significant role. / … than the unmarried and, surprisingly, couples in a cohabitational relationship. / Choice, and citizens’ belief that they can affect the political process, increase subjective well-being.",
+              "evidence_vi": "Một khi các tiêu chí cơ bản về chỗ ở và dinh dưỡng đầy đủ được đáp ứng, sự giàu có tăng thêm không đóng vai trò đáng kể. / … so với người chưa kết hôn và, đáng ngạc nhiên, các cặp sống chung. / Quyền lựa chọn và niềm tin rằng mình có thể tác động đến tiến trình chính trị làm tăng hạnh phúc chủ quan."
+            }
+          ]
+        },
+        {
+          "range": "Questions 4–7",
+          "instruction": "Complete the summary using the list of words, A–I, below.\nWrite the correct letter, A–I in the spaces below.",
+          "instruction_vi": "Hoàn thành đoạn tóm tắt bằng danh sách từ A–I bên dưới. Viết chữ cái đúng vào chỗ trống.",
+          "context": "A episode   B interaction   C cooperation\nD control   E number   F level\nG course   H conflict   I limit\n\nMoney can buy you just about anything, but not, it seems, happiness. Whether on a personal or national 4 ______, your bank balance won't make you happier. Once the basic criteria of a roof over your head and food on the table have been met, money ceases to play a part. One of the most important factors in achieving happiness is the extent of our social 5 ______ – our relationships with family, friends, colleagues and so on. Equally important is the amount of 6 ______ we have, either in our personal life, working life, or even in our ability to influence the political 7 ______ that our country embarks on.",
+          "questions": [
+            {
+              "no": "4",
+              "prompt": "Whether on a personal or national ______, your bank balance won't make you happier.",
+              "prompt_vi": "Dù ở ______ cá nhân hay quốc gia, số dư tài khoản ngân hàng cũng không làm bạn hạnh phúc hơn.",
+              "answer": "F",
+              "explanation": "Đáp án: **F – level**. Cụm cố định ‘on a personal/national **level**’ (ở cấp độ cá nhân/ quốc gia). Bài đọc: ‘On a national level, the more that governments…’ và ý ‘what is true for individuals can be applied on a larger scale to the world population’.\nCác từ khác như ‘limit’, ‘number’ không đi với ‘on a … ’ theo nghĩa này.",
+              "evidence": "And what is true for individuals can be applied on a larger scale to the world population.",
+              "evidence_vi": "Và điều đúng với cá nhân cũng có thể áp dụng ở quy mô lớn hơn cho dân số thế giới."
+            },
+            {
+              "no": "5",
+              "prompt": "One of the most important factors in achieving happiness is the extent of our social ______.",
+              "prompt_vi": "Một trong những yếu tố quan trọng nhất để đạt được hạnh phúc là mức độ ______ xã hội của chúng ta.",
+              "answer": "B",
+              "explanation": "Đáp án: **B – interaction**. Bài: ‘**Social interaction** among families, neighbourhoods, workplaces… correlates strongly with subjective well-being. In fact, the degree of individuals’ social connections is the best benchmark of their happiness.’ → ‘the extent of’ = ‘the degree of’; ‘relationships with family, friends, colleagues’ khớp với danh sách families, workplaces…\nBẫy: **cooperation** (hợp tác) nghe hợp nghĩa nhưng bài không dùng; ‘social cooperation’ không phải ý của bài.",
+              "evidence": "Social interaction among families, neighbourhoods, workplaces, communities and religious groups correlates strongly with subjective well-being.",
+              "evidence_vi": "Sự giao lưu xã hội giữa các gia đình, khu phố, nơi làm việc, cộng đồng và nhóm tôn giáo có tương quan chặt chẽ với hạnh phúc chủ quan."
+            },
+            {
+              "no": "6",
+              "prompt": "Equally important is the amount of ______ we have, either in our personal life, working life…",
+              "prompt_vi": "Quan trọng không kém là mức độ ______ mà chúng ta có, trong đời sống cá nhân, công việc…",
+              "answer": "D",
+              "explanation": "Đáp án: **D – control**. Bài: ‘**Control of one’s life in general** is also key’; về công việc: ‘people who are **in control of the work they do**’. Tóm tắt nói ‘personal life, working life’ → đúng hai chỗ bài nhắc ‘control’.\n‘amount of’ đi với danh từ không đếm được → control phù hợp ngữ pháp.",
+              "evidence": "Control of one’s life in general is also key.",
+              "evidence_vi": "Việc làm chủ cuộc sống nói chung cũng là yếu tố then chốt."
+            },
+            {
+              "no": "7",
+              "prompt": "…or even in our ability to influence the political ______ that our country embarks on.",
+              "prompt_vi": "…hoặc thậm chí trong khả năng tác động tới ______ chính trị mà đất nước chúng ta theo đuổi.",
+              "answer": "G",
+              "explanation": "Đáp án: **G – course**. ‘embark on a **course**’ = bắt đầu đi theo một đường lối/ hướng đi. Bài: ‘citizens’ belief that they can **affect the political process**’ → influence = affect; political course ≈ political process.\nBẫy: **conflict** đi với ‘political’ cũng tự nhiên (‘political conflict’) nhưng sai nghĩa; ‘episode’ không đi với ‘embark on’.",
+              "evidence": "Choice, and citizens’ belief that they can affect the political process, increase subjective well-being.",
+              "evidence_vi": "Quyền lựa chọn và niềm tin của người dân rằng họ có thể tác động đến tiến trình chính trị làm tăng hạnh phúc chủ quan."
+            }
+          ]
+        },
+        {
+          "range": "Questions 8–13",
+          "instruction": "Do the following statements agree with the information given in Reading Passage 1?\nWrite\nTRUE if the statement agrees with the information\nFALSE if the statement contradicts the information\nNOT GIVEN if there is no information on this",
+          "instruction_vi": "Các nhận định sau có khớp với thông tin trong bài đọc 1 không? Viết TRUE nếu khớp, FALSE nếu mâu thuẫn, NOT GIVEN nếu không có thông tin.",
+          "questions": [
+            {
+              "no": "8",
+              "prompt": "People from underdeveloped nations try to attain the same standard of living as those from developed nations.",
+              "prompt_vi": "Người dân ở các nước kém phát triển cố gắng đạt mức sống ngang với người dân ở các nước phát triển.",
+              "answer": "NOT GIVEN",
+              "explanation": "Từ khoá: **underdeveloped nations**, **attain the same standard of living**.\nBài nhắc ‘underdeveloped nations’ hai lần: (1) nước giàu không có điểm hạnh phúc cao hơn nước kém phát triển; (2) người dân nước kém phát triển thuộc nhóm bất hạnh nhất và tuổi thọ giảm. Không chỗ nào nói họ CỐ GẮNG đạt mức sống như nước phát triển.\nBẫy: ý ‘keeping up with the Joneses’ (đua đòi) nói về con người nói chung với hàng xóm, không phải giữa các quốc gia → NOT GIVEN.",
+              "evidence": "Statistically, wealthier nations do not achieve higher scores on the happiness-ometer than developing or underdeveloped nations.",
+              "evidence_vi": "Về thống kê, các nước giàu hơn không đạt điểm hạnh phúc cao hơn các nước đang phát triển hay kém phát triển."
+            },
+            {
+              "no": "9",
+              "prompt": "Seeing what others have makes people want to have it too.",
+              "prompt_vi": "Nhìn thấy những gì người khác có khiến con người cũng muốn có được nó.",
+              "answer": "TRUE",
+              "explanation": "Từ khoá: **seeing what others have**, **want to have it too**.\nBài: ví dụ người hàng xóm đỗ chiếc xe 40.000 đô ‘causing us much consternation, but **fueling us with new aspirations**’ → aspirations = muốn có; ‘keeping up with the Joneses’ = muốn bằng người khác. Khớp → TRUE.",
+              "evidence": "Just as we acquire a new $25,000 car, our neighbour parks his brand spanking new $40,000 set of wheels in his drive, causing us much consternation, but fueling us with new aspirations in the process.",
+              "evidence_vi": "Đúng lúc ta mua chiếc xe 25.000 đô, hàng xóm lại đỗ chiếc xe mới cứng 40.000 đô trước nhà, khiến ta rất bực bội, nhưng đồng thời tiếp cho ta những khát vọng mới."
+            },
+            {
+              "no": "10",
+              "prompt": "The larger the family is, the happier the parents will probably be.",
+              "prompt_vi": "Gia đình càng đông người thì cha mẹ có lẽ càng hạnh phúc.",
+              "answer": "NOT GIVEN",
+              "explanation": "Từ khoá: **larger family**.\nBài chỉ nói ‘Having a family enhances well-being, and **spending more time** with one’s family helps even more.’ – càng dành NHIỀU THỜI GIAN cho gia đình càng tốt, không nói gì về SỐ LƯỢNG thành viên. Đừng nhầm ‘more time’ với ‘more members’ → NOT GIVEN.",
+              "evidence": "Having a family enhances well-being, and spending more time with one’s family helps even more.",
+              "evidence_vi": "Có gia đình giúp tăng hạnh phúc, và dành nhiều thời gian hơn cho gia đình còn giúp ích nhiều hơn."
+            },
+            {
+              "no": "11",
+              "prompt": "One’s attitude to life has no influence on one’s health.",
+              "prompt_vi": "Thái độ sống của một người không ảnh hưởng gì đến sức khoẻ của người đó.",
+              "answer": "FALSE",
+              "explanation": "Từ khoá: **attitude to life**, **health**.\nNghiên cứu về các nữ tu: người thể hiện nhiều cảm xúc tích cực nhất sống lâu hơn 10 năm; ‘Happy people… are much less likely to fall ill and die’. Ngoài ra ‘evidence exists for an association between unhappiness and poor health’. → thái độ sống CÓ ảnh hưởng đến sức khoẻ, mâu thuẫn với ‘no influence’ → FALSE.",
+              "evidence": "Happy people, it seems, are much less likely to fall ill and die than unhappy people.",
+              "evidence_vi": "Có vẻ người hạnh phúc ít có khả năng mắc bệnh và qua đời hơn nhiều so với người bất hạnh."
+            },
+            {
+              "no": "12",
+              "prompt": "Instinct can be a barrier to happiness.",
+              "prompt_vi": "Bản năng có thể là một rào cản đối với hạnh phúc.",
+              "answer": "TRUE",
+              "explanation": "Từ khoá: **instinct**, **barrier to happiness**.\nBài: lo lắng (worrying) ‘stems… from our **cave dwelling days**’ – tức là một thói quen bản năng có từ thời tiền sử; ‘worrying simply **undermines our ability to enjoy life**’ → làm cản trở hạnh phúc. Instinct ≈ thói quen di truyền từ thời sống trong hang; barrier ≈ undermines → TRUE.",
+              "evidence": "It stems, apparently, from our cave dwelling days… But in the modern world, worrying simply undermines our ability to enjoy life in the present.",
+              "evidence_vi": "Có vẻ nó bắt nguồn từ thời ta sống trong hang động… Nhưng trong thế giới hiện đại, lo lắng chỉ làm suy giảm khả năng tận hưởng cuộc sống hiện tại."
+            },
+            {
+              "no": "13",
+              "prompt": "Family and friends rank equally as sources of happiness.",
+              "prompt_vi": "Gia đình và bạn bè được xếp ngang nhau như những nguồn hạnh phúc.",
+              "answer": "FALSE",
+              "explanation": "Từ khoá: **rank equally**.\nBài: ‘family life provided **the greatest source** of satisfaction’ và lời khuyên ‘plan frequent interactions with your family, friends and neighbours **(in that order)**’ → gia đình xếp trước bạn bè, KHÔNG ngang nhau → FALSE.\nLưu ý: ‘Friendship is another major factor’ chỉ nói tình bạn quan trọng, không nói ngang bằng gia đình.",
+              "evidence": "Try to plan frequent interactions with your family, friends and neighbours (in that order).",
+              "evidence_vi": "Hãy cố lên kế hoạch thường xuyên giao lưu với gia đình, bạn bè và hàng xóm (theo đúng thứ tự đó)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "reading",
+      "title": "Reading – Passage 2",
+      "note": "Bài ‘One Who Hopes’ về ngôn ngữ nhân tạo Esperanto (Questions 14–26).",
+      "passage": {
+        "title": "One Who Hopes",
+        "title_vi": "Người hy vọng",
+        "paragraphs": [
+          {
+            "label": "A",
+            "en": "Language lovers, just like music lovers, enjoy variety. For the latter there's Mozart, The Rolling Stones and Beyonce. For the former there's English, French, Swahili, Urdu... the list is endless. But what about those poor overworked students who find learning difficult, confusing languages a drudge? Wouldn't it put a smile on their faces if there were just one simple, easy-to-learn tongue that would cut their study time by years? Well, of course, it exists. It's called Esperanto, and it's been around for more than 120 years. Esperanto is the most widely spoken artificially constructed international language. The name derives from Doktoro Esperanto, the pseudonym under which L. L. Zamenhof first published his Unua Libro in 1887. The phrase itself means 'one who hopes'. Zamenhof's goal was to create an easy and flexible language as a universal second language to promote peace and international understanding.",
+            "vi": "Những người yêu ngôn ngữ, cũng giống như người yêu âm nhạc, thích sự đa dạng. Với người yêu nhạc thì có Mozart, The Rolling Stones và Beyoncé. Với người yêu ngôn ngữ thì có tiếng Anh, tiếng Pháp, tiếng Swahili, tiếng Urdu… danh sách là vô tận. Nhưng còn những sinh viên tội nghiệp, quá tải, những người thấy việc học các ngôn ngữ khó và rối rắm là một cực hình thì sao? Chẳng phải họ sẽ mỉm cười nếu có một thứ tiếng đơn giản, dễ học giúp rút ngắn thời gian học đi nhiều năm hay sao? Và tất nhiên, thứ tiếng đó có tồn tại. Nó tên là Esperanto, và đã có mặt hơn 120 năm. Esperanto là ngôn ngữ quốc tế được xây dựng nhân tạo có nhiều người nói nhất. Cái tên này bắt nguồn từ Doktoro Esperanto, bút danh mà L. L. Zamenhof dùng khi lần đầu xuất bản cuốn Unua Libro năm 1887. Bản thân cụm từ này có nghĩa là ‘người hy vọng’. Mục tiêu của Zamenhof là tạo ra một ngôn ngữ dễ học và linh hoạt làm ngôn ngữ thứ hai chung cho toàn thế giới, nhằm thúc đẩy hoà bình và sự hiểu biết lẫn nhau giữa các quốc gia."
+          },
+          {
+            "label": "B",
+            "en": "Zamenhof, after ten years of developing his brainchild from the late 1870s to the early 1880s, had the first Esperanto grammar published in Warsaw in July 1887. The number of speakers grew rapidly over the next few decades, at first primarily in the Russian empire and Eastern Europe, then in Western Europe and the Americas, China, and Japan. In the early years, speakers of Esperanto kept in contact primarily through correspondence and periodicals, but since 1905 world congresses have been held on five continents every year except during the two World Wars. Latest estimates for the numbers of Esperanto speakers are around 2 million. Put in percentage terms, that's about 0.03% of the world's population - no staggering figure, comparatively speaking. One reason is that Esperanto has no official status in any country, but it is an optional subject on the curriculum of several state education systems. It is widely estimated that it can be learned in anywhere between a quarter to a twentieth of the time required for other languages.",
+            "vi": "Sau mười năm phát triển ‘đứa con tinh thần’ của mình từ cuối thập niên 1870 đến đầu thập niên 1880, Zamenhof cho xuất bản cuốn ngữ pháp Esperanto đầu tiên tại Warsaw vào tháng 7 năm 1887. Số người nói tiếng này tăng nhanh trong vài thập kỷ tiếp theo, lúc đầu chủ yếu ở Đế quốc Nga và Đông Âu, sau đó lan sang Tây Âu, châu Mỹ, Trung Quốc và Nhật Bản. Trong những năm đầu, người nói Esperanto giữ liên lạc với nhau chủ yếu qua thư từ và các ấn phẩm định kỳ, nhưng từ năm 1905, các đại hội thế giới đã được tổ chức hằng năm trên năm châu lục, trừ thời gian hai cuộc Thế chiến. Ước tính mới nhất về số người nói Esperanto là khoảng 2 triệu. Tính theo tỷ lệ phần trăm, con số đó chỉ khoảng 0,03% dân số thế giới – một con số chẳng có gì đáng kinh ngạc nếu so sánh. Một lý do là Esperanto không có vị thế chính thức ở bất kỳ quốc gia nào, nhưng nó là một môn học tự chọn trong chương trình giảng dạy của một số hệ thống giáo dục công. Người ta ước tính rộng rãi rằng có thể học Esperanto trong khoảng thời gian chỉ bằng từ một phần tư đến một phần hai mươi thời gian cần để học các ngôn ngữ khác."
+          },
+          {
+            "label": "C",
+            "en": "As a constructed language, Esperanto is not genealogically related to any ethnic language. Whilst it is described as 'a language lexically predominantly Romanic', the phonology, grammar, vocabulary, and semantics are based on the western Indo-European languages. For those of us who are not naturally predisposed to tucking languages under our belts, it is an easy language to learn. It has 5 vowels and 23 consonants. It has one simple way of conjugating all of its verbs. Words are often made from many other roots, making the number of words which one must memorise much smaller. The language is phonetic, and the rules of pronunciation are very simple, so that everyone knows how to pronounce a written word and vice-versa, and word order follows a standard, logical pattern. Through prefixing and suffixing, Esperanto makes it easy to identify words as nouns, verbs, adjectives, adverbs, direct objects and so on, by means of easy-to-spot endings. All this makes for easy language learning. What's more, several research studies demonstrate that studying Esperanto before another foreign language speeds up and improves the learning of the other language. This is presumably because learning subsequent foreign languages is easier than learning one's first, while the use of a grammatically simple and culturally flexible language like Esperanto softens the blow of learning one's first foreign language. In one study, a group of European high school students studied Esperanto for one year, then French for three years, and ended up with a significantly better command of French than a control group who had studied French for all four years.",
+            "vi": "Là một ngôn ngữ được xây dựng, Esperanto không có quan hệ ‘huyết thống’ với bất kỳ ngôn ngữ dân tộc nào. Dù được mô tả là ‘một ngôn ngữ mà từ vựng chủ yếu có gốc Rôman’, ngữ âm, ngữ pháp, từ vựng và ngữ nghĩa của nó dựa trên các ngôn ngữ Ấn-Âu phía tây. Với những ai trong chúng ta không có năng khiếu bẩm sinh để ‘thu nạp’ ngôn ngữ, đây là một thứ tiếng dễ học. Nó có 5 nguyên âm và 23 phụ âm. Nó chỉ có một cách chia đơn giản cho tất cả động từ. Từ thường được tạo ra từ nhiều gốc từ khác, khiến số từ phải ghi nhớ ít hơn nhiều. Ngôn ngữ này viết sao đọc vậy, và quy tắc phát âm rất đơn giản, nên ai cũng biết cách đọc một từ được viết ra và ngược lại, đồng thời trật tự từ tuân theo một khuôn mẫu chuẩn, hợp lý. Thông qua việc thêm tiền tố và hậu tố, Esperanto giúp dễ dàng nhận biết từ là danh từ, động từ, tính từ, trạng từ, tân ngữ trực tiếp v.v. nhờ những đuôi từ dễ nhận ra. Tất cả những điều này giúp việc học trở nên dễ dàng. Hơn nữa, một số nghiên cứu chỉ ra rằng học Esperanto trước khi học một ngoại ngữ khác giúp đẩy nhanh và cải thiện việc học ngoại ngữ đó. Có lẽ là vì học các ngoại ngữ tiếp theo dễ hơn học ngoại ngữ đầu tiên, trong khi việc dùng một ngôn ngữ đơn giản về ngữ pháp và linh hoạt về văn hoá như Esperanto làm ‘nhẹ đòn’ cho việc học ngoại ngữ đầu tiên. Trong một nghiên cứu, một nhóm học sinh trung học châu Âu học Esperanto một năm, rồi học tiếng Pháp ba năm, và cuối cùng có trình độ tiếng Pháp tốt hơn đáng kể so với nhóm đối chứng học tiếng Pháp suốt cả bốn năm."
+          },
+          {
+            "label": "D",
+            "en": "Needless to say, the language has its critics. Some point to the Eastern European features of the language as being harsh and difficult to pronounce, and argue that Esperanto has an artificial feel to it, without the flow of a natural tongue, and that by nature of its artificiality, it is impossible to become emotionally involved with the language. Others cite its lack of cultural history, indigenous literature - “no one has ever written a novel straight into Esperanto” - together with its minimal vocabulary and its inability to express all the necessary philosophical, emotional and psychological concepts.",
+            "vi": "Dĩ nhiên, ngôn ngữ này cũng có những người chỉ trích. Một số người chỉ ra rằng các đặc điểm Đông Âu của nó nghe thô cứng và khó phát âm, và cho rằng Esperanto mang cảm giác giả tạo, thiếu sự trôi chảy của một ngôn ngữ tự nhiên, và chính vì bản chất nhân tạo đó, người ta không thể gắn bó cảm xúc với ngôn ngữ này. Những người khác viện dẫn việc nó thiếu lịch sử văn hoá, thiếu văn học bản địa – “chưa ai từng viết một cuốn tiểu thuyết trực tiếp bằng Esperanto” – cùng với vốn từ vựng tối thiểu và việc nó không thể diễn đạt hết các khái niệm triết học, cảm xúc và tâm lý cần thiết."
+          },
+          {
+            "label": "E",
+            "en": "The champions of Esperanto - Esperantists - disagree. They claim that it is a language in which a great body of world literature has appeared in translation: in poetry, novels, literary journals, and, to rebut the accusation that it is not a 'real' language, point out that it is frequently used at international meetings which draw hundreds and thousands of participants. Moreover, on an international scale, it is most useful - and fair - for neutral communication. That means that communication through Esperanto does not give advantages to the members of any particular people or culture, but provides an ethos of equality of rights, tolerance and true internationalism.",
+            "vi": "Những người ủng hộ Esperanto – các Esperantist – không đồng ý. Họ khẳng định đây là ngôn ngữ mà một khối lượng lớn văn học thế giới đã được dịch sang: thơ ca, tiểu thuyết, tạp chí văn học; và để bác bỏ lời buộc tội rằng nó không phải là một ngôn ngữ ‘thực sự’, họ chỉ ra rằng nó thường xuyên được sử dụng tại các hội nghị quốc tế thu hút hàng trăm, hàng nghìn người tham dự. Hơn nữa, ở quy mô quốc tế, nó hữu ích nhất – và công bằng nhất – cho giao tiếp trung lập. Điều đó có nghĩa là giao tiếp bằng Esperanto không mang lại lợi thế cho thành viên của bất kỳ dân tộc hay nền văn hoá cụ thể nào, mà tạo nên một tinh thần bình đẳng về quyền, khoan dung và chủ nghĩa quốc tế đích thực."
+          },
+          {
+            "label": "F",
+            "en": "Esperantists further claim that Esperanto has the potential - were it universally taught for a year or two throughout the world - to empower ordinary people to communicate effectively worldwide on a scale that far exceeds that which is attainable today by only the most linguistically brilliant among us. It offers the opportunity to improve communication in business, diplomacy, scholarship and other fields so that those who speak many different native languages will be able to participate fluently in international conferences and chat comfortably with each other after the formal presentations are made. Nowadays that privilege is often restricted to native speakers of English and those who have special talents and opportunities for learning English as a foreign language.",
+            "vi": "Các Esperantist còn khẳng định rằng Esperanto có tiềm năng – nếu nó được dạy phổ cập trong một hai năm trên toàn thế giới – giúp người bình thường giao tiếp hiệu quả trên toàn cầu ở quy mô vượt xa những gì ngày nay chỉ những người có tài năng ngôn ngữ xuất chúng nhất mới đạt được. Nó mở ra cơ hội cải thiện giao tiếp trong kinh doanh, ngoại giao, học thuật và các lĩnh vực khác, để những người nói nhiều tiếng mẹ đẻ khác nhau có thể tham gia trôi chảy vào các hội nghị quốc tế và trò chuyện thoải mái với nhau sau các bài trình bày chính thức. Ngày nay, đặc quyền đó thường chỉ dành cho người bản ngữ tiếng Anh và những ai có năng khiếu đặc biệt cũng như cơ hội học tiếng Anh như một ngoại ngữ."
+          },
+          {
+            "label": "G",
+            "en": "What Esperanto does offer in concrete terms is the potential of saving billions of dollars which are now being spent on translators and interpreters, billions which would be freed up to serve the purposes of governments and organisations that spend so much of their resources to change words from one language into the words of others. Take, for example, the enormously costly conferences, meetings and documentation involved in the European Union parliamentary and administrative procedures - all funded, essentially, by tax payers. And instead of the World Health Organisation, and all NGOs for that matter, devoting enormous sums to provide interpreters and translations, they would be able to devote those huge amounts of money to improving the health of stricken populations throughout the world.",
+            "vi": "Điều mà Esperanto thực sự mang lại một cách cụ thể là tiềm năng tiết kiệm hàng tỷ đô la hiện đang được chi cho biên dịch viên và phiên dịch viên – hàng tỷ đô la sẽ được giải phóng để phục vụ mục đích của các chính phủ và tổ chức vốn đang tiêu tốn rất nhiều nguồn lực để chuyển lời từ ngôn ngữ này sang ngôn ngữ khác. Lấy ví dụ các hội nghị, cuộc họp và tài liệu cực kỳ tốn kém trong các thủ tục nghị viện và hành chính của Liên minh châu Âu – về cơ bản đều do người đóng thuế chi trả. Và thay vì Tổ chức Y tế Thế giới, cũng như tất cả các tổ chức phi chính phủ, phải dành những khoản tiền khổng lồ cho phiên dịch và biên dịch, họ có thể dùng số tiền khổng lồ đó để cải thiện sức khoẻ của những cộng đồng đang gặp khó khăn trên khắp thế giới."
+          }
+        ]
+      },
+      "groups": [
+        {
+          "range": "Questions 14–19",
+          "instruction": "Reading Passage 2 has seven paragraphs, A–G.\nChoose the correct heading for paragraphs B–G from the list of headings below.\nWrite the correct number i–ix in spaces 14–19 below.",
+          "instruction_vi": "Bài đọc 2 có bảy đoạn A–G. Chọn tiêu đề đúng cho các đoạn B–G từ danh sách bên dưới. Viết số La Mã đúng i–ix.",
+          "context": "**List of Headings**\ni  A non-exclusive language\nii  Fewer languages, more results\niii  Language is personal\niv  What’s fashionable in language\nv  From the written word to the spoken word\nvi  A real language\nvii  Harmony through language\nviii  The mechanics of a language\nix  Lost in translation\n\nExample: Paragraph A – vii",
+          "questions": [
+            {
+              "no": "14",
+              "prompt": "Paragraph B",
+              "prompt_vi": "Đoạn B",
+              "answer": "v",
+              "explanation": "Đáp án: **v – From the written word to the spoken word** (Từ chữ viết đến lời nói).\nĐoạn B kể lịch sử phát triển: lúc đầu người nói Esperanto liên lạc ‘primarily through **correspondence and periodicals**’ (thư từ, tạp chí = written word), sau đó từ 1905 có ‘**world congresses**’ (đại hội – nơi người ta NÓI với nhau = spoken word). Đây chính là sự chuyển dịch mà tiêu đề mô tả.\nBẫy: tiêu đề iv (What’s fashionable) – đoạn có số liệu người nói tăng nhanh, nhưng không nói về ‘mốt’.",
+              "evidence": "In the early years, speakers of Esperanto kept in contact primarily through correspondence and periodicals, but since 1905 world congresses have been held on five continents every year…",
+              "evidence_vi": "Những năm đầu, người nói Esperanto giữ liên lạc chủ yếu qua thư từ và tạp chí, nhưng từ 1905 các đại hội thế giới được tổ chức hằng năm trên năm châu lục…"
+            },
+            {
+              "no": "15",
+              "prompt": "Paragraph C",
+              "prompt_vi": "Đoạn C",
+              "answer": "viii",
+              "explanation": "Đáp án: **viii – The mechanics of a language** (Cơ chế vận hành của một ngôn ngữ).\nĐoạn C mô tả chi tiết cấu tạo: 5 nguyên âm, 23 phụ âm, một cách chia động từ, từ ghép từ gốc, phát âm theo chữ viết, trật tự từ logic, tiền tố/hậu tố… → đó là ‘mechanics’ (cách ngôn ngữ vận hành).",
+              "evidence": "It has 5 vowels and 23 consonants. It has one simple way of conjugating all of its verbs.",
+              "evidence_vi": "Nó có 5 nguyên âm và 23 phụ âm. Nó có một cách đơn giản để chia tất cả động từ."
+            },
+            {
+              "no": "16",
+              "prompt": "Paragraph D",
+              "prompt_vi": "Đoạn D",
+              "answer": "iii",
+              "explanation": "Đáp án: **iii – Language is personal** (Ngôn ngữ là chuyện cá nhân/ cảm xúc).\nĐoạn D là lời chỉ trích: Esperanto giả tạo, ‘**impossible to become emotionally involved** with the language’, không diễn đạt được ‘philosophical, **emotional and psychological** concepts’ → ý chính: ngôn ngữ thật gắn với cảm xúc, con người – điều Esperanto thiếu.\nBẫy: ix ‘Lost in translation’ – đoạn D không nói về dịch thuật (đoạn E mới nói văn học được dịch sang Esperanto).",
+              "evidence": "…by nature of its artificiality, it is impossible to become emotionally involved with the language.",
+              "evidence_vi": "…vì bản chất nhân tạo, không thể gắn bó cảm xúc với ngôn ngữ này."
+            },
+            {
+              "no": "17",
+              "prompt": "Paragraph E",
+              "prompt_vi": "Đoạn E",
+              "answer": "vi",
+              "explanation": "Đáp án: **vi – A real language** (Một ngôn ngữ thực thụ).\nĐoạn E: những người ủng hộ ‘**rebut the accusation that it is not a ‘real’ language**’ bằng cách chỉ ra văn học được dịch sang và việc dùng ở các hội nghị quốc tế lớn.\nBẫy: đoạn E cũng nhắc ‘neutral communication… does not give advantages to… any particular people’ (gần với i), nhưng ý ‘non-exclusive’ được phát triển đầy đủ ở đoạn F; ý chủ đạo của E là bác bỏ lời chê ‘không phải ngôn ngữ thật’.",
+              "evidence": "…and, to rebut the accusation that it is not a 'real' language, point out that it is frequently used at international meetings which draw hundreds and thousands of participants.",
+              "evidence_vi": "…và để bác bỏ lời buộc tội rằng nó không phải ngôn ngữ ‘thực sự’, họ chỉ ra rằng nó thường được dùng ở các hội nghị quốc tế có hàng trăm, hàng nghìn người tham dự."
+            },
+            {
+              "no": "18",
+              "prompt": "Paragraph F",
+              "prompt_vi": "Đoạn F",
+              "answer": "i",
+              "explanation": "Đáp án: **i – A non-exclusive language** (Một ngôn ngữ không độc quyền/ không loại trừ ai).\nĐoạn F: Esperanto giúp ‘**ordinary people**’ giao tiếp toàn cầu, trong khi hiện nay ‘that privilege is often **restricted to** native speakers of English and those who have special talents’. Exclusive = chỉ dành cho một nhóm; non-exclusive = dành cho tất cả.",
+              "evidence": "Nowadays that privilege is often restricted to native speakers of English and those who have special talents and opportunities for learning English as a foreign language.",
+              "evidence_vi": "Ngày nay đặc quyền đó thường chỉ dành cho người bản ngữ tiếng Anh và những người có năng khiếu, cơ hội đặc biệt để học tiếng Anh như ngoại ngữ."
+            },
+            {
+              "no": "19",
+              "prompt": "Paragraph G",
+              "prompt_vi": "Đoạn G",
+              "answer": "ii",
+              "explanation": "Đáp án: **ii – Fewer languages, more results** (Ít ngôn ngữ hơn, nhiều kết quả hơn).\nĐoạn G: dùng một ngôn ngữ chung sẽ tiết kiệm ‘billions of dollars… spent on translators and interpreters’, tiền đó có thể dùng để ‘improving the health of stricken populations’ → ít ngôn ngữ (ít dịch thuật) → nhiều kết quả hơn (tiền dành cho y tế…).\nBẫy: ix ‘Lost in translation’ có chữ ‘translation’ trùng với đoạn G, nhưng thành ngữ này nghĩa là ‘ý nghĩa bị mất khi dịch’, không phải ‘tiền bị tốn vì dịch’ → sai.",
+              "evidence": "What Esperanto does offer in concrete terms is the potential of saving billions of dollars which are now being spent on translators and interpreters…",
+              "evidence_vi": "Điều Esperanto mang lại một cách cụ thể là tiềm năng tiết kiệm hàng tỷ đô la hiện đang chi cho biên dịch và phiên dịch…"
+            }
+          ]
+        },
+        {
+          "range": "Questions 20–22",
+          "instruction": "Choose the correct letter A, B, C or D.",
+          "instruction_vi": "Chọn chữ cái đúng A, B, C hoặc D.",
+          "questions": [
+            {
+              "no": "20",
+              "prompt": "What advantage is there to learning Esperanto as one’s first foreign language?",
+              "prompt_vi": "Học Esperanto như ngoại ngữ đầu tiên có lợi ích gì?",
+              "options": [
+                "A. Its pronunciation rules follow those of most European languages.",
+                "B. There are no grammar rules to learn.",
+                "C. It can make the learning of other foreign languages less complicated.",
+                "D. Its verbs are not conjugated."
+              ],
+              "answer": "C",
+              "explanation": "Từ khoá: **first foreign language** → đoạn C: ‘studying Esperanto before another foreign language **speeds up and improves** the learning of the other language… **softens the blow** of learning one's first foreign language’ → C (giúp học ngoại ngữ khác bớt phức tạp).\n**A** sai: bài chỉ nói phát âm đơn giản, viết sao đọc vậy, không nói theo quy tắc của đa số ngôn ngữ châu Âu.\n**B** sai: Esperanto CÓ ngữ pháp (‘grammatically simple’, có cuốn ngữ pháp đầu tiên năm 1887).\n**D** sai: động từ VẪN được chia, chỉ là ‘one simple way of conjugating all of its verbs’.",
+              "evidence": "What's more, several research studies demonstrate that studying Esperanto before another foreign language speeds up and improves the learning of the other language.",
+              "evidence_vi": "Hơn nữa, một số nghiên cứu cho thấy học Esperanto trước một ngoại ngữ khác giúp đẩy nhanh và cải thiện việc học ngoại ngữ đó."
+            },
+            {
+              "no": "21",
+              "prompt": "What do its critics say of Esperanto?",
+              "prompt_vi": "Những người chỉ trích nói gì về Esperanto?",
+              "options": [
+                "A. It is only used in artificial situations.",
+                "B. It requires emotional involvement.",
+                "C. It cannot translate works of literature.",
+                "D. It lacks depth of expression."
+              ],
+              "answer": "D",
+              "explanation": "Đoạn D: ‘its **minimal vocabulary** and its **inability to express** all the necessary philosophical, emotional and psychological concepts’ → thiếu chiều sâu diễn đạt = D.\n**A** sai: critics nói ngôn ngữ có ‘artificial feel’ (cảm giác giả tạo), không nói chỉ dùng trong tình huống giả tạo.\n**B** sai: ngược lại – critics nói KHÔNG THỂ gắn bó cảm xúc với nó.\n**C** sai: critics nói chưa ai viết tiểu thuyết TRỰC TIẾP bằng Esperanto (thiếu văn học bản địa), không nói nó không dịch được văn học; thực tế đoạn E cho biết nhiều tác phẩm đã được dịch sang.",
+              "evidence": "Others cite its lack of cultural history, indigenous literature… together with its minimal vocabulary and its inability to express all the necessary philosophical, emotional and psychological concepts.",
+              "evidence_vi": "Những người khác viện dẫn việc nó thiếu lịch sử văn hoá, văn học bản địa… cùng với vốn từ tối thiểu và việc không thể diễn đạt hết các khái niệm triết học, cảm xúc, tâm lý cần thiết."
+            },
+            {
+              "no": "22",
+              "prompt": "How could Esperanto help on a global level?",
+              "prompt_vi": "Esperanto có thể giúp ích như thế nào ở cấp độ toàn cầu?",
+              "options": [
+                "A. It would eliminate the need for conferences.",
+                "B. More aid money would reach those who need it.",
+                "C. The world population would be speaking only one language.",
+                "D. More funds could be made available for learning foreign languages."
+              ],
+              "answer": "B",
+              "explanation": "Đoạn G: thay vì WHO và các NGO chi tiền cho phiên dịch, ‘they would be able to devote those huge amounts of money to **improving the health of stricken populations**’ → tiền viện trợ đến tay người cần = B.\n**A** sai: Esperanto giúp người ta tham gia hội nghị trôi chảy hơn, không loại bỏ hội nghị.\n**C** sai: Esperanto là ‘universal **second** language’ – mọi người vẫn giữ tiếng mẹ đẻ.\n**D** sai: tiền tiết kiệm được dùng cho mục đích của chính phủ/ tổ chức, y tế – không phải để học ngoại ngữ.",
+              "evidence": "…they would be able to devote those huge amounts of money to improving the health of stricken populations throughout the world.",
+              "evidence_vi": "…họ có thể dành những khoản tiền khổng lồ đó để cải thiện sức khoẻ của các cộng đồng gặp khó khăn trên khắp thế giới."
+            }
+          ]
+        },
+        {
+          "range": "Questions 23–26",
+          "instruction": "Do the following statements agree with the information given in Reading Passage 2?\nWrite\nYES if the statement agrees with the views of the writer\nNO if the statement contradicts the views of the writer\nNOT GIVEN if it is impossible to say what the writer thinks about this",
+          "instruction_vi": "Các nhận định sau có khớp với quan điểm của tác giả không? Viết YES nếu khớp, NO nếu mâu thuẫn, NOT GIVEN nếu không thể biết tác giả nghĩ gì.",
+          "questions": [
+            {
+              "no": "23",
+              "prompt": "Supporters of Esperanto say it gives everyone an equal voice.",
+              "prompt_vi": "Những người ủng hộ Esperanto nói rằng nó cho mọi người tiếng nói bình đẳng.",
+              "answer": "YES",
+              "explanation": "Từ khoá: **supporters** = ‘champions of Esperanto – Esperantists’; **equal voice**.\nĐoạn E: giao tiếp bằng Esperanto ‘does not give advantages to the members of any particular people or culture, but provides an ethos of **equality of rights**’ → mọi người bình đẳng → YES.",
+              "evidence": "…communication through Esperanto does not give advantages to the members of any particular people or culture, but provides an ethos of equality of rights, tolerance and true internationalism.",
+              "evidence_vi": "…giao tiếp bằng Esperanto không đem lại lợi thế cho thành viên của bất kỳ dân tộc hay nền văn hoá nào, mà tạo ra tinh thần bình đẳng về quyền, khoan dung và chủ nghĩa quốc tế đích thực."
+            },
+            {
+              "no": "24",
+              "prompt": "Esperanto is the only artificially-constructed language.",
+              "prompt_vi": "Esperanto là ngôn ngữ nhân tạo duy nhất.",
+              "answer": "NO",
+              "explanation": "Từ khoá: **the only**.\nĐoạn A: ‘Esperanto is **the most widely spoken** artificially constructed international language’ → ‘được nói rộng rãi NHẤT’ ngụ ý còn những ngôn ngữ nhân tạo khác (ít người nói hơn). Vì vậy ‘the only’ mâu thuẫn → NO.\nLưu ý bẫy: từ tuyệt đối ‘only’ trong câu hỏi thường là dấu hiệu NO/ FALSE khi bài dùng so sánh nhất.",
+              "evidence": "Esperanto is the most widely spoken artificially constructed international language.",
+              "evidence_vi": "Esperanto là ngôn ngữ quốc tế nhân tạo được nói rộng rãi nhất."
+            },
+            {
+              "no": "25",
+              "prompt": "Esperanto can be learned as part of a self-study course.",
+              "prompt_vi": "Có thể học Esperanto qua một khoá tự học.",
+              "answer": "NOT GIVEN",
+              "explanation": "Từ khoá: **self-study course**.\nBài chỉ nói Esperanto là ‘an optional subject on the curriculum of several state education systems’ (môn tự chọn trong trường công) và thời gian học ngắn. Không có thông tin nào về tự học → NOT GIVEN.\nBẫy: ‘optional’ (tự chọn) ≠ ‘self-study’ (tự học).",
+              "evidence": "…it is an optional subject on the curriculum of several state education systems.",
+              "evidence_vi": "…nó là môn học tự chọn trong chương trình của một số hệ thống giáo dục công."
+            },
+            {
+              "no": "26",
+              "prompt": "Esperanto can be used equally in formal and casual situations.",
+              "prompt_vi": "Esperanto có thể được dùng như nhau trong cả tình huống trang trọng lẫn thân mật.",
+              "answer": "YES",
+              "explanation": "Từ khoá: **formal and casual situations**.\nĐoạn F: Esperanto giúp mọi người ‘**participate fluently in international conferences**’ (formal) và ‘**chat comfortably** with each other after the formal presentations are made’ (casual) → dùng được cả hai bối cảnh → YES.",
+              "evidence": "…will be able to participate fluently in international conferences and chat comfortably with each other after the formal presentations are made.",
+              "evidence_vi": "…sẽ có thể tham gia trôi chảy vào các hội nghị quốc tế và trò chuyện thoải mái với nhau sau các bài trình bày chính thức."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "reading",
+      "title": "Reading – Passage 3",
+      "note": "Bài ‘Driverless cars’ (Questions 27–40). Lưu ý: đoạn 2 trong đề bị lỗi in (thiếu chữ): ‘On the as well as stay in lane, and maintain a steady cruising seed.’ – chép nguyên văn như đề; ý đúng có lẽ là ‘On the plus side, cars can already … as well as stay in lane, and maintain a steady cruising speed.’",
+      "passage": {
+        "title": "Driverless cars",
+        "title_vi": "Xe không người lái",
+        "paragraphs": [
+          {
+            "label": "1",
+            "en": "Driverless cars may be set to become reality. At least that is, if the executives behind the taxi app, Uber, are to be believed. Currently, Uber is taking its biggest steps yet towards a driver-free world, launching the Uber Advanced Technologies Centre in Pittsburgh. The ultimate goal of this institution is to 'do research and development, primarily in the areas of mapping and vehicle safety and autonomy technology'.",
+            "vi": "Xe không người lái có thể sắp trở thành hiện thực. Ít nhất là vậy, nếu ta tin lời các giám đốc đứng sau ứng dụng gọi taxi Uber. Hiện tại, Uber đang thực hiện những bước tiến lớn nhất từ trước đến nay hướng tới một thế giới không cần tài xế, với việc thành lập Trung tâm Công nghệ Tiên tiến Uber tại Pittsburgh. Mục tiêu cuối cùng của cơ sở này là ‘nghiên cứu và phát triển, chủ yếu trong các lĩnh vực lập bản đồ, an toàn phương tiện và công nghệ tự hành’."
+          },
+          {
+            "label": "2",
+            "en": "To date, Uber has provided a chauffeur-driven taxi service for American clients. Venturing into the realms of driverless cars is therefore a new direction which will require massive investment. It is indeed a huge leap of faith on Uber's part, since technology has yet to catch up with the idea of a fully autonomous vehicle. On the as well as stay in lane, and maintain a steady cruising seed. In a patchwork fashion such cars could eventually build up to almost full automation and Uber believes that car owners will readily embrace the idea of driverless taxis. In Uber's eyes, current car owners only stand to gain by the introduction of such technology. Hiring a driverless cab means that the client does not have to pay for the cost of the driver in the cab fee. The only cost incurred by clients is for fuel, plus wear and tear. It is certainly an attractive proposition. Uber stands to benefit, too, since employees currently working as taxi drivers will be removed from the company's payroll. Apparently for car drivers and Uber, it is a win-win situation.",
+            "vi": "Cho đến nay, Uber cung cấp dịch vụ taxi có tài xế lái cho khách hàng Mỹ. Vì vậy, việc bước chân vào lĩnh vực xe không người lái là một hướng đi mới đòi hỏi đầu tư khổng lồ. Đây thực sự là một canh bạc niềm tin rất lớn của Uber, bởi công nghệ vẫn chưa theo kịp ý tưởng về một chiếc xe hoàn toàn tự hành. [Câu bị lỗi in trong đề – ý: về mặt tích cực, xe hiện đã có thể … cũng như tự giữ làn đường và duy trì tốc độ hành trình ổn định.] Theo kiểu ghép dần từng phần, những chiếc xe như vậy cuối cùng có thể tiến tới gần như tự động hoàn toàn, và Uber tin rằng chủ xe sẽ sẵn sàng đón nhận ý tưởng taxi không người lái. Trong mắt Uber, chủ xe hiện nay chỉ có lợi khi công nghệ này ra đời. Thuê một chiếc taxi không người lái có nghĩa là khách hàng không phải trả chi phí tài xế trong giá cước. Chi phí duy nhất khách phải chịu là tiền nhiên liệu cộng với hao mòn. Đó chắc chắn là một đề xuất hấp dẫn. Uber cũng được lợi, vì những nhân viên hiện đang làm tài xế taxi sẽ bị loại khỏi bảng lương của công ty. Có vẻ như với người đi xe và Uber, đây là tình huống đôi bên cùng có lợi."
+          },
+          {
+            "label": "3",
+            "en": "Not everyone will benefit however from this technology, the car industry being an obvious example. Not surprisingly, the industry views the concept of self-driving cars with a sense of growing alarm. Such technology could well prove the death knell for private car ownership. As a result, the industry is dragging its feet over the manufacture and introduction of fully automated vehicles onto the market, due to commercial issues.",
+            "vi": "Tuy nhiên, không phải ai cũng được lợi từ công nghệ này, ngành công nghiệp ô tô là ví dụ rõ ràng. Không có gì ngạc nhiên khi ngành này nhìn khái niệm xe tự lái với nỗi lo ngại ngày càng tăng. Công nghệ như vậy rất có thể sẽ là hồi chuông báo tử cho việc sở hữu ô tô cá nhân. Vì thế, ngành ô tô đang chần chừ trong việc sản xuất và đưa xe tự động hoàn toàn ra thị trường, do các vấn đề thương mại."
+          },
+          {
+            "label": "4",
+            "en": "The commercial aspect apart, there is also the safety issue. Whilst a fully automated car could respond to most eventualities in the course of a trip, would it be capable of responding to unforeseen events, such as changes in route or unexpected diversions? Evidently legislative authorities are also of this opinion. Currently, no matter how much automation a car has, it still requires a driver with a full licence behind the wheel to drive on public roads. Whilst robot drivers, on the whole, have the upper hand on their human counterparts safety-wise, that still does not guarantee that they will become legal. As a consortium of researchers put it, 'If self-driving cars cut the roughly 40,000 annual US traffic fatalities in half, the car makers might get not 20,000 thank-you notes, but 20,000 lawsuits.'",
+            "vi": "Ngoài khía cạnh thương mại, còn có vấn đề an toàn. Dù một chiếc xe tự động hoàn toàn có thể xử lý hầu hết các tình huống trong một chuyến đi, liệu nó có khả năng phản ứng với những sự việc không lường trước, như thay đổi lộ trình hay đường vòng bất ngờ? Rõ ràng các cơ quan lập pháp cũng có cùng quan điểm. Hiện nay, dù một chiếc xe được tự động hoá đến đâu, nó vẫn cần một tài xế có bằng lái đầy đủ ngồi sau vô lăng mới được chạy trên đường công cộng. Mặc dù nhìn chung tài xế robot có ưu thế hơn tài xế con người về mặt an toàn, điều đó vẫn không đảm bảo chúng sẽ được hợp pháp hoá. Như một nhóm các nhà nghiên cứu đã nói: ‘Nếu xe tự lái giảm một nửa con số khoảng 40.000 ca tử vong do giao thông mỗi năm ở Mỹ, các hãng xe có thể sẽ không nhận được 20.000 lá thư cảm ơn, mà là 20.000 vụ kiện.’"
+          },
+          {
+            "label": "5",
+            "en": "Interestingly, Uber is now undertaking an aggressive hiring campaign for taxi drivers to meet the demand for their taxi app. It seems that even Uber is less than confident that driverless taxis will soon become a reality. Whether Uber is backing a doomed campaign or instead is about to bring in a technology that will be universally greeted with positivity and acceptance depends entirely on your viewpoint.",
+            "vi": "Thú vị là Uber hiện đang tiến hành một chiến dịch tuyển dụng tài xế taxi ồ ạt để đáp ứng nhu cầu cho ứng dụng của mình. Có vẻ như ngay cả Uber cũng không mấy tự tin rằng taxi không người lái sẽ sớm trở thành hiện thực. Việc Uber đang đặt cược vào một chiến dịch chắc chắn thất bại, hay sắp mang đến một công nghệ sẽ được mọi người đón nhận tích cực, hoàn toàn tuỳ thuộc vào góc nhìn của bạn."
+          },
+          {
+            "label": "6",
+            "en": "John Reynolds, a Pittsburgh taxi driver, is angry at Uber's attitude on fully automated technology. 'They are completely disregarding individual livelihoods, such as mine, as well as those of big car manufacturers in the pursuit of money. Admittedly things change and we have to roll with the times, but there should be some safeguards in place to protect those potentially affected by the introduction of new technologies. I guess I'm biased, being a taxi driver myself, but it's difficult to see it objectively.'",
+            "vi": "John Reynolds, một tài xế taxi ở Pittsburgh, tức giận trước thái độ của Uber về công nghệ tự động hoàn toàn. ‘Họ hoàn toàn phớt lờ sinh kế của từng cá nhân, như của tôi, cũng như của các hãng xe lớn, chỉ để chạy theo đồng tiền. Phải thừa nhận là mọi thứ thay đổi và chúng ta phải thích nghi với thời cuộc, nhưng cần có một số biện pháp bảo vệ những người có thể bị ảnh hưởng bởi công nghệ mới. Tôi đoán mình có thiên kiến, vì bản thân là tài xế taxi, nhưng thật khó để nhìn nhận chuyện này một cách khách quan.’"
+          },
+          {
+            "label": "7",
+            "en": "Susie Greenacre, a resident of Pittsburgh, has no such reservations about driverless cars. 'I'm all for it. Driverless cars have my backing, any day! I hate the stress of rush-hour traffic! I think if I could just hop in a driverless car which would take me anywhere I wanted I would never want to drive again!'",
+            "vi": "Susie Greenacre, một cư dân Pittsburgh, không hề có những e ngại như vậy về xe không người lái. ‘Tôi hoàn toàn ủng hộ. Xe không người lái luôn có sự ủng hộ của tôi! Tôi ghét sự căng thẳng của giao thông giờ cao điểm! Tôi nghĩ nếu tôi chỉ cần nhảy lên một chiếc xe không người lái đưa tôi đi bất cứ đâu tôi muốn, tôi sẽ không bao giờ muốn tự lái xe nữa!’"
+          },
+          {
+            "label": "8",
+            "en": "Jason Steiner, a school teacher in a Pittsburgh secondary school, is inclined to agree with Susie. 'Whilst I'm not averse to driving, I would swap the stressful daily commute by car to a driverless one if I had the chance! It just takes the pressure off driving. I would be slightly wary though, of completely dependent on a robot-driven car when it comes to having to react to unexpected obstacles in the road.'",
+            "vi": "Jason Steiner, giáo viên một trường trung học ở Pittsburgh, có xu hướng đồng ý với Susie. ‘Dù tôi không ghét lái xe, tôi sẵn sàng đổi chuyến đi làm hằng ngày đầy căng thẳng bằng ô tô sang một chiếc xe không người lái nếu có cơ hội! Nó giúp bớt áp lực lái xe. Tuy vậy, tôi sẽ hơi dè chừng việc phụ thuộc hoàn toàn vào xe do robot lái khi phải phản ứng với những chướng ngại bất ngờ trên đường.’"
+          }
+        ]
+      },
+      "groups": [
+        {
+          "range": "Questions 27–32",
+          "instruction": "Choose the correct letter, A, B, C or D.",
+          "instruction_vi": "Chọn chữ cái đúng A, B, C hoặc D.",
+          "questions": [
+            {
+              "no": "27",
+              "prompt": "Which of the following statements is accurate?",
+              "prompt_vi": "Nhận định nào sau đây là chính xác?",
+              "options": [
+                "A. Driverless cars conform to safety regulations.",
+                "B. There is an obvious market for fully automated cars.",
+                "C. Human drivers are no competition for driverless cars.",
+                "D. Potentially, fully automated taxis are more cost-effective than normal taxis."
+              ],
+              "answer": "D",
+              "explanation": "Đoạn 2: ‘Hiring a driverless cab means that the client **does not have to pay for the cost of the driver** in the cab fee. The only cost incurred by clients is for fuel, plus wear and tear.’ → rẻ hơn taxi thường = cost-effective. ‘Potentially’ khớp vì công nghệ chưa hoàn thiện.\n**A** sai: luật hiện nay vẫn yêu cầu tài xế có bằng ngồi sau vô lăng – xe không người lái chưa đáp ứng quy định.\n**B** sai: chỉ là niềm tin của Uber (‘Uber believes…’), ngành ô tô còn lo ngại; không phải thị trường ‘hiển nhiên’.\n**C** sai: bài chỉ nói robot ‘have the upper hand… safety-wise’ (ưu thế về an toàn), không nói con người hoàn toàn không thể cạnh tranh.",
+              "evidence": "Hiring a driverless cab means that the client does not have to pay for the cost of the driver in the cab fee.",
+              "evidence_vi": "Thuê taxi không người lái nghĩa là khách hàng không phải trả chi phí tài xế trong giá cước."
+            },
+            {
+              "no": "28",
+              "prompt": "Uber is investing in a technology that",
+              "prompt_vi": "Uber đang đầu tư vào một công nghệ mà",
+              "options": [
+                "A. will prove controversial.",
+                "B. has been tried and tested.",
+                "C. is unlikely to prove cost-effective.",
+                "D. will be universally welcomed."
+              ],
+              "answer": "A",
+              "explanation": "Cả bài cho thấy nhiều ý kiến trái chiều: ngành ô tô lo ngại, cơ quan lập pháp dè dặt, tài xế taxi giận dữ, còn một số người dân ủng hộ; và tác giả kết: việc nó thành công hay thất bại ‘**depends entirely on your viewpoint**’ → gây tranh cãi = A.\n**B** sai: ‘technology has yet to catch up with the idea of a fully autonomous vehicle’ – chưa được kiểm chứng.\n**C** sai: ngược lại, bài nói nó hấp dẫn về chi phí (‘an attractive proposition’).\n**D** sai: đúng là có cụm ‘universally greeted with positivity’ trong bài, nhưng đó chỉ là một khả năng trong câu ‘whether… or…’, và John Reynolds, ngành ô tô phản đối → không ‘universally welcomed’.",
+              "evidence": "Whether Uber is backing a doomed campaign or instead is about to bring in a technology that will be universally greeted with positivity and acceptance depends entirely on your viewpoint.",
+              "evidence_vi": "Việc Uber đang đặt cược vào một chiến dịch thất bại hay sắp đưa ra một công nghệ được mọi người đón nhận tích cực hoàn toàn tuỳ thuộc vào góc nhìn của bạn."
+            },
+            {
+              "no": "29",
+              "prompt": "What is NOT true about driverless cars?",
+              "prompt_vi": "Điều gì KHÔNG đúng về xe không người lái?",
+              "options": [
+                "A. They have become a reality in many countries.",
+                "B. They may improve road safety.",
+                "C. They will reduce the cost of travelling.",
+                "D. They will endanger jobs."
+              ],
+              "answer": "A",
+              "explanation": "Câu hỏi NOT TRUE → tìm phương án mâu thuẫn với bài.\n**A** – KHÔNG đúng: bài mở đầu ‘Driverless cars **may be set to become** reality’ (có thể sắp thành hiện thực) và ‘technology has yet to catch up’ → chưa thành hiện thực ở đâu cả → chọn A.\nCác phương án còn lại đều ĐÚNG theo bài: **B** ‘robot drivers… have the upper hand… safety-wise’, ví dụ giảm một nửa 40.000 ca tử vong; **C** khách không phải trả tiền tài xế; **D** tài xế taxi bị loại khỏi bảng lương, John Reynolds lo mất sinh kế.",
+              "evidence": "Driverless cars may be set to become reality.",
+              "evidence_vi": "Xe không người lái có thể sắp trở thành hiện thực."
+            },
+            {
+              "no": "30",
+              "prompt": "What can be said about current legislation?",
+              "prompt_vi": "Có thể nói gì về luật pháp hiện hành?",
+              "options": [
+                "A. It is in favour of driverless cars.",
+                "B. It currently doesn't favour fully automated cars.",
+                "C. It is keeping up with technology.",
+                "D. It already accommodates driverless cars."
+              ],
+              "answer": "B",
+              "explanation": "Đoạn 4: ‘Currently, no matter how much automation a car has, it **still requires a driver with a full licence behind the wheel** to drive on public roads.’ → luật hiện tại không tạo điều kiện cho xe tự động hoàn toàn = B.\n**A**, **D** sai: ngược với bài. **C** sai: bài không nói luật theo kịp công nghệ; ngược lại luật còn dè dặt, ‘does not guarantee that they will become legal’.",
+              "evidence": "Currently, no matter how much automation a car has, it still requires a driver with a full licence behind the wheel to drive on public roads.",
+              "evidence_vi": "Hiện nay, dù xe có tự động hoá đến đâu, nó vẫn cần một tài xế có bằng lái đầy đủ ngồi sau vô lăng để chạy trên đường công cộng."
+            },
+            {
+              "no": "31",
+              "prompt": "What is the general view held by car manufacturers?",
+              "prompt_vi": "Quan điểm chung của các nhà sản xuất ô tô là gì?",
+              "options": [
+                "A. Driverless cars are more dangerous than non-automated cars.",
+                "B. Fully automated cars are too expensive to manufacture.",
+                "C. The introduction of driverless cars will threaten their livelihoods.",
+                "D. Technology is still too underdeveloped to manufacture driverless cars."
+              ],
+              "answer": "C",
+              "explanation": "Đoạn 3: ngành ô tô nhìn xe tự lái ‘with a sense of **growing alarm**’ vì nó ‘could well prove **the death knell for private car ownership**’ (nếu không ai mua xe riêng thì hãng xe mất khách) và họ chần chừ ‘**due to commercial issues**’ → đe doạ ‘nồi cơm’ của họ = C. John Reynolds cũng nói Uber phớt lờ ‘livelihoods… of big car manufacturers’.\n**A** sai: vấn đề an toàn được nêu là ý chung (‘The commercial aspect apart, there is also the safety issue’), không phải quan điểm của hãng xe; bài còn nói robot an toàn hơn.\n**B**, **D** sai: không phải lý do hãng xe đưa ra – lý do là thương mại.",
+              "evidence": "Such technology could well prove the death knell for private car ownership. As a result, the industry is dragging its feet… due to commercial issues.",
+              "evidence_vi": "Công nghệ này rất có thể là hồi chuông báo tử cho việc sở hữu xe cá nhân. Vì thế, ngành công nghiệp này đang chần chừ… do các vấn đề thương mại."
+            },
+            {
+              "no": "32",
+              "prompt": "What can be said about the writer's opinion of driverless cars?",
+              "prompt_vi": "Có thể nói gì về quan điểm của tác giả đối với xe không người lái?",
+              "options": [
+                "A. He is not really interested, but sceptical, that such a technology will be developed.",
+                "B. He reserves judgement as to whether fully automated cars will become a reality.",
+                "C. He believes that such a technology will never become a reality.",
+                "D. He is critical of Uber's plans to introduce fully automated cars."
+              ],
+              "answer": "B",
+              "explanation": "Tác giả viết rất trung lập: mở đầu bằng ‘**may** be set to become reality… **if** the executives… are to be believed’, và kết đoạn 5 ‘**depends entirely on your viewpoint**’ → tác giả không đưa ra phán xét, ‘reserves judgement’ (giữ lại ý kiến) = B.\n**A**, **C** sai: tác giả không khẳng định công nghệ sẽ không bao giờ thành hiện thực hay hoài nghi rõ ràng. **D** sai: lời chỉ trích Uber là của John Reynolds, không phải tác giả.",
+              "evidence": "Whether Uber is backing a doomed campaign or instead is about to bring in a technology that will be universally greeted with positivity and acceptance depends entirely on your viewpoint.",
+              "evidence_vi": "Việc Uber đang đặt cược vào chiến dịch thất bại hay sắp đưa ra một công nghệ được mọi người đón nhận hoàn toàn tuỳ thuộc vào góc nhìn của bạn."
+            }
+          ]
+        },
+        {
+          "range": "Questions 33–37",
+          "instruction": "Look at the following statements, 33–37, and the list of people.\nMatch each statement to the correct person, A–C.\nYou may use any letter more than once.",
+          "instruction_vi": "Nối mỗi nhận định 33–37 với người đúng A–C. Có thể dùng một chữ cái nhiều lần.",
+          "context": "A  John Reynolds\nB  Susie Greenacre\nC  Jason Steiner",
+          "questions": [
+            {
+              "no": "33",
+              "prompt": "This person is willing to give up control of their vehicle because they appreciate the benefits of fully automated cars.",
+              "prompt_vi": "Người này sẵn sàng từ bỏ quyền điều khiển xe vì đánh giá cao lợi ích của xe tự động hoàn toàn.",
+              "answer": "C",
+              "explanation": "Jason: ‘Whilst I'm not averse to driving, **I would swap** the stressful daily commute by car to a driverless one if I had the chance! **It just takes the pressure off driving.**’ → sẵn sàng nhường quyền lái (swap) vì thấy lợi ích (giảm áp lực) = C.\nVì sao không phải B? Susie hợp hơn với câu 34 (‘never want to drive again’ – từ bỏ HOÀN TOÀN). Câu 33 nhấn mạnh ‘willing to’ + ‘appreciate the benefits’ – Jason dù thích lái xe vẫn sẵn sàng đổi vì thấy lợi ích. (Một số đáp án có thể chấp nhận B, nhưng C khớp sát hơn với cách phân biệt 33/34.)",
+              "evidence": "I would swap the stressful daily commute by car to a driverless one if I had the chance! It just takes the pressure off driving.",
+              "evidence_vi": "Tôi sẵn sàng đổi chuyến đi làm hằng ngày căng thẳng bằng ô tô sang xe không người lái nếu có cơ hội! Nó giúp bớt áp lực lái xe."
+            },
+            {
+              "no": "34",
+              "prompt": "This person would have no regrets about giving up driving entirely in favour of being driven by a fully automated car.",
+              "prompt_vi": "Người này sẽ không hề tiếc nuối khi từ bỏ hẳn việc lái xe để được xe tự động hoàn toàn chở đi.",
+              "answer": "B",
+              "explanation": "Susie: ‘if I could just hop in a driverless car… **I would never want to drive again!**’ → giving up driving entirely, no regrets = B.",
+              "evidence": "I think if I could just hop in a driverless car which would take me anywhere I wanted I would never want to drive again!",
+              "evidence_vi": "Tôi nghĩ nếu chỉ cần nhảy lên một chiếc xe không người lái đưa tôi đi bất cứ đâu, tôi sẽ không bao giờ muốn lái xe nữa!"
+            },
+            {
+              "no": "35",
+              "prompt": "This person is aware that the new technology of driverless cars may not provide an adequate substitute for a human driver.",
+              "prompt_vi": "Người này nhận thức rằng công nghệ xe không người lái có thể không thay thế được hoàn toàn tài xế con người.",
+              "answer": "C",
+              "explanation": "Jason: ‘I would be **slightly wary** though, of completely dependent on a robot-driven car when it comes to having to **react to unexpected obstacles** in the road.’ → robot có thể không thay thế tốt con người khi gặp chướng ngại bất ngờ = C.\nJohn (A) lo về sinh kế, không phải về khả năng của robot.",
+              "evidence": "I would be slightly wary though, of completely dependent on a robot-driven car when it comes to having to react to unexpected obstacles in the road.",
+              "evidence_vi": "Tuy vậy tôi sẽ hơi dè chừng việc phụ thuộc hoàn toàn vào xe do robot lái khi phải phản ứng với chướng ngại bất ngờ trên đường."
+            },
+            {
+              "no": "36",
+              "prompt": "This person believes that those affected adversely by new technology should be protected from its effects.",
+              "prompt_vi": "Người này tin rằng những người bị ảnh hưởng tiêu cực bởi công nghệ mới nên được bảo vệ khỏi tác động của nó.",
+              "answer": "A",
+              "explanation": "John Reynolds: ‘there should be some **safeguards** in place to **protect those potentially affected** by the introduction of new technologies.’ → safeguards = protect; affected adversely = potentially affected = A.",
+              "evidence": "…there should be some safeguards in place to protect those potentially affected by the introduction of new technologies.",
+              "evidence_vi": "…cần có một số biện pháp bảo vệ những người có thể bị ảnh hưởng bởi việc đưa công nghệ mới vào."
+            },
+            {
+              "no": "37",
+              "prompt": "This person enjoys driving but only under favourable conditions.",
+              "prompt_vi": "Người này thích lái xe nhưng chỉ trong điều kiện thuận lợi.",
+              "answer": "C",
+              "explanation": "Jason: ‘I'm **not averse to driving**’ (không ghét lái xe = có thể thích lái) nhưng muốn đổi ‘the **stressful daily commute**’ (điều kiện không thuận lợi) sang xe tự lái → C.\nSusie (B) ghét giao thông giờ cao điểm và không muốn lái nữa – không có dấu hiệu ‘enjoys driving’.",
+              "evidence": "Whilst I'm not averse to driving, I would swap the stressful daily commute by car to a driverless one if I had the chance!",
+              "evidence_vi": "Dù tôi không ghét lái xe, tôi sẵn sàng đổi chuyến đi làm hằng ngày căng thẳng bằng ô tô sang xe không người lái nếu có cơ hội!"
+            }
+          ]
+        },
+        {
+          "range": "Questions 38–40",
+          "instruction": "Do the following statements agree with the information given in the text?\nWrite\nTRUE if the statement agrees with the information\nFALSE if the statement contradicts the information\nNOT GIVEN if there is no information on this",
+          "instruction_vi": "Các nhận định sau có khớp với thông tin trong bài không? Viết TRUE, FALSE hoặc NOT GIVEN.",
+          "questions": [
+            {
+              "no": "38",
+              "prompt": "Driverless technology will have to overcome legal and safety obstacles to become completely viable.",
+              "prompt_vi": "Công nghệ không người lái sẽ phải vượt qua các trở ngại về pháp lý và an toàn để trở nên hoàn toàn khả thi.",
+              "answer": "TRUE",
+              "explanation": "Từ khoá: **legal and safety obstacles**.\nĐoạn 4: ‘there is also **the safety issue**… would it be capable of responding to unforeseen events…?’; luật vẫn yêu cầu tài xế có bằng; robot an toàn hơn nhưng ‘that still **does not guarantee that they will become legal**’ → muốn khả thi hoàn toàn phải vượt qua cả rào cản an toàn và pháp lý → TRUE.",
+              "evidence": "Whilst robot drivers, on the whole, have the upper hand on their human counterparts safety-wise, that still does not guarantee that they will become legal.",
+              "evidence_vi": "Dù nhìn chung tài xế robot có ưu thế hơn con người về an toàn, điều đó vẫn không đảm bảo chúng sẽ được hợp pháp hoá."
+            },
+            {
+              "no": "39",
+              "prompt": "Uber has shown nothing but complete self-conviction in its investment in driverless cars.",
+              "prompt_vi": "Uber chỉ thể hiện sự tự tin tuyệt đối vào khoản đầu tư cho xe không người lái.",
+              "answer": "FALSE",
+              "explanation": "Từ khoá: **nothing but complete self-conviction** (hoàn toàn tự tin).\nĐoạn 5: Uber đang ‘an aggressive **hiring campaign for taxi drivers**… It seems that even Uber is **less than confident** that driverless taxis will soon become a reality.’ → ‘less than confident’ (không mấy tự tin) mâu thuẫn với ‘complete self-conviction’ → FALSE.",
+              "evidence": "It seems that even Uber is less than confident that driverless taxis will soon become a reality.",
+              "evidence_vi": "Có vẻ ngay cả Uber cũng không mấy tự tin rằng taxi không người lái sẽ sớm trở thành hiện thực."
+            },
+            {
+              "no": "40",
+              "prompt": "The safety issues with driverless technology are likely to be resolved fairly quickly.",
+              "prompt_vi": "Các vấn đề an toàn của công nghệ không người lái có khả năng được giải quyết khá nhanh.",
+              "answer": "NOT GIVEN",
+              "explanation": "Từ khoá: **resolved fairly quickly**.\nBài có nêu vấn đề an toàn (phản ứng với tình huống bất ngờ, luật yêu cầu tài xế) nhưng KHÔNG dự đoán khi nào hoặc nhanh hay chậm các vấn đề này được giải quyết → NOT GIVEN.\nBẫy: đừng suy diễn từ ‘technology has yet to catch up’ thành FALSE – câu đó nói hiện trạng, không nói về tốc độ giải quyết trong tương lai.",
+              "evidence": "The commercial aspect apart, there is also the safety issue.",
+              "evidence_vi": "Ngoài khía cạnh thương mại, còn có vấn đề an toàn."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

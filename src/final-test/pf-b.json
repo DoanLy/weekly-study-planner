@@ -1,0 +1,1184 @@
+{
+  "id": "pf-b",
+  "title": "Pre Foundation – Final Test (R-L-W)",
+  "subtitle": "Listening 40 câu (4 section) · Reading 3 passage (Einstein, Grocery Stores, Olympic Torch) · Writing Task 1 (bar chart rau quả UK)",
+  "pages": "Trang 44–61",
+  "sections": [
+    {
+      "skill": "listening",
+      "title": "Listening – Section 1",
+      "note": "Nguồn: **The Official Cambridge Guide to IELTS – Test 6 – Section 1** (Accommodation Form: Rental Properties) – đối chiếu transcript trên tuhoc.dolenglish.vn và answer key trên ieltsmaterial.com (https://ieltsmaterial.com/accommodation-form-rental-properties-listening-answers/). Không có audio nên dẫn chứng là ý transcript diễn đạt lại.",
+      "groups": [
+        {
+          "range": "Questions 1–10",
+          "instruction": "Complete the form below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "instruction_vi": "Hoàn thành mẫu đơn bên dưới. Viết MỘT TỪ VÀ/HOẶC MỘT CON SỐ cho mỗi câu trả lời.",
+          "context": "ACCOMMODATION FORM: RENTAL PROPERTIES\nExample – Name: Jane Ryder\nContact phone number: (0044) ...1...\nEmail address: richard@ ...2... co.uk\nOccupation: a local ...3...\nType of accommodation:\n• a 2-bedroom apartment wanted (must have its own ...4...)\n• no ...5... required (family bringing theirs)\n• a ...6... in the kitchen is preferable\nPreferred location: near a ...7...\nMaximum rent: ...8... per month\nOther requests: the accommodation has to be ...9... in the daytime\nHow did you first hear about us: through a ...10...",
+          "questions": [
+            {
+              "no": "1",
+              "prompt": "Contact phone number: (0044) ______",
+              "prompt_vi": "Số điện thoại liên lạc: (0044) ______",
+              "answer": "2086132978",
+              "confidence": "high",
+              "explanation": "Ô số điện thoại sau mã nước (0044) → **dãy số**. Người gọi nói 0044 cho nước Anh, sau đó là **208 613 2978** → điền **2086132978** (có thể cách nhóm 208 613 2978).\nBẫy: không chép lại 0044 vì đã in sẵn.",
+              "evidence": "(ý transcript) So 0044 for the UK, and then it's 208 613 2978.",
+              "evidence_vi": "Vậy là 0044 cho nước Anh, rồi đến 208 613 2978."
+            },
+            {
+              "no": "2",
+              "prompt": "Email address: richard@ ______ co.uk",
+              "prompt_vi": "Địa chỉ email: richard@ ______ .co.uk",
+              "answer": "visiontech",
+              "confidence": "high",
+              "explanation": "Email \"richard@ ______ co.uk\" → tên miền, thường được đánh vần. Bà Ryder nói email của chồng tiện hơn: **richard@visiontech.co.uk** → **visiontech** (viết liền, chữ thường).",
+              "evidence": "(ý transcript) It's richard@visiontech.co.uk.",
+              "evidence_vi": "Địa chỉ là richard@visiontech.co.uk."
+            },
+            {
+              "no": "3",
+              "prompt": "Occupation: a local ______",
+              "prompt_vi": "Nghề nghiệp: một ______ ở địa phương",
+              "answer": "doctor",
+              "confidence": "high",
+              "explanation": "\"Occupation: a local ______\" → danh từ chỉ nghề. Bà nói **làm bác sĩ ở bệnh viện trong thị trấn** → **doctor**.\nLưu ý: dentist là phỏng đoán cũ – sai.",
+              "evidence": "(ý transcript) I'm a doctor at the hospital in our town.",
+              "evidence_vi": "Tôi là bác sĩ ở bệnh viện trong thị trấn."
+            },
+            {
+              "no": "4",
+              "prompt": "a 2-bedroom apartment wanted (must have its own ______)",
+              "prompt_vi": "cần một căn hộ 2 phòng ngủ (phải có ______ riêng)",
+              "answer": "garage",
+              "confidence": "high",
+              "explanation": "\"must have its own ______\" → danh từ chỉ tiện ích. Nhân viên hỏi có cần **garage** (nhà để xe) riêng không, bà Ryder xác nhận **chắc chắn quan trọng** → **garage**.",
+              "evidence": "(ý transcript) Is a garage something you'll want? – Yes, that's definitely important.",
+              "evidence_vi": "Chị có cần nhà để xe không? – Có, cái đó chắc chắn quan trọng."
+            },
+            {
+              "no": "5",
+              "prompt": "no ______ required (family bringing theirs)",
+              "prompt_vi": "không cần ______ (gia đình tự mang theo đồ của họ)",
+              "answer": "furniture",
+              "confidence": "high",
+              "explanation": "\"no ______ required (family bringing theirs)\" → danh từ không đếm được. Bà nói **thứ họ không cần là đồ nội thất** (sẽ mang theo của mình) → **furniture** (không thêm -s).",
+              "evidence": "(ý transcript) What we don't need is any furniture.",
+              "evidence_vi": "Thứ chúng tôi không cần là đồ nội thất."
+            },
+            {
+              "no": "6",
+              "prompt": "a ______ in the kitchen is preferable",
+              "prompt_vi": "có ______ trong bếp thì tốt hơn",
+              "answer": "fridge",
+              "confidence": "high",
+              "explanation": "\"a ______ in the kitchen is preferable\" → thiết bị nhà bếp. Nhân viên hỏi về **tủ lạnh**; bà nói sẽ bán tủ lạnh cũ trước khi đến nên **muốn có sẵn** → **fridge**.\nBẫy: dishwasher có thể được nhắc nhưng không phải thứ bà cần.",
+              "evidence": "(ý transcript) How about a fridge? – We'll be selling ours before we come.",
+              "evidence_vi": "Còn tủ lạnh thì sao? – Chúng tôi sẽ bán cái của mình trước khi đến."
+            },
+            {
+              "no": "7",
+              "prompt": "Preferred location: near a ______",
+              "prompt_vi": "Vị trí mong muốn: gần một ______",
+              "answer": "school",
+              "confidence": "high",
+              "explanation": "\"near a ______\" → địa điểm. Nhân viên đoán gia đình muốn ở **gần trường học** (cho con), bà đồng ý → **school**.",
+              "evidence": "(ý transcript) I imagine you'd like to be fairly close to a school.",
+              "evidence_vi": "Tôi đoán chị muốn ở khá gần một trường học."
+            },
+            {
+              "no": "8",
+              "prompt": "Maximum rent: ______ per month",
+              "prompt_vi": "Tiền thuê tối đa: ______ mỗi tháng",
+              "answer": "950",
+              "confidence": "high",
+              "explanation": "Giá thuê tối đa mỗi tháng → **con số tiền**. Nhân viên hỏi giới hạn là **£950** phải không, bà xác nhận → **950** (có thể ghi £950).\nBẫy: nghe kỹ nine hundred and fifty, không nhầm 915/990.",
+              "evidence": "(ý transcript) Would your limit be, say, £950? – I'd say so, yes.",
+              "evidence_vi": "Mức tối đa của chị là khoảng 950 bảng? – Đúng vậy."
+            },
+            {
+              "no": "9",
+              "prompt": "the accommodation has to be ______ in the daytime",
+              "prompt_vi": "chỗ ở phải ______ vào ban ngày",
+              "answer": "quiet",
+              "confidence": "high",
+              "explanation": "\"has to be ______ in the daytime\" → **tính từ**. Bà (làm ca đêm) nói điều thật sự cần là căn hộ **yên tĩnh** → **quiet**.",
+              "evidence": "(ý transcript) What I really need from any apartment is for it to be quiet.",
+              "evidence_vi": "Điều tôi thật sự cần ở căn hộ là nó phải yên tĩnh."
+            },
+            {
+              "no": "10",
+              "prompt": "How did you first hear about us: through a ______",
+              "prompt_vi": "Bạn biết đến chúng tôi lần đầu qua: một ______",
+              "answer": "friend",
+              "confidence": "high",
+              "explanation": "\"through a ______\" → nguồn biết đến công ty. Bà nói **một người bạn** giới thiệu → **friend**.\nBẫy: newspaper/website có thể được nhắc như các kênh khác.",
+              "evidence": "(ý transcript) It was a friend of ours.",
+              "evidence_vi": "Đó là một người bạn của chúng tôi."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "listening",
+      "title": "Listening – Section 2",
+      "note": "Nguồn: **The Official Cambridge Guide to IELTS – Test 7 – Section 1** (Hostel Accommodation in Darwin) – đối chiếu transcript + đáp án trên engnovate.com (https://engnovate.com/ielts-listening-tests/official-cambridge-guide-to-ielts-academic-listening-test-7/) và kanan.co. Đề Pre-IELTS đánh số lại thành 11–20.",
+      "groups": [
+        {
+          "range": "Questions 11–16",
+          "instruction": "Complete the table below. Write NO MORE THAN ONE WORD AND/OR A NUMBER for each answer.",
+          "instruction_vi": "Hoàn thành bảng bên dưới. Viết KHÔNG QUÁ MỘT TỪ VÀ/HOẶC MỘT CON SỐ cho mỗi câu trả lời.",
+          "context": "Hostel accommodation in Darwin\nName | Price per person (dormitory rooms) | Comments and reviews\nExample: Top End Backpackers | $19 | – parking available; – staff are ...11...; – nice pool; – air-conditioning is too ...12...\nGum Tree Lodge | ...13... $ | – good quiet location; – pool and gardens; – ...14... in the dormitories\nKangaroo Lodge | $22 | – downtown location; – reception at the lodge is always open; – no lockers in the rooms; – the ...15... are very clean; – seems to be a ...16... every night",
+          "questions": [
+            {
+              "no": "11",
+              "prompt": "Top End Backpackers – staff are ______",
+              "prompt_vi": "Top End Backpackers – nhân viên thì ______",
+              "answer": "unfriendly",
+              "confidence": "high",
+              "explanation": "\"staff are ______\" → **tính từ** mô tả nhân viên. Người nói kể bạn ở Top End Backpackers phàn nàn nhân viên có **thái độ không thân thiện** → **unfriendly**.\nBẫy: nghe nhầm thành \"friendly\" sẽ mất điểm – chú ý tiền tố **un-**.",
+              "evidence": "(ý transcript) They had an unfriendly attitude.",
+              "evidence_vi": "Họ có thái độ không thân thiện."
+            },
+            {
+              "no": "12",
+              "prompt": "air-conditioning is too ______",
+              "prompt_vi": "điều hoà thì quá ______",
+              "answer": "noisy",
+              "confidence": "high",
+              "explanation": "\"air-conditioning is too ______\" → tính từ. Máy lạnh **rất ồn**, khiến khách không ngủ được → **noisy**.",
+              "evidence": "(ý transcript) It was very noisy, so they were kept awake.",
+              "evidence_vi": "Nó rất ồn nên họ bị mất ngủ."
+            },
+            {
+              "no": "13",
+              "prompt": "Gum Tree Lodge – price: $ ______",
+              "prompt_vi": "Gum Tree Lodge – giá: ______ đô",
+              "answer": "23.50",
+              "confidence": "high",
+              "explanation": "Giá phòng tập thể Gum Tree Lodge → **số tiền**. \"twenty-three fifty\" = **23.50** ($23.50).\nBẫy: phân biệt fifty/fifteen; giá Top End là $19, Kangaroo $22 – không chép nhầm.",
+              "evidence": "(ý transcript) It's twenty-three fifty for the dorms.",
+              "evidence_vi": "Phòng tập thể giá 23,50 đô."
+            },
+            {
+              "no": "14",
+              "prompt": "______ in the dormitories",
+              "prompt_vi": "______ trong các phòng tập thể",
+              "answer": "insects",
+              "confidence": "high",
+              "explanation": "\"______ in the dormitories\" → danh từ (nhận xét tiêu cực). Có **côn trùng bay khắp phòng ngủ tập thể** → **insects** (số nhiều).\nLưu ý: \"lockers\" là đặc điểm của Kangaroo Lodge (no lockers), không phải ở đây.",
+              "evidence": "(ý transcript) There were insects flying around in the dormitories.",
+              "evidence_vi": "Có côn trùng bay khắp các phòng ngủ tập thể."
+            },
+            {
+              "no": "15",
+              "prompt": "the ______ are very clean",
+              "prompt_vi": "______ rất sạch sẽ",
+              "answer": "bathrooms",
+              "confidence": "high",
+              "explanation": "\"the ______ are very clean\" → danh từ số nhiều (động từ are). Mọi thứ sạch, **đặc biệt là phòng tắm** → **bathrooms**.",
+              "evidence": "(ý transcript) Especially the bathrooms – they were excellent.",
+              "evidence_vi": "Đặc biệt là phòng tắm – rất tuyệt."
+            },
+            {
+              "no": "16",
+              "prompt": "seems to be a ______ every night",
+              "prompt_vi": "có vẻ như mỗi tối đều có một ______",
+              "answer": "party",
+              "confidence": "high",
+              "explanation": "\"seems to be a ______ every night\" → danh từ số ít (có \"a\"). Mọi người ở đó tụ tập và **thành một bữa tiệc** mỗi tối → **party**.",
+              "evidence": "(ý transcript) Everyone staying there got together and ended up having a party.",
+              "evidence_vi": "Mọi người ở đó tụ tập và rốt cuộc thành một bữa tiệc."
+            }
+          ]
+        },
+        {
+          "range": "Questions 17–20",
+          "instruction": "Write ONE WORD ONLY for each answer.",
+          "instruction_vi": "Viết CHỈ MỘT TỪ cho mỗi câu trả lời.",
+          "context": "Kangaroo Lodge\nAddress: on ...17... Lane\nGeneral information about hostel accommodation\n• Sheets are provided\n• can hire a ...18...\n• ...19... is included\n• a shared ...20... is available",
+          "questions": [
+            {
+              "no": "17",
+              "prompt": "Address: on ______ Lane",
+              "prompt_vi": "Địa chỉ: trên đường ______ Lane",
+              "answer": "Shadforth",
+              "confidence": "high",
+              "explanation": "\"on ______ Lane\" → tên đường, được **đánh vần** S-H-A-D-F-O-R-T-H → **Shadforth** (viết hoa).",
+              "evidence": "(ý transcript) S-H-A-D-F-O-R-T-H.",
+              "evidence_vi": "S-H-A-D-F-O-R-T-H."
+            },
+            {
+              "no": "18",
+              "prompt": "can hire a ______",
+              "prompt_vi": "có thể thuê một ______",
+              "answer": "towel",
+              "confidence": "high",
+              "explanation": "\"can hire a ______\" → danh từ số ít. Khách có thể **mang khăn tắm hoặc thuê tại chỗ** → **towel**.",
+              "evidence": "(ý transcript) You can usually either bring your own towel, or hire one there.",
+              "evidence_vi": "Bạn thường có thể mang khăn của mình hoặc thuê ở đó."
+            },
+            {
+              "no": "19",
+              "prompt": "______ is included",
+              "prompt_vi": "______ được bao gồm (trong giá)",
+              "answer": "breakfast",
+              "confidence": "high",
+              "explanation": "\"______ is included\" → bữa ăn. **Không phải trả thêm tiền bữa sáng** = breakfast included → **breakfast**.",
+              "evidence": "(ý transcript) You don't have to pay extra for breakfast.",
+              "evidence_vi": "Bạn không phải trả thêm tiền bữa sáng."
+            },
+            {
+              "no": "20",
+              "prompt": "a shared ______ is available",
+              "prompt_vi": "có sẵn một ______ dùng chung",
+              "answer": "kitchen",
+              "confidence": "high",
+              "explanation": "\"a shared ______\" → danh từ. Cứ **5–6 phòng có một bếp** dùng chung → **kitchen**.",
+              "evidence": "(ý transcript) For every five or six rooms there's a kitchen.",
+              "evidence_vi": "Cứ năm, sáu phòng thì có một gian bếp."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "listening",
+      "title": "Listening – Section 3",
+      "note": "Nguồn: **The Official Cambridge Guide to IELTS – Test 1 – Section 3** (Computer System – Dave Hadley & Randhir) – đáp án theo answer key trên yourielts.ru (Listening Practice Test 1 Section 3), đối chiếu transcript trên tuhoc.dolenglish.vn. Q27–30 chỉ có key (không xem được transcript đoạn này) nên để medium.",
+      "groups": [
+        {
+          "range": "Questions 21–26",
+          "instruction": "Choose the correct answer A, B or C.",
+          "instruction_vi": "Chọn đáp án đúng A, B hoặc C.",
+          "questions": [
+            {
+              "no": "21",
+              "prompt": "Dave Hadley says that the computer system has",
+              "prompt_vi": "Dave Hadley nói rằng hệ thống máy tính đã",
+              "answer": "C",
+              "options": [
+                "A. too many users.",
+                "B. never worked well.",
+                "C. become outdated."
+              ],
+              "confidence": "high",
+              "explanation": "Dave nói hệ thống máy tính **giờ không còn đủ tốt nữa** (từng ổn nhưng đã lỗi thời) → **C – become outdated**.\nB sai: hệ thống không phải \"chưa bao giờ hoạt động tốt\".",
+              "evidence": "(ý transcript) It is just not good enough now.",
+              "evidence_vi": "Bây giờ nó không còn đủ tốt nữa."
+            },
+            {
+              "no": "22",
+              "prompt": "The main problem with the computer system is that it",
+              "prompt_vi": "Vấn đề chính của hệ thống máy tính là nó",
+              "answer": "A",
+              "options": [
+                "A. is too slow",
+                "B. stops working",
+                "C. displays incorrect data"
+              ],
+              "confidence": "high",
+              "explanation": "Vấn đề chính: **chuyển từ màn hình này sang màn hình khác mất rất lâu** → **A – too slow**.",
+              "evidence": "(ý transcript) It just takes ages to go from one screen to the next.",
+              "evidence_vi": "Chuyển từ màn hình này sang màn hình kia mất cả buổi."
+            },
+            {
+              "no": "23",
+              "prompt": "Timetabling has become an issue because",
+              "prompt_vi": "Việc xếp thời khoá biểu trở thành vấn đề vì",
+              "answer": "B",
+              "options": [
+                "A. there is not enough time for anyone to do it.",
+                "B. the system does not handle course options.",
+                "C. the courses are constantly changing."
+              ],
+              "confidence": "high",
+              "explanation": "Xếp thời khoá biểu thành vấn đề vì nhiều khoá học **có môn tự chọn (options)** mà hệ thống **không xử lý được** → **B**.",
+              "evidence": "(ý transcript) Many of them have options… and the system doesn't handle that.",
+              "evidence_vi": "Nhiều khoá có môn tự chọn… mà hệ thống không xử lý được."
+            },
+            {
+              "no": "24",
+              "prompt": "To solve the timetabling issues, Randhir suggests that",
+              "prompt_vi": "Để giải quyết vấn đề thời khoá biểu, Randhir gợi ý rằng",
+              "answer": "A",
+              "options": [
+                "A. students should create their own timetables",
+                "B. Dave should have someone to assist him.",
+                "C. the number of courses should be reduced."
+              ],
+              "confidence": "high",
+              "explanation": "Gợi ý của Randhir: một **hệ thống trực tuyến để sinh viên tự xếp lịch** → **A – students should create their own timetables**.\nB (có người trợ giúp Dave) là bẫy – không được đề xuất.",
+              "evidence": "(ý transcript) What about having an online system that students can use to do their scheduling?",
+              "evidence_vi": "Hay là có một hệ thống trực tuyến để sinh viên tự xếp lịch?"
+            },
+            {
+              "no": "25",
+              "prompt": "Randhir says that a new system may",
+              "prompt_vi": "Randhir nói rằng một hệ thống mới có thể",
+              "answer": "C",
+              "options": [
+                "A. need to be trialled.",
+                "B. still to be trialled.",
+                "C. be more economical."
+              ],
+              "confidence": "high",
+              "explanation": "Randhir nói hệ thống mới **về lâu dài có thể tiết kiệm tiền** → **C – be more economical**.\nA/B (thử nghiệm) không phải ý anh nhấn mạnh.",
+              "evidence": "(ý transcript) It may save you money in the long run.",
+              "evidence_vi": "Về lâu dài nó có thể giúp tiết kiệm tiền."
+            },
+            {
+              "no": "26",
+              "prompt": "Improving the existing system will take",
+              "prompt_vi": "Việc cải thiện hệ thống hiện tại sẽ mất",
+              "answer": "B",
+              "options": [
+                "A. a few weeks.",
+                "B. four or five months.",
+                "C. nine months"
+              ],
+              "confidence": "high",
+              "explanation": "Cải thiện hệ thống hiện tại mất bao lâu: **đến tháng Tư hoặc tháng Năm** → khoảng **B – four or five months**.\nBẫy: \"a few weeks\" và \"nine months\" là các mốc khác được nhắc.",
+              "evidence": "(ý transcript) It would take until April or May to improve the existing system.",
+              "evidence_vi": "Phải đến tháng Tư hoặc tháng Năm mới cải thiện xong hệ thống hiện tại."
+            }
+          ]
+        },
+        {
+          "range": "Questions 27–30",
+          "instruction": "Complete the flowchart below. Write NO MORE THAN TWO WORDS for each answer.",
+          "instruction_vi": "Hoàn thành lưu đồ bên dưới. Viết KHÔNG QUÁ HAI TỪ cho mỗi câu trả lời.",
+          "context": "Next steps\nGet approval from ...27...\nComplete a ...28... form\nBook a ...29... with the systems analyst\nSet up a ...30... with technologies team",
+          "questions": [
+            {
+              "no": "27",
+              "prompt": "Get approval from ______",
+              "prompt_vi": "Xin phê duyệt từ ______",
+              "answer": "senior management",
+              "confidence": "medium",
+              "explanation": "\"Get approval from ______\" → danh từ chỉ người/cấp phê duyệt (≤ 2 từ). Key: **(senior) management / managers** – xin phê duyệt từ ban quản lý cấp cao."
+            },
+            {
+              "no": "28",
+              "prompt": "Complete a ______ form",
+              "prompt_vi": "Điền một mẫu đơn ______",
+              "answer": "project request",
+              "confidence": "medium",
+              "explanation": "\"Complete a ______ form\" → loại biểu mẫu (≤ 2 từ). Key: **project request** (mẫu đề xuất dự án)."
+            },
+            {
+              "no": "29",
+              "prompt": "Book a ______ with the systems analyst",
+              "prompt_vi": "Đặt một ______ với chuyên viên phân tích hệ thống",
+              "answer": "meeting",
+              "confidence": "medium",
+              "explanation": "\"Book a ______ with the systems analyst\" → danh từ. Key: **meeting** (đặt lịch họp với chuyên viên phân tích hệ thống)."
+            },
+            {
+              "no": "30",
+              "prompt": "Set up a ______ with technologies team",
+              "prompt_vi": "Sắp xếp một ______ với nhóm công nghệ",
+              "answer": "conference call",
+              "confidence": "medium",
+              "explanation": "\"Set up a ______ with technologies team\" → danh từ (≤ 2 từ). Key: **conference call** (cuộc gọi hội nghị).\nBẫy: \"training session\" là phỏng đoán cũ – sai."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "listening",
+      "title": "Listening – Section 4",
+      "note": "Nguồn: **The Official Cambridge Guide to IELTS – Academic Test 4 – Part 2** (Hadley Park – tình nguyện viên Group A + plan) – đối chiếu transcript + đáp án trên engnovate.com (https://engnovate.com/ielts-listening-answers/hadley-park/). Đề Pre-IELTS đánh số lại 31–40 (hướng dẫn plan vẫn ghi \"Questions 15–20\" của sách gốc).",
+      "groups": [
+        {
+          "range": "Questions 31–32",
+          "instruction": "Choose TWO letters, A–E. Which TWO tasks will the volunteers in Group A be responsible for?",
+          "instruction_vi": "Chọn HAI chữ cái, A–E. Tình nguyện viên Nhóm A sẽ chịu trách nhiệm cho HAI công việc nào?",
+          "context": "A. widening pathways\nB. planting trees\nC. picking up rubbish\nD. putting up signs\nE. building fences",
+          "questions": [
+            {
+              "no": "31–32",
+              "prompt": "Which TWO tasks will the volunteers in Group A be responsible for?",
+              "prompt_vi": "Nhóm A sẽ phụ trách HAI việc nào?",
+              "answer": "B, E",
+              "confidence": "high",
+              "explanation": "Nhiệm vụ của Group A: **dựng hàng rào gỗ** dọc đường xe đạp (E) và **trồng cây/cây bản địa** (B).\nCác việc khác đã giao cho người khác: nhặt rác do trường học lo; mở rộng đường đi và cắm biển do hội đồng (council) lo → A, C, D là bẫy.",
+              "evidence": "(ý transcript) Fencing needs constructing along parts of the bicycle track… and getting the trees into the ground.",
+              "evidence_vi": "Cần dựng hàng rào dọc một số đoạn đường xe đạp… và trồng cây xuống đất."
+            }
+          ]
+        },
+        {
+          "range": "Questions 33–34",
+          "instruction": "Choose TWO letters, A–E. Which TWO items should volunteers in Group A bring with them?",
+          "instruction_vi": "Chọn HAI chữ cái, A–E. Tình nguyện viên Nhóm A nên mang theo HAI vật dụng nào?",
+          "context": "A. food and water\nB. boots\nC. gloves\nD. raincoats\nE. their own tools",
+          "questions": [
+            {
+              "no": "33–34",
+              "prompt": "Which TWO items should volunteers in Group A bring with them?",
+              "prompt_vi": "Nhóm A nên mang HAI thứ nào?",
+              "answer": "B, C",
+              "confidence": "high",
+              "explanation": "Đồ Group A nên mang: **ủng chắc chắn** vì đất lầy (B) và **găng tay của riêng mình** (C).\nA (đồ ăn, nước) và E (dụng cụ) **được cung cấp**; D (áo mưa) **không còn cần** vì dự báo thời tiết đã đổi.",
+              "evidence": "(ý transcript) I'd definitely recommend a strong pair of boots… your own gloves would also be advisable.",
+              "evidence_vi": "Tôi chắc chắn khuyên mang một đôi ủng chắc… mang găng tay riêng cũng nên."
+            }
+          ]
+        },
+        {
+          "range": "Questions 35–40",
+          "instruction": "Label the plan below. Write the correct letter, A–I, next to Questions 35–40.",
+          "instruction_vi": "Điền nhãn cho sơ đồ. Viết chữ cái đúng, A–I, cạnh câu 35–40. (Đề in nhầm \"Questions 15–20\".)",
+          "context": "Plan: A lake with an island at the top; a bicycle track runs along the lake shore. Footpaths (dashed lines) connect a CAR PARK (bottom) with a circle of stones/seats in the middle. Boxes A–I: A (left, near the path down from the bicycle track), B (just below the bicycle track, path to the circle), C and D (right, separated by a bamboo fence), E (next to the FRUIT BUSHES, bamboo fence below it), F (far left, path from the main footpath), G (just left-below the circle), H and I (bottom right, either side of a bamboo fence).\nKey: ||||||| bamboo fences   ------ footpath\n35. Vegetable beds\n36. Bee hives\n37. Seating\n38. Adventure playground\n39. Sand area\n40. Pond",
+          "questions": [
+            {
+              "no": "35",
+              "prompt": "Vegetable beds",
+              "prompt_vi": "Luống rau",
+              "answer": "G",
+              "confidence": "high",
+              "explanation": "Vegetable beds: từ bãi xe đi theo lối mòn tới **vòng tròn**, rẽ theo lối ngắn bên trái vòng tròn → ô **G**.",
+              "evidence": "(ý transcript) Go up the footpath until you reach the circle, then take the short path on its left.",
+              "evidence_vi": "Đi theo lối mòn tới vòng tròn rồi rẽ lối ngắn bên trái."
+            },
+            {
+              "no": "36",
+              "prompt": "Bee hives",
+              "prompt_vi": "Tổ ong",
+              "answer": "I",
+              "confidence": "high",
+              "explanation": "Bee hives: từ vòng tròn đi sang phía đông, ở ngã rẽ đi xuống, tổ ong nằm **bên phải hàng rào tre** → **I** (H nằm bên trái hàng rào).",
+              "evidence": "(ý transcript) The bee hives are on the right of the fence.",
+              "evidence_vi": "Tổ ong ở bên phải hàng rào."
+            },
+            {
+              "no": "37",
+              "prompt": "Seating",
+              "prompt_vi": "Chỗ ngồi",
+              "answer": "B",
+              "confidence": "high",
+              "explanation": "Seating: từ đỉnh vòng tròn đi lối mòn **lên gần đường xe đạp** → khu ghế ngồi là **B**.",
+              "evidence": "(ý transcript) This path takes you up to the seating area.",
+              "evidence_vi": "Lối này dẫn bạn lên khu ghế ngồi."
+            },
+            {
+              "no": "38",
+              "prompt": "Adventure playground",
+              "prompt_vi": "Sân chơi phiêu lưu",
+              "answer": "E",
+              "confidence": "high",
+              "explanation": "Adventure playground: từ bãi xe rẽ **trái đầu tiên**, rồi lối ngắn bên phải → khu vui chơi nằm **phía trên hàng rào tre**, cạnh bụi cây ăn quả → **E**.",
+              "evidence": "(ý transcript) You want the first left turn… that's the adventure playground, above the bamboo fence.",
+              "evidence_vi": "Bạn rẽ trái đầu tiên… đó là sân chơi phiêu lưu, phía trên hàng rào tre."
+            },
+            {
+              "no": "39",
+              "prompt": "Sand area",
+              "prompt_vi": "Khu cát",
+              "answer": "C",
+              "confidence": "high",
+              "explanation": "Sand area: từ vòng tròn đi sang đông, ở ngã rẽ đi **lên phía đường xe đạp** → khu cát nằm **ngay trên hàng rào tre** ở đó → **C** (D nằm dưới hàng rào).",
+              "evidence": "(ý transcript) The sand area is just above the bamboo fence there.",
+              "evidence_vi": "Khu cát nằm ngay phía trên hàng rào tre ở đó."
+            },
+            {
+              "no": "40",
+              "prompt": "Pond",
+              "prompt_vi": "Ao",
+              "answer": "A",
+              "confidence": "high",
+              "explanation": "Pond: nằm **bên trái bản đồ, phía trên** (trên bụi cây ăn quả, cạnh lối mòn nhỏ) → **A**.",
+              "evidence": "(ý transcript) It's on the left-hand side of your plan – towards the top.",
+              "evidence_vi": "Nó ở phía bên trái sơ đồ – về phía trên."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "reading",
+      "title": "Reading – Passage 1",
+      "passage": {
+        "title": "ALBERT EINSTEIN",
+        "title_vi": "Albert Einstein",
+        "paragraphs": [
+          {
+            "en": "Albert Einstein is perhaps the best-known scientist of the 20th century. He received the Nobel Prize in Physics in 1921 and his theories of special and general relativity are of great importance to many branches of physics and astronomy. He is well known for his theories about light, matter, gravity, space and time. His most famous idea is that energy and mass are different forms of the same thing.",
+            "vi": "Albert Einstein có lẽ là nhà khoa học nổi tiếng nhất thế kỷ 20. Ông nhận giải Nobel Vật lý năm 1921, và các thuyết tương đối hẹp và tương đối rộng của ông có tầm quan trọng lớn đối với nhiều ngành vật lý và thiên văn học. Ông nổi tiếng với các lý thuyết về ánh sáng, vật chất, lực hấp dẫn, không gian và thời gian. Ý tưởng nổi tiếng nhất của ông là năng lượng và khối lượng là những dạng khác nhau của cùng một thứ."
+          },
+          {
+            "en": "Einstein was born in Wurttemberg, Germany on 14th March 1879. His family was Jewish but he had not been very religious in his youth although he became very interested in Judaism in later life.",
+            "vi": "Einstein sinh ra ở Württemberg, Đức, vào ngày 14 tháng 3 năm 1879. Gia đình ông là người Do Thái nhưng thời trẻ ông không sùng đạo lắm, dù về sau ông trở nên rất quan tâm đến Do Thái giáo."
+          },
+          {
+            "en": "It is well documented that Einstein did not begin speaking until after the age of three. In fact, he found speaking so difficult that his family were worried that he would never start to speak. When Einstein was four years old, his father gave him a magnetic compass. It was this compass that inspired him to explore the world of science. He wanted to understand why the needle always pointed north whichever way he turned the compass. It looked as if the needle was moving itself. But the needle was inside a closed case, so no other force (such as the wind) could have been moving it. And this is how Einstein became interested in studying science and mathematics.",
+            "vi": "Có nhiều tài liệu ghi lại rằng Einstein mãi sau ba tuổi mới bắt đầu biết nói. Thực tế, ông thấy việc nói khó khăn đến mức gia đình lo rằng ông sẽ không bao giờ nói được. Khi Einstein bốn tuổi, cha ông tặng ông một chiếc la bàn từ. Chính chiếc la bàn này đã truyền cảm hứng cho ông khám phá thế giới khoa học. Ông muốn hiểu vì sao chiếc kim luôn chỉ về hướng bắc dù ông xoay la bàn theo hướng nào. Trông như thể chiếc kim tự chuyển động. Nhưng chiếc kim nằm trong một chiếc hộp kín, nên không có lực nào khác (chẳng hạn như gió) có thể làm nó chuyển động. Và đó là cách Einstein bắt đầu yêu thích việc học khoa học và toán học."
+          },
+          {
+            "en": "In fact, he was so clever that at the age of 12 he taught himself Euclidean geometry. At fifteen, he went to school in Munich which he found very boring. He finished secondary school in Aarau, Switzerland and entered the Swiss Federal Institute of Technology in Zurich from which he graduated in 1900. But Einstein did not like the teaching there either. He often missed classes and used the time to study physics on his own or to play the violin instead. However, he was able to pass his examinations by studying the notes of a classmate. His teachers did not have a good opinion of him and refused to recommend him for a university position. So, he got a job in a patent office in Switzerland. While he was working there, he wrote the papers that first made him famous as a great scientist.",
+            "vi": "Thực ra, ông thông minh đến mức năm 12 tuổi đã tự học hình học Euclid. Năm mười lăm tuổi, ông đi học ở Munich, nơi ông thấy rất nhàm chán. Ông học xong trung học ở Aarau, Thụy Sĩ và vào Học viện Công nghệ Liên bang Thụy Sĩ ở Zurich, tốt nghiệp năm 1900. Nhưng Einstein cũng không thích cách giảng dạy ở đó. Ông thường bỏ lớp và dùng thời gian đó để tự học vật lý hoặc chơi vĩ cầm. Tuy vậy, ông vẫn thi đỗ nhờ học theo vở ghi của một bạn cùng lớp. Các thầy giáo không có thiện cảm với ông và từ chối giới thiệu ông vào một vị trí ở trường đại học. Vì thế, ông xin làm việc ở một văn phòng cấp bằng sáng chế ở Thụy Sĩ. Trong thời gian làm việc ở đó, ông đã viết những bài báo khoa học đầu tiên giúp ông nổi tiếng như một nhà khoa học vĩ đại."
+          },
+          {
+            "en": "Einstein had two severely disabled children with his first wife, Mileva. His daughter (whose name we do not know) was born about a year before their marriage in January 1902. She was looked after by her Serbian grandparents until she died at the age of two. It is generally believed that she died from scarlet fever but there are those who believe that she may have suffered from a disorder known as Down Syndrome. But there is not enough evidence to know for sure. In fact, no one even knew that she had existed until Einstein's granddaughter found 54 love letters that Einstein and Mileva had written to each other between 1897 and 1903. She found these letters inside a shoe box in their attic in California. Einstein and Mileva's son, Eduard, was diagnosed with schizophrenia. He spent decades in hospitals and died in Zurich in 1965.",
+            "vi": "Einstein có hai người con bị khuyết tật nặng với người vợ đầu, Mileva. Con gái của ông (người mà chúng ta không biết tên) sinh ra khoảng một năm trước khi họ kết hôn, vào tháng 1 năm 1902. Cô bé được ông bà ngoại người Serbia chăm sóc cho đến khi mất lúc hai tuổi. Người ta thường cho rằng cô bé chết vì bệnh sốt phát ban (scarlet fever), nhưng cũng có người tin rằng cô bé có thể mắc một chứng rối loạn gọi là hội chứng Down. Tuy nhiên, không có đủ bằng chứng để biết chắc chắn. Thực tế, thậm chí không ai biết đến sự tồn tại của cô bé cho đến khi cháu gái của Einstein tìm thấy 54 bức thư tình mà Einstein và Mileva đã viết cho nhau từ năm 1897 đến 1903. Bà tìm thấy những bức thư này trong một hộp giày trên gác mái nhà họ ở California. Con trai của Einstein và Mileva, Eduard, được chẩn đoán mắc bệnh tâm thần phân liệt. Ông sống hàng chục năm trong bệnh viện và mất ở Zurich năm 1965."
+          },
+          {
+            "en": "Just before the start of World War I, Einstein moved back to Germany and became director of a school there. But in 1933, following death threats from the Nazis, he moved to the United States, where he died on 18th April 1955.",
+            "vi": "Ngay trước khi Thế chiến thứ nhất bắt đầu, Einstein chuyển về Đức và trở thành giám đốc một trường học ở đó. Nhưng vào năm 1933, sau những lời đe doạ giết của Đức Quốc xã, ông chuyển sang Mỹ, nơi ông qua đời ngày 18 tháng 4 năm 1955."
+          }
+        ]
+      },
+      "groups": [
+        {
+          "range": "Questions 1–8",
+          "instruction": "Do the following statements agree with the information given in the text? Write TRUE, FALSE or NOT GIVEN.",
+          "instruction_vi": "Các nhận định sau có khớp với thông tin trong bài không? Viết TRUE (đúng), FALSE (sai – trái với bài) hoặc NOT GIVEN (không có thông tin).",
+          "context": "TRUE – if the statement agrees with the information\nFALSE – if the statement contradicts the information\nNOT GIVEN – if there is no information on this",
+          "questions": [
+            {
+              "no": "1",
+              "prompt": "The general theory of relativity is a very important theory in modern physics.",
+              "prompt_vi": "Thuyết tương đối rộng là một lý thuyết rất quan trọng trong vật lý hiện đại.",
+              "answer": "TRUE",
+              "explanation": "**Từ khoá:** general theory of relativity, very important, physics → đoạn 1.\nBài viết: thuyết tương đối hẹp và rộng \"are of great importance to many branches of physics\".\n**Paraphrase:** of great importance ≈ very important; many branches of physics ≈ modern physics (vật lý ngày nay). Nội dung khớp → TRUE.",
+              "evidence": "his theories of special and general relativity are of great importance to many branches of physics and astronomy.",
+              "evidence_vi": "các thuyết tương đối hẹp và rộng của ông có tầm quan trọng lớn đối với nhiều ngành vật lý và thiên văn học."
+            },
+            {
+              "no": "2",
+              "prompt": "Einstein had such difficulty with language that those around him thought he would never learn how to speak.",
+              "prompt_vi": "Einstein gặp khó khăn với ngôn ngữ đến mức những người xung quanh nghĩ ông sẽ không bao giờ học nói được.",
+              "answer": "TRUE",
+              "explanation": "**Từ khoá:** difficulty, never learn how to speak → đoạn 3.\n**Paraphrase:** found speaking so difficult ≈ had such difficulty with language; his family were worried ≈ those around him thought; would never start to speak ≈ would never learn how to speak. Cấu trúc \"so … that\" trong bài ↔ \"such … that\" trong câu hỏi → TRUE.",
+              "evidence": "he found speaking so difficult that his family were worried that he would never start to speak.",
+              "evidence_vi": "ông thấy việc nói khó khăn đến mức gia đình lo rằng ông sẽ không bao giờ bắt đầu nói được."
+            },
+            {
+              "no": "3",
+              "prompt": "It seemed to Einstein that nothing could be pushing the needle of the compass around except the wind.",
+              "prompt_vi": "Einstein cho rằng không có gì có thể đẩy kim la bàn quay ngoài gió.",
+              "answer": "FALSE",
+              "explanation": "**Từ khoá:** needle, compass, wind → đoạn 3.\nBài viết nói kim nằm trong hộp kín nên **không có lực nào khác (như gió)** có thể làm nó chuyển động – tức gió bị **loại trừ**, còn câu hỏi lại nói chỉ có gió mới đẩy được kim. Hai ý **trái ngược** → FALSE.\n**Bẫy:** câu hỏi dùng lại đúng từ \"wind\" để đánh lừa – phải đọc kỹ \"no other force (such as the wind)\".",
+              "evidence": "But the needle was inside a closed case, so no other force (such as the wind) could have been moving it.",
+              "evidence_vi": "Nhưng chiếc kim nằm trong một hộp kín, nên không có lực nào khác (chẳng hạn như gió) có thể làm nó chuyển động."
+            },
+            {
+              "no": "4",
+              "prompt": "Einstein enjoyed the teaching methods in Switzerland.",
+              "prompt_vi": "Einstein thích phương pháp giảng dạy ở Thụy Sĩ.",
+              "answer": "FALSE",
+              "explanation": "**Từ khoá:** teaching, Switzerland → đoạn 4 (Swiss Federal Institute of Technology in Zurich).\nBài viết: \"Einstein did not like the teaching there either\" – \"there\" = học viện ở Zurich, Thụy Sĩ. **did not like** trái nghĩa với **enjoyed** → FALSE.\nThêm bằng chứng: ông thường bỏ lớp (often missed classes).",
+              "evidence": "But Einstein did not like the teaching there either. He often missed classes...",
+              "evidence_vi": "Nhưng Einstein cũng không thích cách giảng dạy ở đó. Ông thường bỏ lớp..."
+            },
+            {
+              "no": "5",
+              "prompt": "Einstein taught himself how to play the violin.",
+              "prompt_vi": "Einstein tự học chơi vĩ cầm.",
+              "answer": "NOT GIVEN",
+              "explanation": "**Từ khoá:** taught himself, violin → đoạn 4.\nBài chỉ nói ông dùng thời gian bỏ lớp để \"play the violin\" – **không** nói ông học vĩ cầm như thế nào (tự học hay có thầy). Cụm \"taught himself\" trong bài lại gắn với **Euclidean geometry**, không phải violin.\n**Bẫy:** ghép nhầm thông tin \"taught himself\" (hình học) với \"violin\". Không có thông tin → NOT GIVEN.",
+              "evidence": "at the age of 12 he taught himself Euclidean geometry ... used the time to study physics on his own or to play the violin instead.",
+              "evidence_vi": "năm 12 tuổi ông tự học hình học Euclid ... dùng thời gian đó để tự học vật lý hoặc chơi vĩ cầm."
+            },
+            {
+              "no": "6",
+              "prompt": "His daughter died of schizophrenia when she was two.",
+              "prompt_vi": "Con gái ông chết vì bệnh tâm thần phân liệt khi lên hai tuổi.",
+              "answer": "FALSE",
+              "explanation": "**Từ khoá:** daughter, died, schizophrenia, two → đoạn 5.\nBài viết: người ta cho rằng con gái chết vì **scarlet fever** (sốt phát ban); **schizophrenia** là bệnh của **con trai Eduard**. Câu hỏi gán sai bệnh cho con gái → mâu thuẫn với bài → FALSE.\n**Bẫy:** trộn thông tin của hai người con.",
+              "evidence": "It is generally believed that she died from scarlet fever ... Einstein and Mileva's son, Eduard, was diagnosed with schizophrenia.",
+              "evidence_vi": "Người ta thường tin rằng cô bé chết vì sốt phát ban ... Con trai của Einstein và Mileva, Eduard, được chẩn đoán mắc tâm thần phân liệt."
+            },
+            {
+              "no": "7",
+              "prompt": "The existence of a daughter only became known to the world between 1897 and 1903.",
+              "prompt_vi": "Sự tồn tại của người con gái chỉ được thế giới biết đến trong khoảng 1897–1903.",
+              "answer": "FALSE",
+              "explanation": "**Từ khoá:** existence, daughter, known, 1897–1903 → đoạn 5.\nBài viết: không ai biết cô bé tồn tại **cho đến khi cháu gái của Einstein tìm thấy các bức thư** – những bức thư được **viết** trong giai đoạn 1897–1903. Như vậy 1897–1903 là thời gian **viết thư**, còn việc thế giới biết đến xảy ra **rất lâu sau** (khi cháu gái phát hiện). Câu hỏi sai về thời điểm → FALSE.",
+              "evidence": "no one even knew that she had existed until Einstein's granddaughter found 54 love letters that Einstein and Mileva had written to each other between 1897 and 1903.",
+              "evidence_vi": "thậm chí không ai biết cô bé từng tồn tại cho đến khi cháu gái của Einstein tìm thấy 54 bức thư tình mà Einstein và Mileva đã viết cho nhau trong khoảng 1897–1903."
+            },
+            {
+              "no": "8",
+              "prompt": "In 1933 Einstein moved to the United States where he became an American citizen.",
+              "prompt_vi": "Năm 1933 Einstein chuyển đến Mỹ, nơi ông trở thành công dân Mỹ.",
+              "answer": "NOT GIVEN",
+              "explanation": "**Từ khoá:** 1933, United States, American citizen → đoạn 6.\nBài chỉ nói năm 1933 ông chuyển sang Mỹ và mất ở đó năm 1955; **không nhắc** việc ông có nhập quốc tịch Mỹ hay không. Phần đầu câu đúng nhưng phần \"became an American citizen\" không có thông tin → NOT GIVEN.\n**Lưu ý:** dùng kiến thức bên ngoài (thực tế ông nhập quốc tịch năm 1940) là sai nguyên tắc – chỉ dựa vào bài.",
+              "evidence": "But in 1933, following death threats from the Nazis, he moved to the United States, where he died on 18th April 1955.",
+              "evidence_vi": "Nhưng năm 1933, sau những lời đe doạ giết của Đức Quốc xã, ông chuyển sang Mỹ, nơi ông mất ngày 18/4/1955."
+            }
+          ]
+        },
+        {
+          "range": "Questions 9–10",
+          "instruction": "Complete the sentences below. Choose NO MORE THAN THREE WORDS from the text for each answer.",
+          "instruction_vi": "Hoàn thành các câu sau. Chọn KHÔNG QUÁ BA TỪ trong bài cho mỗi câu trả lời.",
+          "questions": [
+            {
+              "no": "9",
+              "prompt": "He tried hard to understand how the needle could seem to move itself so that it always ______",
+              "prompt_vi": "Ông cố gắng hiểu vì sao chiếc kim dường như tự chuyển động để nó luôn luôn ______",
+              "answer": "pointed north",
+              "explanation": "**Từ khoá:** understand, needle, always → đoạn 3.\nBài: \"He wanted to understand why the needle **always pointed north**\". Sau \"always\" cần một **động từ chia quá khứ** (câu đang ở thì quá khứ: tried) → **pointed north** (2 từ, đúng giới hạn).\n**Lưu ý:** không viết \"points north\" (sai thì) hay \"pointed to the north\" (không đúng từ trong bài).",
+              "evidence": "He wanted to understand why the needle always pointed north whichever way he turned the compass.",
+              "evidence_vi": "Ông muốn hiểu vì sao chiếc kim luôn chỉ về hướng bắc dù ông xoay la bàn theo hướng nào."
+            },
+            {
+              "no": "10",
+              "prompt": "He often did not go to classes and used the time to study physics ______ or to play music.",
+              "prompt_vi": "Ông thường không đến lớp và dùng thời gian đó để học vật lý ______ hoặc chơi nhạc.",
+              "answer": "on his own",
+              "explanation": "**Từ khoá:** did not go to classes (= missed classes), study physics, play music (= play the violin) → đoạn 4.\nBài: \"used the time to study physics **on his own** or to play the violin\". Chỗ trống đứng sau \"study physics\" và trước \"or\" → **on his own** (3 từ, đúng giới hạn).\n**Paraphrase:** often did not go to classes ≈ often missed classes; play music ≈ play the violin.",
+              "evidence": "He often missed classes and used the time to study physics on his own or to play the violin instead.",
+              "evidence_vi": "Ông thường bỏ lớp và dùng thời gian đó để tự học vật lý hoặc chơi vĩ cầm."
+            }
+          ]
+        },
+        {
+          "range": "Questions 11–13",
+          "instruction": "Choose the correct letter, A, B, C or D.",
+          "instruction_vi": "Chọn chữ cái đúng, A, B, C hoặc D.",
+          "questions": [
+            {
+              "no": "11",
+              "prompt": "The name of Einstein's daughter",
+              "prompt_vi": "Tên con gái của Einstein",
+              "answer": "B",
+              "options": [
+                "A. was not chosen by him.",
+                "B. is a mystery.",
+                "C. is shared by his granddaughter.",
+                "D. was discovered in a shoe box."
+              ],
+              "explanation": "**Từ khoá:** name, daughter → đoạn 5: \"His daughter (whose name we do not know)\".\n**Paraphrase:** we do not know (chúng ta không biết) ≈ is a mystery (là một bí ẩn) → **B**.\n• A sai: bài không nói ai đặt tên.\n• C sai: bài không nói cháu gái mang tên đó.\n• D sai: hộp giày chứa **thư tình**, không phải nơi phát hiện ra tên cô bé (tên vẫn chưa được biết).",
+              "evidence": "His daughter (whose name we do not know) was born about a year before their marriage in January 1902.",
+              "evidence_vi": "Con gái của ông (người mà chúng ta không biết tên) sinh ra khoảng một năm trước khi họ kết hôn vào tháng 1 năm 1902."
+            },
+            {
+              "no": "12",
+              "prompt": "His teachers would not recommend him for a university position because",
+              "prompt_vi": "Các thầy giáo không giới thiệu ông vào vị trí ở đại học vì",
+              "answer": "A",
+              "options": [
+                "A. they did not think highly of him.",
+                "B. they thought he was a Nazi.",
+                "C. his wife was Serbian.",
+                "D. he seldom skipped classes."
+              ],
+              "explanation": "**Từ khoá:** teachers, recommend, university position → đoạn 4.\nBài: \"His teachers did not have a good opinion of him and refused to recommend him\".\n**Paraphrase:** did not have a good opinion of him ≈ did not think highly of him → **A**.\n• B sai: Đức Quốc xã chỉ xuất hiện năm 1933 (đe doạ ông), không liên quan.\n• C sai: chỉ ông bà ngoại của con gái là người Serbia; không phải lý do.\n• D sai và ngược lại: ông **often missed classes** (thường bỏ lớp), không phải \"seldom skipped\" (hiếm khi bỏ).",
+              "evidence": "His teachers did not have a good opinion of him and refused to recommend him for a university position.",
+              "evidence_vi": "Các thầy giáo không có thiện cảm với ông và từ chối giới thiệu ông vào một vị trí ở trường đại học."
+            },
+            {
+              "no": "13",
+              "prompt": "The famous physicist Albert Einstein was of",
+              "prompt_vi": "Nhà vật lý nổi tiếng Albert Einstein có gốc",
+              "answer": "B",
+              "options": [
+                "A. Swiss origin",
+                "B. Jewish origin",
+                "C. American origin",
+                "D. Austrian origin"
+              ],
+              "explanation": "**Từ khoá:** origin (nguồn gốc) → đoạn 2: \"His family was Jewish\".\n\"of Jewish origin\" = có gốc Do Thái → **B**.\n• A sai: ông học và làm việc ở Thụy Sĩ nhưng sinh ra ở Đức.\n• C sai: ông chỉ chuyển sang Mỹ năm 1933.\n• D sai: bài không nhắc tới Áo.",
+              "evidence": "Einstein was born in Wurttemberg, Germany on 14th March 1879. His family was Jewish...",
+              "evidence_vi": "Einstein sinh ở Württemberg, Đức ngày 14/3/1879. Gia đình ông là người Do Thái..."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "reading",
+      "title": "Reading – Passage 2",
+      "passage": {
+        "title": "The Innovation of Grocery Stores",
+        "title_vi": "Sự đổi mới của các cửa hàng tạp hoá",
+        "paragraphs": [
+          {
+            "label": "A",
+            "en": "At the very beginning of the 20th century, the American grocery stores offered comprehensive services: the customers would ask help from the people behind the counters (called clerks) for the items they liked, and then the clerks would wrap the items up. For the purpose of saving time, customers had to ask delivery boys or go in person to send the lists of what they intended to buy to the stores in advance and then went to pay for the goods later. Generally speaking, these grocery stores sold only one brand for each item. Such early chain stores as A&P stores, although containing full services, were very time-consuming and inefficient for the purchase.",
+            "vi": "Vào đầu thế kỷ 20, các cửa hàng tạp hoá ở Mỹ cung cấp dịch vụ trọn gói: khách hàng nhờ những người đứng sau quầy (gọi là nhân viên bán hàng – clerk) lấy giúp những món họ muốn, rồi nhân viên sẽ gói hàng lại. Để tiết kiệm thời gian, khách phải nhờ các cậu bé giao hàng hoặc tự đến gửi trước danh sách những thứ định mua cho cửa hàng, rồi sau đó mới đến thanh toán. Nhìn chung, các cửa hàng này chỉ bán một nhãn hiệu cho mỗi mặt hàng. Những chuỗi cửa hàng đầu tiên như A&P, dù có đầy đủ dịch vụ, lại rất mất thời gian và kém hiệu quả cho việc mua sắm."
+          },
+          {
+            "label": "B",
+            "en": "Born in Virginia, Clarence Saunders left school at the age of 14 in 1895 to work first as a clerk in a grocery store. During his working in the store, he found that it was very inefficient for people to buy things there. Without the assistance of computers at that time, shopping was performed in a quite backward way. Having noticed that this inconvenient shopping mode could lead to tremendous consumption of time and money, Saunders, with great enthusiasm and innovation, proposed an unprecedented solution—let the consumers do self-service in the process of shopping—which might bring a thorough revolution to the whole industry.",
+            "vi": "Sinh ra ở Virginia, Clarence Saunders bỏ học năm 14 tuổi (năm 1895), công việc đầu tiên là làm nhân viên bán hàng trong một cửa hàng tạp hoá. Trong thời gian làm việc ở đó, ông nhận thấy việc mua sắm ở đây rất kém hiệu quả. Không có sự trợ giúp của máy tính vào thời đó, việc mua bán được thực hiện theo cách khá lạc hậu. Nhận thấy kiểu mua sắm bất tiện này có thể gây lãng phí rất lớn về thời gian và tiền bạc, Saunders, với lòng nhiệt huyết và tinh thần đổi mới, đã đề xuất một giải pháp chưa từng có – để người tiêu dùng tự phục vụ trong quá trình mua sắm – điều có thể mang lại một cuộc cách mạng triệt để cho toàn ngành."
+          },
+          {
+            "label": "C",
+            "en": "In 1902, Saunders moved to Memphis to put his perspective into practice, that is, to establish a grocery wholesale cooperative. In his newly designed grocery store, he divided the store into three different areas: A 'front lobby' served as an entrance, an exit, and included checkouts at the front. 'A sales department' was deliberately designed to allow customers to wander around the aisle and select their needed groceries. In this way, the clerks would not do the unnecessary work but arrange more delicate aisle and shelves to display the goods and enable the customers to browse through all the items. In the gallery above the sales department, supervisors can monitor the customers without disturbing them. 'Stockroom', where large fridges were placed to maintain fresh products, is another section of his grocery store only for the staff to enter. Also, this new shopping design and layout could accommodate more customers to go shopping simultaneously and even lead to some unimaginable phenomena: impulse buying and later supermarket.",
+            "vi": "Năm 1902, Saunders chuyển đến Memphis để biến quan điểm của mình thành hiện thực, tức là thành lập một hợp tác xã bán buôn tạp hoá. Trong cửa hàng được thiết kế mới, ông chia cửa hàng thành ba khu vực khác nhau: \"sảnh trước\" (front lobby) làm lối vào, lối ra và có các quầy thanh toán ở phía trước. \"Khu bán hàng\" được thiết kế có chủ đích để khách hàng đi dạo dọc các lối đi và tự chọn những món hàng mình cần. Bằng cách này, nhân viên không phải làm những việc không cần thiết mà tập trung sắp xếp các lối đi và kệ hàng tinh tế hơn để trưng bày hàng hoá, giúp khách có thể xem qua tất cả các mặt hàng. Ở ban công (gallery) phía trên khu bán hàng, người giám sát có thể theo dõi khách mà không làm phiền họ. \"Kho hàng\" (stockroom), nơi đặt những tủ lạnh lớn để bảo quản hàng tươi sống, là một khu vực khác của cửa hàng mà chỉ nhân viên mới được vào. Ngoài ra, cách thiết kế và bố trí mua sắm mới này có thể đón nhiều khách mua sắm cùng lúc hơn, thậm chí dẫn đến những hiện tượng không ai ngờ tới: mua sắm bốc đồng và sau này là siêu thị."
+          },
+          {
+            "label": "D",
+            "en": "On September 6, 1916, Saunders performed the self-service revolution in the USA by opening the first Piggly Wiggly featured by the turnstile at the entrance store at 79 Jefferson Street in Memphis, Tennessee. Quite distinct from those in other grocery stores, customers in Piggly Wiggly chose the goods on the shelves and paid the items all by themselves. Inside the Piggly Wiggly, shoppers were not at the mercy of staff. They were free to roam the store, check out the products and get what they needed by their own hands. There, the items were clearly priced, and no one forced customers to buy the things they did not need. As a matter of fact, the biggest benefit that the Piggly Wiggly brought to customers was the money-saving effect. Self-service was optimistic for the improvement. 'It is good for both the consumer and retailer because it cuts costs,' noted George T. Haley, a professor at the University of New Haven and director of the Centre for International Industry Competitiveness, 'if you look at the way in which grocery stores (previous to Piggly Wiggly and Alpha Beta) were operated, what you can find is that there are a great number of workers involved, and labour is a major expense.' Fortunately, the chain stores such as Piggly Wiggly cut the fat.",
+            "vi": "Ngày 6 tháng 9 năm 1916, Saunders thực hiện cuộc cách mạng tự phục vụ ở Mỹ bằng việc khai trương cửa hàng Piggly Wiggly đầu tiên – nổi bật với cửa quay (turnstile) ở lối vào – tại số 79 phố Jefferson, Memphis, bang Tennessee. Khác hẳn với các cửa hàng tạp hoá khác, khách hàng ở Piggly Wiggly tự chọn hàng trên kệ và tự thanh toán. Bên trong Piggly Wiggly, người mua không phải phụ thuộc vào nhân viên. Họ được tự do đi khắp cửa hàng, xem xét sản phẩm và tự tay lấy những gì mình cần. Ở đó, hàng hoá được niêm yết giá rõ ràng và không ai ép khách mua những thứ họ không cần. Thực tế, lợi ích lớn nhất mà Piggly Wiggly mang lại cho khách hàng là tiết kiệm tiền. Mô hình tự phục vụ mang lại nhiều triển vọng cải thiện. \"Nó có lợi cho cả người tiêu dùng lẫn nhà bán lẻ vì nó cắt giảm chi phí\", George T. Haley – giáo sư Đại học New Haven, giám đốc Trung tâm Năng lực Cạnh tranh Công nghiệp Quốc tế – nhận xét, \"nếu nhìn vào cách các cửa hàng tạp hoá (trước Piggly Wiggly và Alpha Beta) vận hành, bạn sẽ thấy có rất nhiều nhân công tham gia, và lao động là một khoản chi phí lớn.\" May mắn thay, các chuỗi cửa hàng như Piggly Wiggly đã cắt bỏ phần chi phí thừa này."
+          },
+          {
+            "label": "E",
+            "en": "Piggly Wiggly and this kind of self-service stores soared at that time. In the first year, Saunders opened nine branches in Memphis. Meanwhile, Saunders immediately applied a patent for the self-service concept and began franchising Piggly Wiggly stores. Thanks to the employment of self-service and franchising, the number of Piggly Wiggly had increased to nearly 1,300 by 1923. Piggly Wiggly sold $100 million (worth $1.3 billion today) in groceries, which made it the third-biggest grocery retailer in the nation. After that, this chain store experienced company listing on the New York Stock Exchange, with the stocks doubling from late 1922 to March 1923. Saunders contributed significantly to the perfect design and layout of grocery stores. In order to keep the flow rate smooth, Saunders even invented the turnstile to replace the common entrance mode.",
+            "vi": "Piggly Wiggly và kiểu cửa hàng tự phục vụ này phát triển vượt bậc thời bấy giờ. Ngay năm đầu tiên, Saunders đã mở chín chi nhánh ở Memphis. Đồng thời, ông lập tức xin cấp bằng sáng chế cho khái niệm tự phục vụ và bắt đầu nhượng quyền thương hiệu Piggly Wiggly. Nhờ áp dụng mô hình tự phục vụ và nhượng quyền, số cửa hàng Piggly Wiggly đã tăng lên gần 1.300 vào năm 1923. Piggly Wiggly bán được 100 triệu đô la hàng tạp hoá (tương đương 1,3 tỷ đô la ngày nay), trở thành nhà bán lẻ tạp hoá lớn thứ ba cả nước. Sau đó, chuỗi cửa hàng này niêm yết trên Sở Giao dịch Chứng khoán New York, giá cổ phiếu tăng gấp đôi từ cuối năm 1922 đến tháng 3 năm 1923. Saunders đã đóng góp đáng kể vào việc thiết kế và bố trí hoàn chỉnh cho các cửa hàng tạp hoá. Để giữ cho dòng người lưu thông trơn tru, Saunders thậm chí còn phát minh ra cửa quay để thay thế kiểu lối vào thông thường."
+          },
+          {
+            "label": "F",
+            "en": "Clarence Saunders died in 1953, leaving abundant legacies mainly symbolised by Piggly Wiggly, the pattern of which spread extensively and lasted permanently.",
+            "vi": "Clarence Saunders qua đời năm 1953, để lại một di sản phong phú mà biểu tượng chính là Piggly Wiggly – mô hình của nó đã lan rộng khắp nơi và tồn tại lâu dài."
+          }
+        ]
+      },
+      "groups": [
+        {
+          "range": "Questions 14–18",
+          "instruction": "Reading Passage has six paragraphs, A–F. Which paragraph contains the following information? Write the correct letter, A–F. NB You may use any letter more than once.",
+          "instruction_vi": "Bài đọc có sáu đoạn A–F. Đoạn nào chứa các thông tin sau? Viết chữ cái đúng A–F. Lưu ý: một chữ cái có thể dùng nhiều lần. (Đề in nhầm \"Reading Passage 1\".)",
+          "questions": [
+            {
+              "no": "14",
+              "prompt": "Layout of Clarence Saunders' store",
+              "prompt_vi": "Cách bố trí cửa hàng của Clarence Saunders",
+              "answer": "C",
+              "explanation": "**Từ khoá:** layout → đoạn C mô tả chi tiết việc chia cửa hàng thành **ba khu vực**: front lobby, sales department, stockroom (+ gallery phía trên).\n**Paraphrase:** divided the store into three different areas ≈ layout. Đoạn C còn dùng đúng từ \"design and layout\".\n**Bẫy:** đoạn E cũng có cụm \"design and layout of grocery stores\" nhưng chỉ nhắc qua một câu – không mô tả bố trí cụ thể.",
+              "evidence": "In his newly designed grocery store, he divided the store into three different areas...",
+              "evidence_vi": "Trong cửa hàng được thiết kế mới, ông chia cửa hàng thành ba khu vực khác nhau..."
+            },
+            {
+              "no": "15",
+              "prompt": "A reference to a reduction by chain stores in labour costs",
+              "prompt_vi": "Nhắc đến việc các chuỗi cửa hàng cắt giảm chi phí nhân công",
+              "answer": "D",
+              "explanation": "**Từ khoá:** reduction, chain stores, labour costs → đoạn D: lời GS George T. Haley \"labour is a major expense\" và câu kết \"the chain stores such as Piggly Wiggly **cut the fat**\".\n**Paraphrase:** cuts costs / cut the fat ≈ reduction; labour is a major expense ≈ labour costs.",
+              "evidence": "...there are a great number of workers involved, and labour is a major expense.' Fortunately, the chain stores such as Piggly Wiggly cut the fat.",
+              "evidence_vi": "...có rất nhiều nhân công tham gia, và lao động là một khoản chi lớn.\" May mắn thay, các chuỗi cửa hàng như Piggly Wiggly đã cắt bỏ phần chi phí thừa."
+            },
+            {
+              "no": "16",
+              "prompt": "How Clarence Saunders' idea had been carried out",
+              "prompt_vi": "Ý tưởng của Clarence Saunders đã được thực hiện như thế nào",
+              "answer": "C",
+              "explanation": "**Từ khoá:** idea, carried out → đoạn C mở đầu: \"Saunders moved to Memphis to **put his perspective into practice**\".\n**Paraphrase:** put his perspective into practice ≈ his idea had been carried out (biến ý tưởng thành hiện thực). Đoạn C sau đó mô tả cách ông hiện thực hoá ý tưởng (lập hợp tác xã, thiết kế cửa hàng mới).\n**Lưu ý:** C dùng hai lần (14 và 16) – đề đã cho phép (NB). Đoạn D (khai trương Piggly Wiggly) cũng liên quan nhưng không có cụm diễn đạt tương ứng trực tiếp như C.",
+              "evidence": "In 1902, Saunders moved to Memphis to put his perspective into practice, that is, to establish a grocery wholesale cooperative.",
+              "evidence_vi": "Năm 1902, Saunders chuyển đến Memphis để biến quan điểm của mình thành hiện thực, tức là thành lập một hợp tác xã bán buôn tạp hoá."
+            },
+            {
+              "no": "17",
+              "prompt": "How people used to shop before Clarence Saunders' stores opened",
+              "prompt_vi": "Người ta mua sắm như thế nào trước khi cửa hàng của Clarence Saunders mở cửa",
+              "answer": "A",
+              "explanation": "**Từ khoá:** used to shop, before → đoạn A mô tả cách mua sắm \"at the very beginning of the 20th century\": nhờ clerk lấy hàng, gửi danh sách trước, trả tiền sau.\n**Paraphrase:** at the very beginning of the 20th century (trước khi Piggly Wiggly ra đời năm 1916) ≈ before Saunders' stores opened.",
+              "evidence": "the customers would ask help from the people behind the counters (called clerks) for the items they liked, and then the clerks would wrap the items up.",
+              "evidence_vi": "khách hàng nhờ những người đứng sau quầy (gọi là clerk) lấy giúp món họ muốn, rồi nhân viên gói hàng lại."
+            },
+            {
+              "no": "18",
+              "prompt": "A description of economic success brought by Clarence Saunders' stores",
+              "prompt_vi": "Mô tả thành công kinh tế mà các cửa hàng của Clarence Saunders mang lại",
+              "answer": "E",
+              "explanation": "**Từ khoá:** economic success → đoạn E có nhiều số liệu: gần 1.300 cửa hàng năm 1923, doanh thu 100 triệu đô, nhà bán lẻ lớn thứ ba, cổ phiếu tăng gấp đôi.\n**Paraphrase:** soared, sold $100 million, third-biggest, stocks doubling ≈ economic success.",
+              "evidence": "Piggly Wiggly sold $100 million (worth $1.3 billion today) in groceries, which made it the third-biggest grocery retailer in the nation.",
+              "evidence_vi": "Piggly Wiggly bán được 100 triệu đô la hàng tạp hoá (tương đương 1,3 tỷ đô ngày nay), trở thành nhà bán lẻ tạp hoá lớn thứ ba cả nước."
+            }
+          ]
+        },
+        {
+          "range": "Questions 19–23",
+          "instruction": "Complete the sentences below. Choose NO MORE THAN TWO WORDS from the passage for each answer.",
+          "instruction_vi": "Hoàn thành các câu sau. Chọn KHÔNG QUÁ HAI TỪ trong bài cho mỗi câu trả lời.",
+          "questions": [
+            {
+              "no": "19",
+              "prompt": "Clarence Saunders' first job was as ______ in a grocery store.",
+              "prompt_vi": "Công việc đầu tiên của Clarence Saunders là làm ______ trong một cửa hàng tạp hoá.",
+              "answer": "a clerk",
+              "explanation": "**Từ khoá:** first job → đoạn B: \"to work **first** as a clerk in a grocery store\".\n**Paraphrase:** work first as ≈ first job was as. Sau \"as\" cần danh từ chỉ nghề: **a clerk** (2 từ). Viết \"clerk\" cũng được chấp nhận, nhưng giữ mạo từ \"a\" cho đúng ngữ pháp vì trong câu không có sẵn mạo từ.",
+              "evidence": "Clarence Saunders left school at the age of 14 in 1895 to work first as a clerk in a grocery store.",
+              "evidence_vi": "Clarence Saunders bỏ học năm 14 tuổi (1895), công việc đầu tiên là nhân viên bán hàng ở một cửa hàng tạp hoá."
+            },
+            {
+              "no": "20",
+              "prompt": "In Clarence Saunders' store, people should pay for goods at a ______.",
+              "prompt_vi": "Trong cửa hàng của Clarence Saunders, người ta trả tiền hàng tại ______.",
+              "answer": "front lobby",
+              "explanation": "**Từ khoá:** pay for goods → đoạn C: \"A 'front lobby' served as an entrance, an exit, and **included checkouts** at the front.\"\n**Paraphrase:** checkouts (quầy thanh toán) ≈ pay for goods. Chỗ trống đứng sau \"a\" nên cần danh từ **số ít** → **front lobby** (2 từ).\n**Bẫy:** \"checkouts\" là số nhiều, không hợp với \"a\" → không chọn.",
+              "evidence": "A 'front lobby' served as an entrance, an exit, and included checkouts at the front.",
+              "evidence_vi": "\"Sảnh trước\" làm lối vào, lối ra và có các quầy thanh toán ở phía trước."
+            },
+            {
+              "no": "21",
+              "prompt": "Customers would be under surveillance at the ______.",
+              "prompt_vi": "Khách hàng sẽ bị giám sát tại ______.",
+              "answer": "gallery",
+              "explanation": "**Từ khoá:** under surveillance → đoạn C: \"In the **gallery** above the sales department, supervisors can **monitor** the customers\".\n**Paraphrase:** monitor ≈ under surveillance (bị theo dõi). Đáp án: **gallery** (ban công/tầng lửng phía trên).",
+              "evidence": "In the gallery above the sales department, supervisors can monitor the customers without disturbing them.",
+              "evidence_vi": "Ở ban công phía trên khu bán hàng, người giám sát có thể theo dõi khách mà không làm phiền họ."
+            },
+            {
+              "no": "22",
+              "prompt": "Another area in his store was called '______', which was only accessible to the internal staff.",
+              "prompt_vi": "Một khu vực khác trong cửa hàng được gọi là \"______\", chỉ nhân viên nội bộ mới vào được.",
+              "answer": "Stockroom",
+              "explanation": "**Từ khoá:** only accessible to the internal staff → đoạn C: \"'Stockroom' ... is another section of his grocery store **only for the staff to enter**\".\n**Paraphrase:** only for the staff to enter ≈ only accessible to the internal staff; another section ≈ another area. Đáp án: **Stockroom** (kho hàng).",
+              "evidence": "'Stockroom', where large fridges were placed to maintain fresh products, is another section of his grocery store only for the staff to enter.",
+              "evidence_vi": "\"Kho hàng\", nơi đặt các tủ lạnh lớn để bảo quản hàng tươi, là một khu vực khác của cửa hàng chỉ nhân viên mới được vào."
+            },
+            {
+              "no": "23",
+              "prompt": "In Clarence Saunders' shopping design, much work was done by ______.",
+              "prompt_vi": "Trong thiết kế mua sắm của Clarence Saunders, phần lớn công việc do ______ làm.",
+              "answer": "customers",
+              "explanation": "**Từ khoá:** much work was done by → ý chính của mô hình **self-service**: đoạn B \"let the consumers do self-service\"; đoạn D \"customers ... chose the goods on the shelves and paid the items **all by themselves**\".\nĐáp án: **customers** (chấp nhận cả \"consumers\"). Viết số nhiều vì nói chung về khách hàng.\n**Bẫy:** \"clerks\" sai – đoạn C nói nhân viên \"would not do the unnecessary work\".",
+              "evidence": "customers in Piggly Wiggly chose the goods on the shelves and paid the items all by themselves.",
+              "evidence_vi": "khách hàng ở Piggly Wiggly tự chọn hàng trên kệ và tự mình thanh toán."
+            }
+          ]
+        },
+        {
+          "range": "Questions 24–26",
+          "instruction": "Choose the correct letter, A, B, C or D.",
+          "instruction_vi": "Chọn chữ cái đúng, A, B, C hoặc D.",
+          "questions": [
+            {
+              "no": "24",
+              "prompt": "Why did Clarence Saunders want to propel the improvement of grocery stores at his age?",
+              "prompt_vi": "Vì sao Clarence Saunders muốn thúc đẩy việc cải tiến các cửa hàng tạp hoá ở tuổi đó?",
+              "answer": "C",
+              "options": [
+                "A. He wanted to transfer business to retailing.",
+                "B. He thought it was profitable.",
+                "C. He thought this could enable customers' life to be more convenient.",
+                "D. He wanted to create a new shop by himself."
+              ],
+              "explanation": "**Từ khoá:** why, improvement → đoạn B: ông thấy mua sắm \"very inefficient\", \"backward\", \"inconvenient shopping mode could lead to tremendous consumption of time and money\" → muốn giải quyết sự bất tiện cho người mua.\n**Paraphrase:** giải quyết kiểu mua sắm bất tiện, tốn thời gian ≈ make customers' life more convenient → **C**.\n• A sai: không có chuyện chuyển kinh doanh sang bán lẻ.\n• B sai: bài không nói ông làm vì thấy có lời (lợi nhuận đến sau).\n• D sai: động cơ không phải là muốn tự mở một cửa hàng.",
+              "evidence": "Having noticed that this inconvenient shopping mode could lead to tremendous consumption of time and money, Saunders ... proposed an unprecedented solution",
+              "evidence_vi": "Nhận thấy kiểu mua sắm bất tiện này có thể gây lãng phí rất lớn thời gian và tiền bạc, Saunders ... đã đề xuất một giải pháp chưa từng có"
+            },
+            {
+              "no": "25",
+              "prompt": "The Piggly Wiggly store was",
+              "prompt_vi": "Cửa hàng Piggly Wiggly",
+              "answer": "B",
+              "options": [
+                "A. located in Virginia.",
+                "B. mainly featured self-service.",
+                "C. initially very unpopular with customers.",
+                "D. developed with a pessimistic future."
+              ],
+              "explanation": "**Từ khoá:** Piggly Wiggly → đoạn D: \"Saunders performed the **self-service revolution** ... by opening the first Piggly Wiggly\"; khách \"chose the goods ... and paid ... all by themselves\" → đặc trưng chính là **tự phục vụ** → **B**.\n• A sai: cửa hàng ở **Memphis, Tennessee**; Virginia là nơi Saunders sinh ra.\n• C sai: ngược lại, cửa hàng \"soared\" (phát triển vượt bậc) – 9 chi nhánh ngay năm đầu.\n• D sai: bài nói \"Self-service was **optimistic**\" – trái với pessimistic.",
+              "evidence": "On September 6, 1916, Saunders performed the self-service revolution in the USA by opening the first Piggly Wiggly",
+              "evidence_vi": "Ngày 6/9/1916, Saunders thực hiện cuộc cách mạng tự phục vụ ở Mỹ bằng việc mở cửa hàng Piggly Wiggly đầu tiên"
+            },
+            {
+              "no": "26",
+              "prompt": "Today, the main thing associated with Clarence Saunders is that",
+              "prompt_vi": "Ngày nay, điều chính gắn liền với Clarence Saunders là",
+              "answer": "C",
+              "options": [
+                "A. a fully automatic store system opened soon near his first store.",
+                "B. his Piggly Wiggly store was very popular at that time.",
+                "C. his name was usually connected with Piggly Wiggly stores.",
+                "D. his name was printed together with that of his famous store."
+              ],
+              "explanation": "**Từ khoá:** today, associated with → đoạn F: Saunders để lại di sản \"mainly symbolised by Piggly Wiggly\", mô hình này \"lasted permanently\" (tồn tại tới nay).\n**Paraphrase:** mainly symbolised by ≈ usually connected with → **C**.\n• A sai: không có cửa hàng tự động hoàn toàn nào.\n• B sai: đúng là Piggly Wiggly từng rất nổi tiếng \"at that time\" (thời đó), nhưng câu hỏi hỏi về **hôm nay** (today).\n• D sai: bài không nói tên ông được in cùng tên cửa hàng.",
+              "evidence": "Clarence Saunders died in 1953, leaving abundant legacies mainly symbolised by Piggly Wiggly, the pattern of which spread extensively and lasted permanently.",
+              "evidence_vi": "Clarence Saunders mất năm 1953, để lại di sản phong phú mà biểu tượng chính là Piggly Wiggly, mô hình của nó lan rộng và tồn tại lâu dài."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "reading",
+      "title": "Reading – Passage 3",
+      "passage": {
+        "title": "The Olympic Torch",
+        "title_vi": "Ngọn đuốc Olympic",
+        "paragraphs": [
+          {
+            "en": "Since 776 B.C., when the Greek people held their first-ever Olympic Games, the Games were hosted every four years at the city of Olympia. Back then, a long journey for the Olympic torch was made before the opening ceremony of each Olympic Games. The Greek people would light a cauldron of flames on the altar, a ritual devoted to Hera, the Greek Goddess of birth and marriage.",
+            "vi": "Từ năm 776 trước Công nguyên, khi người Hy Lạp tổ chức Thế vận hội đầu tiên, Thế vận hội được tổ chức bốn năm một lần tại thành phố Olympia. Thời đó, ngọn đuốc Olympic phải trải qua một hành trình dài trước lễ khai mạc của mỗi kỳ Thế vận hội. Người Hy Lạp thắp một vạc lửa trên bàn thờ, một nghi lễ dâng lên Hera – nữ thần Hy Lạp của sinh nở và hôn nhân."
+          },
+          {
+            "en": "The reintroduction of flame to the Olympics occurred at the Amsterdam 1928 Games, for which a cauldron was lit yet without a torch relay. The 1936 Berlin Summer Games held the first Olympic torch relay, which was not resumed in the Winter Olympics until 1952. However, in that year the torch was lit not in Olympia, Greece, but in Norway, which was considered as the birthplace of skiing. Until the Innsbruck 1964 Winter Olympics in Austria, the Olympic flame was reignited at Olympia.",
+            "vi": "Ngọn lửa được đưa trở lại Thế vận hội tại Thế vận hội Amsterdam 1928, khi một vạc lửa được thắp nhưng không có cuộc rước đuốc. Thế vận hội Mùa hè Berlin 1936 tổ chức lễ rước đuốc Olympic đầu tiên, và phải đến năm 1952 lễ rước đuốc mới có ở Thế vận hội Mùa đông. Tuy nhiên, năm đó ngọn đuốc không được thắp ở Olympia, Hy Lạp, mà ở Na Uy – nơi được coi là quê hương của môn trượt tuyết. Đến Thế vận hội Mùa đông Innsbruck 1964 ở Áo, ngọn lửa Olympic mới lại được thắp ở Olympia."
+          },
+          {
+            "en": "The torch is originally an abstract concept of a designer or groups of designers. A couple of design groups hand in their drafts to the Olympic Committee in the hope of getting the chance to create the torch. The group that wins the competition will come up with a design for a torch that has both aesthetic and practical value. After the torch is completed, it has to succeed in going through all sorts of severe weather conditions. The appearance of the modern Olympic torch is attributed to a Disney artist John Hench, who designed the torch for the 1960 Winter Olympics in Squaw Valley, California. His design laid a solid foundation for all the torches in the future.",
+            "vi": "Ban đầu, ngọn đuốc chỉ là một ý tưởng trừu tượng của một nhà thiết kế hoặc một nhóm nhà thiết kế. Một vài nhóm thiết kế nộp bản phác thảo cho Uỷ ban Olympic với hy vọng có cơ hội chế tạo ngọn đuốc. Nhóm thắng cuộc sẽ đưa ra thiết kế cho một ngọn đuốc có cả giá trị thẩm mỹ lẫn giá trị thực tiễn. Sau khi hoàn thành, ngọn đuốc phải vượt qua được mọi loại điều kiện thời tiết khắc nghiệt. Diện mạo của ngọn đuốc Olympic hiện đại là nhờ John Hench, một hoạ sĩ của Disney, người đã thiết kế ngọn đuốc cho Thế vận hội Mùa đông 1960 ở Squaw Valley, California. Thiết kế của ông đặt nền móng vững chắc cho tất cả các ngọn đuốc sau này."
+          },
+          {
+            "en": "The long trip to the Olympic area is not completed by one single torch, but by thousands of them, so the torch has to be replicated many times. Approximately 10,000 to 15,000 torches are built to fit thousands of runners who take the torches through every section of the Olympic relay. Every single runner can choose to buy his or her torch as a treasurable souvenir when he or she finishes his or her part of the relay.",
+            "vi": "Hành trình dài đến khu vực Thế vận hội không phải do một ngọn đuốc duy nhất hoàn thành mà do hàng nghìn ngọn đuốc, vì vậy ngọn đuốc phải được sao chép nhiều lần. Khoảng 10.000 đến 15.000 ngọn đuốc được chế tạo cho hàng nghìn người chạy mang đuốc qua từng chặng của cuộc rước. Mỗi người chạy có thể chọn mua lại ngọn đuốc của mình như một món quà lưu niệm quý giá sau khi hoàn thành chặng của mình."
+          },
+          {
+            "en": "The first torch in the modern Olympics (the 1936 Berlin Games) was made from a slender steel rod with a circular platform at the top and a circular hole in the middle to jet flames. The name of the runner was also inscribed on the platform as a token of thanks. In the earlier days, torches used everything from gunpowder to olive oil as fuels. Some torches adopted a combination of hexamine and naphthalene with a flammable fluid. However, these materials weren't exactly the ideal fuel sources, and they could be quite hazardous sometimes. In the 1956 Olympics, the torch in the final relay was ignited by magnesium and aluminium, but some flaming pieces fell off and seared the runner's arms.",
+            "vi": "Ngọn đuốc đầu tiên của Thế vận hội hiện đại (Berlin 1936) được làm từ một thanh thép mảnh, trên đỉnh có một bệ tròn với một lỗ tròn ở giữa để phun lửa. Tên của người chạy cũng được khắc trên bệ như một lời cảm ơn. Thời kỳ đầu, đuốc dùng đủ loại nhiên liệu, từ thuốc súng đến dầu ô liu. Một số ngọn đuốc dùng hỗn hợp hexamine và naphthalene với một chất lỏng dễ cháy. Tuy nhiên, những vật liệu này không hẳn là nguồn nhiên liệu lý tưởng và đôi khi khá nguy hiểm. Ở Thế vận hội 1956, ngọn đuốc ở chặng cuối được đốt bằng magie và nhôm, nhưng một số mảnh cháy rơi ra làm bỏng tay người chạy."
+          },
+          {
+            "en": "To improve safety, liquid fuels made their first appearance at the 1972 Munich Games. Since then, torches have been using fuels which are pressurised into the form of a liquid. When the fuels are burnt, they turn into gas to produce a flame. Liquid fuel is safer for the runner and can be stored in a light container. The torch at the 1996 Atlanta Summer Olympics is equipped with an aluminium base that accommodates a tiny fuel tank. As the fuel ascends through the modified handle, it is squeezed through a brass valve that has thousands of little openings. As the fuel passes through the tiny openings, it accumulates pressure. Once it makes its way through the openings, the pressure decreases and the liquid becomes gas so it can burn up.",
+            "vi": "Để tăng độ an toàn, nhiên liệu lỏng lần đầu xuất hiện tại Thế vận hội Munich 1972. Từ đó, các ngọn đuốc sử dụng nhiên liệu được nén thành dạng lỏng. Khi cháy, nhiên liệu chuyển thành khí để tạo ra ngọn lửa. Nhiên liệu lỏng an toàn hơn cho người chạy và có thể chứa trong một bình nhẹ. Ngọn đuốc ở Thế vận hội Mùa hè Atlanta 1996 có một đế bằng nhôm chứa một bình nhiên liệu nhỏ xíu. Khi nhiên liệu đi lên qua phần tay cầm đã được cải tiến, nó bị ép qua một van bằng đồng thau có hàng nghìn lỗ nhỏ. Khi đi qua các lỗ nhỏ, nhiên liệu tích tụ áp suất. Khi đã ra khỏi các lỗ, áp suất giảm và chất lỏng biến thành khí để có thể cháy."
+          },
+          {
+            "en": "The torch in 1996 was fuelled by propylene, a type of substance that could give out a bright flame. However, since propylene was loaded with carbon, it would produce plenty of smoke which was detrimental to the environment. In 2000, the designers of the Sydney Olympic torch proposed a lighter and cheaper design, which was harmless to the environment. For the fuel, they decided to go with a combination of 35 per cent propane (a gas that is used for cooking and heating) and 65 per cent butane (a gas that is obtained from petroleum), thus creating a powerful flame without generating much smoke.",
+            "vi": "Ngọn đuốc năm 1996 dùng nhiên liệu propylene, một chất có thể tạo ra ngọn lửa sáng. Tuy nhiên, vì propylene chứa nhiều cacbon nên nó tạo ra rất nhiều khói, gây hại cho môi trường. Năm 2000, các nhà thiết kế đuốc Olympic Sydney đề xuất một thiết kế nhẹ hơn, rẻ hơn và không gây hại cho môi trường. Về nhiên liệu, họ quyết định dùng hỗn hợp 35% propane (khí dùng để nấu ăn và sưởi ấm) và 65% butane (khí lấy từ dầu mỏ), nhờ đó tạo ra ngọn lửa mạnh mà không sinh nhiều khói."
+          },
+          {
+            "en": "Both the 1996 and 2000 torches adopted a double flame burning system, enabling the flames to stay lit even in severe weather conditions. The exterior flame burns at a slower rate and at a lower temperature. It can be perceived easily with its big orange flame, but it is unstable. On the other hand, the interior flame burns faster and hotter, generating a small blue flame with great stability, due to the internal site offering protection from the wind. Accordingly, the interior flame would serve as a pilot light, which could relight the external flame if it should go out.",
+            "vi": "Cả hai ngọn đuốc năm 1996 và 2000 đều áp dụng hệ thống đốt hai ngọn lửa, giúp ngọn lửa vẫn cháy ngay cả trong điều kiện thời tiết khắc nghiệt. Ngọn lửa bên ngoài cháy chậm hơn và ở nhiệt độ thấp hơn. Có thể dễ dàng nhìn thấy nó với ngọn lửa lớn màu cam, nhưng nó không ổn định. Ngược lại, ngọn lửa bên trong cháy nhanh và nóng hơn, tạo ra ngọn lửa nhỏ màu xanh rất ổn định, nhờ vị trí bên trong được che chắn khỏi gió. Do đó, ngọn lửa bên trong đóng vai trò như ngọn lửa mồi, có thể thắp lại ngọn lửa bên ngoài nếu nó bị tắt."
+          },
+          {
+            "en": "As for the torch of 2002 Olympics in Salt Lake City, the top section was made of glass in which the flame burned, for the purpose of echoing the theme of 'Light the Fire Within' of that Olympics. This torch was of great significance for the designs of following torches.",
+            "vi": "Còn ngọn đuốc Thế vận hội 2002 ở Salt Lake City có phần trên làm bằng thuỷ tinh, ngọn lửa cháy bên trong đó, nhằm thể hiện chủ đề \"Light the Fire Within\" (Thắp lửa từ bên trong) của kỳ Thế vận hội ấy. Ngọn đuốc này có ý nghĩa lớn đối với thiết kế của các ngọn đuốc sau này."
+          }
+        ]
+      },
+      "groups": [
+        {
+          "range": "Questions 27–29",
+          "instruction": "Complete the summary below. Choose NO MORE THAN THREE WORDS from the passage for each answer.",
+          "instruction_vi": "Hoàn thành đoạn tóm tắt. Chọn KHÔNG QUÁ BA TỪ trong bài cho mỗi câu trả lời.",
+          "context": "The Olympic torch, as requested by the Olympic Committee, will be carefully designed so that it is capable of withstanding all kinds of ...27... . Generally, the design of the modern Olympic torch has both ...28... value.\nThe torch must be copied, and thousands of torches are constructed to accommodate thousands of runners who will carry them through each leg of the Olympic relay. Each runner has an opportunity to purchase the torch as a(n) ...29... at the end of his or her leg of the relay.",
+          "questions": [
+            {
+              "no": "27",
+              "prompt": "...capable of withstanding all kinds of ______.",
+              "prompt_vi": "...có thể chịu được mọi loại ______.",
+              "answer": "severe weather conditions",
+              "explanation": "**Từ khoá:** withstanding all kinds of → đoạn 3: \"it has to succeed in going through **all sorts of severe weather conditions**\".\n**Paraphrase:** going through ≈ withstanding; all sorts of ≈ all kinds of. Đáp án: **severe weather conditions** (3 từ – đúng giới hạn; \"weather conditions\" cũng chấp nhận).",
+              "evidence": "After the torch is completed, it has to succeed in going through all sorts of severe weather conditions.",
+              "evidence_vi": "Sau khi hoàn thành, ngọn đuốc phải vượt qua được mọi loại điều kiện thời tiết khắc nghiệt."
+            },
+            {
+              "no": "28",
+              "prompt": "...the design of the modern Olympic torch has both ______ value.",
+              "prompt_vi": "...thiết kế của ngọn đuốc hiện đại có cả giá trị ______.",
+              "answer": "aesthetic and practical",
+              "explanation": "**Từ khoá:** both ... value → đoạn 3: \"a design for a torch that has **both aesthetic and practical value**\".\nChỗ trống nằm giữa \"both\" và \"value\" → cần **hai tính từ nối bằng \"and\"**: **aesthetic and practical** (3 từ).\n**Lưu ý chính tả:** aesthetic (thẩm mỹ).",
+              "evidence": "The group that wins the competition will come up with a design for a torch that has both aesthetic and practical value.",
+              "evidence_vi": "Nhóm thắng cuộc sẽ đưa ra thiết kế ngọn đuốc có cả giá trị thẩm mỹ và giá trị thực tiễn."
+            },
+            {
+              "no": "29",
+              "prompt": "Each runner has an opportunity to purchase the torch as a(n) ______",
+              "prompt_vi": "Mỗi người chạy có cơ hội mua lại ngọn đuốc như một ______",
+              "answer": "treasurable souvenir",
+              "explanation": "**Từ khoá:** purchase, end of his or her leg → đoạn 4: \"can choose to **buy** his or her torch as a **treasurable souvenir** when he or she finishes his or her part of the relay\".\n**Paraphrase:** buy ≈ purchase; finishes his or her part ≈ at the end of his or her leg. Đáp án: **treasurable souvenir** (\"souvenir\" cũng chấp nhận). Đề ghi \"a(n)\" nên danh từ phải **số ít**.",
+              "evidence": "Every single runner can choose to buy his or her torch as a treasurable souvenir when he or she finishes his or her part of the relay.",
+              "evidence_vi": "Mỗi người chạy có thể chọn mua lại ngọn đuốc như một món quà lưu niệm quý giá khi hoàn thành chặng của mình."
+            }
+          ]
+        },
+        {
+          "range": "Questions 30–35",
+          "instruction": "Look at the following statements (Questions 30–35) and the list of Olympic torches below. Match each statement with the correct Olympic torch, A–H.",
+          "instruction_vi": "Đọc các nhận định (câu 30–35) và danh sách các ngọn đuốc Olympic. Nối mỗi nhận định với ngọn đuốc đúng, A–H.",
+          "context": "List of Olympic Torches\nA. ancient Greek Olympic flames\nB. Berlin Games torch (1936)\nC. 1952 Winter Games flame\nD. 1956 Games torch\nE. Munich Games torch (1972)\nF. 1996 torch (Atlanta)\nG. 2000 torch (Sydney)\nH. 2002 torch (Salt Lake City)",
+          "questions": [
+            {
+              "no": "30",
+              "prompt": "first liquid fuel",
+              "prompt_vi": "nhiên liệu lỏng đầu tiên",
+              "answer": "E",
+              "explanation": "Đoạn 6: \"liquid fuels made their **first appearance** at the **1972 Munich Games**\" → **E**.\n**Paraphrase:** made their first appearance ≈ first.",
+              "evidence": "To improve safety, liquid fuels made their first appearance at the 1972 Munich Games.",
+              "evidence_vi": "Để tăng độ an toàn, nhiên liệu lỏng lần đầu xuất hiện tại Thế vận hội Munich 1972."
+            },
+            {
+              "no": "31",
+              "prompt": "not environmentally friendly",
+              "prompt_vi": "không thân thiện với môi trường",
+              "answer": "F",
+              "explanation": "Đoạn 7: đuốc **1996** dùng propylene chứa nhiều cacbon, tạo nhiều khói \"**detrimental to the environment**\" → **F**.\n**Paraphrase:** detrimental to the environment ≈ not environmentally friendly.\n**Bẫy:** G (2000) thì ngược lại – \"harmless to the environment\".",
+              "evidence": "since propylene was loaded with carbon, it would produce plenty of smoke which was detrimental to the environment.",
+              "evidence_vi": "vì propylene chứa nhiều cacbon nên nó tạo ra nhiều khói, gây hại cho môi trường."
+            },
+            {
+              "no": "32",
+              "prompt": "beginning to record the runner's name",
+              "prompt_vi": "bắt đầu ghi tên người chạy",
+              "answer": "B",
+              "explanation": "Đoạn 5: ngọn đuốc đầu tiên của Thế vận hội hiện đại (**Berlin 1936**) – \"The name of the runner was also **inscribed** on the platform\" → **B**.\n**Paraphrase:** inscribed (khắc) ≈ record; the first torch ≈ beginning to.",
+              "evidence": "The name of the runner was also inscribed on the platform as a token of thanks.",
+              "evidence_vi": "Tên người chạy cũng được khắc trên bệ như một lời cảm ơn."
+            },
+            {
+              "no": "33",
+              "prompt": "potentially risky as it burnt the runner's arms",
+              "prompt_vi": "có thể nguy hiểm vì làm bỏng tay người chạy",
+              "answer": "D",
+              "explanation": "Đoạn 5: \"In the **1956** Olympics ... some flaming pieces fell off and **seared the runner's arms**\" → **D**.\n**Paraphrase:** seared (làm cháy xém) ≈ burnt; hazardous ≈ potentially risky.",
+              "evidence": "In the 1956 Olympics, the torch in the final relay was ignited by magnesium and aluminium, but some flaming pieces fell off and seared the runner's arms.",
+              "evidence_vi": "Ở Thế vận hội 1956, ngọn đuốc chặng cuối được đốt bằng magie và nhôm, nhưng một số mảnh cháy rơi ra làm bỏng tay người chạy."
+            },
+            {
+              "no": "34",
+              "prompt": "specially designed for a theme of \"Light\"",
+              "prompt_vi": "được thiết kế riêng cho chủ đề \"Light\"",
+              "answer": "H",
+              "explanation": "Đoạn 9: đuốc **2002 Salt Lake City** có phần đỉnh bằng thuỷ tinh \"for the purpose of echoing the theme of '**Light the Fire Within**'\" → **H**.\n**Paraphrase:** for the purpose of echoing the theme ≈ specially designed for a theme.",
+              "evidence": "the top section was made of glass in which the flame burned, for the purpose of echoing the theme of 'Light the Fire Within' of that Olympics.",
+              "evidence_vi": "phần đỉnh làm bằng thuỷ tinh, ngọn lửa cháy bên trong, nhằm thể hiện chủ đề \"Light the Fire Within\" của kỳ Thế vận hội ấy."
+            },
+            {
+              "no": "35",
+              "prompt": "not lit in Greece",
+              "prompt_vi": "không được thắp ở Hy Lạp",
+              "answer": "C",
+              "explanation": "Đoạn 2: năm **1952** (Thế vận hội Mùa đông) \"the torch was lit **not in Olympia, Greece, but in Norway**\" → **C**.\n**Bẫy:** Amsterdam 1928 cũng có vạc lửa nhưng không nằm trong danh sách A–H.",
+              "evidence": "However, in that year the torch was lit not in Olympia, Greece, but in Norway, which was considered as the birthplace of skiing.",
+              "evidence_vi": "Tuy nhiên, năm đó ngọn đuốc không được thắp ở Olympia, Hy Lạp, mà ở Na Uy – nơi được coi là quê hương của môn trượt tuyết."
+            }
+          ]
+        },
+        {
+          "range": "Questions 36–40",
+          "instruction": "Label the diagram below. Choose NO MORE THAN THREE WORDS from the passage for each answer.",
+          "instruction_vi": "Điền nhãn cho sơ đồ. Chọn KHÔNG QUÁ BA TỪ trong bài cho mỗi câu trả lời.",
+          "context": "The structure of the 1996 and 2000 Olympic torches (diagram, from top to bottom):\n• Burning system produces ...40...\n• Thin fuel pipe\n• A brass valve with many small ...37...\n• Pressurised fuel rises from the improved ...38...\n• The liquid fuel. In 2000, it was a mixture of ...39...\n• ...36... coated by an aluminum base",
+          "questions": [
+            {
+              "no": "36",
+              "prompt": "______ coated by an aluminum base",
+              "prompt_vi": "______ được bao bởi một đế nhôm",
+              "answer": "(tiny) fuel tank",
+              "explanation": "**Từ khoá:** aluminium base → đoạn 6: \"equipped with an **aluminium base that accommodates a tiny fuel tank**\".\n**Paraphrase:** an aluminium base accommodates X ≈ X coated by an aluminum base. Đáp án: **tiny fuel tank** / **fuel tank** (≤ 3 từ).",
+              "evidence": "The torch at the 1996 Atlanta Summer Olympics is equipped with an aluminium base that accommodates a tiny fuel tank.",
+              "evidence_vi": "Ngọn đuốc ở Thế vận hội Atlanta 1996 có một đế nhôm chứa một bình nhiên liệu nhỏ xíu."
+            },
+            {
+              "no": "37",
+              "prompt": "A brass valve with many small ______",
+              "prompt_vi": "Một van đồng thau có nhiều ______ nhỏ",
+              "answer": "openings",
+              "explanation": "**Từ khoá:** brass valve → đoạn 6: \"a brass valve that has **thousands of little openings**\".\n**Paraphrase:** thousands of ≈ many; little ≈ small. Chỗ trống sau \"many small\" cần **danh từ số nhiều** → **openings**.",
+              "evidence": "it is squeezed through a brass valve that has thousands of little openings.",
+              "evidence_vi": "nó bị ép qua một van đồng thau có hàng nghìn lỗ nhỏ."
+            },
+            {
+              "no": "38",
+              "prompt": "Pressurised fuel rises from the improved ______",
+              "prompt_vi": "Nhiên liệu nén đi lên từ ______ đã được cải tiến",
+              "answer": "handle",
+              "explanation": "**Từ khoá:** rises, improved → đoạn 6: \"As the fuel **ascends** through the **modified handle**\".\n**Paraphrase:** ascends ≈ rises; modified ≈ improved. Đáp án: **handle** (tay cầm).",
+              "evidence": "As the fuel ascends through the modified handle, it is squeezed through a brass valve...",
+              "evidence_vi": "Khi nhiên liệu đi lên qua tay cầm đã được cải tiến, nó bị ép qua một van đồng thau..."
+            },
+            {
+              "no": "39",
+              "prompt": "The liquid fuel. In 2000, it was a mixture of ______",
+              "prompt_vi": "Nhiên liệu lỏng. Năm 2000, nó là hỗn hợp của ______",
+              "answer": "propane and butane",
+              "explanation": "**Từ khoá:** 2000, mixture → đoạn 7: \"a **combination** of 35 per cent **propane** ... and 65 per cent **butane**\".\n**Paraphrase:** combination ≈ mixture. Đáp án: **propane and butane** (3 từ, đúng giới hạn).\n**Bẫy:** propylene là nhiên liệu của năm **1996**, không phải 2000.",
+              "evidence": "For the fuel, they decided to go with a combination of 35 per cent propane ... and 65 per cent butane",
+              "evidence_vi": "Về nhiên liệu, họ quyết định dùng hỗn hợp 35% propane ... và 65% butane"
+            },
+            {
+              "no": "40",
+              "prompt": "Burning system produces ______",
+              "prompt_vi": "Hệ thống đốt tạo ra ______",
+              "answer": "double flame",
+              "explanation": "**Từ khoá:** burning system → đoạn 8: \"Both the 1996 and 2000 torches adopted a **double flame burning system**\" – hệ thống tạo ra hai ngọn lửa (ngoài màu cam, trong màu xanh).\nĐáp án: **double flame** (chấp nhận \"double flames\"/\"two flames\" tuỳ cách chấm; an toàn nhất là chép đúng cụm trong bài).",
+              "evidence": "Both the 1996 and 2000 torches adopted a double flame burning system, enabling the flames to stay lit even in severe weather conditions.",
+              "evidence_vi": "Cả hai ngọn đuốc 1996 và 2000 đều dùng hệ thống đốt hai ngọn lửa, giúp lửa vẫn cháy ngay cả khi thời tiết khắc nghiệt."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "writing",
+      "title": "Writing – Task 1",
+      "note": "Đề chỉ có Writing Task 1 (trang 61); không có Task 2.",
+      "tasks": [
+        {
+          "title": "Writing Task 1",
+          "prompt": "You should spend about 20 minutes on this task.\nPercentage of UK people who consumed daily recommended amount of fruit and vegetables in 2002, 2006 and 2010.\nSummarize the information by selecting and reporting the main features and make comparisons where relevant.\nYou should write at least 150 words.",
+          "prompt_vi": "Bạn nên dành khoảng 20 phút cho bài này.\nTỉ lệ người dân Vương quốc Anh ăn đủ lượng rau quả được khuyến nghị hằng ngày vào các năm 2002, 2006 và 2010.\nHãy tóm tắt thông tin bằng cách chọn lọc và báo cáo các đặc điểm chính, và so sánh khi cần thiết.\nViết ít nhất 150 từ.",
+          "chart": {
+            "type": "bar",
+            "unit": "%",
+            "labels": [
+              "2002",
+              "2006",
+              "2010"
+            ],
+            "series": [
+              {
+                "name": "Men",
+                "values": [
+                  22,
+                  26,
+                  24
+                ]
+              },
+              {
+                "name": "Women",
+                "values": [
+                  25,
+                  32,
+                  26
+                ]
+              },
+              {
+                "name": "Children",
+                "values": [
+                  11,
+                  18,
+                  16
+                ]
+              }
+            ]
+          },
+          "answer": "The bar chart shows the percentage of men, women and children in the UK who ate the daily recommended amount of fruit and vegetables in 2002, 2006 and 2010.\n\nOverall, women had the highest percentage in all three years, while children had the lowest. All three groups increased from 2002 to 2006 and then fell slightly in 2010.\n\nIn 2002, 25% of women ate enough fruit and vegetables. This figure went up to 32% in 2006, which was the highest point in the chart. However, it dropped to 26% in 2010. The percentage of men followed a similar pattern. It was 22% in 2002, rose to 26% in 2006 and then decreased a little to 24% in 2010.\n\nChildren had much lower figures than adults. Only 11% of children ate the recommended amount in 2002. This number increased to 18% in 2006, but it fell to 16% in 2010. Although the figure for children went down in 2010, it was still higher than in 2002, and the same was true for men and women.",
+          "answer_vi": "Biểu đồ cột cho thấy tỉ lệ nam giới, phụ nữ và trẻ em ở Vương quốc Anh ăn đủ lượng rau quả được khuyến nghị mỗi ngày vào các năm 2002, 2006 và 2010.\n\nNhìn chung, phụ nữ có tỉ lệ cao nhất trong cả ba năm, trong khi trẻ em có tỉ lệ thấp nhất. Cả ba nhóm đều tăng từ năm 2002 đến 2006 và sau đó giảm nhẹ vào năm 2010.\n\nNăm 2002, 25% phụ nữ ăn đủ rau quả. Con số này tăng lên 32% vào năm 2006, mức cao nhất trong biểu đồ. Tuy nhiên, nó giảm xuống 26% vào năm 2010. Tỉ lệ ở nam giới có xu hướng tương tự: 22% năm 2002, tăng lên 26% năm 2006 và sau đó giảm nhẹ còn 24% năm 2010.\n\nTrẻ em có tỉ lệ thấp hơn nhiều so với người lớn. Chỉ 11% trẻ em ăn đủ lượng khuyến nghị vào năm 2002. Con số này tăng lên 18% năm 2006 nhưng giảm còn 16% năm 2010. Mặc dù tỉ lệ ở trẻ em giảm vào năm 2010, nó vẫn cao hơn năm 2002, và điều này cũng đúng với nam giới và phụ nữ.",
+          "notes": [
+            "**Dạng bài:** biểu đồ cột (bar chart) có thời gian (3 năm) → vừa mô tả xu hướng (tăng/giảm) vừa so sánh giữa 3 nhóm. Dùng **thì quá khứ đơn** vì các năm đều đã qua.",
+            "**Cấu trúc 4 đoạn:** (1) Mở bài – paraphrase đề: consumed → ate; daily recommended amount → the recommended amount each day. (2) Tổng quan – 2 ý chính: phụ nữ luôn cao nhất, trẻ em luôn thấp nhất; cả 3 nhóm tăng rồi giảm nhẹ. (3) Thân bài 1 – người lớn (women, men). (4) Thân bài 2 – trẻ em + so sánh 2010 với 2002.",
+            "**Số liệu đọc từ biểu đồ:** Men 22% → 26% → 24%; Women 25% → 32% → 26%; Children 11% → 18% → 16%. Đỉnh cao nhất: women 2006 (32%); thấp nhất: children 2002 (11%).",
+            "**Mẹo band 5.0:** đoạn Overview không cần số liệu; mỗi đoạn thân bài nên có đủ số liệu của cả 3 năm; dùng câu đơn, nối bằng and / but / however / while là đủ.",
+            "**Lỗi hay gặp:** viết \"the percent of\" (đúng: the percentage of); quên giới từ \"to\" khi nói mức đích (rose **to** 26%) và \"by\" khi nói mức thay đổi (rose **by** 4%)."
+          ],
+          "vocab": [
+            {
+              "en": "the daily recommended amount",
+              "vi": "lượng khuyến nghị mỗi ngày"
+            },
+            {
+              "en": "the percentage of men / women / children",
+              "vi": "tỉ lệ phần trăm nam / nữ / trẻ em"
+            },
+            {
+              "en": "follow a similar pattern",
+              "vi": "có xu hướng tương tự"
+            },
+            {
+              "en": "go up to / rise to + số liệu",
+              "vi": "tăng lên tới ..."
+            },
+            {
+              "en": "drop to / fall to / decrease to + số liệu",
+              "vi": "giảm xuống còn ..."
+            },
+            {
+              "en": "decrease a little / fall slightly",
+              "vi": "giảm nhẹ"
+            },
+            {
+              "en": "the highest point",
+              "vi": "mức cao nhất"
+            },
+            {
+              "en": "much lower than",
+              "vi": "thấp hơn nhiều so với"
+            },
+            {
+              "en": "overall",
+              "vi": "nhìn chung"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

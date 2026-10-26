@@ -1,0 +1,781 @@
+{
+  "id": "dc-1",
+  "title": "Đề cương Pre IELTS – Final Test (1)",
+  "subtitle": "Listening 10 phút (Part 1–2) · Reading 20 phút (2 bài đọc, 8 câu) · Writing 30 phút (3 bài tập biểu đồ)",
+  "pages": "Trang 63–70",
+  "sections": [
+    {
+      "skill": "listening",
+      "title": "Listening – Part 1",
+      "note": "Nguồn: **Cambridge IELTS 14 – Test 2 – Part 1** (Total Health Clinic) – answer key đối chiếu ieltsmaterial.com (https://ieltsmaterial.com/total-health-clinic-ielts-listening-answers/) và transcript trên tuhoc.dolenglish.vn. Đã sửa các đáp án nhớ sai trước đây (journalist, cycling, swimming, ankle). Không có audio nên dẫn chứng là ý transcript diễn đạt lại.",
+      "groups": [
+        {
+          "range": "Questions 1–10",
+          "instruction": "Complete the notes below. Write ONE WORD AND/OR A NUMBER for each answer.",
+          "instruction_vi": "Hoàn thành ghi chú bên dưới. Viết MỘT TỪ VÀ/HOẶC MỘT CON SỐ cho mỗi câu trả lời.",
+          "context": "TOTAL HEALTH CLINIC\nPATIENT DETAILS\nPersonal information\nExample – Name: Julie Anne Garcia\nContact phone: 1 ______\nDate of birth: 2 ______, 1992\nOccupation: works as a 3 ______\nInsurance company: 4 ______ Life Insurance\nDetails of the problem\nType of problem: pain in her left 5 ______\nWhen it began: 6 ______ ago\nAction already taken: has taken painkillers and applied ice\nOther information\nSports played: belongs to a 7 ______ club; goes 8 ______ regularly\nMedical history: injured her 9 ______ last year; no allergies; no regular medication apart from 10 ______",
+          "questions": [
+            {
+              "no": "1",
+              "prompt": "Contact phone: ______",
+              "prompt_vi": "Số điện thoại liên lạc: ______",
+              "answer": "219 442 9785",
+              "confidence": "high",
+              "explanation": "Ô số điện thoại → **dãy số**. Julie đọc số **219-442-9785** → **2194429785** (có thể cách nhóm).\nBẫy: \"double four\" = 44; đọc số theo nhóm 3-3-4.",
+              "evidence": "(ý transcript) Julie gives her number as 219 442 9785.",
+              "evidence_vi": "Julie đọc số điện thoại là 219 442 9785."
+            },
+            {
+              "no": "2",
+              "prompt": "Date of birth: ______, 1992",
+              "prompt_vi": "Ngày sinh: ______, 1992",
+              "answer": "10 October",
+              "confidence": "high",
+              "explanation": "\"______, 1992\" → ngày + tháng. Julie nói **ngày 10 tháng 10 năm 1992**; nhân viên có ghi nhầm năm 1991 rồi sửa lại – năm đã in sẵn nên chỉ điền **10 October** (October 10 / 10th October).",
+              "evidence": "(ý transcript) The 10th of October, 1992 – the clerk corrects 1991 to 1992.",
+              "evidence_vi": "Ngày 10 tháng 10 năm 1992 – nhân viên sửa lại năm 1991 thành 1992."
+            },
+            {
+              "no": "3",
+              "prompt": "Occupation: works as a ______",
+              "prompt_vi": "Nghề nghiệp: làm ______",
+              "answer": "manager",
+              "confidence": "high",
+              "explanation": "\"works as a ______\" → danh từ chỉ nghề số ít. Julie làm cho chuỗi nhà hàng Esterhazy's: **bắt đầu là bồi bàn, giờ là quản lý** → **manager**.\nBẫy: **waitress** là công việc cũ – thông tin bị \"cập nhật\" lại.",
+              "evidence": "(ý transcript) She started as a waitress at Esterhazy's but she's a manager now.",
+              "evidence_vi": "Cô ấy bắt đầu là bồi bàn ở Esterhazy's nhưng giờ là quản lý."
+            },
+            {
+              "no": "4",
+              "prompt": "Insurance company: ______ Life Insurance",
+              "prompt_vi": "Công ty bảo hiểm: ______ Life Insurance",
+              "answer": "Cawley",
+              "confidence": "high",
+              "explanation": "\"______ Life Insurance\" → tên công ty, được **đánh vần C-A-W-L-E-Y** → **Cawley** (viết hoa).",
+              "evidence": "(ý transcript) Cawley Life Insurance, C-A-W-L-E-Y.",
+              "evidence_vi": "Công ty bảo hiểm nhân thọ Cawley, C-A-W-L-E-Y."
+            },
+            {
+              "no": "5",
+              "prompt": "Type of problem: pain in her left ______",
+              "prompt_vi": "Loại vấn đề: đau ở ______ trái",
+              "answer": "knee",
+              "confidence": "high",
+              "explanation": "\"pain in her left ______\" → bộ phận cơ thể. Julie nói **đau đầu gối trái** → **knee** (chú ý chữ k câm).",
+              "evidence": "(ý transcript) I've had some pain in my left knee.",
+              "evidence_vi": "Tôi bị đau ở đầu gối trái."
+            },
+            {
+              "no": "6",
+              "prompt": "When it began: ______ ago",
+              "prompt_vi": "Bắt đầu khi nào: ______ trước",
+              "answer": "three weeks",
+              "confidence": "high",
+              "explanation": "\"______ ago\" → khoảng thời gian. Julie **bắt đầu thấy đau 3 tuần trước**; \"a few days\" là lúc cơn đau nặng hơn – bẫy → **three weeks** (3 weeks).",
+              "evidence": "(ý transcript) I first noticed it three weeks ago.",
+              "evidence_vi": "Tôi bắt đầu thấy đau từ ba tuần trước."
+            },
+            {
+              "no": "7",
+              "prompt": "Sports played: belongs to a ______ club",
+              "prompt_vi": "Môn thể thao: là thành viên của một câu lạc bộ ______",
+              "answer": "tennis",
+              "confidence": "high",
+              "explanation": "\"belongs to a ______ club\" → môn thể thao. Julie chơi **khá nhiều tennis** và là **thành viên câu lạc bộ** → **tennis**.",
+              "evidence": "(ý transcript) I play quite a lot of tennis… I'm a member of a club.",
+              "evidence_vi": "Tôi chơi tennis khá nhiều… tôi là thành viên một câu lạc bộ."
+            },
+            {
+              "no": "8",
+              "prompt": "goes ______ regularly",
+              "prompt_vi": "thường xuyên đi ______",
+              "answer": "running",
+              "confidence": "high",
+              "explanation": "\"goes ______ regularly\" → V-ing chỉ hoạt động (go + V-ing). Julie **chạy bộ 3–4 lần mỗi tuần** → **running**.\nBẫy: swimming chỉ thỉnh thoảng – không phải \"regularly\".",
+              "evidence": "(ý transcript) I go running three or four times a week.",
+              "evidence_vi": "Tôi chạy bộ ba, bốn lần một tuần."
+            },
+            {
+              "no": "9",
+              "prompt": "Medical history: injured her ______ last year",
+              "prompt_vi": "Tiền sử bệnh: năm ngoái bị thương ở ______",
+              "answer": "shoulder",
+              "confidence": "high",
+              "explanation": "\"injured her ______ last year\" → bộ phận cơ thể. Năm ngoái Julie bị ngã và **chấn thương vai** → **shoulder**.",
+              "evidence": "(ý transcript) I slipped last year and injured my shoulder.",
+              "evidence_vi": "Năm ngoái tôi bị trượt ngã và chấn thương vai."
+            },
+            {
+              "no": "10",
+              "prompt": "no regular medication apart from ______",
+              "prompt_vi": "không dùng thuốc thường xuyên ngoại trừ ______",
+              "answer": "vitamins",
+              "confidence": "high",
+              "explanation": "\"no regular medication apart from ______\" → danh từ số nhiều. Julie nói **chỉ uống vitamin** → **vitamins**.",
+              "evidence": "(ý transcript) Only vitamins.",
+              "evidence_vi": "Chỉ có vitamin thôi."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "listening",
+      "title": "Listening – Part 2",
+      "note": "Nguồn: bài \"The National Arts Centre\" – IELTS Listening Practice Test trên bestmytest.com (https://www.bestmytest.com/ielts/ielts-listening/130, Section 2). Chỉ đọc được answer key + giải thích qua kết quả tìm kiếm (trang chặn truy cập trực tiếp, không xem được transcript đầy đủ) nên confidence = medium. Chưa xác định được sách gốc.",
+      "groups": [
+        {
+          "range": "Questions 11–16",
+          "instruction": "Write NO MORE THAN TWO WORDS AND OR A NUMBER for each answer.",
+          "instruction_vi": "Viết KHÔNG QUÁ HAI TỪ VÀ/HOẶC MỘT CON SỐ cho mỗi câu trả lời.",
+          "context": "THE NATIONAL ARTS CENTRE\nWell known for: 11 ______\nComplex consists of: concert rooms, theatres, cinemas, art galleries, public library, restaurants, a 12 ______\nHistorical background: 1940 – area destroyed by bombs\n1960s–1970s – Centre was 13 ______ and built\nin 14 ______ opened to public\nManaged by: the 15 ______\nOpen: 16 ______ days per year",
+          "questions": [
+            {
+              "no": "11",
+              "prompt": "Well known for: ______",
+              "prompt_vi": "Nổi tiếng về: ______",
+              "answer": "classical music",
+              "confidence": "medium",
+              "explanation": "\"Well known for: ______\" → cụm danh từ (≤ 2 từ). Trung tâm nổi tiếng thế giới là nơi biểu diễn **nhạc cổ điển** → **classical music**.",
+              "evidence": "(ý transcript) The Centre is world-famous as a venue for classical music.",
+              "evidence_vi": "Trung tâm nổi tiếng thế giới là nơi biểu diễn nhạc cổ điển."
+            },
+            {
+              "no": "12",
+              "prompt": "Complex consists of: … restaurants, a ______",
+              "prompt_vi": "Khu phức hợp gồm: … nhà hàng, một ______",
+              "answer": "bookshop",
+              "confidence": "medium",
+              "explanation": "\"…restaurants, a ______\" → danh từ số ít (có \"a\"). Sau khi liệt kê phòng hoà nhạc, nhà hát, rạp phim, phòng tranh, thư viện, nhà hàng, người nói thêm **một hiệu sách** → **bookshop**.\nLưu ý: \"conference centre\" là phỏng đoán cũ – sai theo key.",
+              "evidence": "(ý transcript) …and there's also a bookshop.",
+              "evidence_vi": "…và còn có một hiệu sách."
+            },
+            {
+              "no": "13",
+              "prompt": "1960s–1970s – Centre was ______ and built",
+              "prompt_vi": "Thập niên 1960–1970 – Trung tâm được ______ và xây dựng",
+              "answer": "planned",
+              "confidence": "medium",
+              "explanation": "\"Centre was ______ and built\" → phân từ II. Thập niên 1960 trung tâm **được lên kế hoạch**, thập niên 1970 được xây → **planned**.",
+              "evidence": "(ý transcript) It was planned in the 1960s and built in the 1970s.",
+              "evidence_vi": "Nó được lên kế hoạch vào thập niên 1960 và xây vào thập niên 1970."
+            },
+            {
+              "no": "14",
+              "prompt": "in ______ opened to public",
+              "prompt_vi": "năm ______ mở cửa cho công chúng",
+              "answer": "1983",
+              "confidence": "medium",
+              "explanation": "\"in ______ opened to public\" → **năm**. Mở cửa cho công chúng năm **1983**.\nBẫy: phân biệt 1983/1982 – nghe kỹ âm cuối \"eighty-three\".",
+              "evidence": "(ý transcript) It was eventually opened to the public in 1983.",
+              "evidence_vi": "Cuối cùng nó mở cửa cho công chúng vào năm 1983."
+            },
+            {
+              "no": "15",
+              "prompt": "Managed by: the ______",
+              "prompt_vi": "Được quản lý bởi: ______",
+              "answer": "City Council",
+              "confidence": "medium",
+              "explanation": "\"Managed by: the ______\" → tổ chức. Trung tâm do **Hội đồng thành phố** điều hành, không phải tư nhân → **City Council**.",
+              "evidence": "(ý transcript) It's run by the City Council.",
+              "evidence_vi": "Nó do Hội đồng thành phố điều hành."
+            },
+            {
+              "no": "16",
+              "prompt": "Open: ______ days per year",
+              "prompt_vi": "Mở cửa: ______ ngày mỗi năm",
+              "answer": "363",
+              "confidence": "medium",
+              "explanation": "\"Open: ______ days per year\" → con số. Mở cửa **363 ngày/năm** (chỉ đóng 2 ngày).\nBẫy: đừng điền 365.",
+              "evidence": "(ý transcript) The Centre is open 363 days of the year.",
+              "evidence_vi": "Trung tâm mở cửa 363 ngày trong năm."
+            }
+          ]
+        },
+        {
+          "range": "Questions 17–20",
+          "instruction": "Complete the table below. Write NO MORE THAN THREE WORDS AND OR A NUMBER for each answer.",
+          "instruction_vi": "Hoàn thành bảng dưới đây. Viết KHÔNG QUÁ BA TỪ VÀ/HOẶC MỘT CON SỐ cho mỗi câu trả lời.",
+          "context": "Day | Time | Event | Venue | Ticket price\nMonday and Tuesday | 7.30 p.m. | ‘The Magic Flute’ (opera by Mozart) | 17 ______ | from £8.00\nWednesday | 8.00 p.m. | 18 ‘______’ (Canadian film) | Cinema 2 | 19 £ ______\nSaturday and Sunday | 11 a.m. to 10 p.m. | 20 ‘______’ (art exhibition) | Gallery 1 | free",
+          "questions": [
+            {
+              "no": "17",
+              "prompt": "‘The Magic Flute’ (opera by Mozart) – Venue: ______",
+              "prompt_vi": "‘Cây sáo thần’ (opera của Mozart) – Địa điểm: ______",
+              "answer": "Garden Hall",
+              "confidence": "medium",
+              "explanation": "Venue của vở opera The Magic Flute → tên địa điểm. Key: **Garden Hall** (viết hoa).\nLưu ý: \"Main Hall\" là phỏng đoán cũ – sai.",
+              "evidence": "(ý transcript) It's in the Garden Hall.",
+              "evidence_vi": "Vở diễn ở Garden Hall."
+            },
+            {
+              "no": "18",
+              "prompt": "Wednesday 8.00 p.m. – ‘______’ (Canadian film)",
+              "prompt_vi": "Thứ Tư 20:00 – ‘______’ (phim Canada)",
+              "answer": "Three Lives",
+              "confidence": "medium",
+              "explanation": "Tên bộ phim Canada chiếu thứ Tư → tên riêng (≤ 3 từ). Key: **Three Lives**.",
+              "evidence": "(ý transcript) That's called 'Three Lives'.",
+              "evidence_vi": "Phim đó tên là 'Three Lives'."
+            },
+            {
+              "no": "19",
+              "prompt": "Ticket price: £ ______",
+              "prompt_vi": "Giá vé: £ ______",
+              "answer": "4.50",
+              "confidence": "medium",
+              "explanation": "Giá vé → số tiền. Vé chỉ **£4.50**, giảm so với giá thường **£5.50** – bẫy giá gốc → **4.50**.",
+              "evidence": "(ý transcript) Tickets cost just £4.50, a reduction on the usual price of £5.50.",
+              "evidence_vi": "Vé chỉ 4,50 bảng, giảm so với giá thường 5,50 bảng."
+            },
+            {
+              "no": "20",
+              "prompt": "Saturday and Sunday – ‘______’ (art exhibition)",
+              "prompt_vi": "Thứ Bảy và Chủ Nhật – ‘______’ (triển lãm nghệ thuật)",
+              "answer": "Faces of China",
+              "confidence": "medium",
+              "explanation": "Tên triển lãm nghệ thuật → tên riêng. Bộ sưu tập nghệ thuật Trung Quốc tên **'Faces of China'**.",
+              "evidence": "(ý transcript) It's a collection of Chinese art called 'Faces of China'.",
+              "evidence_vi": "Đó là bộ sưu tập nghệ thuật Trung Quốc tên 'Faces of China'."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "reading",
+      "title": "Reading – Passage 1",
+      "note": "Thời gian khuyến nghị: khoảng 10 phút cho Questions 1–4. Dạng câu hỏi trả lời ngắn (Short-answer questions): chép NGUYÊN từ trong bài, tối đa 3 từ.",
+      "passage": {
+        "title": "Out of the Wild, into Our Homes",
+        "title_vi": "Từ thiên nhiên hoang dã vào nhà chúng ta",
+        "paragraphs": [
+          {
+            "en": "Many of the earth’s creatures die because of choices humans make. These choices have nothing to do with food or shelter or anything else that helps humans survive. What kills these millions of animals from all over the world is human greed - the desire for money.",
+            "vi": "Nhiều sinh vật trên trái đất chết vì những lựa chọn của con người. Những lựa chọn này chẳng liên quan gì đến thức ăn, chỗ ở hay bất cứ thứ gì giúp con người sinh tồn. Thứ giết chết hàng triệu con vật trên khắp thế giới chính là lòng tham của con người – sự khao khát tiền bạc."
+          },
+          {
+            "en": "People use parts of animals for everything from hats to handbags, from ornamental jewellery and ashtrays to powders that supposedly improve a person’s life. Declaring a species endangered and protecting it by laws is not always enough. Poachers, people who kill wildlife illegally, rarely get caught.",
+            "vi": "Con người dùng các bộ phận của động vật để làm đủ thứ, từ mũ đến túi xách, từ đồ trang sức, gạt tàn cho đến những loại bột được cho là giúp cải thiện cuộc sống của một người. Việc tuyên bố một loài đang bị đe doạ và bảo vệ nó bằng luật pháp không phải lúc nào cũng đủ. Những kẻ săn trộm – những người giết động vật hoang dã bất hợp pháp – hiếm khi bị bắt."
+          },
+          {
+            "en": "During the late 1980s, saving elephants became a popular cause. Wildlife protection groups made sure everyone saw pictures or films of elephants with their faces sawed off for their ivory tusks. These groups also proved that certain populations of elephants were dwindling.",
+            "vi": "Vào cuối những năm 1980, cứu loài voi trở thành một mục tiêu được nhiều người ủng hộ. Các nhóm bảo vệ động vật hoang dã đảm bảo rằng ai cũng được xem những bức ảnh hoặc đoạn phim về những con voi bị cưa mất mặt để lấy ngà. Các nhóm này cũng chứng minh rằng một số quần thể voi đang suy giảm dần."
+          },
+          {
+            "en": "As a result, most people stopped buying objects made of ivory. Laws against poaching were strengthened. Many countries made bringing ivory in from other countries illegal. Killing elephants for their ivory became more risky and less profitable.",
+            "vi": "Kết quả là hầu hết mọi người đã ngừng mua đồ vật làm từ ngà voi. Luật chống săn trộm được siết chặt hơn. Nhiều quốc gia coi việc nhập khẩu ngà voi từ nước khác là bất hợp pháp. Giết voi lấy ngà trở nên rủi ro hơn và ít lợi nhuận hơn."
+          },
+          {
+            "en": "However, concern for a certain species tends to fade after a while. In the late 1970s, people protested against the slaughter of seal pups. Everyone was shocked at the sight of pups being clubbed to death in their icy habitat. The brutality came to a halt. But ten years later, the number of seal pups killed was higher than ever.",
+            "vi": "Tuy nhiên, sự quan tâm dành cho một loài nào đó thường phai nhạt sau một thời gian. Cuối những năm 1970, mọi người đã phản đối việc tàn sát hải cẩu con. Ai cũng bị sốc khi thấy cảnh những con hải cẩu non bị đập chết bằng gậy ngay trong môi trường sống băng giá của chúng. Sự tàn bạo ấy đã dừng lại. Nhưng mười năm sau, số hải cẩu con bị giết lại cao hơn bao giờ hết."
+          },
+          {
+            "en": "Other animal protection movements have come and gone, such as saving the whales and protecting dolphins from the tuna fishermen. The whale population appears to have increased for now. And the laws are finally changing in the United States to protect the dolphins that swim with tuna fish in parts of the Pacific Ocean.",
+            "vi": "Những phong trào bảo vệ động vật khác cũng đã đến rồi đi, chẳng hạn như cứu cá voi và bảo vệ cá heo khỏi những người đánh bắt cá ngừ. Hiện tại số lượng cá voi có vẻ đã tăng lên. Và luật pháp ở Mỹ cuối cùng cũng đang thay đổi để bảo vệ những con cá heo bơi cùng đàn cá ngừ ở một số vùng của Thái Bình Dương."
+          },
+          {
+            "en": "In the 2010s, the protests and the publicity will probably turn to some other endangered species. Plenty of them urgently need attention. During this time, will the elephants be forgotten?",
+            "vi": "Trong thập niên 2010, các cuộc biểu tình và sự chú ý của truyền thông có lẽ sẽ chuyển sang một số loài đang bị đe doạ khác. Rất nhiều loài trong số đó đang cần được quan tâm khẩn cấp. Trong thời gian đó, liệu loài voi có bị lãng quên?"
+          }
+        ]
+      },
+      "groups": [
+        {
+          "range": "Questions 1–4",
+          "instruction": "Read the passage and answer the following questions with NO MORE THAN THREE WORDS from the passage.",
+          "instruction_vi": "Đọc bài và trả lời các câu hỏi sau bằng KHÔNG QUÁ BA TỪ lấy từ bài đọc.",
+          "questions": [
+            {
+              "no": "1",
+              "prompt": "According to the passage, what do people use to make things that people think can improve their lives?",
+              "prompt_vi": "Theo bài đọc, người ta dùng gì để làm ra những thứ mà người ta nghĩ có thể cải thiện cuộc sống của họ?",
+              "answer": "parts of animals",
+              "explanation": "**Từ khoá:** ‘use to make things’, ‘think can improve their lives’.\n**Vị trí:** đoạn 2 – ‘People use **parts of animals** for everything … to powders that **supposedly improve a person’s life**.’\n**Paraphrase:** ‘people think can improve’ ≈ ‘supposedly improve’ (được cho là cải thiện); ‘their lives’ ≈ ‘a person’s life’.\nNguyên liệu người ta dùng chính là **parts of animals** (3 từ – vừa đủ giới hạn). Không trả lời ‘powders’ vì ‘powders’ là SẢN PHẨM làm ra, còn câu hỏi hỏi thứ được DÙNG để làm ra sản phẩm.",
+              "evidence": "People use parts of animals for everything from hats to handbags, from ornamental jewellery and ashtrays to powders that supposedly improve a person’s life.",
+              "evidence_vi": "Con người dùng các bộ phận của động vật để làm đủ thứ, từ mũ đến túi xách, từ đồ trang sức, gạt tàn cho đến những loại bột được cho là cải thiện cuộc sống của một người."
+            },
+            {
+              "no": "2",
+              "prompt": "What do people kill elephants and cut their faces off for?",
+              "prompt_vi": "Người ta giết voi và cắt mặt chúng để lấy gì?",
+              "answer": "(their) ivory tusks",
+              "explanation": "**Từ khoá:** ‘elephants’, ‘cut their faces off’, ‘for’.\n**Vị trí:** đoạn 3 – ‘elephants with their faces **sawed off for their ivory tusks**’.\n**Paraphrase:** ‘cut … off’ = ‘sawed off’ (cưa ra). Giới từ ‘for’ trong câu hỏi khớp đúng với ‘for their ivory tusks’ (để lấy ngà).\nĐáp án: **ivory tusks** (hoặc ‘their ivory tusks’ – 3 từ, vẫn đúng). Chú ý số nhiều **tusks**. Trả lời ‘ivory’ (1 từ) cũng thường được chấp nhận vì đoạn 4 nhắc ‘killing elephants for their ivory’.",
+              "evidence": "Wildlife protection groups made sure everyone saw pictures or films of elephants with their faces sawed off for their ivory tusks.",
+              "evidence_vi": "Các nhóm bảo vệ động vật hoang dã đảm bảo rằng ai cũng được xem ảnh hoặc phim về những con voi bị cưa mất mặt để lấy ngà."
+            },
+            {
+              "no": "3",
+              "prompt": "What animal is mentioned after elephants as a victim of humans?",
+              "prompt_vi": "Loài vật nào được nhắc đến sau loài voi như một nạn nhân của con người?",
+              "answer": "seal pups",
+              "explanation": "**Từ khoá:** ‘after elephants’, ‘victim’.\n**Vị trí:** đoạn 5 (ngay sau 2 đoạn nói về voi) – ‘people protested against **the slaughter of seal pups**’.\n**Paraphrase:** ‘victim of humans’ ≈ ‘slaughter’ (bị tàn sát), ‘clubbed to death’ (bị đập chết).\nĐáp án: **seal pups** (hải cẩu con). Chú ý thứ tự: voi (đoạn 3–4) → hải cẩu (đoạn 5) → cá voi, cá heo (đoạn 6). Không trả lời ‘whales’ hay ‘dolphins’ vì chúng được nhắc SAU hải cẩu.",
+              "evidence": "In the late 1970s, people protested against the slaughter of seal pups.",
+              "evidence_vi": "Cuối những năm 1970, mọi người đã phản đối việc tàn sát hải cẩu con."
+            },
+            {
+              "no": "4",
+              "prompt": "Whom do some animal protection movements want to protect dolphins from?",
+              "prompt_vi": "Một số phong trào bảo vệ động vật muốn bảo vệ cá heo khỏi ai?",
+              "answer": "(the) tuna fishermen",
+              "explanation": "**Từ khoá:** ‘Whom’ (hỏi về NGƯỜI), ‘protect dolphins from’.\n**Vị trí:** đoạn 6 – ‘protecting dolphins **from the tuna fishermen**’.\nCâu hỏi gần như lặp lại nguyên văn bài (‘protect … from’). Vì hỏi ‘Whom’ nên đáp án phải là người → **the tuna fishermen** (3 từ). Không trả lời ‘tuna fish’ – cá ngừ không phải mối đe doạ, cá heo chỉ bơi cùng cá ngừ.",
+              "evidence": "Other animal protection movements have come and gone, such as saving the whales and protecting dolphins from the tuna fishermen.",
+              "evidence_vi": "Những phong trào bảo vệ động vật khác cũng đã đến rồi đi, chẳng hạn như cứu cá voi và bảo vệ cá heo khỏi những người đánh bắt cá ngừ."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "reading",
+      "title": "Reading – Passage 2",
+      "note": "Thời gian khuyến nghị: khoảng 10 phút cho Questions 5–8. Bài đọc không có tiêu đề trong đề; nội dung về các yếu tố sinh tồn (thức ăn, lửa, nơi trú ẩn, nước). Dạng trắc nghiệm A–D.",
+      "passage": {
+        "title": "(Untitled) – The main elements required for survival",
+        "title_vi": "(Không tiêu đề) – Những yếu tố chính cần để sinh tồn",
+        "paragraphs": [
+          {
+            "en": "The main elements required for survival are food, fire, shelter and water. Their order of importance will depend upon where you happen to be. In the desert water will head the list; in polar regions shelter and fire will be the main concerns. Ordering your priorities is the first step to survival.",
+            "vi": "Những yếu tố chính cần để sinh tồn là thức ăn, lửa, nơi trú ẩn và nước. Thứ tự quan trọng của chúng sẽ phụ thuộc vào nơi bạn đang ở. Ở sa mạc, nước sẽ đứng đầu danh sách; ở vùng cực, nơi trú ẩn và lửa sẽ là mối quan tâm chính. Sắp xếp thứ tự ưu tiên là bước đầu tiên để sinh tồn."
+          },
+          {
+            "en": "It takes a healthy person quite a long time to die of starvation, for the body can use up its stored resources, but exposure to wind, rain and cold can be fatal even in mild climates and death comes in only minutes in the icy waters of the poles. Food is rarely the first priority. Even in those places where it is difficult to find, there are usually other problems to face first. Shelter will often be the prime necessity in extremes of climate or temperatures such as in the frozen polar regions or in the baking deserts. The need for fire is closely linked.",
+            "vi": "Một người khoẻ mạnh phải mất khá lâu mới chết đói, vì cơ thể có thể sử dụng hết nguồn dự trữ của nó; nhưng việc phơi mình trước gió, mưa và giá lạnh có thể gây tử vong ngay cả ở vùng khí hậu ôn hoà, và cái chết đến chỉ trong vài phút ở vùng nước băng giá của hai cực. Thức ăn hiếm khi là ưu tiên hàng đầu. Ngay cả ở những nơi khó tìm thức ăn, thường vẫn có những vấn đề khác phải đối mặt trước. Nơi trú ẩn thường là nhu cầu thiết yếu nhất trong điều kiện khí hậu hoặc nhiệt độ khắc nghiệt, như ở vùng cực băng giá hay sa mạc nóng như thiêu. Nhu cầu về lửa gắn liền chặt chẽ với điều đó."
+          },
+          {
+            "en": "Water is something that most people in the modern world take for granted. They are so used to turning on a tap that until an extreme drought causes water rationing they seldom think about it. Yet the survivor at sea, or after a flood, though surrounded by water, may be desperate for drinkable water. And there are many places where, unless it rains, no obvious water is available. Although there could be other survival necessities to deal with, water is always universally important.",
+            "vi": "Nước là thứ mà hầu hết mọi người trong thế giới hiện đại coi là đương nhiên. Họ quá quen với việc mở vòi nước đến mức, cho tới khi một đợt hạn hán khắc nghiệt buộc phải phân phối nước theo khẩu phần, họ hiếm khi nghĩ đến nó. Thế nhưng người sống sót trên biển, hoặc sau một trận lũ, dù bị nước bao quanh, vẫn có thể khao khát tuyệt vọng nước uống được. Và có nhiều nơi mà nếu trời không mưa thì không có nguồn nước nào rõ ràng. Mặc dù có thể còn những nhu cầu sinh tồn khác cần giải quyết, nước luôn quan trọng ở mọi nơi."
+          }
+        ]
+      },
+      "groups": [
+        {
+          "range": "Questions 5–8",
+          "instruction": "Choose the correct letter, A, B, C or D.",
+          "instruction_vi": "Chọn chữ cái đúng, A, B, C hoặc D.",
+          "questions": [
+            {
+              "no": "5",
+              "prompt": "The factor which decides the order of importance of the main elements required for survival is ………..",
+              "prompt_vi": "Yếu tố quyết định thứ tự quan trọng của các yếu tố chính cần để sinh tồn là ………..",
+              "options": [
+                "A. your health",
+                "B. your location",
+                "C. your job",
+                "D. your strength"
+              ],
+              "answer": "B",
+              "explanation": "**Từ khoá:** ‘decides the order of importance’.\n**Vị trí:** đoạn 1 – ‘Their **order of importance will depend upon where you happen to be**.’\n**Paraphrase:** ‘decides’ ≈ ‘depend upon’; ‘where you happen to be’ (nơi bạn đang ở) = **your location** → **B**.\n**Loại trừ:** A – ‘healthy person’ có xuất hiện ở đoạn 2 nhưng nói về thời gian chết đói, không quyết định thứ tự ưu tiên; C (job) và D (strength) không hề được nhắc đến.\n(Lưu ý: đề in ‘the order of importance or the main elements’ – ‘or’ là lỗi đánh máy của ‘of’.)",
+              "evidence": "Their order of importance will depend upon where you happen to be. In the desert water will head the list; in polar regions shelter and fire will be the main concerns.",
+              "evidence_vi": "Thứ tự quan trọng của chúng sẽ phụ thuộc vào nơi bạn đang ở. Ở sa mạc nước đứng đầu danh sách; ở vùng cực, nơi trú ẩn và lửa là mối quan tâm chính."
+            },
+            {
+              "no": "6",
+              "prompt": "The basic need that may NOT be equally important as the others in extremely cold places is ………..",
+              "prompt_vi": "Nhu cầu cơ bản có thể KHÔNG quan trọng bằng những nhu cầu khác ở những nơi cực lạnh là ………..",
+              "options": [
+                "A. water",
+                "B. shelter",
+                "C. fire",
+                "D. none of above"
+              ],
+              "answer": "A",
+              "explanation": "**Từ khoá:** ‘extremely cold places’ = ‘polar regions’.\n**Vị trí:** đoạn 1 – ‘in **polar regions shelter and fire will be the main concerns**’; đoạn 2 – ‘Shelter will often be the prime necessity … in the frozen polar regions … The need for fire is closely linked.’\nỞ vùng lạnh, **shelter** và **fire** là mối quan tâm chính → B, C sai. Trong 3 phương án còn lại chỉ **water** không được xếp ưu tiên ở vùng cực (nước đứng đầu ở **sa mạc**) → **A**.\n**Bẫy:** đoạn 3 nói ‘water is always universally important’, khiến nhiều bạn chọn D. Nhưng câu hỏi dùng ‘may NOT be **equally** important’ (có thể không quan trọng NGANG BẰNG) – tức so sánh thứ tự ưu tiên ở vùng lạnh, chứ không nói nước không quan trọng. Theo đoạn 1, ở vùng cực mối quan tâm chính là shelter và fire, nên nước xếp sau.",
+              "evidence": "In the desert water will head the list; in polar regions shelter and fire will be the main concerns.",
+              "evidence_vi": "Ở sa mạc nước sẽ đứng đầu danh sách; ở vùng cực, nơi trú ẩn và lửa sẽ là mối quan tâm chính."
+            },
+            {
+              "no": "7",
+              "prompt": "Fire is described as",
+              "prompt_vi": "Lửa được mô tả là",
+              "options": [
+                "A. universally important",
+                "B. being taken for granted",
+                "C. the prime necessity",
+                "D. closely linked with shelter"
+              ],
+              "answer": "D",
+              "explanation": "**Từ khoá:** ‘Fire’.\n**Vị trí:** đoạn 2 – ‘Shelter will often be the prime necessity … **The need for fire is closely linked**.’ ‘Linked’ ở đây là gắn với câu ngay trước, tức gắn với **shelter** → **D**.\n**Loại trừ (bẫy gán sai đối tượng):**\n- A ‘universally important’ – bài dùng cho **water** (‘water is always universally important’).\n- B ‘taken for granted’ – cũng nói về **water** (‘Water is something that most people … take for granted’).\n- C ‘the prime necessity’ – nói về **shelter**, không phải fire.",
+              "evidence": "Shelter will often be the prime necessity in extremes of climate or temperatures such as in the frozen polar regions or in the baking deserts. The need for fire is closely linked.",
+              "evidence_vi": "Nơi trú ẩn thường là nhu cầu thiết yếu nhất trong điều kiện khí hậu hoặc nhiệt độ khắc nghiệt như vùng cực băng giá hay sa mạc nóng như thiêu. Nhu cầu về lửa gắn liền chặt chẽ với điều đó."
+            },
+            {
+              "no": "8",
+              "prompt": "According to the passage, which of the following statements is TRUE?",
+              "prompt_vi": "Theo bài đọc, nhận định nào sau đây là ĐÚNG?",
+              "options": [
+                "A. Exposure to wind is not dangerous in mild climates.",
+                "B. People may die quickly in the water of polar regions.",
+                "C. Looking for food is the first thing to do most of the time.",
+                "D. Survivors after a flood won’t need water for drinking."
+              ],
+              "answer": "B",
+              "explanation": "**Vị trí:** đoạn 2 – ‘**death comes in only minutes in the icy waters of the poles**’.\n**Paraphrase:** ‘die quickly’ = ‘death comes in only minutes’; ‘the water of polar regions’ = ‘the icy waters of the poles’ → **B** đúng.\n**Loại trừ:**\n- A sai: bài nói ‘exposure to wind, rain and cold **can be fatal even in mild climates**’ (có thể gây chết người ngay cả ở khí hậu ôn hoà) – ngược với ‘not dangerous’.\n- C sai: ‘**Food is rarely the first priority**’ – ngược với ‘the first thing to do most of the time’.\n- D sai: người sống sót sau lũ ‘**may be desperate for drinkable water**’ – tức rất cần nước uống.",
+              "evidence": "…exposure to wind, rain and cold can be fatal even in mild climates and death comes in only minutes in the icy waters of the poles.",
+              "evidence_vi": "…việc phơi mình trước gió, mưa và giá lạnh có thể gây tử vong ngay cả ở vùng khí hậu ôn hoà, và cái chết đến chỉ trong vài phút ở vùng nước băng giá của hai cực."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "writing",
+      "title": "Writing – Exercise 1",
+      "note": "Bài điền từ cho sẵn vào một bài mô tả biểu đồ đường (line graph). Mỗi từ/cụm dùng 1 lần: a sharp rise · rocketed sharply · dropped significantly · similar · remained steady.",
+      "tasks": [
+        {
+          "title": "Exercise 1. Fill in the blank with the given words",
+          "prompt": "The line graph gives information about the number of Iranian, Greek and Turkish students who enrolled at Sheffield University between 2005 and 2009.\n\nWord box: a sharp rise · rocketed sharply · dropped significantly · similar · remained steady\n\nThe diagram shows the enrolment of Iranian, Greek and Turkish students at Sheffield University from 2005 to 2009. During this period, enrolment of both Iranian and Turkish students 1. ______ . However, Greek admissions 2. ______ with numbers being almost the reverse of those for Iranian students.\n\nIranian numbers grew steadily up to 2008 followed by 3. ______ reaching almost 160 students in 2009. Similarly, numbers of Turkish students showed steady growth throughout the period from about 20 in 2005 to over 120 in 2009. In contrast, enrolments of Greek students decreased dramatically from a high of 180 students in 2005 to just about 70 in 2007. Numbers then 4. ______ throughout 2007 finally dropping again to a low of around 45 in 2009. A further point of interest is that from 2007 to 2008, enrolments from all three countries were very 5. ______, the average difference being approximately 20 students.\n\nOverall, the graph highlights a considerable difference between growth in Iranian and Turkish enrolments but reduction in Greek enrolments.",
+          "prompt_vi": "Biểu đồ đường cung cấp thông tin về số sinh viên Iran, Hy Lạp và Thổ Nhĩ Kỳ nhập học tại Đại học Sheffield từ năm 2005 đến 2009. Điền các từ/cụm từ cho sẵn vào chỗ trống trong đoạn mô tả.",
+          "chart": {
+            "type": "line",
+            "unit": "Number of students",
+            "labels": [
+              "2005",
+              "2006",
+              "2007",
+              "2008",
+              "2009"
+            ],
+            "series": [
+              {
+                "name": "Iran",
+                "values": [
+                  37,
+                  60,
+                  70,
+                  88,
+                  158
+                ]
+              },
+              {
+                "name": "Greece",
+                "values": [
+                  178,
+                  153,
+                  70,
+                  70,
+                  46
+                ]
+              },
+              {
+                "name": "Turkey",
+                "values": [
+                  22,
+                  50,
+                  87,
+                  105,
+                  123
+                ]
+              }
+            ]
+          },
+          "answer": "The diagram shows the enrolment of Iranian, Greek and Turkish students at Sheffield University from 2005 to 2009. During this period, enrolment of both Iranian and Turkish students **rocketed sharply**. However, Greek admissions **dropped significantly** with numbers being almost the reverse of those for Iranian students.\n\nIranian numbers grew steadily up to 2008 followed by **a sharp rise** reaching almost 160 students in 2009. Similarly, numbers of Turkish students showed steady growth throughout the period from about 20 in 2005 to over 120 in 2009. In contrast, enrolments of Greek students decreased dramatically from a high of 180 students in 2005 to just about 70 in 2007. Numbers then **remained steady** throughout 2007 finally dropping again to a low of around 45 in 2009. A further point of interest is that from 2007 to 2008, enrolments from all three countries were very **similar**, the average difference being approximately 20 students.\n\nOverall, the graph highlights a considerable difference between growth in Iranian and Turkish enrolments but reduction in Greek enrolments.",
+          "answer_vi": "Biểu đồ thể hiện số sinh viên Iran, Hy Lạp và Thổ Nhĩ Kỳ nhập học tại Đại học Sheffield từ năm 2005 đến 2009. Trong giai đoạn này, số sinh viên Iran và Thổ Nhĩ Kỳ nhập học đều **tăng vọt**. Tuy nhiên, số sinh viên Hy Lạp được nhận **giảm đáng kể**, với số liệu gần như ngược lại so với sinh viên Iran.\n\nSố sinh viên Iran tăng đều đặn đến năm 2008, sau đó là **một đợt tăng mạnh**, đạt gần 160 sinh viên vào năm 2009. Tương tự, số sinh viên Thổ Nhĩ Kỳ tăng đều trong suốt giai đoạn, từ khoảng 20 năm 2005 lên hơn 120 năm 2009. Ngược lại, số sinh viên Hy Lạp nhập học giảm mạnh từ mức cao 180 năm 2005 xuống chỉ còn khoảng 70 năm 2007. Sau đó con số **giữ ổn định** từ 2007 (đến 2008), cuối cùng lại giảm xuống mức thấp khoảng 45 vào năm 2009. Một điểm đáng chú ý nữa là từ 2007 đến 2008, số sinh viên nhập học từ cả ba nước rất **giống nhau**, chênh lệch trung bình khoảng 20 sinh viên.\n\nNhìn chung, biểu đồ cho thấy sự khác biệt rõ rệt giữa sự tăng trưởng số sinh viên Iran, Thổ Nhĩ Kỳ và sự sụt giảm số sinh viên Hy Lạp.",
+          "notes": [
+            "Mẹo làm bài điền từ: xác định TỪ LOẠI cần điền trước. Chỗ (1), (2), (4) đứng sau chủ ngữ → cần CỤM ĐỘNG TỪ (rocketed sharply / dropped significantly / remained steady); chỗ (3) sau ‘followed by’ → cần CỤM DANH TỪ (a sharp rise); chỗ (5) sau ‘were very’ → cần TÍNH TỪ (similar).",
+            "Cấu trúc ‘S + V + adverb’ (dropped significantly) và ‘there was + a + adj + noun’ / ‘followed by + a + adj + noun’ (a sharp rise) là hai cách diễn đạt xu hướng cơ bản nhất của Task 1.",
+            "Nhận xét: ‘rocketed sharply’ hơi thừa nghĩa (rocket đã có nghĩa là tăng vọt) – khi tự viết, nên dùng ‘rocketed’ hoặc ‘rose sharply’."
+          ],
+          "vocab": [
+            {
+              "en": "enrolment / enrol",
+              "vi": "sự nhập học / ghi danh nhập học"
+            },
+            {
+              "en": "admissions",
+              "vi": "số người được nhận vào (trường)"
+            },
+            {
+              "en": "rocket",
+              "vi": "tăng vọt"
+            },
+            {
+              "en": "drop significantly",
+              "vi": "giảm đáng kể"
+            },
+            {
+              "en": "a sharp rise",
+              "vi": "một sự tăng mạnh"
+            },
+            {
+              "en": "remain steady",
+              "vi": "giữ ổn định"
+            },
+            {
+              "en": "the reverse of",
+              "vi": "ngược lại với"
+            },
+            {
+              "en": "a high of / a low of",
+              "vi": "mức cao nhất là / mức thấp nhất là"
+            }
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "range": "Blanks 1–5",
+          "instruction": "Fill in the blank with the given words.",
+          "instruction_vi": "Điền từ/cụm từ cho sẵn vào chỗ trống.",
+          "context": "a sharp rise · rocketed sharply · dropped significantly · similar · remained steady",
+          "questions": [
+            {
+              "no": "1",
+              "prompt": "During this period, enrolment of both Iranian and Turkish students ______ .",
+              "prompt_vi": "Trong giai đoạn này, số sinh viên Iran và Thổ Nhĩ Kỳ nhập học đều ______ .",
+              "answer": "rocketed sharply",
+              "explanation": "Chủ ngữ ‘enrolment of both Iranian and Turkish students’ chưa có động từ → cần **cụm động từ quá khứ**. Nhìn biểu đồ: Iran tăng từ ~37 lên ~158, Thổ Nhĩ Kỳ từ ~22 lên ~123 – tăng rất mạnh → **rocketed sharply**. Câu sau bắt đầu bằng ‘However, Greek admissions…’ cho thấy câu này phải trái nghĩa với xu hướng giảm của Hy Lạp."
+            },
+            {
+              "no": "2",
+              "prompt": "However, Greek admissions ______ with numbers being almost the reverse of those for Iranian students.",
+              "prompt_vi": "Tuy nhiên, số sinh viên Hy Lạp được nhận ______ , với số liệu gần như ngược lại so với sinh viên Iran.",
+              "answer": "dropped significantly",
+              "explanation": "Sau chủ ngữ ‘Greek admissions’ cần **cụm động từ**. ‘However’ báo hiệu đối lập với câu (1) (tăng) và ‘the reverse of those for Iranian students’ → Hy Lạp **giảm**: từ ~178 (2005) xuống ~46 (2009) → **dropped significantly**."
+            },
+            {
+              "no": "3",
+              "prompt": "Iranian numbers grew steadily up to 2008 followed by ______ reaching almost 160 students in 2009.",
+              "prompt_vi": "Số sinh viên Iran tăng đều đến năm 2008, sau đó là ______ , đạt gần 160 sinh viên năm 2009.",
+              "answer": "a sharp rise",
+              "explanation": "‘followed by’ + **cụm danh từ** → chỉ có ‘a sharp rise’ là danh từ trong hộp từ. Biểu đồ: Iran tăng từ ~88 (2008) lên ~158 (2009) – bước nhảy dốc nhất → ‘a sharp rise’ hợp lý."
+            },
+            {
+              "no": "4",
+              "prompt": "Numbers then ______ throughout 2007 finally dropping again to a low of around 45 in 2009.",
+              "prompt_vi": "Sau đó con số ______ trong suốt năm 2007, cuối cùng lại giảm xuống mức thấp khoảng 45 vào năm 2009.",
+              "answer": "remained steady",
+              "explanation": "Sau ‘Numbers then’ cần **cụm động từ**. Biểu đồ: đường Hy Lạp nằm ngang ở mức ~70 từ 2007 đến 2008, và từ ‘dropping again’ phía sau cho thấy trước đó KHÔNG giảm → **remained steady** (giữ ổn định)."
+            },
+            {
+              "no": "5",
+              "prompt": "…from 2007 to 2008, enrolments from all three countries were very ______, the average difference being approximately 20 students.",
+              "prompt_vi": "…từ 2007 đến 2008, số sinh viên nhập học từ cả ba nước rất ______ , chênh lệch trung bình khoảng 20 sinh viên.",
+              "answer": "similar",
+              "explanation": "Sau ‘were very’ cần **tính từ** → ‘similar’ (giống nhau, tương đương). Biểu đồ: năm 2007–2008 ba đường đều quanh mức 70–105, chỉ chênh khoảng 20 sinh viên – khớp với ‘the average difference being approximately 20 students’."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "writing",
+      "title": "Writing – Exercise 2",
+      "note": "Bài viết câu hoàn chỉnh từ từ gợi ý (sentence building), chú ý chia động từ ở THÌ QUÁ KHỨ ĐƠN vì số liệu thuộc năm 2000.",
+      "tasks": [
+        {
+          "title": "Exercise 2. Use given words to make complete sentences",
+          "prompt": "Use given words to make complete sentences. Remember to change the verb forms if necessary.\n\nThe graph below shows the average daily sales of selected food items at the Brisk Café, by season in 2000.\n\na. winter,/ hot coffee/ have/ the highest number/ sales/ around 75 servings sold daily/.\nb. summer,/ ice coffee sales/ rise significantly/ an average of 40 servings/ sold daily/.\nc. general,/ average daily sales of each food item/ change/ the season/ change/.",
+          "prompt_vi": "Dùng các từ cho sẵn để viết thành câu hoàn chỉnh, nhớ chia động từ nếu cần. Biểu đồ thể hiện doanh số bán trung bình mỗi ngày của một số món tại quán Brisk Café theo mùa năm 2000.",
+          "chart": {
+            "type": "bar",
+            "unit": "Number of servings",
+            "labels": [
+              "Hot coffee",
+              "Iced coffee",
+              "Ice cream",
+              "Soup",
+              "Salad"
+            ],
+            "series": [
+              {
+                "name": "Winter",
+                "values": [
+                  75,
+                  2,
+                  25,
+                  50,
+                  25
+                ]
+              },
+              {
+                "name": "Summer",
+                "values": [
+                  30,
+                  40,
+                  35,
+                  25,
+                  25
+                ]
+              }
+            ]
+          },
+          "answer": "a. In winter, hot coffee had the highest number of sales, with around 75 servings sold daily.\n\nb. In summer, iced coffee sales rose significantly to an average of 40 servings sold daily.\n\nc. In general, the average daily sales of each food item changed as the season changed.",
+          "answer_vi": "a. Vào mùa đông, cà phê nóng có doanh số cao nhất, với khoảng 75 phần được bán mỗi ngày.\n\nb. Vào mùa hè, doanh số cà phê đá tăng đáng kể, lên mức trung bình 40 phần bán ra mỗi ngày.\n\nc. Nhìn chung, doanh số trung bình mỗi ngày của từng món thay đổi khi mùa thay đổi.",
+          "notes": [
+            "Thì: biểu đồ nói về năm 2000 (quá khứ) → have → **had**, rise → **rose**, change → **changed**.",
+            "Giới từ với mùa: **in winter / in summer**; cụm cố định **in general** (nhìn chung).",
+            "‘with + N + V3’ (with around 75 servings sold daily) là cách gắn số liệu vào cuối câu rất tiện trong Task 1.",
+            "‘rise to + số’ = tăng LÊN mức…; ‘rise by + số’ = tăng THÊM… Ở câu b, iced coffee từ ~2 lên 40 nên dùng **to**.",
+            "‘as + mệnh đề’ = khi/theo đà (as the season changed)."
+          ],
+          "vocab": [
+            {
+              "en": "average daily sales",
+              "vi": "doanh số trung bình mỗi ngày"
+            },
+            {
+              "en": "serving",
+              "vi": "suất, phần (đồ ăn/uống)"
+            },
+            {
+              "en": "iced coffee",
+              "vi": "cà phê đá"
+            },
+            {
+              "en": "the highest number of sales",
+              "vi": "doanh số cao nhất"
+            },
+            {
+              "en": "rise significantly",
+              "vi": "tăng đáng kể"
+            },
+            {
+              "en": "by season",
+              "vi": "theo mùa"
+            }
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "range": "Sentences a–c",
+          "instruction": "Use given words to make complete sentences. Remember to change the verb forms if necessary.",
+          "instruction_vi": "Dùng các từ cho sẵn để viết câu hoàn chỉnh. Nhớ chia động từ nếu cần.",
+          "questions": [
+            {
+              "no": "a",
+              "prompt": "winter,/ hot coffee/ have/ the highest number/ sales/ around 75 servings sold daily/.",
+              "prompt_vi": "mùa đông / cà phê nóng / có / số lượng cao nhất / doanh số / khoảng 75 phần bán mỗi ngày",
+              "answer": "In winter, hot coffee had the highest number of sales, with around 75 servings sold daily.",
+              "explanation": "- Thêm giới từ **In** trước ‘winter’.\n- **have → had** (quá khứ, năm 2000).\n- ‘the highest number **of** sales’ – cần giới từ ‘of’ nối hai danh từ.\n- Thêm **with** trước ‘around 75 servings sold daily’ để tạo cụm bổ sung số liệu (with + N + V3). Có thể thay bằng ‘…sales, at around 75 servings sold daily’.\nĐối chiếu biểu đồ: cột Winter của Hot coffee cao nhất toàn biểu đồ, đúng 75."
+            },
+            {
+              "no": "b",
+              "prompt": "summer,/ ice coffee sales/ rise significantly/ an average of 40 servings/ sold daily/.",
+              "prompt_vi": "mùa hè / doanh số cà phê đá / tăng đáng kể / trung bình 40 phần / bán mỗi ngày",
+              "answer": "In summer, iced coffee sales rose significantly to an average of 40 servings sold daily.",
+              "explanation": "- Thêm **In** trước ‘summer’.\n- **rise → rose** (động từ bất quy tắc: rise – rose – risen). Lỗi hay gặp: ‘rised’ ✗.\n- Thêm **to** trước ‘an average of 40 servings’ (tăng LÊN mức 40); không dùng ‘by’ vì 40 là mức đạt được chứ không phải lượng tăng thêm (thực tế tăng thêm ~38).\n- ‘sold daily’ là phân từ rút gọn bổ nghĩa cho ‘servings’ (= which were sold daily).\n- Đề in ‘ice coffee’, biểu đồ ghi ‘Iced coffee’ – nên viết **iced coffee** cho chuẩn."
+            },
+            {
+              "no": "c",
+              "prompt": "general,/ average daily sales of each food item/ change/ the season/ change/.",
+              "prompt_vi": "nhìn chung / doanh số trung bình mỗi ngày của từng món / thay đổi / mùa / thay đổi",
+              "answer": "In general, the average daily sales of each food item changed as the season changed.",
+              "explanation": "- Cụm cố định **In general**.\n- Thêm **the** trước ‘average daily sales’ (danh từ xác định – doanh số của các món trong biểu đồ).\n- **change → changed** ở cả hai vế (quá khứ).\n- Nối hai mệnh đề bằng **as** (khi/theo đà): ‘…changed as the season changed’. Có thể dùng ‘when the season changed’.\nLưu ý về nội dung: món salad thực ra giữ nguyên 25 ở cả hai mùa, nhưng đây là câu nhận xét tổng quát theo gợi ý của đề."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "skill": "writing",
+      "title": "Writing – Exercise 3",
+      "note": "Mô tả biểu đồ đường theo từng giai đoạn. Số liệu đọc từ ảnh (đơn vị: triệu con): 1977 ≈ 120, 1980 ≈ 127, 1983 ≈ 109, 1986 ≈ 97, 1989 ≈ 104, 1992 ≈ 94, 1995 ≈ 96, 1998 ≈ 92, 2001 ≈ 90. Vì biểu đồ chỉ có điểm dữ liệu mỗi 3 năm, giai đoạn ‘1981–1986’ được mô tả bằng đoạn đi xuống từ đỉnh 1980 đến 1986; ‘1987–1995’ mô tả đoạn dao động 1986–1995.",
+      "tasks": [
+        {
+          "title": "Exercise 3. Describe the graph by periods of time",
+          "prompt": "The graph below shows the birds’ population in Europe from 1977 to 2001.\n\na. 1977 – 1980\nb. 1981 – 1986\nc. 1987 – 1995",
+          "prompt_vi": "Biểu đồ dưới đây thể hiện số lượng chim ở châu Âu từ năm 1977 đến 2001. Hãy mô tả biểu đồ theo từng giai đoạn: a. 1977–1980; b. 1981–1986; c. 1987–1995.",
+          "chart": {
+            "type": "line",
+            "unit": "Millions of birds",
+            "labels": [
+              "1977",
+              "1980",
+              "1983",
+              "1986",
+              "1989",
+              "1992",
+              "1995",
+              "1998",
+              "2001"
+            ],
+            "series": [
+              {
+                "name": "Birds’ population in Europe",
+                "values": [
+                  120,
+                  127,
+                  109,
+                  97,
+                  104,
+                  94,
+                  96,
+                  92,
+                  90
+                ]
+              }
+            ]
+          },
+          "answer": "a. From 1977 to 1980, the bird population in Europe increased slightly from 120 million to a peak of about 127 million.\n\nb. Between 1981 and 1986, the number of birds fell sharply. It dropped to about 109 million in 1983 and then to around 97 million in 1986.\n\nc. From 1987 to 1995, the bird population fluctuated. It rose to about 104 million in 1989, then decreased to around 94 million in 1992. After that, it went up slightly to about 96 million in 1995.",
+          "answer_vi": "a. Từ năm 1977 đến 1980, số lượng chim ở châu Âu tăng nhẹ từ 120 triệu lên mức đỉnh khoảng 127 triệu con.\n\nb. Từ năm 1981 đến 1986, số lượng chim giảm mạnh. Con số giảm xuống khoảng 109 triệu vào năm 1983 và sau đó còn khoảng 97 triệu vào năm 1986.\n\nc. Từ năm 1987 đến 1995, số lượng chim dao động. Nó tăng lên khoảng 104 triệu vào năm 1989, rồi giảm xuống khoảng 94 triệu vào năm 1992. Sau đó, nó tăng nhẹ lên khoảng 96 triệu vào năm 1995.",
+          "notes": [
+            "Mỗi giai đoạn nêu: (1) xu hướng chính (tăng/giảm/dao động), (2) số liệu đầu – cuối, (3) điểm đặc biệt (đỉnh, đáy).",
+            "Dùng THÌ QUÁ KHỨ ĐƠN vì toàn bộ thời gian trong biểu đồ đã qua: increased, fell, dropped, rose, decreased, went up.",
+            "Giới từ với số liệu: **from … to …** (từ mức … đến mức …), **to** (lên/xuống mức), **in + năm**, **a peak of** (mức đỉnh).",
+            "Giai đoạn có cả tăng và giảm → dùng ‘fluctuated’ cho câu tổng quát, rồi mô tả từng bước bằng ‘then’, ‘After that’.",
+            "Số liệu đọc từ biểu đồ nên dùng ‘about / around / approximately’ để an toàn."
+          ],
+          "vocab": [
+            {
+              "en": "bird population",
+              "vi": "số lượng (quần thể) chim"
+            },
+            {
+              "en": "increase slightly",
+              "vi": "tăng nhẹ"
+            },
+            {
+              "en": "a peak of",
+              "vi": "mức đỉnh là"
+            },
+            {
+              "en": "fall sharply",
+              "vi": "giảm mạnh"
+            },
+            {
+              "en": "fluctuate",
+              "vi": "dao động"
+            },
+            {
+              "en": "go up / decrease",
+              "vi": "tăng lên / giảm xuống"
+            }
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "range": "Periods a–c",
+          "instruction": "Describe the graph by periods of time.",
+          "instruction_vi": "Mô tả biểu đồ theo từng giai đoạn thời gian.",
+          "questions": [
+            {
+              "no": "a",
+              "prompt": "1977 – 1980",
+              "prompt_vi": "Giai đoạn 1977 – 1980",
+              "answer": "From 1977 to 1980, the bird population in Europe increased slightly from 120 million to a peak of about 127 million.",
+              "explanation": "Đường đi lên từ 120 (1977) đến ~127 (1980) – mức tăng khoảng 7 triệu, không lớn → dùng **increased slightly**. Năm 1980 là điểm cao nhất toàn biểu đồ → nên nhấn mạnh bằng **a peak of**. Cấu trúc: From + năm + to + năm, S + V-ed + from + số + to + số."
+            },
+            {
+              "no": "b",
+              "prompt": "1981 – 1986",
+              "prompt_vi": "Giai đoạn 1981 – 1986",
+              "answer": "Between 1981 and 1986, the number of birds fell sharply. It dropped to about 109 million in 1983 and then to around 97 million in 1986.",
+              "explanation": "Sau đỉnh 1980, đường dốc xuống liên tục: ~109 (1983) → ~97 (1986), tức giảm khoảng 30 triệu → dùng **fell sharply** (fall – fell – fallen, bất quy tắc). Dùng **Between … and …** để thay đổi cách mở câu so với câu a. Thay ‘the bird population’ bằng ‘the number of birds’ để tránh lặp từ."
+            },
+            {
+              "no": "c",
+              "prompt": "1987 – 1995",
+              "prompt_vi": "Giai đoạn 1987 – 1995",
+              "answer": "From 1987 to 1995, the bird population fluctuated. It rose to about 104 million in 1989, then decreased to around 94 million in 1992. After that, it went up slightly to about 96 million in 1995.",
+              "explanation": "Đường lên – xuống – lên: ~104 (1989) → ~94 (1992) → ~96 (1995) → xu hướng chung là **fluctuated** (dao động). Sau đó mô tả từng bước theo thứ tự thời gian bằng các từ nối **then**, **After that**. Chú ý chia bất quy tắc: rise – **rose**, go – **went**."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

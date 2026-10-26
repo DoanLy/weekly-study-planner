@@ -28,7 +28,16 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Writing Task 1: thêm hình minh hoạ biểu đồ (mới nhất)
+### Gỡ menu "Writing Task 1" + "Playbook"; thêm menu "FinalTest Pre-Foundation" (mới nhất, 2026-10-26)
+- **Gỡ**: xoá `src/WritingTask1View.jsx`, `src/writing-task1.md`; xoá toàn bộ code Playbook trong `src/App.jsx` (PLAYBOOK_* , PlaybookView/StageCard/TemplateModal, toggle/reset checklist, field `playbookChecklist` trong EMPTY_DATA/normalize) + các icon lucide không còn dùng. `src/ChartFigure.jsx` GIỮ LẠI (menu mới dùng để vẽ biểu đồ Writing). Field `playbookChecklist` cũ trong DB sẽ tự rơi ở lần lưu kế tiếp (không ảnh hưởng gì).
+- **Nguồn đề**: PDF `D:\ENGLISH\ĐỀ PRE IELTS\Ôn tập 3\TONG HOP DE PRE IELTS (merged).pdf` (113 trang, trang 1–18 và 80–84 là bản scan). Chia thành 8 đề:
+  `md01` (tr.1–8 + bài làm học sinh tr.19–24, có trường `student` = đáp án HS sai), `md01b` (tr.9–18), `pf-a` (tr.25–43), `pf-b` (tr.44–61), `dc-1` (tr.63–70), `dc-2` (tr.71–78), `fd-md02` (tr.80–84, chỉ Listening), `fd-final` (tr.86–113, không có Writing).
+- **Dữ liệu**: mỗi đề 1 file `src/final-test/<id>.json` (sections → passage{paragraphs en/vi} / groups → questions{no, prompt, prompt_vi, options, answer, confidence, explanation, evidence, evidence_vi, student} / tasks{prompt, chart (cú pháp ChartFigure), answer band 5.0, answer_vi, notes, vocab}). Thứ tự đề: `TEST_ORDER` trong `src/FinalTestView.jsx`. Sửa nội dung → sửa JSON, không cần đụng code.
+- **Listening không có audio**: đáp án đối chiếu nguồn gốc tra trên mạng (Cambridge 3/10/13/14/15, Official Cambridge Guide, Recent Actual Tests, IELTS Trainer 2, ieltsmaterial…) — nguồn ghi trong `note` từng section. `confidence`: high = khớp key/transcript; medium = chỉ có key hoặc nguồn phụ. Còn 1 câu chưa xác định: dc-2 Q15 (UI hiện kiểu "cần nghe audio", regex `UNKNOWN_ANSWER`). Map md01 Q18–20 lấy theo key gốc nhưng bản đồ trong đề là bản vẽ lại → nên đối chiếu.
+- **UI** (`src/FinalTestView.jsx`, lazy-load từ App.jsx nên ~590 kB dữ liệu chỉ tải khi mở menu): lưới 8 thẻ đề, lọc Listening/Reading/Writing, nút "Hiện bản dịch" và "Tự làm trước (ẩn đáp án)", bài đọc song ngữ gập/mở, câu trắc nghiệm tô xanh phương án đúng, nhãn độ tin cậy cho Listening.
+- **Verify** (ui-only 5174, không chạm DB): 8 đề render, không lọt `**`/undefined/NaN, mọi câu có options đều tô được đáp án, mobile 375px không tràn ngang, `vite build` pass. Lưu ý: sửa nhiều Edit liên tiếp khi HMR đang chạy có thể kẹt module cũ trong tab → `touch` file + navigate URL mới.
+
+### Writing Task 1: thêm hình minh hoạ biểu đồ (ĐÃ GỠ cùng menu, xem mục trên)
 - **Yêu cầu**: thêm hình minh hoạ từng loại biểu đồ ở tab Tổng quan và cho từng đề ví dụ.
 - **Cách làm**: khối ```chart (JSON) trong [src/writing-task1.md](src/writing-task1.md) → `parseBlocks` tạo block `chart` → component mới [src/ChartFigure.jsx](src/ChartFigure.jsx) vẽ bằng SVG thuần (không thêm thư viện). Hỗ trợ `line`, `bar` (cột nhóm), `pie` (1 hoặc nhiều hình tròn, legend dùng chung màu), `gallery` (lưới thẻ thu nhỏ). Cú pháp JSON ghi ở đầu ChartFigure.jsx.
 - **Vị trí**: Tổng quan có gallery 5 thẻ (Line, Bar ①, Bar ②, Pie ①, Pie ②) dữ liệu minh hoạ; 5 đề ví dụ ở PHẦN 4 có hình vẽ đúng số liệu trong bảng đề, đặt ngay sau bảng số liệu.
