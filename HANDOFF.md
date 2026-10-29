@@ -28,7 +28,10 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Gỡ menu "Writing Task 1" + "Playbook"; thêm menu "FinalTest Pre-Foundation" (mới nhất, 2026-10-26)
+### Gỡ menu "FinalTest Pre-Foundation" (mới nhất, 2026-10-29)
+- Xoá `src/FinalTestView.jsx`, toàn bộ `src/final-test/*.json`, và `src/ChartFigure.jsx` (chỉ còn FinalTest dùng). Trong `src/App.jsx` bỏ nav item `final-test`, khối render và import `Suspense`/`lazy`. `vite build` pass. Muốn khôi phục: `git show 6ba3714` (commit thêm menu).
+
+### Gỡ menu "Writing Task 1" + "Playbook"; thêm menu "FinalTest Pre-Foundation" (ĐÃ GỠ FinalTest, xem mục trên; 2026-10-26)
 - **Gỡ**: xoá `src/WritingTask1View.jsx`, `src/writing-task1.md`; xoá toàn bộ code Playbook trong `src/App.jsx` (PLAYBOOK_* , PlaybookView/StageCard/TemplateModal, toggle/reset checklist, field `playbookChecklist` trong EMPTY_DATA/normalize) + các icon lucide không còn dùng. `src/ChartFigure.jsx` GIỮ LẠI (menu mới dùng để vẽ biểu đồ Writing). Field `playbookChecklist` cũ trong DB sẽ tự rơi ở lần lưu kế tiếp (không ảnh hưởng gì).
 - **Nguồn đề**: PDF `D:\ENGLISH\ĐỀ PRE IELTS\Ôn tập 3\TONG HOP DE PRE IELTS (merged).pdf` (113 trang, trang 1–18 và 80–84 là bản scan). Chia thành 8 đề:
   `md01` (tr.1–8 + bài làm học sinh tr.19–24, có trường `student` = đáp án HS sai), `md01b` (tr.9–18), `pf-a` (tr.25–43), `pf-b` (tr.44–61), `dc-1` (tr.63–70), `dc-2` (tr.71–78), `fd-md02` (tr.80–84, chỉ Listening), `fd-final` (tr.86–113, không có Writing).

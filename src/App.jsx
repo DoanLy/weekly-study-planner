@@ -1,9 +1,7 @@
-import { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import TESTING_DATA from './testing-data.json';
 import { TESTING_GLOSSARY } from './testing-glossary.js';
 
-// Dữ liệu lời giải đề khá nặng → chỉ tải khi mở menu FinalTest.
-const FinalTestView = lazy(() => import('./FinalTestView.jsx'));
 import {
   AArrowDown,
   AArrowUp,
@@ -1066,7 +1064,6 @@ function App() {
     { id: 'notes', label: 'Notes', icon: StickyNote },
     { id: 'documents', label: 'Documents', icon: Library },
     { id: 'speaking', label: 'Speaking', icon: Mic },
-    { id: 'final-test', label: 'FinalTest Pre-Foundation', icon: GraduationCap },
     { id: 'testing', label: 'Testing', icon: FlaskConical },
     { id: 'settings', label: 'Settings', icon: SlidersHorizontal },
   ];
@@ -1249,12 +1246,6 @@ function App() {
             speakingTopics={data.speakingTopics}
             setSpeakingTopics={updateSpeakingTopics}
           />
-        )}
-
-        {activeView === 'final-test' && (
-          <Suspense fallback={<p className="text-sm font-semibold text-ink-400">Đang tải đề…</p>}>
-            <FinalTestView />
-          </Suspense>
         )}
 
         {activeView === 'testing' && <TestingView />}
