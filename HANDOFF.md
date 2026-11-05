@@ -28,7 +28,13 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Menu mới "Daily Vlog" — bản UI đầu tiên, người dùng sẽ xem rồi yêu cầu sửa tiếp (mới nhất, 2026-11-05)
+### Daily Vlog: bấm từ ở cột English để nghe phát âm (mới nhất, 2026-11-05)
+- **Lưu ý repo**: user dán thông tin project `flashlearn`, nhưng trang Daily Vlog chỉ có ở repo này (`flashlearn` không có code vlog ở nhánh nào), nên sửa và push ở đây.
+- **`src/DailyVlogView.jsx`**: trong modal Luyện, mỗi từ (cả chữ lẫn phiên âm) là một nút; bấm thì đọc từ đó, đang đọc thì tô nền `teal-200`. `spokenWord` bỏ dấu câu hai đầu từ trước khi đọc. Token chỉ có dấu câu (`—`) vẫn là chữ thường. Thêm 1 dòng gợi ý trên đầu nội dung modal.
+- **`src/speech.jsx`**: thêm `speech.speak(key, text)`: bấm lại đúng từ thì đọc lại chứ không dừng (khác `toggle` của nút loa). `onend/onerror` giờ so theo đúng utterance đang phát (`currentUtterance`), vì lượt bị `cancel` vẫn bắn `onerror` muộn và trước đây có thể xoá trạng thái của lượt mới.
+- **Verify** (ui-only 5174, không chạm DB): spy `speechSynthesis.speak` thấy đúng từ đã bỏ dấu câu, `en-US`; bấm lại đúng từ thì đọc lại; loa cả câu và bấm từ thay nhau không kẹt trạng thái; đọc xong hết tô nền; `vite build` pass. **Chưa nghe tiếng thật, chưa thử trên iPhone/iPad.** Bôi đen để copy chữ trong cột English có thể khó hơn vì từ giờ là nút.
+
+### Menu mới "Daily Vlog" — bản UI đầu tiên, người dùng sẽ xem rồi yêu cầu sửa tiếp (2026-11-05)
 - **File**: `src/DailyVlogView.jsx` (danh sách thẻ + modal import + modal luyện), `src/ipa.js` (phiên âm), `src/speech.jsx` (`useSpeech`/`SpeakButton` tách từ App.jsx để Speaking và Daily Vlog dùng chung).
 - **Dữ liệu**: field mới `dailyVlogs` trong state chung (đồng bộ Postgres như Documents): `[{id, title, lines: [{id, section, vi, en, done}], createdAt, updatedAt}]`. Sửa bài thì dòng nào giữ nguyên nội dung vẫn giữ dấu tích.
 - **Import** (`parseBilingualText`): bảng copy từ Word/Docs (Tab), bảng Markdown (`|`), hoặc 2 dòng liền nhau Việt/Anh; tự nhận cột tiếng Việt theo dấu; "1. Mở đầu" hoặc `# ...` thành tiêu đề mục; dòng không ghép được cặp thì cảnh báo ở phần xem trước. File chỉ nhận text (.txt/.md/.tsv), chưa nhận .docx.

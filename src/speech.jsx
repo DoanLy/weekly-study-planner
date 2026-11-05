@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Square, Volume2 } from 'lucide-react';
 
 function pickEnglishVoice() {
@@ -13,6 +13,7 @@ function pickEnglishVoice() {
 
 export function useSpeech() {
   const [speakingKey, setSpeakingKey] = useState(null);
+  const currentUtterance = useRef(null);
   const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
 
   useEffect(() => {
@@ -22,27 +23,41 @@ export function useSpeech() {
     return () => window.speechSynthesis.cancel();
   }, [supported]);
 
-  function toggle(key, text) {
-    if (!supported) return;
-    const synth = window.speechSynthesis;
-    synth.cancel();
-    if (speakingKey === key || !text) {
-      setSpeakingKey(null);
-      return;
-    }
+  function start(key, text) {
     const utterance = new SpeechSynthesisUtterance(text);
     const voice = pickEnglishVoice();
     if (voice) utterance.voice = voice;
     utterance.lang = voice?.lang || 'en-US';
     utterance.rate = 1;
-    const clear = () => setSpeakingKey((current) => (current === key ? null : current));
+    // Lượt bị cancel vẫn bắn onerror sau khi lượt mới đã chạy, nên phải so đúng lượt đang phát.
+    const clear = () => {
+      if (currentUtterance.current === utterance) setSpeakingKey(null);
+    };
     utterance.onend = clear;
     utterance.onerror = clear;
+    currentUtterance.current = utterance;
     setSpeakingKey(key);
-    synth.speak(utterance);
+    window.speechSynthesis.speak(utterance);
   }
 
-  return { supported, speakingKey, toggle };
+  function toggle(key, text) {
+    if (!supported) return;
+    window.speechSynthesis.cancel();
+    if (speakingKey === key || !text) {
+      setSpeakingKey(null);
+      return;
+    }
+    start(key, text);
+  }
+
+  // Khác toggle: bấm lại đúng mục đang đọc thì đọc lại từ đầu chứ không dừng.
+  function speak(key, text) {
+    if (!supported || !text) return;
+    window.speechSynthesis.cancel();
+    start(key, text);
+  }
+
+  return { supported, speakingKey, toggle, speak };
 }
 
 export function SpeakButton({ speech, speechKey, getText, label, className = 'h-7 w-7' }) {

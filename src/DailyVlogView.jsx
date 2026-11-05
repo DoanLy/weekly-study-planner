@@ -111,6 +111,11 @@ function progressOf(vlog) {
   return { total, done, percent: total ? Math.round((done / total) * 100) : 0 };
 }
 
+// Bỏ dấu câu dính hai đầu từ để giọng đọc không ngắt hơi hay đọc thành tiếng ("home," → "home").
+function spokenWord(text) {
+  return text.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
+}
+
 function groupBySection(lines) {
   const groups = [];
   lines.forEach((line) => {
@@ -503,6 +508,11 @@ function VlogReadModal({ vlog, close, edit, toggleLine }) {
               Không tải được từ điển phiên âm. Kiểm tra mạng rồi mở lại bài này.
             </p>
           )}
+          {speech.supported && (
+            <p className="mb-4 text-xs font-semibold text-ink-400">
+              Bấm vào một từ ở cột English để nghe phát âm từ đó.
+            </p>
+          )}
           {groupBySection(vlog.lines).map((group, index) => (
             <div key={index} className="mb-7 last:mb-0">
               {group.title && (
@@ -590,17 +600,42 @@ function VlogLine({ line, dictionary, speech, toggle }) {
             isStageDirection ? 'italic' : ''
           }`}
         >
-          {tokens.map((token, index) => (
-            <span key={index} className="inline-flex flex-col">
-              <span className="text-sm font-bold leading-snug text-ink-800">{token.text}</span>
-              <span
-                className="min-h-4 text-xs font-normal not-italic leading-4 text-teal-700"
-                style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}
+          {tokens.map((token, index) => {
+            const content = (
+              <>
+                <span className="text-sm font-bold leading-snug text-ink-800">{token.text}</span>
+                <span
+                  className="min-h-4 text-xs font-normal not-italic leading-4 text-teal-700"
+                  style={{ fontFamily: "'Segoe UI', Arial, sans-serif" }}
+                >
+                  {token.isWord && dictionary ? token.ipa || '—' : ' '}
+                </span>
+              </>
+            );
+            const word = spokenWord(token.text);
+            if (!speech.supported || !word) {
+              return (
+                <span key={index} className="inline-flex flex-col">
+                  {content}
+                </span>
+              );
+            }
+            const wordKey = `${line.id}:${index}`;
+            return (
+              <button
+                key={index}
+                type="button"
+                onClick={() => speech.speak(wordKey, word)}
+                title={`Nghe từ "${word}"`}
+                aria-label={`Nghe từ ${word}`}
+                className={`-mx-0.5 inline-flex cursor-pointer flex-col rounded px-0.5 text-left transition-colors hover:bg-teal-100 ${
+                  speech.speakingKey === wordKey ? 'bg-teal-200' : ''
+                }`}
               >
-                {token.isWord && dictionary ? token.ipa || '—' : ' '}
-              </span>
-            </span>
-          ))}
+                {content}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
