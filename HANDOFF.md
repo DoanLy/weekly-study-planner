@@ -28,7 +28,14 @@ Ghi lại bối cảnh phiên làm việc gần nhất để phiên sau (ngườ
 
 ## Các việc đã hoàn thành (các phiên gần đây, mới nhất ở trên)
 
-### Gỡ menu "FinalTest Pre-Foundation" (mới nhất, 2026-10-29)
+### Menu mới "Daily Vlog" — bản UI đầu tiên, người dùng sẽ xem rồi yêu cầu sửa tiếp (mới nhất, 2026-11-05)
+- **File**: `src/DailyVlogView.jsx` (danh sách thẻ + modal import + modal luyện), `src/ipa.js` (phiên âm), `src/speech.jsx` (`useSpeech`/`SpeakButton` tách từ App.jsx để Speaking và Daily Vlog dùng chung).
+- **Dữ liệu**: field mới `dailyVlogs` trong state chung (đồng bộ Postgres như Documents): `[{id, title, lines: [{id, section, vi, en, done}], createdAt, updatedAt}]`. Sửa bài thì dòng nào giữ nguyên nội dung vẫn giữ dấu tích.
+- **Import** (`parseBilingualText`): bảng copy từ Word/Docs (Tab), bảng Markdown (`|`), hoặc 2 dòng liền nhau Việt/Anh; tự nhận cột tiếng Việt theo dấu; "1. Mở đầu" hoặc `# ...` thành tiêu đề mục; dòng không ghép được cặp thì cảnh báo ở phần xem trước. File chỉ nhận text (.txt/.md/.tsv), chưa nhận .docx.
+- **Phiên âm**: từ điển CMU (`cmu-pronouncing-dictionary`, giọng Mỹ) đổi ARPAbet → IPA ở client, không lưu DB. Chunk ~4.7 MB chỉ tải khi mở modal luyện. Từ không có trong từ điển (vlog, số...) hiện `—`; chưa có cách sửa tay. Từ đa cách đọc chỉ lấy cách đầu tiên.
+- **Verify** (ui-only 5174, không chạm DB): import 6 dòng mẫu, tích + tiến độ lưu qua reload, loa gọi `speechSynthesis` đúng câu/en-US (spy, chưa nghe tiếng thật), 3 định dạng import, mobile 375px không tràn ngang, `vite build` pass.
+
+### Gỡ menu "FinalTest Pre-Foundation" (2026-10-29)
 - Xoá `src/FinalTestView.jsx`, toàn bộ `src/final-test/*.json`, và `src/ChartFigure.jsx` (chỉ còn FinalTest dùng). Trong `src/App.jsx` bỏ nav item `final-test`, khối render và import `Suspense`/`lazy`. `vite build` pass. Muốn khôi phục: `git show 6ba3714` (commit thêm menu).
 
 ### Gỡ menu "Writing Task 1" + "Playbook"; thêm menu "FinalTest Pre-Foundation" (ĐÃ GỠ FinalTest, xem mục trên; 2026-10-26)

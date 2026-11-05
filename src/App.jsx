@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import TESTING_DATA from './testing-data.json';
 import { TESTING_GLOSSARY } from './testing-glossary.js';
+import DailyVlogView from './DailyVlogView.jsx';
+import { SpeakButton, useSpeech } from './speech.jsx';
 
 import {
   AArrowDown,
@@ -44,12 +46,11 @@ import {
   Search,
   Settings,
   SlidersHorizontal,
-  Square,
   StickyNote,
   Table,
   Trash2,
   Underline,
-  Volume2,
+  Video,
   X,
 } from 'lucide-react';
 
@@ -99,6 +100,7 @@ const EMPTY_DATA = {
   dailyTasks: {},
   scheduleRules: [],
   documents: [],
+  dailyVlogs: [],
   speakingTopics: EMPTY_SPEAKING_TOPICS,
   legacyWeeks: null,
   defaultRulesSeeded: false,
@@ -190,6 +192,7 @@ function normalizeData(value) {
         ? value.scheduleRules
         : [],
       documents: Array.isArray(value.documents) ? value.documents : [],
+      dailyVlogs: Array.isArray(value.dailyVlogs) ? value.dailyVlogs : [],
       speakingTopics: normalizeSpeakingTopics(value.speakingTopics),
     };
   }
@@ -198,6 +201,7 @@ function normalizeData(value) {
     dailyTasks: {},
     scheduleRules: [],
     documents: [],
+    dailyVlogs: [],
     speakingTopics: EMPTY_SPEAKING_TOPICS,
       legacyWeeks: value,
     defaultRulesSeeded: false,
@@ -1057,12 +1061,20 @@ function App() {
     }));
   }
 
+  function updateDailyVlogs(updater) {
+    setData((current) => ({
+      ...current,
+      dailyVlogs: updater(current.dailyVlogs),
+    }));
+  }
+
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'calendar', label: 'Calendar', icon: CalendarDays },
     { id: 'tasks', label: 'Tasks', icon: ListChecks, badge: incompleteSelected },
     { id: 'notes', label: 'Notes', icon: StickyNote },
     { id: 'documents', label: 'Documents', icon: Library },
+    { id: 'daily-vlog', label: 'Daily Vlog', icon: Video },
     { id: 'speaking', label: 'Speaking', icon: Mic },
     { id: 'testing', label: 'Testing', icon: FlaskConical },
     { id: 'settings', label: 'Settings', icon: SlidersHorizontal },
@@ -1238,6 +1250,14 @@ function App() {
             openEditDocument={openEditDocument}
             openViewDocument={openViewDocument}
             openNewDocument={openNewDocument}
+          />
+        )}
+
+        {activeView === 'daily-vlog' && (
+          <DailyVlogView
+            vlogs={data.dailyVlogs}
+            setVlogs={updateDailyVlogs}
+            showToast={showToast}
           />
         )}
 
@@ -2063,71 +2083,10 @@ function DocumentsView({
   );
 }
 
-function pickEnglishVoice() {
-  const voices = window.speechSynthesis?.getVoices() || [];
-  return (
-    voices.find((v) => v.lang === 'en-US' && /natural|online|google/i.test(v.name)) ||
-    voices.find((v) => v.lang === 'en-US') ||
-    voices.find((v) => v.lang?.startsWith('en')) ||
-    null
-  );
-}
-
 function htmlToPlainText(html) {
   const el = document.createElement('div');
   el.innerHTML = html || '';
   return (el.innerText || el.textContent || '').replace(/\s+/g, ' ').trim();
-}
-
-function useSpeech() {
-  const [speakingKey, setSpeakingKey] = useState(null);
-  const supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
-
-  useEffect(() => {
-    if (!supported) return undefined;
-    // Chrome loads voices asynchronously; touching getVoices() kicks that off.
-    window.speechSynthesis.getVoices();
-    return () => window.speechSynthesis.cancel();
-  }, [supported]);
-
-  function toggle(key, text) {
-    if (!supported) return;
-    const synth = window.speechSynthesis;
-    synth.cancel();
-    if (speakingKey === key || !text) {
-      setSpeakingKey(null);
-      return;
-    }
-    const utterance = new SpeechSynthesisUtterance(text);
-    const voice = pickEnglishVoice();
-    if (voice) utterance.voice = voice;
-    utterance.lang = voice?.lang || 'en-US';
-    utterance.rate = 1;
-    const clear = () => setSpeakingKey((current) => (current === key ? null : current));
-    utterance.onend = clear;
-    utterance.onerror = clear;
-    setSpeakingKey(key);
-    synth.speak(utterance);
-  }
-
-  return { supported, speakingKey, toggle };
-}
-
-function SpeakButton({ speech, speechKey, getText, label, className = 'h-7 w-7' }) {
-  if (!speech.supported) return null;
-  const active = speech.speakingKey === speechKey;
-  return (
-    <button
-      type="button"
-      onMouseDown={(event) => event.preventDefault()}
-      onClick={() => speech.toggle(speechKey, getText())}
-      title={active ? 'Dừng đọc' : label}
-      aria-label={active ? 'Dừng đọc' : label}
-      className={`icon-btn ${className} ${active ? 'icon-btn-on' : ''}`}
-    >
-      {active ? <Square size={12} fill="currentColor" /> : <Volume2 size={14} />}
-    </button>
-  );
 }
 
 const SPEAKING_PARTS = [
